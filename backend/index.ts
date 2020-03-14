@@ -18,17 +18,29 @@ app.listen(port, () => {console.log(`advocat api running on port ${port}`)})
 
 const WorkerModel = getModelForClass(Worker)
 app.get('/worker/:id', async (req, res) => {
-    const worker = await WorkerModel.findById(req.params.id)
-    res.send(worker)
+    try{
+        const worker = await WorkerModel.findById(req.params.id)
+        if(worker)
+            res.send(worker)
+        else
+            res.status(404).send("worker not found")
+    } catch (error){
+        res.status(500).send("userid not valid or database not reachable")
+    }
 })
 app.get('/worker', async (req, res) => {    
-    const all = await WorkerModel.find({}).select({"_id": 0})
-    res.send(all)
+    try{
+        const all = await WorkerModel.find({}).select({"_id": 0})
+        res.send(all)
+    }
+    catch (error){
+        res.status(500).send(error)
+    }
 })
 app.post('/worker', async (req,res) =>{
     try {
         const newWorker = await WorkerModel.create(req.body)    
-        res.send(newWorker.id)
+        res.status(201).send(newWorker)
     } catch (error) {
         res.status(500).send(error)
     }

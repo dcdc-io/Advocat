@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx ts-node index.ts",
     "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postman": "newman run advocat.postman_collection.json -e LocalHost.postman_environment.json"
   },
   "author": "dcdc.io",
   "license": "MIT",

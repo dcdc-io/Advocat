@@ -6,131 +6,274 @@
 	},
 	"item": [
 		{
-			"name": "Worker Individual",
-			"event": [
+			"name": "SadPaths",
+			"item": [
 				{
-					"listen": "test",
-					"script": {
-						"id": "70c3b65f-7b55-47ad-a88f-3d8064d8c0fe",
-						"exec": [
-							"pm.test(\"worker test\",function (){",
-							"    pm.response.to.be.ok;",
-							"    pm.response.to.be.json;",
-							"    pm.expect (pm.response.json()).to.deep.equal(",
-							"    {",
-							"        name: \"Test User\",",
-							"        address: \"Test Address\",",
-							"        phone: \"Test phone\",",
-							"        email: \"Test email\"",
-							"    })",
-							"    //may have an issue with `created`",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{URL}}:3000/worker/4",
-					"host": [
-						"{{URL}}"
+					"name": "Worker - Missing name prop",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9d2139ff-40ec-4640-9ccf-e16420936169",
+								"exec": [
+									"pm.test('make invalid worker', function() {",
+									"    pm.response.to.have.status(500)",
+									"    pm.expect(pm.response.json().message).to.equal(\"Worker validation failed: name: Path `name` is required.\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"port": "3000",
-					"path": [
-						"worker",
-						"4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Worker Group",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "148e9c7b-1065-4fac-81cc-64748dd0a08e",
-						"exec": [
-							"pm.test(\"worker test\",function (){",
-							"    pm.response.to.be.ok;",
-							"    pm.response.to.be.json;",
-							"    //unsure exactly what to send here yet",
-							"})"
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
 						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{URL}}:3000/worker",
-					"host": [
-						"{{URL}}"
-					],
-					"port": "3000",
-					"path": [
-						"worker"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Worker",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "9d2139ff-40ec-4640-9ccf-e16420936169",
-						"exec": [
-							"var schema = {",
-							"  \"properties\": {",
-							"    \"id\": { \"type\":\"integer\" } ,",
-							"    \"required\": [\"id\"]",
-							"    }",
-							" }",
-							"",
-							"pm.test('make valid worker', function() {",
-							"    pm.response.to.have.status(201)",
-							"    pm.expect(tv4.validate(pm.respoinse.json(), schema)).to.be.true;",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\t\n\t\"name\": \"name\",\n\t\"address\": \"addy\",\n\t\"phone\": \"phone\",\n\t\"email\": \"email\"\n}"
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"address\": \"addy\",\n    \"phone\": \"phone\",\n    \"email\": \"email\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/worker",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"worker"
+							]
+						}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{URL}}:3000/worker",
-					"host": [
-						"{{URL}}"
+				{
+					"name": "Worker - Worker doesn't exist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "70c3b65f-7b55-47ad-a88f-3d8064d8c0fe",
+								"exec": [
+									"pm.test(\"get single worker that doesn't exist\",function (){",
+									"    pm.response.to.have.status(404)",
+									"    pm.response.to.have.body(\"worker not found\")",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
 					],
-					"port": "3000",
-					"path": [
-						"worker"
-					]
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/worker/5e6ce4e58e13600cb4599ff6",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"worker",
+								"5e6ce4e58e13600cb4599ff6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Worker - invalid ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "70c3b65f-7b55-47ad-a88f-3d8064d8c0fe",
+								"exec": [
+									"pm.test(\"try a bad ID\",function (){",
+									"    pm.response.to.have.status(500)",
+									"    pm.response.to.have.body(\"userid not valid or database not reachable\")",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/worker/5e6ce4e58e13600cb45",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"worker",
+								"5e6ce4e58e13600cb45"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "6d8678a5-eaff-49c7-831c-93ce7520fc58",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "6b40e11a-7647-478e-bc1b-3d0e59d82e2a",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "HappyPath",
+			"item": [
+				{
+					"name": "Worker",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9d2139ff-40ec-4640-9ccf-e16420936169",
+								"exec": [
+									"var schema = {",
+									"  \"properties\": {",
+									"    \"id\": { \"type\":\"integer\" } ,",
+									"    \"required\": [\"id\"]",
+									"    }",
+									" }",
+									"",
+									"pm.test('makes a valid worker', function() {",
+									"    pm.response.to.have.status(201)",
+									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"name\",\n    \"address\": \"addy\",\n    \"phone\": \"phone\",\n    \"email\": \"email\"\n}"
+						},
+						"url": {
+							"raw": "{{URL}}/worker",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"worker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Worker",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "70c3b65f-7b55-47ad-a88f-3d8064d8c0fe",
+								"exec": [
+									"pm.test(\"get single worker\",function (){",
+									"    pm.response.to.be.ok;",
+									"    pm.response.to.be.json;",
+									"    let response = pm.response.json()",
+									"    delete response[\"created\"]",
+									"    pm.expect (response).to.deep.equal(",
+									"    {",
+									"        _id: pm.environment.get(\"WorkerID\"),",
+									"        name: \"name\",",
+									"        address: \"addy\",",
+									"        phone: \"phone\",",
+									"        email: \"email\",",
+									"        __v: 0",
+									"    })",
+									"    //may have an issue with `created`",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/worker/{{WorkerID}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"worker",
+								"{{WorkerID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Worker Group",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "148e9c7b-1065-4fac-81cc-64748dd0a08e",
+								"exec": [
+									"pm.test(\"multible worker test\",function (){",
+									"    pm.response.to.be.ok;",
+									"    pm.response.to.be.json;",
+									"    pm.expect(pm.response.json().length > 0).to.equal(true)",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/worker",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"worker"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		}
 	],
 	"event": [
@@ -157,9 +300,9 @@
 	],
 	"variable": [
 		{
-			"id": "bba372f9-cf3c-40f3-9c18-928400728b5e",
-			"key": "URL",
-			"value": "localhost",
+			"id": "4027e62c-1291-452e-9158-36f75358cb33",
+			"key": "WorkerID",
+			"value": "5e6d44e522ddde5f1c8d0071",
 			"type": "string"
 		}
 	]
