@@ -1,4 +1,5 @@
 import express from "express"
+import bodyParser from "body-parser"
 import { mongoose, getModelForClass } from "@typegoose/typegoose"
 import { Worker } from "./models"
 
@@ -11,11 +12,12 @@ let connection = mongoose.connect('mongodb://localhost:27017/advocat_v0', {
 let db = mongoose.connection
 
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => res.send('the advocat api is running'))
 
 app.get('/worker/:id', (req, res) => {
-    res.send("you requested a worker (not implemented)")
+    res.status(501).send("you requested a worker (not implemented)")
 })
 
 app.get('/worker', async (req, res) => {    
@@ -25,7 +27,9 @@ app.get('/worker', async (req, res) => {
 })
 
 app.post('/worker', async (req,res) =>{
-    res.send("you posted a worker (not implemented)")
+    const WorkerModel = getModelForClass(Worker)
+    console.log(req.body)
+    res.status(501).send()
 })
 
 app.listen(port, () => {

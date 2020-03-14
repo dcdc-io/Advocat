@@ -18,7 +18,7 @@ export class Modifiable extends Logged {
     @prop() public modified!: number
 }
 
-export class Person extends Modifiable, Addressed {
+export class Person extends Modifiable {
     @prop({ required: true }) public name!: string
     @prop({ required: true }) public address!: string
     @prop({ required: true }) public phone!: string
@@ -32,7 +32,7 @@ export class Recipient extends Person {
     @prop() public email!: string
 }
 
-export class Job extends Modifiable, Addressed {
+export class Job extends Modifiable{
     @prop() public workerId?: string = Defaults.UnassignedJob
     @prop({ required: true }) public recipientId!: string 
     @prop() public description!: string
