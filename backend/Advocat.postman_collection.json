@@ -1,0 +1,160 @@
+{
+	"info": {
+		"_postman_id": "958b5212-68fa-4fd1-83f9-2e4d1f0720e2",
+		"name": "Advocat",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Index",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "64b6f640-f263-4021-9c00-40a538b9d5f1",
+						"exec": [
+							"pm.test(\"status test\",function (){",
+							"    pm.response.to.have.status(200)",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}:3000/",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "3000",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Worker Individual",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "70c3b65f-7b55-47ad-a88f-3d8064d8c0fe",
+						"exec": [
+							"pm.test(\"worker test\",function (){",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.json;",
+							"    pm.expect (pm.response.json()).to.deep.equal(",
+							"    {",
+							"        name: \"Test User\",",
+							"        address: \"Test Address\",",
+							"        phone: \"Test phone\",",
+							"        email: \"Test email\"",
+							"    })",
+							"    //may have an issue with @created",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}:3000/worker/4",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "3000",
+					"path": [
+						"worker",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Worker Group",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}:3000/worker",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "3000",
+					"path": [
+						"worker"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Worker",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\n\tname: \"name\",\n\taddress: \"addy\",\n\tphone: \"phone\",\n\temail: \"email\"\n}"
+				},
+				"url": {
+					"raw": "{{URL}}:3000/worker",
+					"host": [
+						"{{URL}}"
+					],
+					"port": "3000",
+					"path": [
+						"worker"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "01de6029-ffac-4c15-a720-37d7cc50c720",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "382d7d77-1c09-4413-b36c-64550f23990b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "31898278-f216-4d31-9001-0c138a58c0b0",
+			"key": "URL",
+			"value": "localhost",
+			"type": "string"
+		}
+	]
+}

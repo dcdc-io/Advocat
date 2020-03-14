@@ -15,13 +15,17 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.get('/', (req, res) => res.send('the advocat api is running'))
 
 app.get('/worker/:id', (req, res) => {
-    res.send("you requested a worker")
+    res.send("you requested a worker (not implemented)")
 })
 
 app.get('/worker', async (req, res) => {    
     const WorkerModel = getModelForClass(Worker)
     const all = await WorkerModel.find({}).select({"_id": 0})
     res.send(all)
+})
+
+app.post('/worker', async (req,res) =>{
+    res.send("you posted a worker (not implemented)")
 })
 
 app.listen(port, () => {
