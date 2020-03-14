@@ -1,8 +1,5 @@
-import { prop, pre } from '@typegoose/typegoose'
+import { prop, pre, Ref } from '@typegoose/typegoose'
 
-export enum Defaults {
-    UnassignedJob = "UnassignedJob"
-}
 
 export class Addressed {
   @prop() public address: string = ""
@@ -33,8 +30,8 @@ export class Recipient extends Person {
 }
 
 export class Job extends Modifiable{
-    @prop() public workerId?: string = Defaults.UnassignedJob
-    @prop({ required: true }) public recipientId!: string 
+    @prop({ ref: Worker }) public worker?: Ref<Worker>
+    @prop({ ref: Recipient, required: true }) public recipient!: Ref<Recipient>
     @prop() public description!: string
     @prop() public status!: string
 }
