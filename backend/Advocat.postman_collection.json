@@ -6,38 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "Index",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "64b6f640-f263-4021-9c00-40a538b9d5f1",
-						"exec": [
-							"pm.test(\"status test\",function (){",
-							"    pm.response.to.have.status(200)",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "{{URL}}:3000/",
-					"host": [
-						"{{URL}}"
-					],
-					"port": "3000",
-					"path": [
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Worker Individual",
 			"event": [
 				{
@@ -55,7 +23,7 @@
 							"        phone: \"Test phone\",",
 							"        email: \"Test email\"",
 							"    })",
-							"    //may have an issue with @created",
+							"    //may have an issue with `created`",
 							"})"
 						],
 						"type": "text/javascript"
@@ -81,6 +49,22 @@
 		},
 		{
 			"name": "Worker Group",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "148e9c7b-1065-4fac-81cc-64748dd0a08e",
+						"exec": [
+							"pm.test(\"worker test\",function (){",
+							"    pm.response.to.be.ok;",
+							"    pm.response.to.be.json;",
+							"    //unsure exactly what to send here yet",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -99,19 +83,41 @@
 		},
 		{
 			"name": "Worker",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9d2139ff-40ec-4640-9ccf-e16420936169",
+						"exec": [
+							"var schema = {",
+							"  \"properties\": {",
+							"    \"id\": { \"type\":\"integer\" } ,",
+							"    \"required\": [\"id\"]",
+							"    }",
+							" }",
+							"",
+							"pm.test('make valid worker', function() {",
+							"    pm.response.to.have.status(201)",
+							"    pm.expect(tv4.validate(pm.respoinse.json(), schema)).to.be.true;",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
 						"name": "Content-Type",
-						"value": "application/x-www-form-urlencoded",
+						"value": "application/json",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\t\n\tname: \"name\",\n\taddress: \"addy\",\n\tphone: \"phone\",\n\temail: \"email\"\n}"
+					"raw": "{\t\n\t\"name\": \"name\",\n\t\"address\": \"addy\",\n\t\"phone\": \"phone\",\n\t\"email\": \"email\"\n}"
 				},
 				"url": {
 					"raw": "{{URL}}:3000/worker",
@@ -151,7 +157,7 @@
 	],
 	"variable": [
 		{
-			"id": "31898278-f216-4d31-9001-0c138a58c0b0",
+			"id": "bba372f9-cf3c-40f3-9c18-928400728b5e",
 			"key": "URL",
 			"value": "localhost",
 			"type": "string"
