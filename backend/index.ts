@@ -18,8 +18,9 @@ app.get('/', (req, res) => res.send('the advocat api is running'))
 
 
 const WorkerModel = getModelForClass(Worker)
-app.get('/worker/:id', (req, res) => {
-    res.status(501).send("you requested a worker (not implemented)")
+app.get('/worker/:id', async (req, res) => {
+    const worker = await WorkerModel.findById(req.params.id)
+    res.send(worker)
 })
 
 app.get('/worker', async (req, res) => {    
@@ -28,7 +29,7 @@ app.get('/worker', async (req, res) => {
 })
 
 app.post('/worker', async (req,res) =>{
-    let newWorker = await WorkerModel.create(req.body)    
+    const newWorker = await WorkerModel.create(req.body)    
     res.send(newWorker.id)
 })
 
