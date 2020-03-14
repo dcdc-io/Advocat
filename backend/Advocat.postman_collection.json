@@ -152,16 +152,8 @@
 							"script": {
 								"id": "9d2139ff-40ec-4640-9ccf-e16420936169",
 								"exec": [
-									"var schema = {",
-									"  \"properties\": {",
-									"    \"id\": { \"type\":\"integer\" } ,",
-									"    \"required\": [\"id\"]",
-									"    }",
-									" }",
-									"",
 									"pm.test('makes a valid worker', function() {",
 									"    pm.response.to.have.status(201)",
-									"    pm.expect(tv4.validate(pm.response.json(), schema)).to.be.true",
 									"});",
 									""
 								],
@@ -300,7 +292,7 @@
 	],
 	"variable": [
 		{
-			"id": "12d284ef-ff25-4d2f-858a-a8e96e5dea38",
+			"id": "7c9d3958-42c2-443c-945d-446f0c694188",
 			"key": "WorkerID",
 			"value": "5e6d44e522ddde5f1c8d0071",
 			"type": "string"

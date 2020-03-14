@@ -5,9 +5,9 @@ import { Modifiable } from "./models";
 
 export const getByID = async (req: Request, res: Response, model: ReturnModelType<typeof Modifiable, unknown>) =>{
     try{
-        const worker = await model.findById(req.params.id)
-        if(worker)
-            res.send(worker)
+        const doc = await model.findById(req.params.id)
+        if(doc)
+            res.send(doc)
         else
             res.status(404).send("not found")
     } catch (error){
@@ -27,8 +27,8 @@ export const getAll = async  (req: Request, res: Response, model: ReturnModelTyp
 
 export const create = async  (req: Request, res: Response, model: ReturnModelType<typeof Modifiable, unknown>) =>{
     try {
-        const newWorker = await model.create(req.body)    
-        res.status(201).send(newWorker)
+        const newDoc = await model.create(req.body)    
+        res.status(201).send(newDoc.id)
     } catch (error) {
         res.status(500).send(error)
     }
