@@ -61,7 +61,7 @@
 								"exec": [
 									"pm.test(\"get single worker that doesn't exist\",function (){",
 									"    pm.response.to.have.status(404)",
-									"    pm.response.to.have.body(\"worker not found\")",
+									"    pm.response.to.have.body(\"not found\")",
 									"})"
 								],
 								"type": "text/javascript"
@@ -94,7 +94,7 @@
 								"exec": [
 									"pm.test(\"try a bad ID\",function (){",
 									"    pm.response.to.have.status(500)",
-									"    pm.response.to.have.body(\"userid not valid or database not reachable\")",
+									"    pm.response.to.have.body(\"id not valid or database not reachable\")",
 									"})"
 								],
 								"type": "text/javascript"
@@ -300,7 +300,7 @@
 	],
 	"variable": [
 		{
-			"id": "4027e62c-1291-452e-9158-36f75358cb33",
+			"id": "12d284ef-ff25-4d2f-858a-a8e96e5dea38",
 			"key": "WorkerID",
 			"value": "5e6d44e522ddde5f1c8d0071",
 			"type": "string"
