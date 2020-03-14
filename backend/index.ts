@@ -30,6 +30,6 @@ app.get('/worker',    async (req, res) => { await getAll(req,res,WorkerModel)})
 app.get('/Recipient', async (req, res) => { await getAll(req,res,RecipientModel)})
 app.get('/job',       async (req, res) => { await getAll(req,res,PointToPointJobModel)})
 
-app.post('/worker', async (req,res) =>{ await create(req,res,WorkerModel)})
+app.post('/worker',    async (req,res) =>{ await create(req,res,WorkerModel)})
 app.post('/Recipient', async (req,res) =>{ await create(req,res,RecipientModel)})
-app.post('/job', async (req,res) =>{ await create(req,res,PointToPointJobModel)})
+app.post('/job',       async (req,res) =>{ await create(req,res,PointToPointJobModel)})
