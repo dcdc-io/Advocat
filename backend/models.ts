@@ -1,5 +1,4 @@
-import { prop, getModelForClass, pre } from '@typegoose/typegoose'
-import mongoose from 'mongoose'
+import { prop, pre } from '@typegoose/typegoose'
 
 export enum Defaults {
     UnassignedJob = "UnassignedJob"
@@ -26,6 +25,7 @@ export class Person extends Modifiable {
 
 export class Worker extends Person {
     @prop({ required: true }) public email!: string
+    @prop() public active!: boolean
 }
 
 export class Recipient extends Person {
@@ -36,6 +36,7 @@ export class Job extends Modifiable{
     @prop() public workerId?: string = Defaults.UnassignedJob
     @prop({ required: true }) public recipientId!: string 
     @prop() public description!: string
+    @prop() public status!: string
 }
 export class PointToPointJob extends Job {
     @prop({ required: true }) public pickupAddress! : string
