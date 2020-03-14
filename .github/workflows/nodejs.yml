@@ -25,6 +25,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     # - run: npm ci
+    - run: (cd backend && npm install) 
     - run: (cd backend && npm run build)
     - run: (cd backend && npm test) 
       env:
