@@ -4,7 +4,6 @@ import { mongoose, getModelForClass } from "@typegoose/typegoose"
 import { Worker, Recipient, PointToPointJob} from "./models"
 import { getByID, getAll, createDoc , updateDoc, deleteDoc} from "./helpers"
 
-
 const app = express()
 const port = 3000
 
@@ -34,10 +33,10 @@ app.get('/worker',    async (req, res) => { await getAll(req,res,WorkerModel) })
 app.get('/Recipient', async (req, res) => { await getAll(req,res,RecipientModel) })
 app.get('/job',       async (req, res) => { await getAll(req,res,PointToPointJobModel) })
 
-app.put('/worker',    async (req,res) => { await updateDoc(req,res,WorkerModel)})
-app.put('/Recipient', async (req,res) => { await updateDoc(req,res,RecipientModel)})
-app.put('/job',       async (req,res) => { await updateDoc(req,res,PointToPointJobModel)})
+app.put('/worker',    async (req,res) => { await updateDoc(req,res,WorkerModel) })
+app.put('/Recipient', async (req,res) => { await updateDoc(req,res,RecipientModel) })
+app.put('/job',       async (req,res) => { await updateDoc(req,res,PointToPointJobModel) })
 
-app.delete('/worker/:id',    async (req,res) => { await deleteDoc(req,res,WorkerModel)})
-app.delete('/Recipient/:id', async (req,res) => { await deleteDoc(req,res,RecipientModel)})
-app.delete('/job/:id',       async (req,res) => { await deleteDoc(req,res,PointToPointJobModel)})
+app.delete('/worker/:id',    async (req,res) => { await deleteDoc(req,res,WorkerModel) })
+app.delete('/Recipient/:id', async (req,res) => { await deleteDoc(req,res,RecipientModel) })
+app.delete('/job/:id',       async (req,res) => { await deleteDoc(req,res,PointToPointJobModel) })

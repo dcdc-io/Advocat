@@ -1,6 +1,5 @@
 import { prop, pre, Ref } from '@typegoose/typegoose'
 
-
 export class Addressed {
   @prop() public address: string = ""
 }
@@ -31,11 +30,19 @@ export class Recipient extends Person {
 
 export class Job extends Modifiable{
     @prop({ ref: Worker }) public worker?: Ref<Worker>
+    @prop({ ref: Worker }) public dispatcher?: Ref<Worker>
     @prop({ ref: Recipient, required: true }) public recipient!: Ref<Recipient>
     @prop() public description!: string
     @prop() public status!: string
 }
+
 export class PointToPointJob extends Job {
     @prop({ required: true }) public pickupAddress! : string
     @prop({ required: true }) public dropOffAddress! : string
+}
+
+export class User extends Modifiable {
+    @prop({ ref: Person }) public person?: Ref<Person> 
+    @prop({ required: true }) public salt!: string
+    @prop({ required: true }) public password!: string
 }
