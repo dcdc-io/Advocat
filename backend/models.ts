@@ -15,16 +15,17 @@ export class Modifiable extends Logged {
 
 export class Person extends Modifiable {
     @prop({ required: true }) public name!: string
-    @prop({ required: true }) public address!: string
     @prop({ required: true }) public phone!: string
 }
 
 export class Worker extends Person {
     @prop({ required: true }) public email!: string
+    @prop({ required: true }) public location!: string
     @prop() public active!: boolean
 }
 
 export class Recipient extends Person {
+    @prop({ required: true }) public address!: string
     @prop() public email!: string
 }
 
@@ -42,7 +43,7 @@ export class PointToPointJob extends Job {
 }
 
 export class User extends Modifiable {
-    @prop({ ref: Person }) public person?: Ref<Person> 
+    @prop({ ref: Person, required: true}) public person?: Ref<Person> 
     @prop({ required: true }) public salt!: string
     @prop({ required: true }) public password!: string
 }
