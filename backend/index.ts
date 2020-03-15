@@ -2,7 +2,7 @@ import express from "express"
 import bodyParser from "body-parser"
 import { mongoose, getModelForClass } from "@typegoose/typegoose"
 import { Worker, Recipient, PointToPointJob} from "./models"
-import { getByID, getAll, create} from "./helpers"
+import { getByID, getAll, createDoc , updateDoc, deleteDoc} from "./helpers"
 
 
 const app = express()
@@ -22,6 +22,10 @@ const WorkerModel = getModelForClass(Worker)
 const RecipientModel = getModelForClass(Recipient)
 const PointToPointJobModel = getModelForClass(PointToPointJob)
 
+app.post('/worker',    async (req,res) => { await createDoc(req,res,WorkerModel) })
+app.post('/Recipient', async (req,res) => { await createDoc(req,res,RecipientModel) })
+app.post('/job',       async (req,res) => { await createDoc(req,res,PointToPointJobModel) })
+
 app.get('/worker/:id',    async (req, res) => { await getByID(req,res,WorkerModel) })
 app.get('/Recipient/:id', async (req, res) => { await getByID(req,res,RecipientModel) })
 app.get('/job/:id',       async (req, res) => { await getByID(req,res,PointToPointJobModel) }) 
@@ -30,6 +34,10 @@ app.get('/worker',    async (req, res) => { await getAll(req,res,WorkerModel) })
 app.get('/Recipient', async (req, res) => { await getAll(req,res,RecipientModel) })
 app.get('/job',       async (req, res) => { await getAll(req,res,PointToPointJobModel) })
 
-app.post('/worker',    async (req,res) => { await create(req,res,WorkerModel) })
-app.post('/Recipient', async (req,res) => { await create(req,res,RecipientModel) })
-app.post('/job',       async (req,res) => { await create(req,res,PointToPointJobModel) })
+app.put('/worker',    async (req,res) => { await updateDoc(req,res,WorkerModel)})
+app.put('/Recipient', async (req,res) => { await updateDoc(req,res,RecipientModel)})
+app.put('/job',       async (req,res) => { await updateDoc(req,res,PointToPointJobModel)})
+
+app.delete('/worker/:id',    async (req,res) => { await deleteDoc(req,res,WorkerModel)})
+app.delete('/Recipient/:id', async (req,res) => { await deleteDoc(req,res,RecipientModel)})
+app.delete('/job/:id',       async (req,res) => { await deleteDoc(req,res,PointToPointJobModel)})
