@@ -1,4 +1,4 @@
-import { prop, pre, Ref } from '@typegoose/typegoose'
+import { prop, pre, Ref, arrayProp } from '@typegoose/typegoose'
 
 export class Addressed {
   @prop() public address: string = ""
@@ -13,6 +13,21 @@ export class Modifiable extends Logged {
     @prop() public modified!: number
 }
 
+export class File {
+    @prop() public data!: Blob
+    @prop() public name!: string
+}
+
+export class QualificationType {
+    @prop({ required: true }) public type!: string
+}
+
+export class Qualification {
+    @prop({ ref: QualificationType, required: true}) public qualificationType?: Ref<QualificationType>
+    @prop() public expiry?: number
+    @arrayProp({ itemRef: File }) public evidence!: Ref<File>[]
+}
+
 export class Person extends Modifiable {
     @prop({ required: true }) public name!: string
     @prop({ required: true }) public phone!: string
@@ -21,6 +36,7 @@ export class Person extends Modifiable {
 export class Worker extends Person {
     @prop({ required: true }) public email!: string
     @prop({ required: true }) public location!: string
+    @arrayProp({ itemRef: Qualification }) public qualifications?: Ref<Qualification>[]
     @prop() public active!: boolean
 }
 
@@ -29,21 +45,37 @@ export class Recipient extends Person {
     @prop() public email!: string
 }
 
-export class Job extends Modifiable{
+export class JobTemplate extends Modifiable {
+    @prop() public name!: string
+    @prop() public description!: string
+    @arrayProp({ itemsRef: QualificationType }) public qualificationsNeeded?: Ref<QualificationType>[]
+    @arrayProp({ items: String }) public tags?: string[]
+    @arrayProp({ items: String }) public jobActions!: string[]
+}
+
+export class JobAction {
+    @prop({ required: true }) public description!: string
+    @prop() public location!: string
+}
+
+export class Job extends Modifiable {
     @prop({ ref: Worker }) public worker?: Ref<Worker>
     @prop({ ref: Worker }) public dispatcher?: Ref<Worker>
     @prop({ ref: Recipient, required: true }) public recipient!: Ref<Recipient>
     @prop() public description!: string
-    @prop() public status!: string
+    @prop() public status!: string 
+    @arrayProp({ itemsRef: QualificationType}) public qualificationsNeeded?: Ref<QualificationType>[]
+    @arrayProp({ items: String }) public tags?: string[]
+    @arrayProp({ itemsRef: JobAction }) public jobActions!: Ref<JobAction>[]
 }
 
-export class PointToPointJob extends Job {
-    @prop({ required: true }) public pickupAddress! : string
-    @prop({ required: true }) public dropOffAddress! : string
+export class Roles extends Modifiable {
+    @prop({required: true}) public name! : string
 }
 
-export class User extends Modifiable {
+export class Credentials extends Modifiable {
     @prop({ ref: Person, required: true}) public person?: Ref<Person> 
     @prop({ required: true }) public salt!: string
     @prop({ required: true }) public password!: string
+    @arrayProp({ itemsRef: Roles }) public roles?: Ref<Roles>[]
 }
