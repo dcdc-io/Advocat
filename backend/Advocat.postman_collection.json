@@ -173,7 +173,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"name\",\n    \"address\": \"addy\",\n    \"phone\": \"phone\",\n    \"email\": \"email\"\n}"
+							"raw": "{\n    \"name\": \"name\",\n    \"location\": \"addy\",\n    \"phone\": \"phone\",\n    \"email\": \"email\"\n}"
 						},
 						"url": {
 							"raw": "{{URL}}/worker",
@@ -204,7 +204,7 @@
 									"    {",
 									"        _id: pm.environment.get(\"WorkerID\"),",
 									"        name: \"name\",",
-									"        address: \"addy\",",
+									"        location: \"addy\",",
 									"        phone: \"phone\",",
 									"        email: \"email\",",
 									"        __v: 0",
@@ -292,7 +292,7 @@
 	],
 	"variable": [
 		{
-			"id": "7c9d3958-42c2-443c-945d-446f0c694188",
+			"id": "07ee04a0-6286-4e1e-8644-909d6f9985b0",
 			"key": "WorkerID",
 			"value": "5e6d44e522ddde5f1c8d0071",
 			"type": "string"
