@@ -16,7 +16,7 @@ describe("models", () => {
         mongoose.disconnect()
     })
     describe("Modifiable", () => {
-        it("gets a created timestamp when created", async () => {            
+        it("gets a created timestamp when created", async () => {
             const ModifiableModel = getModelForClass(Modifiable)
             const result = await ModifiableModel.create({})
             expect(result.created).toBeGreaterThan(0)

@@ -6,8 +6,9 @@ import { getByID, getAll, createDoc , updateDoc, deleteDoc} from "./helpers"
 
 const app = express()
 const port = 3000
+const DB_HOST = process.env.DB_HOST || "localhost"
 
-let connection = mongoose.connect('mongodb://localhost:27017/advocat_v0', { 
+let connection = mongoose.connect(`mongodb://${DB_HOST}:27017/advocat_v0`, { 
     useNewUrlParser: true
 })
 let db = mongoose.connection
