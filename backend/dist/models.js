@@ -73,7 +73,7 @@ __decorate([
     __metadata("design:type", Number)
 ], Qualification.prototype, "expiry", void 0);
 __decorate([
-    typegoose_1.arrayProp({ itemRef: File }),
+    typegoose_1.arrayProp({ itemsRef: File }),
     __metadata("design:type", Array)
 ], Qualification.prototype, "evidence", void 0);
 exports.Qualification = Qualification;
@@ -99,7 +99,7 @@ __decorate([
     __metadata("design:type", String)
 ], Worker.prototype, "location", void 0);
 __decorate([
-    typegoose_1.arrayProp({ itemRef: Qualification }),
+    typegoose_1.arrayProp({ itemsRef: Qualification }),
     __metadata("design:type", Array)
 ], Worker.prototype, "qualifications", void 0);
 __decorate([
