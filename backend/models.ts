@@ -14,7 +14,7 @@ export class Modifiable extends Logged {
 }
 
 export class File {
-    @prop() public data!: Blob
+    @prop() public data!: Buffer
     @prop() public name!: string
 }
 
