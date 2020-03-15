@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  database:
+    image: mongo
+  api:
+    build: ./backend
+    ports:
+      - "3000:3000"
