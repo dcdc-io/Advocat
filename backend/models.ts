@@ -25,7 +25,7 @@ export class QualificationType {
 export class Qualification {
     @prop({ ref: QualificationType, required: true}) public qualificationType?: Ref<QualificationType>
     @prop() public expiry?: number
-    @arrayProp({ itemRef: File }) public evidence!: Ref<File>[]
+    @arrayProp({ itemsRef: File }) public evidence!: Ref<File>[]
 }
 
 export class Person extends Modifiable {
@@ -36,7 +36,7 @@ export class Person extends Modifiable {
 export class Worker extends Person {
     @prop({ required: true }) public email!: string
     @prop({ required: true }) public location!: string
-    @arrayProp({ itemRef: Qualification }) public qualifications?: Ref<Qualification>[]
+    @arrayProp({ itemsRef: Qualification }) public qualifications?: Ref<Qualification>[]
     @prop() public active!: boolean
 }
 
