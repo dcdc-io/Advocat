@@ -1,9 +1,19 @@
-version: '2'
+version: '3'
 
 services:
-  database:
+  mongo:
+    container_name: mongo
     image: mongo
+    ports:
+      - "27017:27017"
   api:
+    container_name: api
+    environment: 
+      - DB_HOST=mongo
+    depends_on: 
+      - mongo
     build: ./backend
     ports:
       - "3000:3000"
+    links:
+      - mongo
