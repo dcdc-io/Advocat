@@ -9,6 +9,11 @@ import { LinkContainer } from 'react-router-bootstrap';
 
 import './Main.css';
 
+import store, { history } from './store'
+import { ConnectedRouter } from 'connected-react-router';
+import { Provider } from 'react-redux'
+import CallerLookup from './views/CallerLookup';
+
 const Home = () => <span>Home</span>;
 
 const About = () => <span>About</span>;
@@ -16,15 +21,14 @@ const About = () => <span>About</span>;
 const Users = () => <span>Users</span>;
 
 const Main = () => (
-  <MemoryRouter>
-    <Container className="p-3">
-      <Jumbotron>
-        <h1 className="header">Welcome To React-Bootstrap</h1>
-        <h2>
-          Current Page is{' '}
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <Container className="p-3">
+        <h1 className="header">Advocat.</h1>
+        <div>
           <Switch>
             <Route path="/about">
-              <About />
+              <CallerLookup />
             </Route>
             <Route path="/users">
               <Users />
@@ -33,7 +37,7 @@ const Main = () => (
               <Home />
             </Route>
           </Switch>
-        </h2>
+        </div>
         <h2>
           Navigate to{' '}
           <ButtonToolbar className="custom-btn-toolbar">
@@ -48,9 +52,9 @@ const Main = () => (
             </LinkContainer>
           </ButtonToolbar>
         </h2>
-      </Jumbotron>
-    </Container>
-  </MemoryRouter>
+      </Container>
+    </ConnectedRouter>
+  </Provider>
 );
 
 export default Main;
