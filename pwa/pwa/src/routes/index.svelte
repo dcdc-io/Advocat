@@ -33,10 +33,39 @@
 </style>
 
 <script>
+	import { useDatabase } from '../helpers.js'
 	let something = 1
+	let message = "no message"
+	let log = ["foo"]
 
-	const alterSomething = () => {
-		something++
+	let numbers
+	const database = async () => {
+		numbers = useDatabase({name:"numbers"})
+		try {
+			message = await numbers.login({username:"admin", password:"password"})
+			const posted = numbers.db.post({name: "guy", number: 0})
+			try {
+				await posted
+				let changes = numbers.db.changes({
+					since: 'now',
+					live: true,
+					include_docs: true
+					}).on('change', function(change) {
+						log = [...log, "a log message"]
+						console.log("CHANGE")
+					}).on('complete', function(info) {
+						console.log("COMPLETE")
+					}).on('error', function (err) {
+						console.log(err);
+				});
+			} catch (e) {
+				debugger
+				console.log(e)
+			}
+		}
+		    catch(e) {
+			message = e.toString()
+		}
 	}
 </script>
 
@@ -53,4 +82,8 @@
 
 <p><strong>Try editing this file (src/routes/index.svelte) to test live reloading.</strong></p>
 
-<a href="#" on:click={alterSomething}>{something}</a>
+<a href="#" on:click={database}>message: {message}</a>
+<br>
+{#each log as logline}
+	<div><span>{logline}</span></div>
+{/each}
