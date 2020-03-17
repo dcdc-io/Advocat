@@ -34,7 +34,7 @@
 </svelte:head>
 
 
-<h1>this is totally a login page</h1>
+<h1>this is a register page</h1>
 <form>
     email <input id="email" type="text" bind:value={email}><br>
       {#if $registerForm.email.errors.includes('email') }
