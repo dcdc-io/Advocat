@@ -1,4 +1,24 @@
-<style></style>
+<style type="text/scss" global>
+  .sveltejs-forms {
+    background-color: lightgray;
+    display: inline-block;
+    padding: 1rem;
+
+    .field {
+      margin-bottom: 1rem;
+      &.error {
+        input {
+          border: 1px solid red;
+        }
+        .message {
+          margin-top: 0.2rem;
+          color: red;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+</style>
 <script>
     import { useDatabase } from '../helpers.js'
     import { Form, Input, Select, Choice } from 'sveltejs-forms'
@@ -45,7 +65,7 @@
 </svelte:head>
 
 
-<h1>this is a register page</h1>
+<h1>become an advocat.</h1>
 <Form
   {schema}  
   {initialValues} 
@@ -56,8 +76,8 @@
   let:isSubmitting
   let:isValid
 >
-  <Input name="user.email" label="Email" placeholder="e.g. user@example.com" />
-  <Input name="password" type="password" placeholder="Password" />
+  <Input label="email" name="user.email"placeholder="e.g. user@example.com" />
+  <Input label="password" name="password" type="password" placeholder="Password" />
   <Select name="language" options={langOptions} />
   <Choice name="os" options={osOptions} multiple />
 
