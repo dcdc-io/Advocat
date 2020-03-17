@@ -29,3 +29,7 @@ step("Search for <query>", async (query) => {
 step("Page contains <content>", async (content) => {
     assert.ok(await text(content).exists());
 });
+
+step("test", async function() {
+	throw 'Unimplemented Step';
+});
