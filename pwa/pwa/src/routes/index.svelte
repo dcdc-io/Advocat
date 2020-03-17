@@ -1,9 +1,11 @@
 <script>
   import { getContext } from "svelte";
   import { goto } from '@sapper/app'
+  import GroupBrowser from '../components/GroupBrowser.svelte'
   let { loggedIn, username } = getContext("user");
-
   const click = (page) => () => goto(page)
+
+  let groups = [{}, {}]
 </script>
 
 <style lang="scss">
@@ -21,7 +23,10 @@
 
 {#if $loggedIn}
   <div>
-    <h2>welcome back {$username}</h2>
+    <div>
+      <h1>welcome back {$username}</h1>
+    </div>
+    <GroupBrowser {groups} />
   </div>
 {:else}
   <div>
