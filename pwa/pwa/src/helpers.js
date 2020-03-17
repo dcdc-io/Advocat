@@ -5,7 +5,7 @@ PouchDB.plugin(PouchDBAuthentication)
 
 const remoteURL = "http://localhost:5984"
 
-export const useDatabase = ({name = ""}) => {
+export const useDatabase = ({name} = {name:""}) => {
     const remote = new PouchDB(`${remoteURL}/${name}`, {skip_setup: true})
     const local = new PouchDB(`${name}`)
     local.sync(remote, {live:true, retry:true}).on('error', console.log.bind(console))
