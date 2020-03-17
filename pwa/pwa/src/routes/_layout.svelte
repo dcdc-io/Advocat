@@ -6,7 +6,8 @@
 
 	import { writable } from 'svelte/store'
 	const loggedIn = writable(false)
-	setContext("user", { loggedIn })
+	const username = writable("empty")
+	setContext("user", { loggedIn, username })
 
 	autoLogin()
 

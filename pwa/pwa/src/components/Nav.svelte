@@ -1,11 +1,7 @@
 <script>
 	export let segment;
-	import { logOut } from '../helpers.js'
 	import { getContext } from 'svelte'
-
-	let { loggedIn } = getContext("user")
-	console.log("in Nav")
-	console.log($loggedIn)
+	let { loggedIn, username } = getContext("user")
 </script>
 
 <style>
@@ -60,10 +56,10 @@
 		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>about</a></li>
 		<li><a rel=prefetch aria-current='{segment === "blog" ? "page" : undefined}' href='blog'>blog</a></li>
 		{#if $loggedIn}
-       		<li>Logged in</li>
-			<li><a href='/' on:click{logOut}>Logout</a></li>
+       		<li><p>{$username}</p></li>
+		{:else}
+			<li><a aria-current='{segment === "login" ? "page" : undefined}' href='login'>login</a></li>
+			<li><a aria-current='{segment === "register" ? "page" : undefined}' href='register'>register</a></li>
       	{/if}
-		<li><a aria-current='{segment === "login" ? "page" : undefined}' href='login'>login</a></li>
-		<li><a aria-current='{segment === "register" ? "page" : undefined}' href='register'>register</a></li>
 	</ul>
 </nav>
