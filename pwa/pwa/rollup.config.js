@@ -35,6 +35,7 @@ export default {
 			}),
 			commonjs({
 				include: 'node_modules/**',
+				exclude: ['svelte-forms'],
 				namedExports: {
 					'node_modules/immediate/lib/browser.js,':['immediate']
 				}
@@ -44,7 +45,7 @@ export default {
 			legacy && babel({
 				extensions: ['.js', '.mjs', '.html', '.svelte'],
 				runtimeHelpers: true,
-				exclude: ['node_modules/@babel/**'],
+				exclude: ['node_modules/@babel/**', 'svelte-forms'],
 				presets: [
 					['@babel/preset-env', {
 						targets: '> 0.25%, not dead'
@@ -81,7 +82,9 @@ export default {
 			resolve({
 				dedupe: ['svelte']
 			}),
-			commonjs()
+			commonjs({
+				exclude: ['svelte-forms']
+			})
 		],
 		external: Object.keys(pkg.dependencies).concat(
 			require('module').builtinModules || Object.keys(process.binding('natives'))
@@ -99,7 +102,9 @@ export default {
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
-			commonjs(),
+			commonjs({
+				exclude: ['svelte-forms']
+			}),
 			!dev && terser()
 		],
 

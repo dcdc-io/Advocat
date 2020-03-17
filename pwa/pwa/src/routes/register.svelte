@@ -1,7 +1,7 @@
 <style></style>
 <script>
     import { useDatabase } from '../helpers.js'
-    import { form } from 'svelte-forms';
+    import { form } from 'svelte-forms'
     
     let email = ""
     let password = ""

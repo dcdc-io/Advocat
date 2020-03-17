@@ -2270,7 +2270,7 @@ pify@^3.0.0:
   resolved "https://registry.yarnpkg.com/pify/-/pify-3.0.0.tgz#e5a4acd2c101fdf3d9a4d07f0dbc4db49dd28176"
   integrity sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY=
 
-polka@next:
+polka@^1.0.0-next.11:
   version "1.0.0-next.11"
   resolved "https://registry.yarnpkg.com/polka/-/polka-1.0.0-next.11.tgz#b1543043c6e5e3c19f6b8f6835b41dfcc13be583"
   integrity sha512-M/HBkS6ILksrDq7uvktCTev81OzuLwNtpxMyYdUhxLKQlMWdsu789XMotQU+p8JY8CM8vx8ML0HudyWjRus/lg==
@@ -2847,6 +2847,16 @@ supports-color@^6.1.0:
   integrity sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
   dependencies:
     has-flag "^3.0.0"
+
+svelte-form@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/svelte-form/-/svelte-form-0.0.1.tgz#40077309df4a9ea1cc8d955110e40d9e3ff1ccfe"
+  integrity sha512-XeoPlwcLW7ji1P66EGKhVMgqL3qvBmHhSGYSaJfrG78dtMEkpKegdjUZg8YpMReZNsUD9jgreKc0Tb4QLRbFWw==
+
+svelte-forms@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/svelte-forms/-/svelte-forms-1.2.0.tgz#cf71c91d8a25772dd7a6f52700f4cc4f23f77d6b"
+  integrity sha512-nhnI/1hROqqaLX8IZBM12mdUHs5S8zxpayrm5amUjDq8y6RO3HgJwfVtOF7yxEX7XAp5sGJFA1MaPuhh7Qc82w==
 
 svelte@^3.0.0:
   version "3.20.0"
