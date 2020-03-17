@@ -1,35 +1,35 @@
 import PouchDB from 'pouchdb'
 import PouchDBAuthentication from 'pouchdb-authentication'
+import { setContext, getContext } from 'svelte'
 PouchDB.plugin(PouchDBAuthentication)
 
-let 
+const remoteURL = "http://localhost:5984"
+//`${remoteURL}
 
 export const useDatabase = ({name}) => {
-    const remote = new PouchDB(`http://localhost:5984/${name}`, {skip_setup: true})
+    const remote = new PouchDB(`${remoteURL}/${name}`, {skip_setup: true})
     const local = new PouchDB(`${name}`)
-    let sync;
-    return {
-        login: async ({username, password, options = {}}) => {
-            try {
-                const response = await remote.logIn(username, password)//, options)
-                console.log("you are logged in")
-                sync = local.sync(remote, {live:true, retry:true}).on('error', console.log.bind(console))
-            } catch (e) {
-                console.log("you are not logged in")
-                debugger
-                throw e
-            }
-        },
-        db: local
-    }
+    local.sync(remote, {live:true, retry:true}).on('error', console.log.bind(console))
+    local.__remote = remote
+    return local
 }
 
-export const login = async ({username, password}) => {
+export const login = async ({username, password, force = false}) => {
     try {
-        await useDatabase({name:""}).login({username, password})
+        const remote = new PouchDB(remoteURL, {skip_setup:true})
+        await remote.logIn(username, password)
         console.log("you are logged in")
+
+        const { value } = getContext("loggedIn")
+        $value = true
+        
     } catch (e) {
         console.error(e)
         throw(e)
     }
+}
+
+export const logOut = async ()=>{
+    const remote = new PouchDB(remoteURL, {skip_setup:true})
+    await remote.logOut();
 }

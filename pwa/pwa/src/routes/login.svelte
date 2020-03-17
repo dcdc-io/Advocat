@@ -4,19 +4,17 @@ div.error{
 }
 </style>
 <script>
-	import { useDatabase } from '../helpers.js'
+	import { login } from '../helpers.js'
 	import { goto } from "@sapper/app"
 
 	let username = ""
 	let password = ""
 	let error = ""
-	let db = useDatabase({name:""})
 
-	const logIn = async () => {
-		console.log(`logging in ${username}:${password}`)	
+	const logInButton = async () => {
 		try{
-			await db.login({username: username, password: password})
-
+			await login({username: username, password: password})
+			goto("/")
 		} catch(e) {
 			console.log(e.message)
 			error = e.message
@@ -37,4 +35,4 @@ div.error{
 email <input type="text" bind:value={username}>
 password <input type="password" bind:value={password}>
 
-<button on:click={logIn}>log in</button><button on:click={register}>register</button>
+<button on:click={logInButton}>log in</button><button on:click={register}>register</button>

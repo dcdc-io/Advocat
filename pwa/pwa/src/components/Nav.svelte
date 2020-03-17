@@ -1,6 +1,9 @@
 <script>
 	export let segment;
-	import { useDatabase } from '../helpers.js'
+	import { logOut } from '../helpers.js'
+	import { getContext } from 'svelte'
+
+	let { value } = getContext("loggedIn")
 </script>
 
 <style>
@@ -54,9 +57,10 @@
 		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='.'>home</a></li>
 		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>about</a></li>
 		<li><a rel=prefetch aria-current='{segment === "blog" ? "page" : undefined}' href='blog'>blog</a></li>
-		<!-- {#if useDatabase({name:""}).db.getSession().ok}
-       		<p>Logged in</p>
-      	{/if} -->
+		{#if $value}
+       		<li>Logged in</li>
+			<li><a href='/' on:click{logOut}>Logout</a></li>
+      	{/if}
 		<li><a aria-current='{segment === "login" ? "page" : undefined}' href='login'>login</a></li>
 		<li><a aria-current='{segment === "register" ? "page" : undefined}' href='register'>register</a></li>
 	</ul>

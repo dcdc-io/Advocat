@@ -1,5 +1,12 @@
 <script>
 	import Nav from '../components/Nav.svelte';
+	import { setContext } from 'svelte'
+
+	import { writable } from 'svelte/store'
+	const value = writable(false, () => {
+		console.log("somebody subscribed")
+	})
+	setContext("loggedIn", { value })
 
 	export let segment;
 </script>
