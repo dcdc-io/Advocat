@@ -27,15 +27,17 @@
   <div>
     <div>
       <h1>welcome to advocat.</h1>
-      <p>advocat. is a social network for the real world</p>
     </div>
     <div class="calltoaction" on:click={click("findgroups")}>
       <h2>find groups</h2>
-      <p>find groups in your local area</p>
+      <p>find volunteer groups in your local area</p>
     </div>
     <div class="calltoaction" on:click={click("createagroup")}>
       <h2>create a group</h2>
-      <p>create a group with other people in your area</p>
+      <p>create a volunteer group with other people in your area</p>
+    </div>
+    <div>
+      <p>advocat. is made with ❤ by <a href="https://dcdc.io" target="_blank">dcdc.io</a>, the worker led digital cooperative</p>
     </div>
   </div>
 {/if}
