@@ -33,10 +33,10 @@ export const login = async ({username, password, force = false}) => {
 
 export const autoLogin = async () => {
     try {
-        const _ = new PouchDB(remoteURL)
+        const _ = new PouchDB(remoteURL, {skip_setup:true})
         const { loggedIn, username } = getContext("user")
         const session = await _.getSession()
-        if (session.ok) {
+        if (session.ok && session.userCtx.name) {
             username.set(session.userCtx.name)
             loggedIn.set(true)
         }
