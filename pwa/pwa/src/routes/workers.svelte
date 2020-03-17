@@ -1,8 +1,10 @@
 <script>
     import { useDatabase } from '../helpers.js'
-    const workers = await useDatabase({name:"workers"})
-    
-    let docs = []//await workers.allDocs()
+    const workers = useDatabase({name:"workers"})
+    let docs = []
+    workers.allDocs().then(alldocs => {
+        docs = [...alldocs.rows]
+    })
 </script>
 
 <div>workers</div>
