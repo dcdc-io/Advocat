@@ -3,7 +3,9 @@
 	import { logOut } from '../helpers.js'
 	import { getContext } from 'svelte'
 
-	let { value } = getContext("loggedIn")
+	let { loggedIn } = getContext("user")
+	console.log("in Nav")
+	console.log($loggedIn)
 </script>
 
 <style>
@@ -57,7 +59,7 @@
 		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='.'>home</a></li>
 		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>about</a></li>
 		<li><a rel=prefetch aria-current='{segment === "blog" ? "page" : undefined}' href='blog'>blog</a></li>
-		{#if $value}
+		{#if $loggedIn}
        		<li>Logged in</li>
 			<li><a href='/' on:click{logOut}>Logout</a></li>
       	{/if}

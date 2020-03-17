@@ -2,11 +2,13 @@
 	import Nav from '../components/Nav.svelte';
 	import { setContext } from 'svelte'
 
+	import { autoLogin } from "../helpers.js"
+
 	import { writable } from 'svelte/store'
-	const value = writable(false, () => {
-		console.log("somebody subscribed")
-	})
-	setContext("loggedIn", { value })
+	const loggedIn = writable(false)
+	setContext("user", { loggedIn })
+
+	autoLogin()
 
 	export let segment;
 </script>
