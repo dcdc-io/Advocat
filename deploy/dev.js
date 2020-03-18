@@ -40,10 +40,15 @@
      */
     // test databases
 
-    const workers_uk_leeds = await createDatabase("workers_uk_leeds")
-    const registrations = await createDatabase("registrations")
-    const blog = await createDatabase("blog")
+    const workers_uk_leeds = await useDatabase("workers_uk_leeds")
+    const registrations = await useDatabase("registrations")
+    const blog = await useDatabase("blog")
 
+    userdb.put()
+
+    let d = await workers_uk_leeds.getSecurity()
+    let e = await workers_uk_leeds.getSecurity()
+    let f = await workers_uk_leeds.getSecurity()
     /**** workaround for the issue that a db needs to exist before you can put security desc. ****/
     await workers_uk_leeds.putSecurity({ "members": { "roles": ["workers_uk_leeds_rw"] } })
     await registrations.putSecurity({ "writers": { "roles": ["registrations_writer"] } })
