@@ -6,6 +6,12 @@ body {
 	color: #333;
 }
 
+#sapper {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
 h1, h2, h3, h4, h5, h6 {
 	margin: 0 0 0.5em 0;
 	font-weight: 400;
@@ -24,7 +30,7 @@ code {
 	font-family: menlo, inconsolata, monospace;
 	font-size: calc(1em - 2px);
 	color: #555;
-	background-color: #A9A9A9;
+	background-color: #696969;
 	padding: 0.2em 0.4em;
 	border-radius: 2px;
 }

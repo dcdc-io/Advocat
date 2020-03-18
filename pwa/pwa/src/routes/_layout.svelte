@@ -16,13 +16,14 @@
 
 <style>
 	main {
-		position: relative;
-		max-width: 56em;
-		height: 100vh;
-		background-color: #696969;
-		padding: 2em;
-		margin: 0 auto;
+		padding: 1.5em;
 		box-sizing: border-box;
+		flex: 1;
+	}	
+	.footer {
+		padding: 1em;
+		text-align: center;
+		color: black;
 	}
 </style>
 
@@ -31,3 +32,7 @@
 <main>
 	<slot></slot>
 </main>
+
+<div class="footer">
+  <p>advocat. is made with ❤ by <a href="https://dcdc.io" target="_blank">dcdc.io</a>, the worker led digital cooperative</p>
+</div>

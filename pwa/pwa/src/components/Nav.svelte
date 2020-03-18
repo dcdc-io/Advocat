@@ -48,18 +48,27 @@
 		padding: 1em 0.5em;
 		display: block;
 	}
+	.info{
+		color: darkorange
+	}
 </style>
 
 <nav>
 	<ul>
 		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='.'>home</a></li>
 		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>about</a></li>
+		{#if false}
 		<li><a rel=prefetch aria-current='{segment === "blog" ? "page" : undefined}' href='blog'>blog</a></li>
+		{/if}
+		{#if true}  <!-- TODO: replace if statement when roles are implemented -->
+			<li><a aria-current='{segment === "advocats" ? "page" : undefined}' href='advocats'>advocats</a></li>
+		{/if}
 		{#if $loggedIn}
-       		<li><p>{$username}</p></li>
+       		<li><p class="info">welcome back, {$username}</p></li>
 		{:else}
 			<li><a aria-current='{segment === "login" ? "page" : undefined}' href='login'>login</a></li>
 			<li><a aria-current='{segment === "register" ? "page" : undefined}' href='register'>register</a></li>
       	{/if}
+		<!-- TODO: logout -->
 	</ul>
 </nav>

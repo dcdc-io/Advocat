@@ -6,7 +6,6 @@ PouchDB.plugin(PouchDBAuthentication)
 const remoteURL = "http://localhost:5984"
 
 export const useDatabase = ({name, sync = true}) => {
-    console.log("use db")
     const url = `${remoteURL.replace(/\/$/, '')}${name ? '/' : ''}${name && name.replace(/^\//, '')}`
     const remote = new PouchDB(url, {skip_setup: true})
     const local = new PouchDB(`${name}`)
@@ -25,7 +24,6 @@ export const login = async ({username, password, force = false}) => {
         const { loggedIn, username:dbUsername } = getContext("user")
         dbUsername.set((await remote.getSession()).userCtx.name)
         loggedIn.set(true)
-        
     } catch (e) {
         console.error(e)
         throw(e)
@@ -49,6 +47,18 @@ export const autoLogin = async () => {
     }
 }
 
+export const signUp = async(username, password ) =>{
+    try {
+        const users = useDatabase({name:""}).__remote
+        users.logOut()
+        const result = users.signUp(username, password)
+        users.close()
+        return result
+    } catch (e) {
+        // don't rethrow
+        console.log(e)
+    }
+}
 /*
 export const logOut = async () => {
     const remote = new PouchDB(remoteURL, {skip_setup:true})
