@@ -44,8 +44,6 @@
     const registrations = await useDatabase("registrations")
     const blog = await useDatabase("blog")
 
-    userdb.put()
-
     let d = await workers_uk_leeds.getSecurity()
     let e = await workers_uk_leeds.getSecurity()
     let f = await workers_uk_leeds.getSecurity()
