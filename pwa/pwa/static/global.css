@@ -24,7 +24,7 @@ code {
 	font-family: menlo, inconsolata, monospace;
 	font-size: calc(1em - 2px);
 	color: #555;
-	background-color: #f0f0f0;
+	background-color: #A9A9A9;
 	padding: 0.2em 0.4em;
 	border-radius: 2px;
 }
@@ -33,4 +33,14 @@ code {
 	body {
 		font-size: 16px;
 	}
+}
+
+@font-face{
+	font-family: 'ChangaOne Regular';
+	src: url('/ChangaOne-Regular.woff') format('woff');
+}
+
+@font-face{
+	font-family: 'ChangaOne Italic';
+	src: url('/ChangaOne-Regular.woff') format('woff');
 }
