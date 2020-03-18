@@ -1,7 +1,9 @@
 import PouchDB from 'pouchdb'
 import PouchDBAuthentication from 'pouchdb-authentication'
+import pouchdbfind from 'pouchdb-find'
 import { setContext, getContext } from 'svelte'
 PouchDB.plugin(PouchDBAuthentication)
+PouchDB.plugin(pouchdbfind)
 
 const remoteURL = "http://localhost:5984"
 
@@ -14,6 +16,11 @@ export const useDatabase = ({name, sync = true}) => {
     }
     local.__remote = remote
     return local
+}
+
+const admin = {
+    username: "admin",
+    password: "password"
 }
 
 export const login = async ({username, password, force = false}) => {
@@ -49,14 +56,16 @@ export const autoLogin = async () => {
 
 export const signUp = async(username, password ) =>{
     try {
-        const users = useDatabase({name:""}).__remote
-        users.logOut()
-        const result = users.signUp(username, password)
-        users.close()
+        const remote = useDatabase({name:""}).__remote
+        await login(admin)      
+        const result = await remote.signUp(username, password)
+        await login({username: username ,password: password})
+        await remote.close()
         return result
     } catch (e) {
-        // don't rethrow
+        console.log("signup Error")
         console.log(e)
+        throw (e)
     }
 }
 /*

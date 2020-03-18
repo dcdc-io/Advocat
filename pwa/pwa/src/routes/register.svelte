@@ -27,7 +27,6 @@
   let isSubmitting
   
   const users = useDatabase({name:""}).__remote
-  console.log("soso")
   const handleSubmit = ({detail:{values,setSubmitting,resetForm}}) => { 
     signUp(values.user.email, values.user.password).then((result) =>
     {
@@ -42,9 +41,9 @@
 
   const schema = yup.object().shape({
     user: yup.object().shape({
-      email: yup.string().required().email(),
-      password: yup.string().required().min(6),
-      passwordConfirm: yup.string().required().oneOf([yup.ref('password')],null)
+      // email: yup.string().required().email(),
+      // password: yup.string().required().min(6),
+      // passwordConfirm: yup.string().required().oneOf([yup.ref('password')],null)
     }),
   })
   const initialValues = {}
