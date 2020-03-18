@@ -3,19 +3,27 @@
 </style>
 
 <script>
-
 //TODO: if not got rights then GOTO /
-    import { useDatabase } from '../helpers.js'
-    import { Form, Input, Select, Choice } from 'sveltejs-forms'
-    import * as yup from 'yup'
+  import { useDatabase } from '../helpers.js'
+  import { Form, Input, Select, Choice } from 'sveltejs-forms'
+  import * as yup from 'yup'
+  let schema
+  let initialValues
+  let handleSubmit
+  (async () => {
+    const groups = useDatabase({name:"groups"})
 
-    const schema = yup.object().shape({
+
+    schema = yup.object().shape({
       group: yup.object().shape({
         location: yup.string().required()
       }),
     })
-    const initialValues = {}
-    const handleSubmit = ({detail:{values,setSubmitting,resetForm}}) => {}
+    initialValues = {}
+    handleSubmit = async ({detail:{values,setSubmitting,resetForm}}) => {
+      (await groups).put({"Location": groups.location})
+    }
+  } )()
 </script>
 
 <div>create advocat group</div>
