@@ -21,36 +21,23 @@
 <style lang="scss">
   .page {
     height: 100%;
-    padding-top: 10%
   }
   .title {
     margin: 0 auto;
     left: 0;
-    font-family: "ChangaOne Regular";
-    color: white;
-    padding-bottom: 5%;
+    color: black;
     font-size: 2em;
   }
   .container {
-    max-width: 90%;
+    max-width: 100%;
     margin: 0 auto;
-  }
-  .footer {
-    position: fixed;
-    bottom: 0;
-    width: 90%;
-    text-align: center;
-    margin: 0 auto;
-    color: white;
   }
   .calltoaction {
-    background: #808080;
+    background: black;
     color: white;
     padding: 1em;
     margin: 1em 0;
     cursor: pointer;
-    border-radius: 15px;
-    border: 2px solid white;
     h2 {
       text-decoration: underline;
     }
@@ -59,7 +46,7 @@
 
 <div class="page">
   <div class="title">
-    <h1>adVoCat.</h1>
+    <h1>welcome to advocat.</h1>
   </div>
   <div class="container">
     {#if $loggedIn}
@@ -78,9 +65,6 @@
         <div class="calltoaction" on:click={click("create_group")}>
           <h2>create a group</h2>
           <p>create a volunteer group with other people in your area</p>
-        </div>
-        <div class="footer">
-          <p>advocat. is made with ❤ by <a href="https://dcdc.io" target="_blank">dcdc.io</a>, the worker led digital cooperative</p>
         </div>
       </div>
     {/if}
