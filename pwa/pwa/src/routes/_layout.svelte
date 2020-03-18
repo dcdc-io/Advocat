@@ -17,10 +17,10 @@
 <style>
 	main {
 		position: relative;
-		max-width: 56em;
-		background-color: white;
-		padding: 2em;
-		margin: 0 auto;
+		width: 100%;
+		height: 100%;
+		background-color: #696969;
+		padding: 0;
 		box-sizing: border-box;
 	}
 </style>
