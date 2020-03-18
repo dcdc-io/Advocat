@@ -26,7 +26,6 @@
     margin: 0 auto;
     left: 0;
     color: black;
-    font-size: 2em;
   }
   .container {
     max-width: 100%;
@@ -47,6 +46,10 @@
 <div class="page">
   <div class="title">
     <h1>welcome to advocat.</h1>
+    {#if !$loggedIn}
+    <p>advocat. was created as a local response to the international 2020 coronavirus crisis.</p>
+    <p>advocat. helps you coordinate your volunteer led efforts so that you can better support your friends, families, and neighbours throughout these difficult times.</p>
+    {/if}
   </div>
   <div class="container">
     {#if $loggedIn}
@@ -59,12 +62,12 @@
     {:else}
       <div> 
         <div class="calltoaction" on:click={click("findgroups")}>
-          <h2>find groups</h2>
+          <h2>find help</h2>
           <p>find volunteer groups in your local area</p>
         </div>
         <div class="calltoaction" on:click={click("create_group")}>
-          <h2>create a group</h2>
-          <p>create a volunteer group with other people in your area</p>
+          <h2>be a volunteer</h2>
+          <p>create or join a volunteer group with other people in your area</p>
         </div>
       </div>
     {/if}

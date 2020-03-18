@@ -57,9 +57,11 @@
 	<ul>
 		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='.'>home</a></li>
 		<li><a aria-current='{segment === "about" ? "page" : undefined}' href='about'>about</a></li>
+		{#if false}
 		<li><a rel=prefetch aria-current='{segment === "blog" ? "page" : undefined}' href='blog'>blog</a></li>
+		{/if}
 		{#if true}  <!-- TODO: replace if statement when roles are implemented -->
-			<li><a aria-current='{segment === "workers" ? "page" : undefined}' href='workers'>advocats</a></li>
+			<li><a aria-current='{segment === "advocats" ? "page" : undefined}' href='advocats'>advocats</a></li>
 		{/if}
 		{#if $loggedIn}
        		<li><p class="info">welcome back, {$username}</p></li>

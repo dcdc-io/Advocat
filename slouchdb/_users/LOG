@@ -1,0 +1,13 @@
+2020/03/18-18:21:26.321 5dac Recovering log #14
+2020/03/18-18:21:26.321 5dac Level-0 table #16: started
+2020/03/18-18:21:26.333 5dac Level-0 table #16: 384 bytes OK
+2020/03/18-18:21:26.349 5dac Delete type=0 #14
+2020/03/18-18:21:26.349 5dac Delete type=3 #12
+2020/03/18-18:21:26.355 61c8 Compacting 4@0 + 0@1 files
+2020/03/18-18:21:26.362 61c8 Generated table #18@0: 18 keys, 4160 bytes
+2020/03/18-18:21:26.362 61c8 Compacted 4@0 + 0@1 files => 4160 bytes
+2020/03/18-18:21:26.369 61c8 compacted to: files[ 0 1 0 0 0 0 0 ]
+2020/03/18-18:21:26.369 61c8 Delete type=2 #5
+2020/03/18-18:21:26.369 61c8 Delete type=2 #8
+2020/03/18-18:21:26.370 61c8 Delete type=2 #13
+2020/03/18-18:21:26.370 61c8 Delete type=2 #16

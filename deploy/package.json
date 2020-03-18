@@ -1,0 +1,11 @@
+{
+  "name": "deploy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "pouchdb": "^7.2.1",
+    "pouchdb-adapter-http": "^7.2.1",
+    "pouchdb-authentication": "^1.1.3"
+  }
+}

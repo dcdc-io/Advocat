@@ -10,6 +10,7 @@ card{
 <script>
 
 //TODO: if not got rights then GOTO /
+    import { getContext } from 'svelte'
     import { useDatabase } from '../helpers.js'
     const workers = useDatabase({name:"workers"})
     let editWorker = false;
@@ -34,6 +35,9 @@ card{
     }
     const saveWorker = () => {
     }
+
+	let { loggedIn, username } = getContext("user")
+
 </script>
 
 <!-- TODO: applicants list way of adding worker.--> 
