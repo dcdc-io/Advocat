@@ -1,7 +1,8 @@
 const fuxor = require('fuxor')
+//fuxor.add('pouchdb', require('slouchdb'))
 fuxor.add('pouchdb-security', require('slouchdb-security'))
-//fuxor.add('pouchdb-fauxton', require('slouchdb-fauxton'))
-const PouchDB = require('pouchdb')
+
+const PouchDB = require('./slouchdb/packages/node_modules/pouchdb')
 
 const app = require('express-pouchdb')(PouchDB.defaults({
     prefix: './db/'

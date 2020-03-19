@@ -270,8 +270,8 @@ exports.putSecurity = function (secObj, callback) {
     promise = db.info().then(info => {
       debugger
       db.put(Object.assign({
-        _id: "_local/_security"
-      }, secObj)).catch(error => {
+        _id: "_security"
+      }, secObj), { suppressUnderscoreDetection: true }).catch(error => {
         debugger
         console.log(error)
       })
