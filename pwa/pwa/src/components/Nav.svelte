@@ -2,6 +2,11 @@
 	export let segment;
 	import { getContext } from 'svelte'
 	let { loggedIn, username } = getContext("user")
+
+	import { colourInvert } from '../helpers.js'
+	function colourInvertButton() {
+		colourInvert.update(n => !n)
+	}
 </script>
 
 <style>
@@ -51,6 +56,15 @@
 	.info{
 		color: darkorange
 	}
+	.button-box {
+		position: fixed;
+		top: 0;
+		right: 0;
+		z-index: 100;
+		margin: 5px;
+		padding: 2px;
+		width: 3em;
+	}
 </style>
 
 <nav>
@@ -71,4 +85,11 @@
       	{/if}
 		<!-- TODO: logout -->
 	</ul>
+	<div class="button-box">
+		{#if $colourInvert}
+			<button on:click={colourInvertButton}>Go Light</button>
+		{:else}
+			<button on:click={colourInvertButton}>Go Dark</button>
+		{/if}
+	</div>
 </nav>

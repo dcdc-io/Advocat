@@ -1,3 +1,9 @@
+<style>
+	h1 {
+		font-family: "ChangaOne Regular";
+	}
+</style>
+
 <svelte:head>
 	<title>About</title>
 </svelte:head>
@@ -10,17 +16,16 @@
 
 <p>advocat. is free to use and does not use advertising and analytics.</p>
 
-<h1>who is behind it?</h1>
+<h1>who's behind it?</h1>
 
 <p>we are <a href="https://dcdc.io" target="_blank">dcdc.io</a> and we are a worker led digital cooperative.</p>
 
-<h1>contributing</h1>
+<h1>want to get involved?</h1>
 
-<h2>time and technical skills</h2>
-<p>we're <a href="https://github.com/dcdc-io/Advocat/issues" target="_blank">on github.com</a> and we would love your help.</p>
+<h2>time and technical skills:</h2>
+<p>we're on <a href="https://github.com/dcdc-io/Advocat/issues" target="_blank">github.com</a> and we would love your help.</p>
 
-<h2>financial contributions and donations</h2>
-<h3>keeping the lights on</h3>
+<h2>keeping the lights on:</h2>
 <p>you may contribute directly to the development, support and maintainance of advocat. by sponsoring the project. contact us for more information at <a href="https://dcdc.io/contact_us">dcdc.io</a>.</p>
-<h3>for donations to advocat. groups</h3>
+<h2>donating to volunteers:</h2>
 <p>if you would like to make a donation to an advocat. group, you should contact the administrators of the group or groups you wish to support directly as we do not have to facility to process donations on behalf of others at the moment.</p>
