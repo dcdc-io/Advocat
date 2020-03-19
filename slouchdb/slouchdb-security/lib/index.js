@@ -15,11 +15,9 @@
 */
 
 "use strict";
-var extend = require("extend");
 var Promise = require("pouchdb-promise");
 
 var nodify = require("promise-nodify");
-var httpQuery = require("pouchdb-req-http-query");
 var wrappers = require("pouchdb-wrappers");
 var createBulkDocsWrapper = require("pouchdb-bulkdocs-wrapper");
 var createChangeslikeWrapper = require("pouchdb-changeslike-wrapper");
