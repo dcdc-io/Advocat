@@ -11,7 +11,10 @@
         await db.logIn("admin", "password")
         return db
     }
-    const createDatabase = async (name) => await useDatabase(name, false)
+    const createDatabase = async (name) => {
+        const db = await useDatabase(name, false)
+        return db
+    }
 
     const userdb = await useDatabase("_users")
 
@@ -40,15 +43,16 @@
      */
     // test databases
 
-    const workers_uk_leeds = await useDatabase("workers_uk_leeds")
-    const registrations = await useDatabase("registrations")
-    const blog = await useDatabase("blog")
+    const workers_uk_leeds = await createDatabase("workers_uk_leeds")
+    //let i = await workers_uk_leeds.get("_local/_security")
+    const registrations = await createDatabase("registrations")
+    const blog = await createDatabase("blog")
 
-    let d = await workers_uk_leeds.getSecurity()
-    let e = await workers_uk_leeds.getSecurity()
-    let f = await workers_uk_leeds.getSecurity()
-    /**** workaround for the issue that a db needs to exist before you can put security desc. ****/
-    await workers_uk_leeds.putSecurity({ "members": { "roles": ["workers_uk_leeds_rw"] } })
+    await workers_uk_leeds.getSecurity().then(doc => {
+        workers_uk_leeds.putSecurity({
+            "members": { "roles": ["workers_uk_leeds_rw_BALEET"]
+        } })
+    })
     await registrations.putSecurity({ "writers": { "roles": ["registrations_writer"] } })
     await blog.putSecurity({ "readers": { "roles": ["blog_reader"] } })
 })()

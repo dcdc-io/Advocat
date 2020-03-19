@@ -15,7 +15,6 @@
 */
 
 "use strict";
-
 var extend = require("extend");
 var Promise = require("pouchdb-promise");
 
@@ -268,10 +267,15 @@ exports.putSecurity = function (secObj, callback) {
   var promise;
 
   if (isHTTP(db)) {
-    promise = httpRequest(db, {
-      method: "PUT",
-      body: JSON.stringify(secObj)
-    });
+    promise = db.info().then(info => {
+      debugger
+      db.put(Object.assign({
+        _id: "_local/_security"
+      }, secObj)).catch(error => {
+        debugger
+        console.log(error)
+      })
+    })
   } else {
     promise = db.get(DOC_ID)
       .catch(function () {
@@ -306,7 +310,7 @@ function httpRequest(db, reqStub) {
       return httpQuery(db, reqStub)
         .then(function (resp) {
           return JSON.parse(resp.body);
-        });
+        });      
     });
 }
 
@@ -315,9 +319,10 @@ exports.getSecurity = function (callback) {
   var promise;
 
   if (isHTTP(db)) {
-    promise = httpRequest(db, {
-      method: "GET"
-    });
+    promise = db.get("_local/_security")
+      .catch(function () {
+        return {}
+      })
   } else {
     promise = db.get(DOC_ID)
       .catch(function () {
