@@ -298,22 +298,6 @@ function isHTTP(db) {
   return ["http", "https"].indexOf(db.type()) !== -1;
 }
 
-function httpRequest(db, reqStub) {
-  return db.info()
-    .then(function (info) {
-      extend(reqStub, {
-        raw_path: "/" + info.db_name + "/_security",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      });
-      return httpQuery(db, reqStub)
-        .then(function (resp) {
-          return JSON.parse(resp.body);
-        });      
-    });
-}
-
 exports.getSecurity = function (callback) {
   var db = this;
   var promise;
