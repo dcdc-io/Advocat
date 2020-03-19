@@ -1,7 +1,6 @@
 <script>
 	import Nav from '../components/Nav.svelte';
 	import { setContext } from 'svelte'
-
 	import { autoLogin, colourInvert } from "../helpers.js"
 
 	import { writable } from 'svelte/store'
@@ -23,14 +22,15 @@
 		padding: 1em;
 		text-align: center;
 		color: black;
+		font-weight: 300;
 	}
 	.colour-scheme {
-		background: #f9f9f9;
-		color: #808080;	
+		background: var(--colour-scheme-light);
+		color: var(--colour-scheme-dark);	
 	}
 	.colour-scheme-inverse {
-		background: #808080;
-		color: #f9f9f9;	
+		background: var(--colour-scheme-dark);
+		color: var(--colour-scheme-light);	
 	}
 </style>
 
