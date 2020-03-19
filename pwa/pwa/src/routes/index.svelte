@@ -64,11 +64,11 @@
       </div>
     {:else}
       <div> 
-        <div class="calltoaction" style="border: 2px solid {$colourInvert ? '#f9f9f9' : '#808080'}" on:click={click("findgroups")}>
+        <div class="calltoaction" style="border: 2px solid {$colourInvert ? "var(--colour-scheme-light)" : "var(--colour-scheme-dark)" }" on:click={click("findgroups")}>
           <h2>find help</h2>
           <p>find volunteer groups in your local area</p>
         </div>
-        <div class="calltoaction" style="border: 2px solid {$colourInvert ? '#f9f9f9' : '#808080'}" on:click={click("create_group")}>
+        <div class="calltoaction" style="border: 2px solid {$colourInvert ? "var(--colour-scheme-light)" : "var(--colour-scheme-dark)" }" on:click={click("create_group")}>
           <h2>be a volunteer</h2>
           <p>create or join a volunteer group with other people in your area</p>
         </div>
