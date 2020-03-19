@@ -37,8 +37,7 @@ export default {
 				dedupe: ['svelte']
 			}),
 			commonjs({
-				include: 'node_modules/**',
-				exclude: [/svelte-forms/],
+				include: 'node_modules/**/*',
 				namedExports: {
 					'node_modules/immediate/lib/browser.js,':['immediate']
 				}
