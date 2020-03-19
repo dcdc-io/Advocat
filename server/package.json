@@ -1,0 +1,16 @@
+{
+  "name": "slouchdb",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "scripts": {
+    "preinstall": "cd slouchdb && yarn && yarn build && cd .."
+  },
+  "dependencies": {
+    "fuxor": "^2.2.6",
+    "pouchdb-server": "^4.2.0",
+    "pouchdb": "link:./slouchdb",
+    "slouchdb-fauxton": "link:./slouchdb-fauxton",
+    "slouchdb-security": "link:./slouchdb-security"
+  }
+}
