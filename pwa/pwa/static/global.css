@@ -4,8 +4,9 @@ body {
 	font-size: 14px;
 	line-height: 1.5;
 	color: #333;
-	--colour-scheme-light: #F9F9F9;
-	--colour-scheme-dark: #808080;
+	--colour-scheme-light: #e9f5f8;
+	--colour-scheme-dark: #10083f;
+	background-image: src("https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=416&h=312&q=60");
 }
 
 #sapper {
@@ -22,6 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
 	font-size: 2em;
+	font-family: "ChangaOne Regular";
 }
 
 a {
