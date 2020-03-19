@@ -2,6 +2,7 @@ import PouchDB from 'pouchdb'
 import PouchDBAuthentication from 'pouchdb-authentication'
 import pouchdbfind from 'pouchdb-find'
 import { setContext, getContext } from 'svelte'
+import { writable } from 'svelte/store'
 PouchDB.plugin(PouchDBAuthentication)
 PouchDB.plugin(pouchdbfind)
 
@@ -76,3 +77,5 @@ export const logOut = async () => {
     await remote.logOut();
 }
 */
+
+export let colourInvert = writable(false)

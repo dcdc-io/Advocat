@@ -1,5 +1,5 @@
 <script>
-  import { useDatabase } from '../helpers.js'
+  import { useDatabase, colourInvert } from '../helpers.js'
   import { getContext } from "svelte";
   import { goto } from '@sapper/app'
   import GroupBrowser from '../components/GroupBrowser.svelte'
@@ -21,37 +21,28 @@
 <style lang="scss">
   .page {
     height: 100%;
+    max-width: 600px;
+    margin: 0 auto;
   }
   .title {
     margin: 0 auto;
     left: 0;
-    color: black;
+    font-family: "ChangaOne Regular";
+    p {
+      font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    }
   }
   .container {
-    max-width: 100%;
     margin: 0 auto;
   }
   .calltoaction {
-    background: #808080;
-    color: white;
     border-radius: 15px;
     padding: 1em;
     margin: 1em 0;
     cursor: pointer;
-    border: 2px solid white;
     h2 {
-      text-decoration: underline;
+      font-family: "ChangaOne Regular";
     }
-  }
-  .title {
-    font-family: "ChangaOne Regular";
-    color: white;
-  }
-  .footer {
-    position: fixed;
-    bottom: 0;
-    margin: 0 auto;
-    color: white;
   }
 </style>
 
@@ -59,8 +50,8 @@
   <div class="title">
     <h1>welcome to advocat.</h1>
     {#if !$loggedIn}
-    <p>advocat. was created as a local response to the international 2020 coronavirus crisis.</p>
-    <p>advocat. helps you coordinate your volunteer led efforts so that you can better support your friends, families, and neighbours throughout these difficult times.</p>
+    <p>advocat. was created as a local response to the 2020 international coronavirus crisis.</p>
+    <p>advocat. helps you to coordinate your volunteer led efforts so that you can better support neighbours, friends, family and your local community throughout these difficult times.</p>
     {/if}
   </div>
   <div class="container">
@@ -73,11 +64,11 @@
       </div>
     {:else}
       <div> 
-        <div class="calltoaction" on:click={click("findgroups")}>
+        <div class="calltoaction" style="border: 2px solid {$colourInvert ? '#f9f9f9' : '#808080'}" on:click={click("findgroups")}>
           <h2>find help</h2>
           <p>find volunteer groups in your local area</p>
         </div>
-        <div class="calltoaction" on:click={click("create_group")}>
+        <div class="calltoaction" style="border: 2px solid {$colourInvert ? '#f9f9f9' : '#808080'}" on:click={click("create_group")}>
           <h2>be a volunteer</h2>
           <p>create or join a volunteer group with other people in your area</p>
         </div>
