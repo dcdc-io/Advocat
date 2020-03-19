@@ -86,8 +86,12 @@ function filledInSecurity(args) {
     .then(function (security) {
       security.members = security.members || {};
       security.admins = security.admins || {};
-      fillInSection(security.members);
+      security.readers = security.readers || {};
+      security.writers = security.writers || {};
       fillInSection(security.admins);
+      fillInSection(security.members);
+      fillInSection(security.readers);
+      fillInSection(security.writers);
 
       return security;
     });
@@ -120,7 +124,7 @@ securityWrappers.query = function (original, args) {
     var isStoredView = typeof args.fun === "string";
     return (
       isIn(userCtx, security.admins) ||
-      (isStoredView && isMember(userCtx, security))
+      (isStoredView && (isMember(userCtx, security) || isReader(userCtx, security)))
     );
   }, original, args);
 };
@@ -138,6 +142,16 @@ function documentModificationWrapper(original, args, docId) {
   }, original, args);
 }
 
+function documentCreationWrapper(original, args, docId) {
+  return securityWrapper(function (userCtx, security) {
+    var isNotDesignDoc = String(docId).indexOf("_design/") !== 0;
+    return (
+      isIn(userCtx, security.admins) ||
+      (isNotDesignDoc && (isMember(userCtx, security) || isWriter(userCtx, security)))
+    );
+  }, original, args);
+}
+
 function isMember(userCtx, security) {
   var thereAreMembers = (
     security.members.names.length ||
@@ -147,7 +161,7 @@ function isMember(userCtx, security) {
 }
 
 function isReader(userCtx, security) {
-  var thereAreReader = (
+  var thereAreReaders = (
     security.readers.names.length ||
     security.readers.roles.length
   );
@@ -155,7 +169,7 @@ function isReader(userCtx, security) {
 }
 
 function isWriter(userCtx, security) {
-  var thereAreWriter = (
+  var thereAreWriters = (
     security.writers.names.length ||
     security.writers.roles.length
   );
@@ -165,7 +179,9 @@ function isWriter(userCtx, security) {
 securityWrappers.put = function (original, args) {
   return documentModificationWrapper(original, args, args.doc._id);
 };
-securityWrappers.post = securityWrappers.put;
+securityWrappers.post = function (original, args) {
+  return documentCreationWrapper(original, args, args.doc._id)
+}
 securityWrappers.remove = securityWrappers.put;
 
 securityWrappers.putAttachment = function (original, args) {
@@ -219,9 +235,7 @@ var requiresWriterWrapper = securityWrapper.bind(null, function (userCtx, securi
 });
 
 [
-  'get', 'allDocs', 'getAttachment', 'info', 'revsDiff', 'getSecurity', 'list',
-  'show', 'update', 'rewriteResultRequestObject', 'bulkGet', 'getIndexes',
-  'find', 'explain'
+  'update', 'rewriteResultRequestObject'
 ].forEach(function (name) {
   securityWrappers[name] = requiresMemberWrapper;
 });
