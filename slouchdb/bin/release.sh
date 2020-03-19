@@ -36,6 +36,7 @@ for pkg in $(ls packages/node_modules); do
   echo "Publishing $pkg..."
   if [ ! -z $DRY_RUN ]; then
     echo "Dry run, not publishing"
+    npm publish --dry-run
   elif [ ! -z $BETA ]; then
     npm publish --tag beta
   else
