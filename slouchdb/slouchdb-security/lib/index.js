@@ -232,6 +232,13 @@ var requiresWriterWrapper = securityWrapper.bind(null, function (userCtx, securi
   securityWrappers[name] = requireMemberChangesWrapper;
 });
 
+[
+  'get', 'allDocs', 'getAttachment', 'info', 'revsDiff', 'getSecurity', 'list',
+  'show', 'bulkGet', 'getIndexes', 'find', 'explain'
+].forEach(function (name) {
+  securityWrappers[name] = requiresReaderWrapper;
+});
+
 var staticSecurityWrappers = {};
 
 staticSecurityWrappers.new = requiresServerAdmin;
@@ -268,13 +275,12 @@ exports.putSecurity = function (secObj, callback) {
 
   if (isHTTP(db)) {
     promise = db.info().then(info => {
-      debugger
       db.put(Object.assign({
         _id: "_security"
-      }, secObj), { suppressUnderscoreDetection: true }).catch(error => {
-        debugger
-        console.log(error)
-      })
+      }, secObj), { suppressUnderscoreDetection: true })
+        .catch(function() {
+          return {_id: DOC_ID};
+        })
     })
   } else {
     promise = db.get(DOC_ID)
