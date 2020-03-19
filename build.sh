@@ -1,16 +1,20 @@
 #!/bin/bash
+echo $PWD
 
 ### dependencies
-(cd slouchdb && cd slouchdb && yarn && yarn build)
+(cd pouchdb && yarn && yarn build)
 
 # build agents
 
-# build pwa
-(cd pwa/pwa/ && yarn && yarn build)
 
 # build couchdb-fauxton
-(cd cou)
+(cd couchdb-fauxton-1.1.10 && yarn)
 
 # build pouchdb-fauxton
+(cd pouchdb-fauxton && yarn)
 
-# build slouchdb
+# build pouchdb-server
+(cd pouchdb-server && yarn)
+
+# build pwa
+(cd pwa && yarn && yarn build)

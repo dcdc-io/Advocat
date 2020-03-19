@@ -1,10 +1,10 @@
-const fuxor = require('fuxor')
+//const fuxor = require('fuxor')
 //fuxor.add('pouchdb-fauxton', require('slouchdb-fauxton'))
-fuxor.add('pouchdb-security', require('slouchdb-security')) // <- dependency injection
+//fuxor.add('pouchdb-security', require('../pouchdb-security')) // <- dependency injection
 
-const PouchDB = require('./slouchdb/packages/node_modules/pouchdb')
+const PouchDB = require('../pouchdb/packages/node_modules/pouchdb')
 
-const app = require('./slouchdb-server')(PouchDB.defaults({
+const app = require('../pouchdb-server/packages/node_modules/express-pouchdb')(PouchDB.defaults({
     prefix: './db/'
 }), {
     mode: 'fullCouchDB',

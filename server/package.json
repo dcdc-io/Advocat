@@ -4,13 +4,13 @@
   "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
-    "preinstall": "cd slouchdb && yarn && yarn build && cd .."
+
   },
   "dependencies": {
     "fuxor": "^2.2.6",
-    "pouchdb-server": "^4.2.0",
-    "pouchdb": "link:./slouchdb",
-    "slouchdb-fauxton": "link:./slouchdb-fauxton",
-    "slouchdb-security": "link:./slouchdb-security"
+    "pouchdb": "link:../pouchdb",
+    "pouchdb-server": "link:../pouchdb-server",
+    "pouchdb-fauxton": "link:../pouchdb-fauxton",
+    "pouchdb-security": "link:../pouchdb-security"
   }
 }
