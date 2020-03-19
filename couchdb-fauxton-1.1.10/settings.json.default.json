@@ -1,0 +1,80 @@
+{
+  "deps": [
+  { "name": "fauxton" },
+  { "name": "components" },
+  { "name": "databases" },
+  { "name": "documents" },
+  { "name": "setup" },
+  { "name": "activetasks" },
+  { "name": "cluster" },
+  { "name": "config" },
+  { "name": "replication" },
+  { "name": "cors" },
+  { "name": "permissions" },
+  { "name": "auth" },
+  { "name": "verifyinstall" },
+  { "name": "documentation" }
+  ],
+    "template": {
+      "development": {
+        "src": "./assets/index.underscore",
+        "dest": "dist/debug/index.html",
+        "variables": {
+          "title": "Project Fauxton",
+          "generationLabel": "Fauxton Dev"
+        },
+        "app": {
+          "root": "/",
+          "host": "../..",
+          "version": "1.0.dev"
+        }
+      },
+      "release": {
+        "src": "assets/index.underscore",
+        "dest": "dist/debug/index.html",
+        "variables": {
+          "title": "Project Fauxton",
+          "generationLabel": "Fauxton Release"
+        },
+        "app": {
+          "root": "/",
+          "host": "../..",
+          "version": "1.0"
+        }
+      },
+      "couchapp": {
+        "src": "assets/index.underscore",
+        "dest": "dist/debug/index.html",
+        "variables": {
+          "title": "Project Fauxton",
+          "generationLabel": "Fauxton Couchapp"
+        },
+        "app": {
+          "root": "/",
+          "host": "../../..",
+          "version": "1.0"
+        }
+      }
+    },
+
+    "couch_config": {
+      "fauxton": {
+        "db": "http://localhost:5984/fauxton",
+        "app": "./couchapp.js",
+        "options": {
+          "okay_if_missing": true
+        }
+      }
+    },
+
+    "nightwatch": {
+      "fauxton_username": "tester",
+      "password": "testerpass",
+      "fauxton_port": "8000",
+      "db_host": "localhost",
+      "db_port": "5984",
+      "custom_commands_path": ["test/nightwatch_tests/custom-commands", "test/nightwatch_tests/custom-commands/auth"],
+      "globals_path": "test/nightwatch_tests/helpers/helpers.js",
+      "selenium_port": "4444"
+    }
+}

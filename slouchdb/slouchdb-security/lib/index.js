@@ -117,7 +117,6 @@ securityWrappers.query = function (original, args) {
   //query may only be called if
   //- a stored view & at least a db member or
   //- at least a db admin
-
   return securityWrapper(function (userCtx, security) {
     var isStoredView = typeof args.fun === "string";
     return (
@@ -220,7 +219,8 @@ var requireMemberChangesWrapper = createChangeslikeWrapper(requiresMemberWrapper
 var requiresReaderWrapper = securityWrapper.bind(null, function (userCtx, security) {
   return (
     isIn(userCtx, security.admins) ||
-    isReader(userCtx, security)
+    isReader(userCtx, security) ||
+    isMember(userCtx, security)
   );
 });
 

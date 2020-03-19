@@ -999,3 +999,16 @@
 [Thu, 19 Mar 2020 10:29:29 GMT] [info] [<0.000.0>] ::1 - - GET /blog?_=1584613738636 200
 [Thu, 19 Mar 2020 11:52:48 GMT] [info] [<0.000.0>] ::1 - - GET / 200
 [Thu, 19 Mar 2020 11:52:48 GMT] [info] [<0.000.0>] ::1 - - OPTIONS /groups/_changes?style=all_docs&since=0&limit=100 404
+[Thu, 19 Mar 2020 17:21:58 GMT] [info] [<0.000.0>] ::1 - - GET / 200
+[Thu, 19 Mar 2020 17:21:58 GMT] [info] [<0.000.0>] ::1 - - OPTIONS /groups/_local/jIHfdxZyHch9sOxAPzlF_A%3D%3D? 404
+[Thu, 19 Mar 2020 17:24:42 GMT] [info] [<0.000.0>] ::1 - - GET / 200
+[Thu, 19 Mar 2020 17:24:42 GMT] [info] [<0.000.0>] ::1 - - GET /_utils/ 304
+[Thu, 19 Mar 2020 17:24:43 GMT] [info] [<0.000.0>] ::1 - - OPTIONS /workers/_local/khn3V2777MpxK45erEIIAg%3D%3D? 404
+[Thu, 19 Mar 2020 17:24:43 GMT] [info] [<0.000.0>] ::1 - - GET /_utils/dashboard.assets/css/styles-a9623008fc27e79da2388441deeacfab.css 304
+[Thu, 19 Mar 2020 17:24:43 GMT] [info] [<0.000.0>] ::1 - - GET /_utils/dashboard.assets/js/bundle-34997e32896293a1fa5d71f79eb1b4f7.js 304
+[Thu, 19 Mar 2020 17:24:43 GMT] [info] [<0.000.0>] ::1 - - GET /_session 200
+[Thu, 19 Mar 2020 17:24:43 GMT] [info] [<0.000.0>] ::1 - - GET /_session 304
+[Thu, 19 Mar 2020 17:24:43 GMT] [info] [<0.000.0>] ::1 - - GET / 200
+[Thu, 19 Mar 2020 17:24:43 GMT] [info] [<0.000.0>] ::1 - - GET /_utils/dashboard.assets/img/pouchdb-site.png 304
+[Thu, 19 Mar 2020 17:24:43 GMT] [info] [<0.000.0>] ::1 - - GET /_utils/dashboard.assets/fonts/fauxtonicon5.woff 304
+[Thu, 19 Mar 2020 17:24:43 GMT] [info] [<0.000.0>] ::1 - - GET /_utils/dashboard.assets/img/pouchdb-favicon.png 304

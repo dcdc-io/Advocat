@@ -64,8 +64,8 @@ done
 
 # rebuild fauxton
 cd ${FAUXTON_SRC}
-npm install
-npm run couchdb
+yarn
+yarn couchdb
 cd ${CURRENT_WD}
 
 rm -fr ${WWW_TARGET}
