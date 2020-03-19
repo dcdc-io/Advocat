@@ -316,10 +316,10 @@ exports.getSecurity = function (callback) {
   } else {
     promise = db.get(DOC_ID)
       .catch(function () {
-        return {security: {}};
+        return {};
       })
       .then(function (doc) {
-        return doc.security;
+        return doc;
       });
   }
   nodify(promise, callback);

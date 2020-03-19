@@ -1,6 +1,5 @@
 const fuxor = require('fuxor')
-//fuxor.add('pouchdb', require('slouchdb'))
-fuxor.add('pouchdb-security', require('slouchdb-security'))
+fuxor.add('pouchdb-security', require('slouchdb-security')) // <- dependency injection
 
 const PouchDB = require('./slouchdb/packages/node_modules/pouchdb')
 
