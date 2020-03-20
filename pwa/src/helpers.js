@@ -22,11 +22,12 @@ export const useDatabase = ({name, sync = true}) => {
 export const login = async ({username, password, force = false}) => {
     try {
         const remote = new PouchDB(remoteURL, {skip_setup:true})
-        await remote.logIn(username, password)
+        const result = await remote.logIn(username, password)
         // set loggedIn (use js api because we're outside svelte)
         const { loggedIn, username:dbUsername } = getContext("user")
         dbUsername.set((await remote.getSession()).userCtx.name)
         loggedIn.set(true)
+        return result
     } catch (e) {
         console.error(e)
         throw(e)
@@ -58,14 +59,15 @@ const register_user = {
 export const signUp = async(username, password ) =>{
     try {
         const _ = useDatabase({name:""}).__remote
-        if( (await _.getSession()).userCtx.name != "register")
+        if((await _.getSession()).userCtx.name != "register")
         {
             await _.logOut()
-            await login(register_user)      
+            console.log (await login(register_user))   
         }
-
+        console.log ((await _.getSession()).userCtx.name)
         const result = await _.signUp(username, password)
         await _.logOut()
+        console.log ((await _.getSession()).userCtx.name)
         await login({username: username ,password: password})
         return result
     } catch (e) {
