@@ -14,15 +14,20 @@
 
 <style>
 	main {
-		padding: 1.5em;
+		max-width: 600px;
+		margin: 0 auto;
+		padding: 2em;
 		box-sizing: border-box;
 		flex: 1;
+		color: var(--colour-scheme-dark);
 	}	
 	.footer {
 		padding: 1em;
 		text-align: center;
 		color: black;
 		font-weight: 300;
+		color: var(--colour-scheme-dark);
+		border-top: 0.1px solid var(--colour-scheme-dark);;
 	}
 	.colour-scheme {
 		background: var(--colour-scheme-light);
@@ -37,11 +42,11 @@
 <Nav {segment}></Nav>
 
 {#if $colourInvert}
-<main class="colour-scheme-inverse">
+<main >
 	<slot></slot>
 </main>
 {:else}
-<main class="colour-scheme">
+<main >
 	<slot></slot>
 </main>
 {/if}
