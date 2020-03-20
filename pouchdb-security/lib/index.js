@@ -286,13 +286,12 @@ exports.putSecurity = function (secObj, callback) {
   var promise;
 
   if (isHTTP(db)) {
-    promise = db.info().then(info => {
-      db.put(Object.assign({
-        _id: "_security"
-      }, secObj), { suppressUnderscoreDetection: true })
+    promise = getSecurity(db).then(doc => {
+      doc.security = secObj
+      return db.put(doc)
         .catch(function() {
-          return {_id: DOC_ID};
-        })
+        return {_id: DOC_ID};
+      })
     })
   } else {
     promise = db.get(DOC_ID)
@@ -321,7 +320,7 @@ exports.getSecurity = function (callback) {
   var promise;
 
   if (isHTTP(db)) {
-    promise = db.get("_local/_security")
+    promise = db.get(DOC_ID)
       .catch(function () {
         return {}
       })
