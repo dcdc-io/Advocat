@@ -149,28 +149,36 @@ function documentCreationWrapper(original, args, docId) {
   }, original, args);
 }
 
-function isMember(userCtx, security) {
+function isNotPublic(security) {
+  var thereAreAdmins = (
+    security.admins.names.length ||
+    security.admins.roles.length
+  );
   var thereAreMembers = (
     security.members.names.length ||
     security.members.roles.length
   );
-  return (!thereAreMembers) || isIn(userCtx, security.members);
-}
-
-function isReader(userCtx, security) {
   var thereAreReaders = (
     security.readers.names.length ||
     security.readers.roles.length
   );
-  return (!thereAreReaders) || isIn(userCtx, security.readers);
-}
-
-function isWriter(userCtx, security) {
   var thereAreWriters = (
     security.writers.names.length ||
     security.writers.roles.length
   );
-  return (!thereAreWriters) || isIn(userCtx, security.writers);
+  return thereAreAdmins || thereAreMembers || thereAreReaders || thereAreWriters;
+}
+
+function isMember(userCtx, security) {
+  return (!isNotPublic(security)) || isIn(userCtx, security.members);
+}
+
+function isReader(userCtx, security) {
+  return (!isNotPublic(security)) || isIn(userCtx, security.readers);
+}
+
+function isWriter(userCtx, security) {
+  return (!isNotPublic(security)) || isIn(userCtx, security.writers);
 }
 
 securityWrappers.put = function (original, args) {
