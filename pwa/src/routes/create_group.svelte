@@ -7,7 +7,7 @@
   import { useDatabase } from '../helpers.js'
   import { Form, Input, Select, Choice } from 'sveltejs-forms'
   import * as yup from 'yup'
-  import { v4 as uuidv4 } from 'uuid';
+
   let schema
   let initialValues
 
@@ -24,7 +24,7 @@
 
 
   const handleSubmit = ({detail:{values,setSubmitting,resetForm}}) => { 
-    groups.put({_id: uuidv4(), location: "leeds"}).then((result) =>
+    groups.post({location: "leeds"}).then((result) =>
     {
       console.log(result)
       setSubmitting(false)      
