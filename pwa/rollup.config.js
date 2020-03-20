@@ -19,11 +19,7 @@ const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /
 
 export default {
 	client: {
-		input: {
-			"client": 'src/client.js',
-			"server": 'src/server.js',		
-			"service-worker": 'src/service-worker.js'			
-		},
+		input: config.client.input(),
 		output: config.client.output(),
 		plugins: [
 			replace({
