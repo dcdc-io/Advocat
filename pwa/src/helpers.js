@@ -19,9 +19,9 @@ export const useDatabase = ({name, sync = true}) => {
     return local
 }
 
-const admin = {
-    username: "admin",
-    password: "password"
+const register_user = {
+    username: "register",
+    password: "register"
 }
 
 export const login = async ({username, password, force = false}) => {
@@ -58,7 +58,7 @@ export const autoLogin = async () => {
 export const signUp = async(username, password ) =>{
     try {
         const remote = useDatabase({name:""}).__remote
-        await login(admin)      
+        await login(register_user)      
         const result = await remote.signUp(username, password)
         await login({username: username ,password: password})
         await remote.close()
