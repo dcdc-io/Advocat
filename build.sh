@@ -7,7 +7,8 @@ echo $PWD
 
 
 # build couchdb-fauxton
-(cd couchdb-fauxton-1.1.10 && yarn)
+# (cd couchdb-fauxton-1.1.10 && yarn && yarn couchdb)
+# ^^^ not need as pouchdb-fauxton will build
 
 # build pouchdb-fauxton
 (cd pouchdb-fauxton && yarn)

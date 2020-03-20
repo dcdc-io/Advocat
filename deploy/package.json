@@ -5,9 +5,9 @@
   "license": "MIT",
   "dependencies": {
     "fuxor": "^2.2.6",
-    "pouchdb": "link:../slouchdb/slouchdb/packages/node_modules/pouchdb",
+    "pouchdb": "^7.2.1",
     "pouchdb-adapter-http": "^7.2.1",
     "pouchdb-authentication": "^1.1.3",
-    "slouchdb-security": "link:../slouchdb/slouchdb-security"
+    "pouchdb-security": "link:../pouchdb-security"
   }
 }

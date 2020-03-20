@@ -1,10 +1,10 @@
 (async () => {
     const fuxor = require('fuxor')
-    fuxor.add('pouchdb-security', require('slouchdb-security')) // <- dependency injection
+    fuxor.add('pouchdb-security', require('../pouchdb-security')) // <- dependency injection
     const PouchDB = require("pouchdb")
     PouchDB.plugin(require('pouchdb-authentication'))
         .plugin(require('pouchdb-adapter-http'))
-        .plugin(require("slouchdb-security")) // <- plugged in to expose security API
+        .plugin(require("../pouchdb-security")) // <- plugged in to expose security API
 
     const useDatabase = async (name, skip_setup = true) => {
         const db = new PouchDB("http://admin:password@localhost:5984" + (name ? "/" + name : ""), {skip_setup, adapter:"http"})
@@ -16,11 +16,28 @@
         return db
     }
 
-    const userdb = await useDatabase("_users")
+    /**************************************************/
+    /*             START OF DEPLOYMENT                */
+    /**************************************************/
+
+    const migrationdb = await useDatabase("__migrations__", false)
+    const migrations = await migrationdb.allDocs()
+
+    if (migrations.rows.length > 0) {
+        // abort, we have a migration
+        console.error("cannot initialize a database that already contains migrations")
+        process.exit(-1)
+    }
+    await migrationdb.post({
+        _id: "0",
+        started: true
+    })
 
     /**
      * first we create some test users then assign roles
      */
+    const userdb = await useDatabase("_users")
+
     // test users
     const alice = await userdb.signUp("alice@dcdc.io", "password")
     const bob = await userdb.signUp("bob@dcdc.io", "password")
@@ -47,12 +64,13 @@
     //let i = await workers_uk_leeds.get("_local/_security")
     const registrations = await createDatabase("registrations")
     const blog = await createDatabase("blog")
-
-    await workers_uk_leeds.getSecurity().then(doc => {
-        workers_uk_leeds.putSecurity({
-            "members": { "roles": ["workers_uk_leeds_rw_BALEET"]
-        } })
-    })
+    
+    await workers_uk_leeds.putSecurity({ "members": { "roles": ["workers_uk_leeds_rw"] } })
     await registrations.putSecurity({ "writers": { "roles": ["registrations_writer"] } })
     await blog.putSecurity({ "readers": { "roles": ["blog_reader"] } })
+
+    await migrationdb.get("0").then(async doc => {
+        doc.completed = true
+        await migrationdb.put(doc)
+    })
 })()

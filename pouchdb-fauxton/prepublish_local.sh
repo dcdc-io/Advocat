@@ -16,7 +16,7 @@ WWW_TARGET=$(pwd)/www
 CURRENT_WD=$(pwd)
 
 rm -fr ${FAUXTON_SRC}
-cp -r ../../couchdb-fauxton-1.1.10 ${FAUXTON_SRC}
+cp -r ../couchdb-fauxton-1.1.10 ${FAUXTON_SRC}
 
 # changing these less variables will have a cascading effect across the
 # entire CSS. changing the CSS itself would be extremely messy in comparison
@@ -32,7 +32,7 @@ ${REPLACE} \
 # currently no way to configure this, so we search-and-replace the site title
 # and favicon in index.underscore
 ${REPLACE} \
-  "Project Fauxton" "PouchDB Server" \
+  "Project Fauxton" "SlouchDB Server" \
   ${FAUXTON_SRC}/assets/index.underscore
 ${REPLACE} \
   "dashboard.assets/img/couchdb-logo.png" \
@@ -60,8 +60,8 @@ done
 
 # rebuild fauxton
 cd ${FAUXTON_SRC}
-yarn
-npm run couchdb
+(yarn || true)
+(yarn couchdb || true)
 cd ${CURRENT_WD}
 
 rm -fr ${WWW_TARGET}

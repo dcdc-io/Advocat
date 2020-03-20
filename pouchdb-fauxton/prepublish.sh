@@ -64,8 +64,8 @@ done
 
 # rebuild fauxton
 cd ${FAUXTON_SRC}
-yarn
-yarn couchdb
+(yarn || true)
+# yarn couchdb
 cd ${CURRENT_WD}
 
 rm -fr ${WWW_TARGET}

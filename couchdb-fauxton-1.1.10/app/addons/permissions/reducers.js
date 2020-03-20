@@ -28,13 +28,12 @@ const initialState = {
 };
 
 export default function permissions (state = initialState, action) {
+  debugger;
   switch (action.type) {
-
     case PERMISSIONS_UPDATE:
       const { permissions } = action;
       return Object.assign({}, state, {
         isLoading: false,
-
         security: permissions,
         adminRoles: getRoles('admins', permissions),
         adminNames: getNames('admins', permissions),

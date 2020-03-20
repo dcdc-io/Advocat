@@ -286,13 +286,21 @@ exports.putSecurity = function (secObj, callback) {
   var promise;
 
   if (isHTTP(db)) {
-    promise = getSecurity(db).then(doc => {
-      doc.security = secObj
-      return db.put(doc)
-        .catch(function() {
-        return {_id: DOC_ID};
+    promise = db.get(DOC_ID)
+      .catch(error => {
+        if (error.status === 404) {
+          return {_id: DOC_ID}
+        } else {
+          throw error
+        }
       })
-    })
+      .then(doc => {
+        doc.security = secObj
+        return db.put(doc)
+          .catch(error => {
+            return {_id: DOC_ID};
+          })
+        })
   } else {
     promise = db.get(DOC_ID)
       .catch(function () {
@@ -320,17 +328,22 @@ exports.getSecurity = function (callback) {
   var promise;
 
   if (isHTTP(db)) {
-    promise = db.get(DOC_ID)
-      .catch(function () {
+    promise = 
+      db.get(DOC_ID)
+      .then(function(doc) {
+        debugger
         return {}
+      })
+      .catch(function () {
+        return {security: {}}
       })
   } else {
     promise = db.get(DOC_ID)
       .catch(function () {
-        return {};
+        return {security: {}};
       })
       .then(function (doc) {
-        return doc;
+        return doc.security;
       });
   }
   nodify(promise, callback);

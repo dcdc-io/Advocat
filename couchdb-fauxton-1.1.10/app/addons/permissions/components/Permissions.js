@@ -47,6 +47,6 @@ Permissions.propTypes = {
   readerNames: React.PropTypes.array.isRequired,
   readerRoles: React.PropTypes.array.isRequired,
   writerNames: React.PropTypes.array.isRequired,
-  writerRoles: React.PropTypes.array.isRequired,  
+  writerRoles: React.PropTypes.array.isRequired,
   security: React.PropTypes.object.isRequired
 };
