@@ -37,7 +37,6 @@ export default {
 				dedupe: ['svelte']
 			}),
 			commonjs({
-				include: 'node_modules/**/*',
 				namedExports: {
 					'node_modules/immediate/lib/browser.js,':['immediate']
 				}
@@ -85,9 +84,7 @@ export default {
 			resolve({
 				dedupe: ['svelte']
 			}),
-			commonjs({
-				exclude: [/svelte-forms/]
-			})
+			commonjs()
 		],
 		external: Object.keys(pkg.dependencies).concat(
 			require('module').builtinModules || Object.keys(process.binding('natives'))
@@ -105,9 +102,7 @@ export default {
 				'process.browser': true,
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
-			commonjs({
-				exclude: [/svelte-forms/]
-			}),
+			commonjs(),
 			!dev && terser()
 		],
 

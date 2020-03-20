@@ -2739,10 +2739,6 @@ pouchdb-errors@6.4.3:
   dependencies:
     inherits "2.0.3"
 
-"pouchdb-find@link:../slouchdb/packages/node_modules/pouchdb-find":
-  version "0.0.0"
-  uid ""
-
 pouchdb-promise@6.4.3, pouchdb-promise@~6.4.0:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-promise/-/pouchdb-promise-6.4.3.tgz#74516f4acf74957b54debd0fb2c0e5b5a68ca7b3"
@@ -2764,7 +2760,7 @@ pouchdb-utils@6.4.3, pouchdb-utils@~6.4.0:
     pouchdb-promise "6.4.3"
     uuid "3.2.1"
 
-"pouchdb@link:../slouchdb/packages/node_modules/pouchdb":
+"pouchdb@link:../pouchdb/packages/pouchdb":
   version "0.0.0"
   uid ""
 
