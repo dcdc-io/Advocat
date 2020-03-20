@@ -19,11 +19,6 @@ export const useDatabase = ({name, sync = true}) => {
     return local
 }
 
-const register_user = {
-    username: "register",
-    password: "register"
-}
-
 export const login = async ({username, password, force = false}) => {
     try {
         const remote = new PouchDB(remoteURL, {skip_setup:true})
@@ -55,13 +50,23 @@ export const autoLogin = async () => {
     }
 }
 
+const register_user = {
+    username: "register",
+    password: "register"
+}
+
 export const signUp = async(username, password ) =>{
     try {
-        const remote = useDatabase({name:""}).__remote
-        await login(register_user)      
-        const result = await remote.signUp(username, password)
+        const _ = useDatabase({name:""}).__remote
+        if( (await _.getSession()).userCtx.name != "register")
+        {
+            await _.logOut()
+            await login(register_user)      
+        }
+
+        const result = await _.signUp(username, password)
+        await _.logOut()
         await login({username: username ,password: password})
-        await remote.close()
         return result
     } catch (e) {
         console.log("signup Error")
