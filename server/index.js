@@ -4,10 +4,15 @@ fuxor.add('pouchdb-security', require('../pouchdb-security')) // <- dependency i
 const PouchDB = require('pouchdb')
 const path = require('path')
 const express = require('express')
+const cors = require('cors')
 const app = express()
-
 const WWW = path.join(path.dirname(__filename) + '/www')
 
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+  optionsSuccessStatus: 200
+}))
 
 app.get('/_utils', function (req, res) {
   if (req.originalUrl === '/_utils') {
