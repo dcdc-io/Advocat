@@ -10,6 +10,7 @@
 
   let schema
   let initialValues
+  let location
 
   const groups = useDatabase({name:"groups"})
 
@@ -24,7 +25,7 @@
 
 
   const handleSubmit = ({detail:{values,setSubmitting,resetForm}}) => { 
-    groups.post({location: "leeds"}).then((result) =>
+    groups.post({location: values.group.location}).then((result) =>
     {
       console.log(result)
       setSubmitting(false)      
@@ -42,7 +43,7 @@
   let:isSubmitting
   let:isValid
 >
-  <Input label="location"     name="group.location"placeholder="e.g. Leeds Central" />
+  <Input label="location"     name="group.location" placeholder="e.g. Leeds Central"/>
   <button type="submit" disabled={isSubmitting}>Create Group</button>
 
 </Form>
