@@ -20,7 +20,11 @@ const initialState = {
   adminRoles: [],
   adminNames: [],
   memberNames: [],
-  memberRoles: []
+  memberRoles: [],
+  readerNames: [],
+  readerRoles: [],
+  writerNames: [],
+  writerRoles: []
 };
 
 export default function permissions (state = initialState, action) {
@@ -35,7 +39,11 @@ export default function permissions (state = initialState, action) {
         adminRoles: getRoles('admins', permissions),
         adminNames: getNames('admins', permissions),
         memberRoles: getRoles('members', permissions),
-        memberNames: getNames('members', permissions)
+        memberNames: getNames('members', permissions),
+        readerRoles: getRoles('readers', permissions),
+        readerNames: getNames('readers', permissions),
+        writerRoles: getRoles('writers', permissions),
+        writerNames: getNames('writers', permissions),
       });
 
     default:
@@ -65,3 +73,7 @@ export const getAdminRoles = state => state.adminRoles;
 export const getAdminNames = state => state.adminNames;
 export const getMemberNames = state => state.memberNames;
 export const getMemberRoles = state => state.memberRoles;
+export const getReaderNames = state => state.readerNames;
+export const getReaderRoles = state => state.readerRoles;
+export const getWriterNames = state => state.writerNames;
+export const getWriterRoles = state => state.writerRoles;

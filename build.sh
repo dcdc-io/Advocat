@@ -2,7 +2,6 @@
 echo $PWD
 
 ### dependencies
-(cd pouchdb && yarn && yarn build)
 
 # build agents
 
@@ -14,7 +13,7 @@ echo $PWD
 (cd pouchdb-fauxton && yarn)
 
 # build pouchdb-server
-(cd pouchdb-server && yarn)
+(cp -r pouchdb-fauxton/www server/www && yarn)
 
 # build pwa
 (cd pwa && yarn && yarn build)
