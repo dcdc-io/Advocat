@@ -38,6 +38,15 @@
     import JobCard from "../components/JobCard.svelte";
     let job_details = {name: "be annoyed at this fucking piece of shit",
                        urgency: "job"}
+
+    const printshit = (result) => {
+        console.log(result)
+        debugger
+    }                   
+    let current_location
+    if (navigator.geolocation) {
+        current_location = navigator.geolocation.getCurrentPosition(printshit)
+    }
 </script>
 
 <div class="jobs_list">
