@@ -5,6 +5,8 @@ echo $PWD
 
 # build agents
 
+# build pouchdb-security
+(cd pouchdb-security && yarn)
 
 # build couchdb-fauxton
 # (cd couchdb-fauxton-1.1.10 && yarn && yarn couchdb)
