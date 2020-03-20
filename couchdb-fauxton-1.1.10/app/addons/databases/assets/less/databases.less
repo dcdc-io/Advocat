@@ -1,0 +1,61 @@
+//  Licensed under the Apache License, Version 2.0 (the "License"); you may not
+//  use this file except in compliance with the License. You may obtain a copy of
+//  the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+//  WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+//  License for the specific language governing permissions and limitations under
+//  the License.
+
+@import "../../../../../assets/less/bootstrap/variables.less";
+@import "../../../../../assets/less/variables.less";
+@import "../../../../../assets/less/bootstrap/mixins.less";
+
+.tools .nav {
+  margin-bottom: 10px;
+}
+
+.new-database-tray {
+  padding: 16px 20px 28px;
+  &:before {
+    right: 115px;
+  }
+
+  input.input-xxlarge {
+    margin-bottom: 0px;
+    width: 250px;
+    .border-radius(5px 0 0 5px);
+  }
+
+  a.btn {
+    color: white;
+    background-color: @linkColor;
+    margin-left: 0;
+    line-height: 1.5em;
+    border: 0px;
+    padding: 10px 10px 9px;
+    font-size: 14px;
+    .border-radius(0 5px 5px 0);
+
+    &:hover {
+      background-color: #cbcbcb;
+      color: white;
+    }
+  }
+}
+
+#database-pagination {
+  float: right;
+}
+
+.database-load-fail {
+  color: #999999;
+  height: 49px;
+}
+
+.database-actions > * {
+  margin-right: 10px;
+}

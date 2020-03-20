@@ -787,6 +787,18 @@ pouchdb-binary-utils@7.2.1:
   dependencies:
     buffer-from "1.1.0"
 
+pouchdb-bulkdocs-wrapper@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/pouchdb-bulkdocs-wrapper/-/pouchdb-bulkdocs-wrapper-4.2.0.tgz#cce556421a090492a25e81dda45a40e06de9b088"
+  integrity sha512-9Zuzot30FoD4Cp9ZqIjb6/7+xyXTFRaXzp1wdigzecdp/D6wgWqo6rKCXKHTZYPEcGB97vMNRYqld6wbA89FCA==
+  dependencies:
+    pouchdb-promise "^6.4.1"
+
+pouchdb-changeslike-wrapper@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/pouchdb-changeslike-wrapper/-/pouchdb-changeslike-wrapper-4.2.0.tgz#2660e14180672f9e396daffd7f2556a9bf4c71bf"
+  integrity sha512-vsz3sTXH2YdWTd+dSBWEFOrdtIM07peQ9dSzROONyG7dqGlr9e2uSj+mXqTm8jBLDwUfcjZu16DTUg2AdWtWJg==
+
 pouchdb-collections@6.4.3:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-collections/-/pouchdb-collections-6.4.3.tgz#2b70ca3143134c361dba6e466518b4f4d8e92ff4"
@@ -828,12 +840,21 @@ pouchdb-md5@7.2.1:
     pouchdb-binary-utils "7.2.1"
     spark-md5 "3.0.0"
 
-pouchdb-promise@6.4.3, pouchdb-promise@~6.4.0:
+pouchdb-plugin-error@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/pouchdb-plugin-error/-/pouchdb-plugin-error-4.2.0.tgz#2e18b6ce80af90a223b4306374b39420f1606004"
+  integrity sha512-dkgckrU7m7sa1WDRNFevsgi9DnqXkH09wXCCSc8D536mQCU3uo4jRyy/mtlSfT56NWGcieWTKNI0HQi3rhqKtg==
+
+pouchdb-promise@6.4.3, pouchdb-promise@^6.4.1, pouchdb-promise@^6.4.3, pouchdb-promise@~6.4.0:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-promise/-/pouchdb-promise-6.4.3.tgz#74516f4acf74957b54debd0fb2c0e5b5a68ca7b3"
   integrity sha512-ruJaSFXwzsxRHQfwNHjQfsj58LBOY1RzGzde4PM5CWINZwFjCQAhZwfMrch2o/0oZT6d+Xtt0HTWhq35p3b0qw==
   dependencies:
     lie "3.1.1"
+
+"pouchdb-security@link:../pouchdb-security":
+  version "0.0.0"
+  uid ""
 
 pouchdb-utils@6.4.3, pouchdb-utils@~6.4.0:
   version "6.4.3"
@@ -863,6 +884,13 @@ pouchdb-utils@7.2.1:
     pouchdb-md5 "7.2.1"
     uuid "3.3.3"
 
+pouchdb-wrappers@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/pouchdb-wrappers/-/pouchdb-wrappers-4.2.0.tgz#283f1f1e959f56f2626619514d52f2b74c3654a7"
+  integrity sha512-ADnQKEgWsf2a3qEXj1njP7D1I1OeA0Z+O7OfXN4mK623Re/hvz869Xes8i8oJXscAh6gz/fzjiU6ElbLF6Wd5w==
+  dependencies:
+    promise-nodify "^1.0.2"
+
 pouchdb@^7.2.1:
   version "7.2.1"
   resolved "https://registry.yarnpkg.com/pouchdb/-/pouchdb-7.2.1.tgz#619e3d5c2463ddd94a4b1bf40d44408c46e9de79"
@@ -888,6 +916,11 @@ pouchdb@^7.2.1:
     through2 "3.0.1"
     uuid "3.3.3"
     vuvuzela "1.0.3"
+
+promise-nodify@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/promise-nodify/-/promise-nodify-1.0.2.tgz#0d0fb143c33400b0061b47e581257557047d4c5a"
+  integrity sha1-DQ+xQ8M0ALAGG0flgSV1VwR9TFo=
 
 property-is-enumerable-x@^1.1.0:
   version "1.1.0"
@@ -1016,10 +1049,6 @@ safer-buffer@^2.0.2, safer-buffer@^2.1.0, safer-buffer@~2.1.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/safer-buffer/-/safer-buffer-2.1.2.tgz#44fa161b0187b9549dd84bb91802f9bd8385cd6a"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
-
-"slouchdb-security@link:../slouchdb/slouchdb-security":
-  version "0.0.0"
-  uid ""
 
 sntp@2.x.x:
   version "2.1.0"

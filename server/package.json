@@ -1,0 +1,16 @@
+{
+  "name": "slouchdb",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "scripts": {},
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-pouchdb": "^4.2.0",
+    "fuxor": "^2.2.6",
+    "pouchdb": "^7.2.1",
+    "pouchdb-fauxton": "link:../pouchdb-fauxton",
+    "pouchdb-security": "link:../pouchdb-security",
+    "pouchdb-server": "^4.2.0"
+  }
+}

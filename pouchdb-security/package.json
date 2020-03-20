@@ -1,0 +1,13 @@
+{
+  "name": "slouchdb-security",
+  "version": "1.0.0",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "pouchdb-bulkdocs-wrapper": "^4.2.0",
+    "pouchdb-changeslike-wrapper": "^4.2.0",
+    "pouchdb-plugin-error": "^4.2.0",
+    "pouchdb-promise": "^6.4.3",
+    "pouchdb-wrappers": "^4.2.0"
+  }
+}
