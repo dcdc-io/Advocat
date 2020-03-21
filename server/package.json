@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "lib/index.js",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "dev":"node dev.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "express-pouchdb": "^4.2.0",
