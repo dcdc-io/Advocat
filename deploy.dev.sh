@@ -2,4 +2,4 @@
 
 # ./build.sh
 
-# (cd deploy && node dev.js)
+# (cd deploy && yarn && node dev.js)

@@ -1,0 +1,25 @@
+image: node:lts
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+cache:
+  paths:
+    - node_modules/
+
+build:
+  script:
+    - yarn
+    - yarn build
+  artifacts:
+    paths:
+      - __sapper__/build
+  only:
+    - master
+
+deploy:
+  stage:
+    deploy
+  dependencies:
+  - build
+  script:
+  - echo 1

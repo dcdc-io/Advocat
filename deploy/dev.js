@@ -74,3 +74,5 @@
         await migrationdb.put(doc)
     })
 })()
+
+console.log("deployment done")
