@@ -32,7 +32,7 @@
     {
       console.log(result)
       setSubmitting(false)      
-    }).catch(error => console.log(error))  
+    })  
   }
 
   const handleReset = () => {
@@ -41,9 +41,9 @@
 
   const schema = yup.object().shape({
     user: yup.object().shape({
-      // email: yup.string().required().email(),
-      // password: yup.string().required().min(6),
-      // passwordConfirm: yup.string().required().oneOf([yup.ref('password')],null)
+      email: yup.string().required().email(),
+      password: yup.string().required().min(6),
+      passwordConfirm: yup.string().required().oneOf([yup.ref('password')],null)
     }),
   })
   const initialValues = {}

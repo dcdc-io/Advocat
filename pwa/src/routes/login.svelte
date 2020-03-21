@@ -32,7 +32,7 @@ div.error{
 <h1>login</h1>
 <div class="error">{error}</div>
 
-email <input type="text" bind:value={username}>
-password <input type="password" bind:value={password}>
+email <input type="text" bind:value={username}><br>
+password <input type="password" bind:value={password}><br>
 
 <button on:click={logInButton}>log in</button><button on:click={register}>register</button>
