@@ -23,10 +23,7 @@
         postcodedata = data;
         console.log(data)
         console.log(postcode_url)
-        //TODO: pass data back to parent
         update(data)
-        //location = setContext("clientLocation", "in thingy")
-        //_this.fire("locationfound", data)
     })
 
     let getLocationByPostcode = (async function() {
@@ -39,5 +36,4 @@
 <div>
     enter your postcode <input type="text" bind:value={postcode}><br>
     <button on:click={getLocationByPostcode}>get location by postcode</button>
-    {postcodedata.result.longitude}, {postcodedata.result.latitude}
 </div>

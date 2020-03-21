@@ -72,7 +72,6 @@
 
 <div class="jobs_list">
     <LocationWidget update={processClientLocation}></LocationWidget>
-    {postcode_data}
     <JobCard job={job_details} clientLocation={client_coords}></JobCard>
     <div class="job urgent" id="1">    
         <div class="distances">
