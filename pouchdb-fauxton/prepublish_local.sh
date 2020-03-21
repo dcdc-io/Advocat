@@ -16,7 +16,7 @@ WWW_TARGET=$(pwd)/www
 CURRENT_WD=$(pwd)
 
 rm -fr ${FAUXTON_SRC}
-cp -r ../couchdb-fauxton-1.1.10 ${FAUXTON_SRC}
+cp -r ../couchdb-fauxton-1.2.3 ${FAUXTON_SRC}
 
 # changing these less variables will have a cascading effect across the
 # entire CSS. changing the CSS itself would be extremely messy in comparison

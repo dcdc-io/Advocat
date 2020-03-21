@@ -5,6 +5,7 @@ fuxor.add('pouchdb-security', pouchdbSecurity)
 import PouchDB from 'pouchdb'
 import express from 'express'
 import expressPouchdb from 'express-pouchdb'
+import path from 'path'
 
 import sirv from 'sirv';
 import compression from 'compression';
@@ -13,7 +14,17 @@ import * as sapper from '@sapper/server';
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 
-express().use(
+express().get(
+	'/db/_utils', (req, res) => {
+		if (req.originalUrl === '/db/_utils')
+			res.redirect(301, '/db/_utils/')
+		else
+			res.sendFile(process.cwd() + "/_utils/index.html")
+	}
+).use(
+	'/db/_utils',
+	express.static(process.cwd() + '/_utils')
+).use(
 	'/db',
 	expressPouchdb(
 		PouchDB.defaults({

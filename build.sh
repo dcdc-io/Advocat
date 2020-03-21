@@ -15,9 +15,12 @@ echo $PWD
 # build pouchdb-fauxton
 (cd pouchdb-fauxton && yarn)
 
-# build pouchdb-server
-(cp -r pouchdb-fauxton/www server/www && yarn)
+## no longer used
+## # build backoffice pouchdb-server
+## (cp -r pouchdb-fauxton/www server/www && yarn)
 
 # build pwa
 (cd pwa && yarn && yarn build)
-(cp -r pwa/__sapper__/build server/pwa)
+
+# copy fauxton build to pwa
+(cp -r pouchdb-fauxton/www pwa/__sapper__/build/_utils)

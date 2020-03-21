@@ -1,15 +1,19 @@
 <script>
 	import Nav from '../components/Nav.svelte';
-	import { setContext } from 'svelte'
+	import { setContext, onMount } from 'svelte'
 	import { autoLogin, colourInvert } from "../helpers.js"
 
 	import { writable } from 'svelte/store'
 	const loggedIn = writable(false)
 	const username = writable("empty")
 	setContext("user", { loggedIn, username })
-	autoLogin()
+	
 
 	export let segment;
+
+	onMount(async () => {
+		autoLogin()
+	})
 </script>
 
 <style>

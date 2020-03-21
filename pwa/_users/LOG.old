@@ -1,5 +1,5 @@
-2020/03/21-02:28:20.579 c54 Recovering log #80
-2020/03/21-02:28:20.579 c54 Level-0 table #82: started
-2020/03/21-02:28:20.591 c54 Level-0 table #82: 237 bytes OK
-2020/03/21-02:28:20.610 c54 Delete type=0 #80
-2020/03/21-02:28:20.611 c54 Delete type=3 #78
+2020/03/21-16:45:38.856 41c8 Recovering log #6
+2020/03/21-16:45:38.856 41c8 Level-0 table #8: started
+2020/03/21-16:45:38.866 41c8 Level-0 table #8: 237 bytes OK
+2020/03/21-16:45:38.884 41c8 Delete type=0 #6
+2020/03/21-16:45:38.885 41c8 Delete type=3 #4

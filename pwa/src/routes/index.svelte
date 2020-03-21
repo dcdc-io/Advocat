@@ -6,10 +6,11 @@
   let { loggedIn, username } = getContext("user");
   const click = (page) => () => goto(page)
 
-  const groupsDb = useDatabase({name:"groups"})
+  let groupsDb
   let groups = []
   $: {
     if ($loggedIn) {
+      groupsDb = useDatabase({name:"groups"})
       groupsDb.allDocs({include_docs:true}).then(result => {
         groups = result.rows.map(r => r.doc)
       })
