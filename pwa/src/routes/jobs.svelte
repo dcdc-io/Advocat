@@ -36,20 +36,45 @@
 
 <script>
     import JobCard from "../components/JobCard.svelte";
+    import LocationWidget from "../components/LocationWidget.svelte";
+    import { setContext, getContext } from 'svelte'
+    let location = "waiting"
+
+    setContext("clientLocation", location)
+    location = getContext("clientLocation")
+
     let job_details = {name: "be annoyed at this fucking piece of shit",
-                       urgency: "job"}
+                       urgency: "job",
+                       location: {longitude: 0.0,
+                                  latitude: 0.0}
+                      }
 
     const printshit = (result) => {
         console.log(result)
         debugger
     }                   
     let current_location
+    /*
     if (navigator.geolocation) {
         current_location = navigator.geolocation.getCurrentPosition(printshit)
-    }
+        console.log("using gps data")
+    } else {
+        current_location = {longitude: 0.1,
+                            latitude: 0.1}
+        console.log("using back up location")
+    }*/
+    
+    let processClientLocation = (async function(data) {
+        postcode_data = data;
+        console.log("updated thing")
+        console.log(data)
+    })
+
 </script>
 
 <div class="jobs_list">
+    <LocationWidget update=this.processClientLocation></LocationWidget>
+    {location}
     <JobCard job={job_details}></JobCard>
     <div class="job urgent" id="1">    
         <div class="distances">
