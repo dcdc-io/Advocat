@@ -31,23 +31,60 @@
 
 <script>
     import { onMount } from "svelte"
-    export let job
+    import gpsDistance from "gps-distance"
 
-    let postcode_url = "https://api.postcodes.io/postcodes/LS61EY"
+    export let job
+    export let clientLocation
+
+    let distance_in_km
+    let distance = 0
+
+
+    let postcode_url = "https://api.postcodes.io/postcodes/"
     let postcode_data = {result: {postcode: "loading",
                                   longitude: 0.0,
                                   latitude: 0.0}}
+    $: postcode_data, getDistanceToJob()
+    $: clientLocation, getDistanceToJob()
+    $: job, getDistanceToJob()
+
+
+    let processPostcode = (async function(data) {
+        postcode_data = data;
+        console.log(data)
+        console.log(postcode_url)
+        //distance = getDistanceToJob()
+    })
     
-    onMount(async function() {
-        const response = await fetch(postcode_url);
-        postcode_data = await response.json();
+    let getLocationByPostcode = (async function() {
+        const response = await fetch(postcode_url + job.postcode);
+        processPostcode(await response.json())
     });
+
+    onMount(async function() {
+        await getLocationByPostcode()
+    })
+
+    let getDistanceToJob = function() {
+        console.log("get distance called")
+        distance_in_km = gpsDistance(clientLocation.latitude,
+                               clientLocation.longitude,
+                               postcode_data.result.latitude,
+                               postcode_data.result.longitude)
+        if ((clientLocation.latitude === 0.0) &&
+            (clientLocation.longitude === 0.0)) {
+            distance = "?" } 
+        else {
+            distance = Math.round((distance_in_km * 0.621371) * 10) / 10
+        }
+    }
+
 </script>
 
 <div class={job.urgency} id="1">    
     <div class="distances">
-        <p class="location">5 miles away</p> 
-        <p class="distance-to-complete">{postcode_data.result.postcode}</p>
+        <p class="location">{postcode_data.result.postcode}</p> 
+        <p class="distance-to-complete">{distance} miles</p>
     </div>
     <p class="job-summary">{job.name}</p>
 </div>

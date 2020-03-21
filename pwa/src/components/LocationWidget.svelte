@@ -4,6 +4,11 @@
     export let postcodedata
     export let update
 
+    console.log("update")
+    console.log(update)
+
+    update("blah")
+
     let location
     let postcode
     let postcode_url = "https://api.postcodes.io/postcodes/"
@@ -19,7 +24,7 @@
         console.log(data)
         console.log(postcode_url)
         //TODO: pass data back to parent
-        //update(data)
+        update(data)
         //location = setContext("clientLocation", "in thingy")
         //_this.fire("locationfound", data)
     })
