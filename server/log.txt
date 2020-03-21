@@ -6714,3 +6714,4 @@
 [Fri, 20 Mar 2020 18:29:10 GMT] [info] [<0.000.0>] ::1 - - GET /blog/_all_docs?limit=21 200
 [Fri, 20 Mar 2020 18:29:10 GMT] [info] [<0.000.0>] ::1 - - GET /blog/_all_docs?startkey=%22%22&endkey=%22%E9%A6%99%22&limit=30&_=1584728257119 200
 [Fri, 20 Mar 2020 18:29:16 GMT] [info] [<0.000.0>] ::1 - - GET /blog/_all_docs 200
+[Sat, 21 Mar 2020 00:59:14 GMT] [info] [<0.000.0>] ::1 - - GET / 200

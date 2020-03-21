@@ -20,3 +20,4 @@ echo $PWD
 
 # build pwa
 (cd pwa && yarn && yarn build)
+(cp -r pwa/__sapper__/build server/pwa)

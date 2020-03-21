@@ -4,15 +4,9 @@ fuxor.add('pouchdb-security', require('../pouchdb-security')) // <- dependency i
 const PouchDB = require('pouchdb')
 const path = require('path')
 const express = require('express')
-const cors = require('cors')
 const app = express()
 const WWW = path.join(path.dirname(__filename) + '/www')
-
-app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true,
-  optionsSuccessStatus: 200
-}))
+const PWA = path.join(path.dirname(__filename) + '/pwa')
 
 app.get('/_utils', function (req, res) {
   if (req.originalUrl === '/_utils') {
@@ -21,7 +15,8 @@ app.get('/_utils', function (req, res) {
     res.sendFile(path.join(WWW, 'index.html'))
   }
 });
-app.use('/_utils', express.static(WWW));
+
+app.use('/_utils', express.static(WWW))
 
 app.use('/', require('express-pouchdb')(PouchDB.defaults({
   prefix: './db/'
@@ -31,5 +26,5 @@ app.use('/', require('express-pouchdb')(PouchDB.defaults({
     exclude: ['routes/fauxton']
   }
 }))
-console.log("listening on 5984")
-app.listen(5984)
+console.log("listening on 80")
+app.listen(80)

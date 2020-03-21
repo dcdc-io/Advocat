@@ -55,6 +55,7 @@
     <h1>advocat.</h1>
     {#if !$loggedIn}
     <p>advocat was created as a local response to the 2020 international coronavirus crisis.</p>
+    <p>advocat helps you to coordinate your volunteer led efforts so that you can better support neighbours, friends, family and your local community.</p>
     {/if}
   </div>
   <div class="container">
