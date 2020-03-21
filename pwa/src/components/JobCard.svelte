@@ -30,13 +30,24 @@
 </style>
 
 <script>
+    import { onMount } from "svelte"
     export let job
+
+    let postcode_url = "https://api.postcodes.io/postcodes/LS61EY"
+    let postcode_data = {result: {postcode: "loading",
+                                  longitude: 0.0,
+                                  latitude: 0.0}}
+    
+    onMount(async function() {
+        const response = await fetch(postcode_url);
+        postcode_data = await response.json();
+    });
 </script>
 
 <div class={job.urgency} id="1">    
     <div class="distances">
         <p class="location">5 miles away</p> 
-        <p class="distance-to-complete">3 miles to complete</p>
+        <p class="distance-to-complete">{postcode_data.result.postcode}</p>
     </div>
     <p class="job-summary">{job.name}</p>
 </div>
