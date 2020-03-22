@@ -12,6 +12,7 @@
 
 <script>
     import JobCard from "../components/JobCard.svelte";
+    import CreateJob from "../components/CreateJob.svelte";
     import LocationWidget from "../components/LocationWidget.svelte";
     import { setContext, getContext } from 'svelte'
 
@@ -42,12 +43,7 @@
                  location: {longitude: 0.0,
                             latitude: 0.0},
                  postcode: "wf110dn"}
-               ]
-
-    const printshit = (result) => {
-        console.log(result)
-        debugger
-    }                   
+               ]                
     
     let processClientLocation = (async function(data) {
         postcode_data = data;
@@ -60,7 +56,12 @@
 </script>
 
 <div class="jobs_list">
+    Note: all these bit won't stay here. It's just a way to develop them all in the same place
     <LocationWidget update={processClientLocation}></LocationWidget>
+    <br>
+
+    <CreateJob></CreateJob>
+    
     { #each jobs as job}
         <JobCard job={job} clientLocation={client_coords}></JobCard>
     {/each}

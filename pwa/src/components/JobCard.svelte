@@ -61,9 +61,14 @@
         processPostcode(await response.json())
     });
 
+    
     onMount(async function() {
-        await getLocationByPostcode()
+        if ((postcode_data.result.latitude === 0.0) &&
+            (postcode_data.result.latitude === 0.0)) {
+            await getLocationByPostcode()
+        }
     })
+    
 
     let getDistanceToJob = function() {
         console.log("get distance called")
