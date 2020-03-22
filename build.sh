@@ -21,4 +21,7 @@ echo $PWD
 (cd pwa && yarn && yarn build)
 
 # copy fauxton build to pwa
-(cp -r couchdb-fauxton-1.2.3/dist/release pwa/__sapper__/build/_utils)
+(rm -rf pwa/__sapper__/build/_utils || true)
+(rm -rf pwa/_utils)
+(cp -r couchdb-fauxton-1.2.3/dist/release pwa/__sapper__/build/_utils || true)
+(cp -r couchdb-fauxton-1.2.3/dist/release pwa/_utils)
