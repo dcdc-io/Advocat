@@ -181,6 +181,10 @@ function isWriter(userCtx, security) {
   return (!isNotPublic(security)) || isIn(userCtx, security.writers);
 }
 
+function isPublicReader(userCtx, security) {
+  return security.readers.roles.some(role => role === "_public")
+}
+
 securityWrappers.put = function (original, args) {
   return documentModificationWrapper(original, args, args.doc._id);
 };
@@ -228,7 +232,8 @@ var requiresReaderWrapper = securityWrapper.bind(null, function (userCtx, securi
   return (
     isIn(userCtx, security.admins) ||
     isReader(userCtx, security) ||
-    isMember(userCtx, security)
+    isMember(userCtx, security) ||
+    isPublicReader(userCtx, security)
   );
 });
 

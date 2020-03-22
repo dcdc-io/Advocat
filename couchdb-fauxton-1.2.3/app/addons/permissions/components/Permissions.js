@@ -46,5 +46,9 @@ Permissions.propTypes = {
   adminNames: PropTypes.array.isRequired,
   memberNames: PropTypes.array.isRequired,
   memberRoles: PropTypes.array.isRequired,
+  readerNames: PropTypes.array.isRequired,
+  readerRoles: PropTypes.array.isRequired,
+  writerNames: PropTypes.array.isRequired,
+  writerRoles: PropTypes.array.isRequired,
   security: PropTypes.object.isRequired
 };

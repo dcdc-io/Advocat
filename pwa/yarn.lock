@@ -2301,6 +2301,11 @@ globule@^1.0.0:
     lodash "~4.17.12"
     minimatch "~3.0.2"
 
+gps-distance@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/gps-distance/-/gps-distance-0.0.4.tgz#f0b4a8172c668fdec065291a4999b961f1916d10"
+  integrity sha1-8LSoFyxmj97AZSkaSZm5YfGRbRA=
+
 graceful-fs@^4.1.2:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.3.tgz#4a12ff1b60376ef09862c2093edd908328be8423"

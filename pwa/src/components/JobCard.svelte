@@ -61,9 +61,14 @@
         processPostcode(await response.json())
     });
 
+    
     onMount(async function() {
-        await getLocationByPostcode()
+        if ((postcode_data.result.latitude === 0.0) &&
+            (postcode_data.result.latitude === 0.0)) {
+            await getLocationByPostcode()
+        }
     })
+    
 
     let getDistanceToJob = function() {
         console.log("get distance called")
@@ -87,4 +92,9 @@
         <p class="distance-to-complete">{distance} miles</p>
     </div>
     <p class="job-summary">{job.name}</p>
+    {#if job.restrictions}
+        Advocat restrictions:
+        <p class="requirements failed"> - {job.restrictions}</p>
+
+    {/if}
 </div>

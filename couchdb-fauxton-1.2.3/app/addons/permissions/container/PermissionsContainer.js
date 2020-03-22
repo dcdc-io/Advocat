@@ -20,7 +20,11 @@ import {
   getAdminRoles,
   getAdminNames,
   getMemberNames,
-  getMemberRoles
+  getMemberRoles,
+  getReaderNames,
+  getReaderRoles,
+  getWriterNames,
+  getWriterRoles
 } from '../reducers';
 
 
@@ -31,6 +35,10 @@ const mapStateToProps = ({permissions}) => {
     adminNames: getAdminNames(permissions),
     memberNames: getMemberNames(permissions),
     memberRoles: getMemberRoles(permissions),
+    readerNames: getReaderNames(permissions),
+    readerRoles: getReaderRoles(permissions),
+    writerNames: getWriterNames(permissions),
+    writerRoles: getWriterRoles(permissions),
     security: getSecurity(permissions)
   };
 };
