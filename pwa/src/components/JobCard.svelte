@@ -87,4 +87,9 @@
         <p class="distance-to-complete">{distance} miles</p>
     </div>
     <p class="job-summary">{job.name}</p>
+    {#if job.restrictions}
+        Advocat restrictions:
+        <p class="requirements failed"> - {job.restrictions}</p>
+
+    {/if}
 </div>
