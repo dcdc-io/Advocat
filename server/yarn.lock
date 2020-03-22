@@ -1800,9 +1800,8 @@ pouchdb-fauxton@^0.0.6:
   resolved "https://registry.yarnpkg.com/pouchdb-fauxton/-/pouchdb-fauxton-0.0.6.tgz#fcfae265a3d621e913ebd035eec338a4efa92aa1"
   integrity sha1-/PriZaPWIekT69A17sM4pO+pKqE=
 
-"pouchdb-fauxton@link:../pouchdb-fauxton":
-  version "0.0.0"
-  uid ""
+"pouchdb-fauxton@file:../pouchdb-fauxton":
+  version "0.0.6"
 
 pouchdb-fetch@7.2.1:
   version "7.2.1"
@@ -1995,9 +1994,14 @@ pouchdb-security@4.2.0:
     pouchdb-wrappers "4.2.0"
     promise-nodify "^1.0.2"
 
-"pouchdb-security@link:../pouchdb-security":
-  version "0.0.0"
-  uid ""
+"pouchdb-security@file:../pouchdb-security":
+  version "1.0.0"
+  dependencies:
+    pouchdb-bulkdocs-wrapper "^4.2.0"
+    pouchdb-changeslike-wrapper "^4.2.0"
+    pouchdb-plugin-error "^4.2.0"
+    pouchdb-promise "^6.4.3"
+    pouchdb-wrappers "^4.2.0"
 
 pouchdb-selector-core@7.2.1:
   version "7.2.1"

@@ -57,7 +57,11 @@ export default class PermissionsScreen extends Component {
       adminRoles,
       adminNames,
       memberRoles,
-      memberNames
+      memberNames,
+      readerRoles,
+      readerNames,
+      writerRoles,
+      writerNames
     } = this.props;
 
     return (
@@ -76,6 +80,20 @@ export default class PermissionsScreen extends Component {
             addItem={this.addItem}
             removeItem={this.removeItem}
             section="members" />
+
+          <PermissionsSection
+            roles={readerRoles}
+            names={readerNames}
+            addItem={this.addItem}
+            removeItem={this.removeItem}
+            section="readers" />
+
+          <PermissionsSection
+            roles={writerRoles}
+            names={writerNames}
+            addItem={this.addItem}
+            removeItem={this.removeItem}
+            section="writers" />
         </div>
       </div>
     );
