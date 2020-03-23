@@ -53,3 +53,7 @@ code {
 	font-family: 'ChangaOne Italic';
 	src: url('/ChangaOne-Regular.woff') format('woff');
 }
+
+input {
+	border: 2px solid var(--colour-scheme-dark);
+}

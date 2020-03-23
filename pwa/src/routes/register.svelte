@@ -27,7 +27,7 @@
   let isSubmitting
   
   const users = useDatabase({name:""}).__remote
-  const handleSubmit = ({detail:{values,setSubmitting,resetForm}}) => { 
+  const handleSubmit = ({detail:{values, setSubmitting, resetForm}}) => { 
     signUp(values.user.email, values.user.password).then((result) =>
     {
       console.log(result)
@@ -63,7 +63,7 @@
   let:isSubmitting
   let:isValid
 >
-  <Input label="email"            name="user.email"placeholder="e.g. user@example.com" />
+  <Input label="email"            name="user.email" placeholder="e.g. user@example.com" />
   <Input label="password"         name="user.password" type="password" placeholder="Password" />
   <Input label="re-type password" name="user.passwordConfirm" type="password" placeholder="Password" />
 

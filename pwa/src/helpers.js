@@ -1,10 +1,12 @@
 import PouchDB from 'pouchdb'
 import PouchDBAuthentication from 'pouchdb-authentication'
 import pouchdbfind from 'pouchdb-find'
+import allDbs from "pouchdb-all-dbs"
 import { setContext, getContext } from 'svelte'
 import { writable } from 'svelte/store'
 PouchDB.plugin(PouchDBAuthentication)
 PouchDB.plugin(pouchdbfind)
+PouchDB.plugin(allDbs)
 
 let dbUrl = ""
 export const setDatabaseUrl = (url) => {
@@ -34,6 +36,7 @@ export const login = async ({username, password, force = false}) => {
         const { loggedIn, username:dbUsername } = getContext("user")
         dbUsername.set((await local.__remote.getSession()).userCtx.name)
         loggedIn.set(true)
+        window.localStorage.setItem("whoami", (await local.__remote.getSession()).userCtx.name)
         return result
     } catch (e) {
         console.error(e)
@@ -44,8 +47,12 @@ export const login = async ({username, password, force = false}) => {
     }
 }
 
-export const autoLogin = async ({ loggedIn, username }) => {
-    console.log("auto login")
+export const checkLocalUser = async ({ loggedIn, username }) => {
+    console.log("checking local user")
+    const dbs = await PouchDB.allDbs()
+
+    console.log(dbs)
+
     let local
     try {
         local = useDatabase({name: "_users", sync: false})
