@@ -28,20 +28,43 @@ gauge.screenshotFn = async function () {
 };
 
 
-step("Navigate to Advocat.", async() => {
-	await goto("localhost:3003");
-});
-
 step("Search for groups in Leeds <location>", async(location)=> {
-	click("find groups");
-	write(location);
+	await click("find groups");
+	await write(location);
 });
 
-step("Verify user has found groups <location>", async function(location) {
+step("Verify user has found groups <location>", async(location) => {
 	assert.ok(await text(location).exists());
 });
 
-step("Create a group <groupName>", async function(groupName) {
-	click("create a group");
-	write(groupName);
+step("Create a group <groupName>", async(groupName) => {
+	await click("create a group");
+	await write(groupName);
+});
+
+step("Navigate to <pageName> page", async(pageName) => {
+    let pageUrl;
+    switch(pageName){
+	case "home":
+		pageUrl = "https://advocat.dev"
+		break;
+	case "about":
+		pageUrl = "https://advocat.dev/about"
+		break;
+	case "jobs":
+		pageUrl = "https://advocat.dev/jobs"
+		break;
+	case "advocats":
+		pageUrl = "https://advocat.dev/advocats";
+		break;
+	case "login":
+		pageUrl = "https://advocat.dev/login";
+		break;
+	case "register":
+		pageUrl = "https://advocat.dev/register";
+		break;
+	default:
+		pageUrl = "https://advocat.dev"
+    }
+    await goto(pageUrl);
 });
