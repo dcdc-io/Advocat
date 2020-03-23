@@ -6,13 +6,12 @@
 	import { writable } from 'svelte/store'
 	const loggedIn = writable(false)
 	const username = writable("empty")
-	setContext("user", { loggedIn, username })
-	
+	setContext("user", { loggedIn, username })	
 
 	export let segment;
 
-	onMount(async () => {
-		autoLogin()
+	onMount(() => {
+		autoLogin({ loggedIn, username })
 	})
 </script>
 

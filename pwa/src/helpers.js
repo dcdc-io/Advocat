@@ -7,9 +7,13 @@ PouchDB.plugin(PouchDBAuthentication)
 PouchDB.plugin(pouchdbfind)
 
 let dbUrl = ""
-export const setDatabaseUrl = (url) => dbUrl = url
+export const setDatabaseUrl = (url) => {
+    console.log("setDatabaseUrl has been called")
+    dbUrl = url
+}
 
 export const useDatabase = ({name, sync = true}) => {
+    console.log("useDatabase has been called")
     const url = `${dbUrl.replace(/\/$/, '')}${name ? '/' : ''}${name && name.replace(/^\//, '')}`
     const remote = new PouchDB(url, {skip_setup: true})
     const local = new PouchDB(`${name}`)
@@ -40,12 +44,11 @@ export const login = async ({username, password, force = false}) => {
     }
 }
 
-export const autoLogin = async () => {
+export const autoLogin = async ({ loggedIn, username }) => {
     console.log("auto login")
     let local
     try {
         local = useDatabase({name: "_users", sync: false})
-        const { loggedIn, username } = getContext("user")
         const session = await local.__remote.getSession()
         if (session.ok && session.userCtx.name) {
             username.set(session.userCtx.name)
@@ -67,16 +70,16 @@ const register_user = {
 
 export const signUp = async(username, password ) =>{
     try {
-        const _ = useDatabase({name:""}).__remote
-        if((await _.getSession()).userCtx.name != "register")
+        const database = useDatabase({name:"_users"}).__remote
+        if((await database.getSession()).userCtx.name != "register")
         {
-            await _.logOut()
+            await database.logOut()
             console.log (await login(register_user))   
         }
-        console.log ((await _.getSession()).userCtx.name)
-        const result = await _.signUp(username, password)
-        await _.logOut()
-        console.log ((await _.getSession()).userCtx.name)
+        console.log ((await database.getSession()).userCtx.name)
+        const result = await database.signUp(username, password)
+        await database.logOut()
+        console.log ((await database.getSession()).userCtx.name)
         await login({username: username ,password: password})
         return result
     } catch (e) {

@@ -19,7 +19,7 @@
   }
 </style>
 <script>
-  import { useDatabase, signUp} from '../helpers.js'
+  import { useDatabase, signUp } from '../helpers.js'
   import { Form, Input, Select, Choice } from 'sveltejs-forms'
   import * as yup from 'yup'
   

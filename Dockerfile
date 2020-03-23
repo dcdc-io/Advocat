@@ -15,4 +15,6 @@ COPY --from=build /build/pwa/_utils /app/_utils
 RUN mkdir -p /app/db && chmod 666 /app/db
 WORKDIR /app
 
+EXPOSE 3000
+
 ENTRYPOINT node __sapper__/build

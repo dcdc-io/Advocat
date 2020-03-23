@@ -1,0 +1,1 @@
+require("express")().get("/", (req,res) => res.send({status:"ok"})).listen(999)
