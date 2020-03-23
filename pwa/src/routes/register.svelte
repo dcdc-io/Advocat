@@ -19,6 +19,8 @@
   }
 </style>
 <script>
+  import { Button, TextField } from 'smelte'
+
   import { useDatabase, signUp } from '../helpers.js'
   import { Form, Input, Select, Choice } from 'sveltejs-forms'
   import * as yup from 'yup'
@@ -63,14 +65,14 @@
   let:isSubmitting
   let:isValid
 >
-  <Input label="email"            name="user.email" placeholder="e.g. user@example.com" />
-  <Input label="password"         name="user.password" type="password" placeholder="Password" />
-  <Input label="re-type password" name="user.passwordConfirm" type="password" placeholder="Password" />
+  <TextField label="email"            name="user.email" placeholder="e.g. user@example.com" />
+  <TextField label="password"         name="user.password" type="password" placeholder="Password" />
+  <TextField label="re-type password" name="user.passwordConfirm" type="password" placeholder="Password" />
 
   <!-- <Select name="language" options={langOptions} /> -->  
   <!-- <Choice name="os" options={osOptions} multiple /> -->
   <!-- <button type="reset">Reset</button> -->
 
-  <button type="submit" disabled={isSubmitting}>Sign in</button>
+  <Button block type="submit" disabled={isSubmitting}>Sign in</Button>
   The form is valid: {isValid}
 </Form>

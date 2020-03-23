@@ -31,6 +31,7 @@
     "sirv": "^0.4.0",
     "sjcl": "^1.0.8",
     "slouchdb-security": "link:../pouchdb-security",
+    "smelte": "^1.0.11",
     "yup": "^0.28.3"
   },
   "devDependencies": {
