@@ -2,6 +2,10 @@
 	h1 {
 		font-family: "ChangaOne Regular";
 	}
+	h2 {
+		font-size: 1.5em;
+		font-family: "ChangaOne Regular";
+	}
 </style>
 
 <svelte:head>

@@ -40,14 +40,19 @@ card.svelte-139un11{
   display:block;
   padding:5px
 }
-h1.svelte-1v7bu8j{
+h1.svelte-1e0o0rs{
   font-family:"ChangaOne Regular"
 }
-.jobs_list.svelte-kd1y6q{
-  display:yes
+
+h2.svelte-1e0o0rs{
+  font-size:1.5em;
+  font-family:"ChangaOne Regular"
 }
 div.error.svelte-1p70sjp{
   color:red
+}
+.jobs_list.svelte-kd1y6q{
+  display:yes
 }
 .page.svelte-16bw1r2.svelte-16bw1r2{
   height:100%;
@@ -218,13 +223,6 @@ a.svelte-bp852d{
 .p-1\/2.svelte-ixci48{
   padding:0.125rem
 }
-.drawer.svelte-12w8ugb{
-  min-width:250px
-}
-
-aside.svelte-12w8ugb{
-  height:calc(100vh - 4rem)
-}
 .reverse.svelte-zzky5a{
   -webkit-transform:rotate(180deg);
   -ms-transform:rotate(180deg);
@@ -235,6 +233,13 @@ aside.svelte-12w8ugb{
   -webkit-transform:rotate(90deg);
   -ms-transform:rotate(90deg);
   transform:rotate(90deg)
+}
+.drawer.svelte-12w8ugb{
+  min-width:250px
+}
+
+aside.svelte-12w8ugb{
+  height:calc(100vh - 4rem)
 }
 .inc.svelte-mguqwa{
   -webkit-animation:svelte-mguqwa-increase 2s ease-in-out infinite;
@@ -292,9 +297,6 @@ aside.svelte-12w8ugb{
     left:110%;
     width:10%
   }
-}
-.snackbar.svelte-1ym8qvd{
-  min-width:344px
 }
 .circular.svelte-1xkiyez{
   -webkit-animation:svelte-1xkiyez-rotate 2s linear infinite;
@@ -357,6 +359,9 @@ aside.svelte-12w8ugb{
     stroke-dashoffset:-124
   }
 }
+.snackbar.svelte-1ym8qvd{
+  min-width:344px
+}
 .label-top.svelte-81hn54{
   line-height:0.05
 }
@@ -369,16 +374,16 @@ aside.svelte-12w8ugb{
 .line.svelte-xd9zs6{
   height:1px
 }
+th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
+  -webkit-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+  transform:rotate(180deg)
+}
 .tooltip.svelte-1n6auy7{
   left:50%;
   -webkit-transform:translateX(-50%);
   -ms-transform:translateX(-50%);
   transform:translateX(-50%)
-}
-th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
-  -webkit-transform:rotate(180deg);
-  -ms-transform:rotate(180deg);
-  transform:rotate(180deg)
 }
 .ripple.svelte-1o8z87d{
   position:absolute !important
@@ -1002,38 +1007,38 @@ video {
   --color-black-trans-dark: rgba(0,0,0,0.35);
   --color-white-500: #fff;
   --color-black: #000;
-  --color-primary-50: #e7bee7;
-  --color-primary-200: #d893d8;
-  --color-primary-300: #c868c8;
-  --color-primary-400: #bc47bc;
-  --color-primary-500: #b027b0;
-  --color-primary-600: #a923a9;
-  --color-primary-700: #a01da0;
-  --color-primary-800: #971797;
-  --color-primary-900: #870e87;
-  --color-primary-trans-light: rgb(231, 190, 231, 0.15);
-  --color-primary-trans: rgb(231, 190, 231, 0.7);
-  --color-primary-trans-dark: rgb(176, 39, 176, 0.15);
-  --color-primary-a100: #ffb8ff;
-  --color-primary-a200: #ff85ff;
-  --color-primary-a400: #ff52ff;
-  --color-primary-a700: #ff38ff;
-  --color-secondary-50: #b3e0db;
-  --color-secondary-200: #80cbc4;
-  --color-secondary-300: #4db6ac;
-  --color-secondary-400: #26a69a;
-  --color-secondary-500: #009688;
-  --color-secondary-600: #008e80;
-  --color-secondary-700: #008375;
-  --color-secondary-800: #00796b;
-  --color-secondary-900: #006858;
-  --color-secondary-trans-light: rgb(179, 224, 219, 0.15);
-  --color-secondary-trans: rgb(179, 224, 219, 0.7);
-  --color-secondary-trans-dark: rgb(0, 150, 136, 0.15);
-  --color-secondary-a100: #97ffec;
-  --color-secondary-a200: #64ffe3;
-  --color-secondary-a400: #31ffda;
-  --color-secondary-a700: #18ffd5;
+  --color-primary-50: #b7b5c5;
+  --color-primary-200: #88849f;
+  --color-primary-300: #585279;
+  --color-primary-400: #342d5c;
+  --color-primary-500: #10083f;
+  --color-primary-600: #0e0739;
+  --color-primary-700: #0c0631;
+  --color-primary-800: #090429;
+  --color-primary-900: #05021b;
+  --color-primary-trans-light: rgb(183, 181, 197, 0.15);
+  --color-primary-trans: rgb(183, 181, 197, 0.7);
+  --color-primary-trans-dark: rgb(16, 8, 63, 0.15);
+  --color-primary-a100: #6659ff;
+  --color-primary-a200: #3726ff;
+  --color-primary-a400: #1300f2;
+  --color-primary-a700: #1100d9;
+  --color-secondary-50: #c8c5dd;
+  --color-secondary-200: #a49ec6;
+  --color-secondary-300: #7f77af;
+  --color-secondary-400: #63599d;
+  --color-secondary-500: #483c8c;
+  --color-secondary-600: #413684;
+  --color-secondary-700: #382e79;
+  --color-secondary-800: #30276f;
+  --color-secondary-900: #211a5c;
+  --color-secondary-trans-light: rgb(200, 197, 221, 0.15);
+  --color-secondary-trans: rgb(200, 197, 221, 0.7);
+  --color-secondary-trans-dark: rgb(72, 60, 140, 0.15);
+  --color-secondary-a100: #a399ff;
+  --color-secondary-a200: #7566ff;
+  --color-secondary-a400: #4733ff;
+  --color-secondary-a700: #301aff;
   --color-error-50: #fcc7c3;
   --color-error-200: #faa19b;
   --color-error-300: #f77b72;
@@ -1460,131 +1465,131 @@ video {
 }
 
 .bg-primary-50 {
-  background-color: #e7bee7;
+  background-color: #b7b5c5;
 }
 
 .bg-primary-200 {
-  background-color: #d893d8;
+  background-color: #88849f;
 }
 
 .bg-primary-300 {
-  background-color: #c868c8;
+  background-color: #585279;
 }
 
 .bg-primary-400 {
-  background-color: #bc47bc;
+  background-color: #342d5c;
 }
 
 .bg-primary-500 {
-  background-color: #b027b0;
+  background-color: #10083f;
 }
 
 .bg-primary-600 {
-  background-color: #a923a9;
+  background-color: #0e0739;
 }
 
 .bg-primary-700 {
-  background-color: #a01da0;
+  background-color: #0c0631;
 }
 
 .bg-primary-800 {
-  background-color: #971797;
+  background-color: #090429;
 }
 
 .bg-primary-900 {
-  background-color: #870e87;
+  background-color: #05021b;
 }
 
 .bg-primary-transLight {
-  background-color: rgb(231, 190, 231, 0.15);
+  background-color: rgb(183, 181, 197, 0.15);
 }
 
 .bg-primary-trans {
-  background-color: rgb(231, 190, 231, 0.7);
+  background-color: rgb(183, 181, 197, 0.7);
 }
 
 .bg-primary-transDark {
-  background-color: rgb(176, 39, 176, 0.15);
+  background-color: rgb(16, 8, 63, 0.15);
 }
 
 .bg-primary-a100 {
-  background-color: #ffb8ff;
+  background-color: #6659ff;
 }
 
 .bg-primary-a200 {
-  background-color: #ff85ff;
+  background-color: #3726ff;
 }
 
 .bg-primary-a400 {
-  background-color: #ff52ff;
+  background-color: #1300f2;
 }
 
 .bg-primary-a700 {
-  background-color: #ff38ff;
+  background-color: #1100d9;
 }
 
 .bg-secondary-50 {
-  background-color: #b3e0db;
+  background-color: #c8c5dd;
 }
 
 .bg-secondary-200 {
-  background-color: #80cbc4;
+  background-color: #a49ec6;
 }
 
 .bg-secondary-300 {
-  background-color: #4db6ac;
+  background-color: #7f77af;
 }
 
 .bg-secondary-400 {
-  background-color: #26a69a;
+  background-color: #63599d;
 }
 
 .bg-secondary-500 {
-  background-color: #009688;
+  background-color: #483c8c;
 }
 
 .bg-secondary-600 {
-  background-color: #008e80;
+  background-color: #413684;
 }
 
 .bg-secondary-700 {
-  background-color: #008375;
+  background-color: #382e79;
 }
 
 .bg-secondary-800 {
-  background-color: #00796b;
+  background-color: #30276f;
 }
 
 .bg-secondary-900 {
-  background-color: #006858;
+  background-color: #211a5c;
 }
 
 .bg-secondary-transLight {
-  background-color: rgb(179, 224, 219, 0.15);
+  background-color: rgb(200, 197, 221, 0.15);
 }
 
 .bg-secondary-trans {
-  background-color: rgb(179, 224, 219, 0.7);
+  background-color: rgb(200, 197, 221, 0.7);
 }
 
 .bg-secondary-transDark {
-  background-color: rgb(0, 150, 136, 0.15);
+  background-color: rgb(72, 60, 140, 0.15);
 }
 
 .bg-secondary-a100 {
-  background-color: #97ffec;
+  background-color: #a399ff;
 }
 
 .bg-secondary-a200 {
-  background-color: #64ffe3;
+  background-color: #7566ff;
 }
 
 .bg-secondary-a400 {
-  background-color: #31ffda;
+  background-color: #4733ff;
 }
 
 .bg-secondary-a700 {
-  background-color: #18ffd5;
+  background-color: #301aff;
 }
 
 .bg-error-50 {
@@ -2000,131 +2005,131 @@ video {
 }
 
 .mode-dark .dark\:bg-primary-50 {
-  background-color: #e7bee7;
+  background-color: #b7b5c5;
 }
 
 .mode-dark .dark\:bg-primary-200 {
-  background-color: #d893d8;
+  background-color: #88849f;
 }
 
 .mode-dark .dark\:bg-primary-300 {
-  background-color: #c868c8;
+  background-color: #585279;
 }
 
 .mode-dark .dark\:bg-primary-400 {
-  background-color: #bc47bc;
+  background-color: #342d5c;
 }
 
 .mode-dark .dark\:bg-primary-500 {
-  background-color: #b027b0;
+  background-color: #10083f;
 }
 
 .mode-dark .dark\:bg-primary-600 {
-  background-color: #a923a9;
+  background-color: #0e0739;
 }
 
 .mode-dark .dark\:bg-primary-700 {
-  background-color: #a01da0;
+  background-color: #0c0631;
 }
 
 .mode-dark .dark\:bg-primary-800 {
-  background-color: #971797;
+  background-color: #090429;
 }
 
 .mode-dark .dark\:bg-primary-900 {
-  background-color: #870e87;
+  background-color: #05021b;
 }
 
 .mode-dark .dark\:bg-primary-transLight {
-  background-color: rgb(231, 190, 231, 0.15);
+  background-color: rgb(183, 181, 197, 0.15);
 }
 
 .mode-dark .dark\:bg-primary-trans {
-  background-color: rgb(231, 190, 231, 0.7);
+  background-color: rgb(183, 181, 197, 0.7);
 }
 
 .mode-dark .dark\:bg-primary-transDark {
-  background-color: rgb(176, 39, 176, 0.15);
+  background-color: rgb(16, 8, 63, 0.15);
 }
 
 .mode-dark .dark\:bg-primary-a100 {
-  background-color: #ffb8ff;
+  background-color: #6659ff;
 }
 
 .mode-dark .dark\:bg-primary-a200 {
-  background-color: #ff85ff;
+  background-color: #3726ff;
 }
 
 .mode-dark .dark\:bg-primary-a400 {
-  background-color: #ff52ff;
+  background-color: #1300f2;
 }
 
 .mode-dark .dark\:bg-primary-a700 {
-  background-color: #ff38ff;
+  background-color: #1100d9;
 }
 
 .mode-dark .dark\:bg-secondary-50 {
-  background-color: #b3e0db;
+  background-color: #c8c5dd;
 }
 
 .mode-dark .dark\:bg-secondary-200 {
-  background-color: #80cbc4;
+  background-color: #a49ec6;
 }
 
 .mode-dark .dark\:bg-secondary-300 {
-  background-color: #4db6ac;
+  background-color: #7f77af;
 }
 
 .mode-dark .dark\:bg-secondary-400 {
-  background-color: #26a69a;
+  background-color: #63599d;
 }
 
 .mode-dark .dark\:bg-secondary-500 {
-  background-color: #009688;
+  background-color: #483c8c;
 }
 
 .mode-dark .dark\:bg-secondary-600 {
-  background-color: #008e80;
+  background-color: #413684;
 }
 
 .mode-dark .dark\:bg-secondary-700 {
-  background-color: #008375;
+  background-color: #382e79;
 }
 
 .mode-dark .dark\:bg-secondary-800 {
-  background-color: #00796b;
+  background-color: #30276f;
 }
 
 .mode-dark .dark\:bg-secondary-900 {
-  background-color: #006858;
+  background-color: #211a5c;
 }
 
 .mode-dark .dark\:bg-secondary-transLight {
-  background-color: rgb(179, 224, 219, 0.15);
+  background-color: rgb(200, 197, 221, 0.15);
 }
 
 .mode-dark .dark\:bg-secondary-trans {
-  background-color: rgb(179, 224, 219, 0.7);
+  background-color: rgb(200, 197, 221, 0.7);
 }
 
 .mode-dark .dark\:bg-secondary-transDark {
-  background-color: rgb(0, 150, 136, 0.15);
+  background-color: rgb(72, 60, 140, 0.15);
 }
 
 .mode-dark .dark\:bg-secondary-a100 {
-  background-color: #97ffec;
+  background-color: #a399ff;
 }
 
 .mode-dark .dark\:bg-secondary-a200 {
-  background-color: #64ffe3;
+  background-color: #7566ff;
 }
 
 .mode-dark .dark\:bg-secondary-a400 {
-  background-color: #31ffda;
+  background-color: #4733ff;
 }
 
 .mode-dark .dark\:bg-secondary-a700 {
-  background-color: #18ffd5;
+  background-color: #301aff;
 }
 
 .mode-dark .dark\:bg-error-50 {
@@ -2540,131 +2545,131 @@ video {
 }
 
 .mode-dark .dark-hover\:bg-primary-50:hover {
-  background-color: #e7bee7;
+  background-color: #b7b5c5;
 }
 
 .mode-dark .dark-hover\:bg-primary-200:hover {
-  background-color: #d893d8;
+  background-color: #88849f;
 }
 
 .mode-dark .dark-hover\:bg-primary-300:hover {
-  background-color: #c868c8;
+  background-color: #585279;
 }
 
 .mode-dark .dark-hover\:bg-primary-400:hover {
-  background-color: #bc47bc;
+  background-color: #342d5c;
 }
 
 .mode-dark .dark-hover\:bg-primary-500:hover {
-  background-color: #b027b0;
+  background-color: #10083f;
 }
 
 .mode-dark .dark-hover\:bg-primary-600:hover {
-  background-color: #a923a9;
+  background-color: #0e0739;
 }
 
 .mode-dark .dark-hover\:bg-primary-700:hover {
-  background-color: #a01da0;
+  background-color: #0c0631;
 }
 
 .mode-dark .dark-hover\:bg-primary-800:hover {
-  background-color: #971797;
+  background-color: #090429;
 }
 
 .mode-dark .dark-hover\:bg-primary-900:hover {
-  background-color: #870e87;
+  background-color: #05021b;
 }
 
 .mode-dark .dark-hover\:bg-primary-transLight:hover {
-  background-color: rgb(231, 190, 231, 0.15);
+  background-color: rgb(183, 181, 197, 0.15);
 }
 
 .mode-dark .dark-hover\:bg-primary-trans:hover {
-  background-color: rgb(231, 190, 231, 0.7);
+  background-color: rgb(183, 181, 197, 0.7);
 }
 
 .mode-dark .dark-hover\:bg-primary-transDark:hover {
-  background-color: rgb(176, 39, 176, 0.15);
+  background-color: rgb(16, 8, 63, 0.15);
 }
 
 .mode-dark .dark-hover\:bg-primary-a100:hover {
-  background-color: #ffb8ff;
+  background-color: #6659ff;
 }
 
 .mode-dark .dark-hover\:bg-primary-a200:hover {
-  background-color: #ff85ff;
+  background-color: #3726ff;
 }
 
 .mode-dark .dark-hover\:bg-primary-a400:hover {
-  background-color: #ff52ff;
+  background-color: #1300f2;
 }
 
 .mode-dark .dark-hover\:bg-primary-a700:hover {
-  background-color: #ff38ff;
+  background-color: #1100d9;
 }
 
 .mode-dark .dark-hover\:bg-secondary-50:hover {
-  background-color: #b3e0db;
+  background-color: #c8c5dd;
 }
 
 .mode-dark .dark-hover\:bg-secondary-200:hover {
-  background-color: #80cbc4;
+  background-color: #a49ec6;
 }
 
 .mode-dark .dark-hover\:bg-secondary-300:hover {
-  background-color: #4db6ac;
+  background-color: #7f77af;
 }
 
 .mode-dark .dark-hover\:bg-secondary-400:hover {
-  background-color: #26a69a;
+  background-color: #63599d;
 }
 
 .mode-dark .dark-hover\:bg-secondary-500:hover {
-  background-color: #009688;
+  background-color: #483c8c;
 }
 
 .mode-dark .dark-hover\:bg-secondary-600:hover {
-  background-color: #008e80;
+  background-color: #413684;
 }
 
 .mode-dark .dark-hover\:bg-secondary-700:hover {
-  background-color: #008375;
+  background-color: #382e79;
 }
 
 .mode-dark .dark-hover\:bg-secondary-800:hover {
-  background-color: #00796b;
+  background-color: #30276f;
 }
 
 .mode-dark .dark-hover\:bg-secondary-900:hover {
-  background-color: #006858;
+  background-color: #211a5c;
 }
 
 .mode-dark .dark-hover\:bg-secondary-transLight:hover {
-  background-color: rgb(179, 224, 219, 0.15);
+  background-color: rgb(200, 197, 221, 0.15);
 }
 
 .mode-dark .dark-hover\:bg-secondary-trans:hover {
-  background-color: rgb(179, 224, 219, 0.7);
+  background-color: rgb(200, 197, 221, 0.7);
 }
 
 .mode-dark .dark-hover\:bg-secondary-transDark:hover {
-  background-color: rgb(0, 150, 136, 0.15);
+  background-color: rgb(72, 60, 140, 0.15);
 }
 
 .mode-dark .dark-hover\:bg-secondary-a100:hover {
-  background-color: #97ffec;
+  background-color: #a399ff;
 }
 
 .mode-dark .dark-hover\:bg-secondary-a200:hover {
-  background-color: #64ffe3;
+  background-color: #7566ff;
 }
 
 .mode-dark .dark-hover\:bg-secondary-a400:hover {
-  background-color: #31ffda;
+  background-color: #4733ff;
 }
 
 .mode-dark .dark-hover\:bg-secondary-a700:hover {
-  background-color: #18ffd5;
+  background-color: #301aff;
 }
 
 .mode-dark .dark-hover\:bg-error-50:hover {
@@ -3080,131 +3085,131 @@ video {
 }
 
 .hover\:bg-primary-50:hover {
-  background-color: #e7bee7;
+  background-color: #b7b5c5;
 }
 
 .hover\:bg-primary-200:hover {
-  background-color: #d893d8;
+  background-color: #88849f;
 }
 
 .hover\:bg-primary-300:hover {
-  background-color: #c868c8;
+  background-color: #585279;
 }
 
 .hover\:bg-primary-400:hover {
-  background-color: #bc47bc;
+  background-color: #342d5c;
 }
 
 .hover\:bg-primary-500:hover {
-  background-color: #b027b0;
+  background-color: #10083f;
 }
 
 .hover\:bg-primary-600:hover {
-  background-color: #a923a9;
+  background-color: #0e0739;
 }
 
 .hover\:bg-primary-700:hover {
-  background-color: #a01da0;
+  background-color: #0c0631;
 }
 
 .hover\:bg-primary-800:hover {
-  background-color: #971797;
+  background-color: #090429;
 }
 
 .hover\:bg-primary-900:hover {
-  background-color: #870e87;
+  background-color: #05021b;
 }
 
 .hover\:bg-primary-transLight:hover {
-  background-color: rgb(231, 190, 231, 0.15);
+  background-color: rgb(183, 181, 197, 0.15);
 }
 
 .hover\:bg-primary-trans:hover {
-  background-color: rgb(231, 190, 231, 0.7);
+  background-color: rgb(183, 181, 197, 0.7);
 }
 
 .hover\:bg-primary-transDark:hover {
-  background-color: rgb(176, 39, 176, 0.15);
+  background-color: rgb(16, 8, 63, 0.15);
 }
 
 .hover\:bg-primary-a100:hover {
-  background-color: #ffb8ff;
+  background-color: #6659ff;
 }
 
 .hover\:bg-primary-a200:hover {
-  background-color: #ff85ff;
+  background-color: #3726ff;
 }
 
 .hover\:bg-primary-a400:hover {
-  background-color: #ff52ff;
+  background-color: #1300f2;
 }
 
 .hover\:bg-primary-a700:hover {
-  background-color: #ff38ff;
+  background-color: #1100d9;
 }
 
 .hover\:bg-secondary-50:hover {
-  background-color: #b3e0db;
+  background-color: #c8c5dd;
 }
 
 .hover\:bg-secondary-200:hover {
-  background-color: #80cbc4;
+  background-color: #a49ec6;
 }
 
 .hover\:bg-secondary-300:hover {
-  background-color: #4db6ac;
+  background-color: #7f77af;
 }
 
 .hover\:bg-secondary-400:hover {
-  background-color: #26a69a;
+  background-color: #63599d;
 }
 
 .hover\:bg-secondary-500:hover {
-  background-color: #009688;
+  background-color: #483c8c;
 }
 
 .hover\:bg-secondary-600:hover {
-  background-color: #008e80;
+  background-color: #413684;
 }
 
 .hover\:bg-secondary-700:hover {
-  background-color: #008375;
+  background-color: #382e79;
 }
 
 .hover\:bg-secondary-800:hover {
-  background-color: #00796b;
+  background-color: #30276f;
 }
 
 .hover\:bg-secondary-900:hover {
-  background-color: #006858;
+  background-color: #211a5c;
 }
 
 .hover\:bg-secondary-transLight:hover {
-  background-color: rgb(179, 224, 219, 0.15);
+  background-color: rgb(200, 197, 221, 0.15);
 }
 
 .hover\:bg-secondary-trans:hover {
-  background-color: rgb(179, 224, 219, 0.7);
+  background-color: rgb(200, 197, 221, 0.7);
 }
 
 .hover\:bg-secondary-transDark:hover {
-  background-color: rgb(0, 150, 136, 0.15);
+  background-color: rgb(72, 60, 140, 0.15);
 }
 
 .hover\:bg-secondary-a100:hover {
-  background-color: #97ffec;
+  background-color: #a399ff;
 }
 
 .hover\:bg-secondary-a200:hover {
-  background-color: #64ffe3;
+  background-color: #7566ff;
 }
 
 .hover\:bg-secondary-a400:hover {
-  background-color: #31ffda;
+  background-color: #4733ff;
 }
 
 .hover\:bg-secondary-a700:hover {
-  background-color: #18ffd5;
+  background-color: #301aff;
 }
 
 .hover\:bg-error-50:hover {
@@ -3700,131 +3705,131 @@ video {
 }
 
 .border-primary-50 {
-  border-color: #e7bee7;
+  border-color: #b7b5c5;
 }
 
 .border-primary-200 {
-  border-color: #d893d8;
+  border-color: #88849f;
 }
 
 .border-primary-300 {
-  border-color: #c868c8;
+  border-color: #585279;
 }
 
 .border-primary-400 {
-  border-color: #bc47bc;
+  border-color: #342d5c;
 }
 
 .border-primary-500 {
-  border-color: #b027b0;
+  border-color: #10083f;
 }
 
 .border-primary-600 {
-  border-color: #a923a9;
+  border-color: #0e0739;
 }
 
 .border-primary-700 {
-  border-color: #a01da0;
+  border-color: #0c0631;
 }
 
 .border-primary-800 {
-  border-color: #971797;
+  border-color: #090429;
 }
 
 .border-primary-900 {
-  border-color: #870e87;
+  border-color: #05021b;
 }
 
 .border-primary-transLight {
-  border-color: rgb(231, 190, 231, 0.15);
+  border-color: rgb(183, 181, 197, 0.15);
 }
 
 .border-primary-trans {
-  border-color: rgb(231, 190, 231, 0.7);
+  border-color: rgb(183, 181, 197, 0.7);
 }
 
 .border-primary-transDark {
-  border-color: rgb(176, 39, 176, 0.15);
+  border-color: rgb(16, 8, 63, 0.15);
 }
 
 .border-primary-a100 {
-  border-color: #ffb8ff;
+  border-color: #6659ff;
 }
 
 .border-primary-a200 {
-  border-color: #ff85ff;
+  border-color: #3726ff;
 }
 
 .border-primary-a400 {
-  border-color: #ff52ff;
+  border-color: #1300f2;
 }
 
 .border-primary-a700 {
-  border-color: #ff38ff;
+  border-color: #1100d9;
 }
 
 .border-secondary-50 {
-  border-color: #b3e0db;
+  border-color: #c8c5dd;
 }
 
 .border-secondary-200 {
-  border-color: #80cbc4;
+  border-color: #a49ec6;
 }
 
 .border-secondary-300 {
-  border-color: #4db6ac;
+  border-color: #7f77af;
 }
 
 .border-secondary-400 {
-  border-color: #26a69a;
+  border-color: #63599d;
 }
 
 .border-secondary-500 {
-  border-color: #009688;
+  border-color: #483c8c;
 }
 
 .border-secondary-600 {
-  border-color: #008e80;
+  border-color: #413684;
 }
 
 .border-secondary-700 {
-  border-color: #008375;
+  border-color: #382e79;
 }
 
 .border-secondary-800 {
-  border-color: #00796b;
+  border-color: #30276f;
 }
 
 .border-secondary-900 {
-  border-color: #006858;
+  border-color: #211a5c;
 }
 
 .border-secondary-transLight {
-  border-color: rgb(179, 224, 219, 0.15);
+  border-color: rgb(200, 197, 221, 0.15);
 }
 
 .border-secondary-trans {
-  border-color: rgb(179, 224, 219, 0.7);
+  border-color: rgb(200, 197, 221, 0.7);
 }
 
 .border-secondary-transDark {
-  border-color: rgb(0, 150, 136, 0.15);
+  border-color: rgb(72, 60, 140, 0.15);
 }
 
 .border-secondary-a100 {
-  border-color: #97ffec;
+  border-color: #a399ff;
 }
 
 .border-secondary-a200 {
-  border-color: #64ffe3;
+  border-color: #7566ff;
 }
 
 .border-secondary-a400 {
-  border-color: #31ffda;
+  border-color: #4733ff;
 }
 
 .border-secondary-a700 {
-  border-color: #18ffd5;
+  border-color: #301aff;
 }
 
 .border-error-50 {
@@ -4240,131 +4245,131 @@ video {
 }
 
 .mode-dark .dark\:border-primary-50 {
-  border-color: #e7bee7;
+  border-color: #b7b5c5;
 }
 
 .mode-dark .dark\:border-primary-200 {
-  border-color: #d893d8;
+  border-color: #88849f;
 }
 
 .mode-dark .dark\:border-primary-300 {
-  border-color: #c868c8;
+  border-color: #585279;
 }
 
 .mode-dark .dark\:border-primary-400 {
-  border-color: #bc47bc;
+  border-color: #342d5c;
 }
 
 .mode-dark .dark\:border-primary-500 {
-  border-color: #b027b0;
+  border-color: #10083f;
 }
 
 .mode-dark .dark\:border-primary-600 {
-  border-color: #a923a9;
+  border-color: #0e0739;
 }
 
 .mode-dark .dark\:border-primary-700 {
-  border-color: #a01da0;
+  border-color: #0c0631;
 }
 
 .mode-dark .dark\:border-primary-800 {
-  border-color: #971797;
+  border-color: #090429;
 }
 
 .mode-dark .dark\:border-primary-900 {
-  border-color: #870e87;
+  border-color: #05021b;
 }
 
 .mode-dark .dark\:border-primary-transLight {
-  border-color: rgb(231, 190, 231, 0.15);
+  border-color: rgb(183, 181, 197, 0.15);
 }
 
 .mode-dark .dark\:border-primary-trans {
-  border-color: rgb(231, 190, 231, 0.7);
+  border-color: rgb(183, 181, 197, 0.7);
 }
 
 .mode-dark .dark\:border-primary-transDark {
-  border-color: rgb(176, 39, 176, 0.15);
+  border-color: rgb(16, 8, 63, 0.15);
 }
 
 .mode-dark .dark\:border-primary-a100 {
-  border-color: #ffb8ff;
+  border-color: #6659ff;
 }
 
 .mode-dark .dark\:border-primary-a200 {
-  border-color: #ff85ff;
+  border-color: #3726ff;
 }
 
 .mode-dark .dark\:border-primary-a400 {
-  border-color: #ff52ff;
+  border-color: #1300f2;
 }
 
 .mode-dark .dark\:border-primary-a700 {
-  border-color: #ff38ff;
+  border-color: #1100d9;
 }
 
 .mode-dark .dark\:border-secondary-50 {
-  border-color: #b3e0db;
+  border-color: #c8c5dd;
 }
 
 .mode-dark .dark\:border-secondary-200 {
-  border-color: #80cbc4;
+  border-color: #a49ec6;
 }
 
 .mode-dark .dark\:border-secondary-300 {
-  border-color: #4db6ac;
+  border-color: #7f77af;
 }
 
 .mode-dark .dark\:border-secondary-400 {
-  border-color: #26a69a;
+  border-color: #63599d;
 }
 
 .mode-dark .dark\:border-secondary-500 {
-  border-color: #009688;
+  border-color: #483c8c;
 }
 
 .mode-dark .dark\:border-secondary-600 {
-  border-color: #008e80;
+  border-color: #413684;
 }
 
 .mode-dark .dark\:border-secondary-700 {
-  border-color: #008375;
+  border-color: #382e79;
 }
 
 .mode-dark .dark\:border-secondary-800 {
-  border-color: #00796b;
+  border-color: #30276f;
 }
 
 .mode-dark .dark\:border-secondary-900 {
-  border-color: #006858;
+  border-color: #211a5c;
 }
 
 .mode-dark .dark\:border-secondary-transLight {
-  border-color: rgb(179, 224, 219, 0.15);
+  border-color: rgb(200, 197, 221, 0.15);
 }
 
 .mode-dark .dark\:border-secondary-trans {
-  border-color: rgb(179, 224, 219, 0.7);
+  border-color: rgb(200, 197, 221, 0.7);
 }
 
 .mode-dark .dark\:border-secondary-transDark {
-  border-color: rgb(0, 150, 136, 0.15);
+  border-color: rgb(72, 60, 140, 0.15);
 }
 
 .mode-dark .dark\:border-secondary-a100 {
-  border-color: #97ffec;
+  border-color: #a399ff;
 }
 
 .mode-dark .dark\:border-secondary-a200 {
-  border-color: #64ffe3;
+  border-color: #7566ff;
 }
 
 .mode-dark .dark\:border-secondary-a400 {
-  border-color: #31ffda;
+  border-color: #4733ff;
 }
 
 .mode-dark .dark\:border-secondary-a700 {
-  border-color: #18ffd5;
+  border-color: #301aff;
 }
 
 .mode-dark .dark\:border-error-50 {
@@ -4780,131 +4785,131 @@ video {
 }
 
 .mode-dark .dark-focus\:border-primary-50:focus {
-  border-color: #e7bee7;
+  border-color: #b7b5c5;
 }
 
 .mode-dark .dark-focus\:border-primary-200:focus {
-  border-color: #d893d8;
+  border-color: #88849f;
 }
 
 .mode-dark .dark-focus\:border-primary-300:focus {
-  border-color: #c868c8;
+  border-color: #585279;
 }
 
 .mode-dark .dark-focus\:border-primary-400:focus {
-  border-color: #bc47bc;
+  border-color: #342d5c;
 }
 
 .mode-dark .dark-focus\:border-primary-500:focus {
-  border-color: #b027b0;
+  border-color: #10083f;
 }
 
 .mode-dark .dark-focus\:border-primary-600:focus {
-  border-color: #a923a9;
+  border-color: #0e0739;
 }
 
 .mode-dark .dark-focus\:border-primary-700:focus {
-  border-color: #a01da0;
+  border-color: #0c0631;
 }
 
 .mode-dark .dark-focus\:border-primary-800:focus {
-  border-color: #971797;
+  border-color: #090429;
 }
 
 .mode-dark .dark-focus\:border-primary-900:focus {
-  border-color: #870e87;
+  border-color: #05021b;
 }
 
 .mode-dark .dark-focus\:border-primary-transLight:focus {
-  border-color: rgb(231, 190, 231, 0.15);
+  border-color: rgb(183, 181, 197, 0.15);
 }
 
 .mode-dark .dark-focus\:border-primary-trans:focus {
-  border-color: rgb(231, 190, 231, 0.7);
+  border-color: rgb(183, 181, 197, 0.7);
 }
 
 .mode-dark .dark-focus\:border-primary-transDark:focus {
-  border-color: rgb(176, 39, 176, 0.15);
+  border-color: rgb(16, 8, 63, 0.15);
 }
 
 .mode-dark .dark-focus\:border-primary-a100:focus {
-  border-color: #ffb8ff;
+  border-color: #6659ff;
 }
 
 .mode-dark .dark-focus\:border-primary-a200:focus {
-  border-color: #ff85ff;
+  border-color: #3726ff;
 }
 
 .mode-dark .dark-focus\:border-primary-a400:focus {
-  border-color: #ff52ff;
+  border-color: #1300f2;
 }
 
 .mode-dark .dark-focus\:border-primary-a700:focus {
-  border-color: #ff38ff;
+  border-color: #1100d9;
 }
 
 .mode-dark .dark-focus\:border-secondary-50:focus {
-  border-color: #b3e0db;
+  border-color: #c8c5dd;
 }
 
 .mode-dark .dark-focus\:border-secondary-200:focus {
-  border-color: #80cbc4;
+  border-color: #a49ec6;
 }
 
 .mode-dark .dark-focus\:border-secondary-300:focus {
-  border-color: #4db6ac;
+  border-color: #7f77af;
 }
 
 .mode-dark .dark-focus\:border-secondary-400:focus {
-  border-color: #26a69a;
+  border-color: #63599d;
 }
 
 .mode-dark .dark-focus\:border-secondary-500:focus {
-  border-color: #009688;
+  border-color: #483c8c;
 }
 
 .mode-dark .dark-focus\:border-secondary-600:focus {
-  border-color: #008e80;
+  border-color: #413684;
 }
 
 .mode-dark .dark-focus\:border-secondary-700:focus {
-  border-color: #008375;
+  border-color: #382e79;
 }
 
 .mode-dark .dark-focus\:border-secondary-800:focus {
-  border-color: #00796b;
+  border-color: #30276f;
 }
 
 .mode-dark .dark-focus\:border-secondary-900:focus {
-  border-color: #006858;
+  border-color: #211a5c;
 }
 
 .mode-dark .dark-focus\:border-secondary-transLight:focus {
-  border-color: rgb(179, 224, 219, 0.15);
+  border-color: rgb(200, 197, 221, 0.15);
 }
 
 .mode-dark .dark-focus\:border-secondary-trans:focus {
-  border-color: rgb(179, 224, 219, 0.7);
+  border-color: rgb(200, 197, 221, 0.7);
 }
 
 .mode-dark .dark-focus\:border-secondary-transDark:focus {
-  border-color: rgb(0, 150, 136, 0.15);
+  border-color: rgb(72, 60, 140, 0.15);
 }
 
 .mode-dark .dark-focus\:border-secondary-a100:focus {
-  border-color: #97ffec;
+  border-color: #a399ff;
 }
 
 .mode-dark .dark-focus\:border-secondary-a200:focus {
-  border-color: #64ffe3;
+  border-color: #7566ff;
 }
 
 .mode-dark .dark-focus\:border-secondary-a400:focus {
-  border-color: #31ffda;
+  border-color: #4733ff;
 }
 
 .mode-dark .dark-focus\:border-secondary-a700:focus {
-  border-color: #18ffd5;
+  border-color: #301aff;
 }
 
 .mode-dark .dark-focus\:border-error-50:focus {
@@ -8244,131 +8249,131 @@ video {
 }
 
 .placeholder-primary-50::placeholder {
-  color: #e7bee7;
+  color: #b7b5c5;
 }
 
 .placeholder-primary-200::placeholder {
-  color: #d893d8;
+  color: #88849f;
 }
 
 .placeholder-primary-300::placeholder {
-  color: #c868c8;
+  color: #585279;
 }
 
 .placeholder-primary-400::placeholder {
-  color: #bc47bc;
+  color: #342d5c;
 }
 
 .placeholder-primary-500::placeholder {
-  color: #b027b0;
+  color: #10083f;
 }
 
 .placeholder-primary-600::placeholder {
-  color: #a923a9;
+  color: #0e0739;
 }
 
 .placeholder-primary-700::placeholder {
-  color: #a01da0;
+  color: #0c0631;
 }
 
 .placeholder-primary-800::placeholder {
-  color: #971797;
+  color: #090429;
 }
 
 .placeholder-primary-900::placeholder {
-  color: #870e87;
+  color: #05021b;
 }
 
 .placeholder-primary-transLight::placeholder {
-  color: rgb(231, 190, 231, 0.15);
+  color: rgb(183, 181, 197, 0.15);
 }
 
 .placeholder-primary-trans::placeholder {
-  color: rgb(231, 190, 231, 0.7);
+  color: rgb(183, 181, 197, 0.7);
 }
 
 .placeholder-primary-transDark::placeholder {
-  color: rgb(176, 39, 176, 0.15);
+  color: rgb(16, 8, 63, 0.15);
 }
 
 .placeholder-primary-a100::placeholder {
-  color: #ffb8ff;
+  color: #6659ff;
 }
 
 .placeholder-primary-a200::placeholder {
-  color: #ff85ff;
+  color: #3726ff;
 }
 
 .placeholder-primary-a400::placeholder {
-  color: #ff52ff;
+  color: #1300f2;
 }
 
 .placeholder-primary-a700::placeholder {
-  color: #ff38ff;
+  color: #1100d9;
 }
 
 .placeholder-secondary-50::placeholder {
-  color: #b3e0db;
+  color: #c8c5dd;
 }
 
 .placeholder-secondary-200::placeholder {
-  color: #80cbc4;
+  color: #a49ec6;
 }
 
 .placeholder-secondary-300::placeholder {
-  color: #4db6ac;
+  color: #7f77af;
 }
 
 .placeholder-secondary-400::placeholder {
-  color: #26a69a;
+  color: #63599d;
 }
 
 .placeholder-secondary-500::placeholder {
-  color: #009688;
+  color: #483c8c;
 }
 
 .placeholder-secondary-600::placeholder {
-  color: #008e80;
+  color: #413684;
 }
 
 .placeholder-secondary-700::placeholder {
-  color: #008375;
+  color: #382e79;
 }
 
 .placeholder-secondary-800::placeholder {
-  color: #00796b;
+  color: #30276f;
 }
 
 .placeholder-secondary-900::placeholder {
-  color: #006858;
+  color: #211a5c;
 }
 
 .placeholder-secondary-transLight::placeholder {
-  color: rgb(179, 224, 219, 0.15);
+  color: rgb(200, 197, 221, 0.15);
 }
 
 .placeholder-secondary-trans::placeholder {
-  color: rgb(179, 224, 219, 0.7);
+  color: rgb(200, 197, 221, 0.7);
 }
 
 .placeholder-secondary-transDark::placeholder {
-  color: rgb(0, 150, 136, 0.15);
+  color: rgb(72, 60, 140, 0.15);
 }
 
 .placeholder-secondary-a100::placeholder {
-  color: #97ffec;
+  color: #a399ff;
 }
 
 .placeholder-secondary-a200::placeholder {
-  color: #64ffe3;
+  color: #7566ff;
 }
 
 .placeholder-secondary-a400::placeholder {
-  color: #31ffda;
+  color: #4733ff;
 }
 
 .placeholder-secondary-a700::placeholder {
-  color: #18ffd5;
+  color: #301aff;
 }
 
 .placeholder-error-50::placeholder {
@@ -8784,131 +8789,131 @@ video {
 }
 
 .focus\:placeholder-primary-50:focus::placeholder {
-  color: #e7bee7;
+  color: #b7b5c5;
 }
 
 .focus\:placeholder-primary-200:focus::placeholder {
-  color: #d893d8;
+  color: #88849f;
 }
 
 .focus\:placeholder-primary-300:focus::placeholder {
-  color: #c868c8;
+  color: #585279;
 }
 
 .focus\:placeholder-primary-400:focus::placeholder {
-  color: #bc47bc;
+  color: #342d5c;
 }
 
 .focus\:placeholder-primary-500:focus::placeholder {
-  color: #b027b0;
+  color: #10083f;
 }
 
 .focus\:placeholder-primary-600:focus::placeholder {
-  color: #a923a9;
+  color: #0e0739;
 }
 
 .focus\:placeholder-primary-700:focus::placeholder {
-  color: #a01da0;
+  color: #0c0631;
 }
 
 .focus\:placeholder-primary-800:focus::placeholder {
-  color: #971797;
+  color: #090429;
 }
 
 .focus\:placeholder-primary-900:focus::placeholder {
-  color: #870e87;
+  color: #05021b;
 }
 
 .focus\:placeholder-primary-transLight:focus::placeholder {
-  color: rgb(231, 190, 231, 0.15);
+  color: rgb(183, 181, 197, 0.15);
 }
 
 .focus\:placeholder-primary-trans:focus::placeholder {
-  color: rgb(231, 190, 231, 0.7);
+  color: rgb(183, 181, 197, 0.7);
 }
 
 .focus\:placeholder-primary-transDark:focus::placeholder {
-  color: rgb(176, 39, 176, 0.15);
+  color: rgb(16, 8, 63, 0.15);
 }
 
 .focus\:placeholder-primary-a100:focus::placeholder {
-  color: #ffb8ff;
+  color: #6659ff;
 }
 
 .focus\:placeholder-primary-a200:focus::placeholder {
-  color: #ff85ff;
+  color: #3726ff;
 }
 
 .focus\:placeholder-primary-a400:focus::placeholder {
-  color: #ff52ff;
+  color: #1300f2;
 }
 
 .focus\:placeholder-primary-a700:focus::placeholder {
-  color: #ff38ff;
+  color: #1100d9;
 }
 
 .focus\:placeholder-secondary-50:focus::placeholder {
-  color: #b3e0db;
+  color: #c8c5dd;
 }
 
 .focus\:placeholder-secondary-200:focus::placeholder {
-  color: #80cbc4;
+  color: #a49ec6;
 }
 
 .focus\:placeholder-secondary-300:focus::placeholder {
-  color: #4db6ac;
+  color: #7f77af;
 }
 
 .focus\:placeholder-secondary-400:focus::placeholder {
-  color: #26a69a;
+  color: #63599d;
 }
 
 .focus\:placeholder-secondary-500:focus::placeholder {
-  color: #009688;
+  color: #483c8c;
 }
 
 .focus\:placeholder-secondary-600:focus::placeholder {
-  color: #008e80;
+  color: #413684;
 }
 
 .focus\:placeholder-secondary-700:focus::placeholder {
-  color: #008375;
+  color: #382e79;
 }
 
 .focus\:placeholder-secondary-800:focus::placeholder {
-  color: #00796b;
+  color: #30276f;
 }
 
 .focus\:placeholder-secondary-900:focus::placeholder {
-  color: #006858;
+  color: #211a5c;
 }
 
 .focus\:placeholder-secondary-transLight:focus::placeholder {
-  color: rgb(179, 224, 219, 0.15);
+  color: rgb(200, 197, 221, 0.15);
 }
 
 .focus\:placeholder-secondary-trans:focus::placeholder {
-  color: rgb(179, 224, 219, 0.7);
+  color: rgb(200, 197, 221, 0.7);
 }
 
 .focus\:placeholder-secondary-transDark:focus::placeholder {
-  color: rgb(0, 150, 136, 0.15);
+  color: rgb(72, 60, 140, 0.15);
 }
 
 .focus\:placeholder-secondary-a100:focus::placeholder {
-  color: #97ffec;
+  color: #a399ff;
 }
 
 .focus\:placeholder-secondary-a200:focus::placeholder {
-  color: #64ffe3;
+  color: #7566ff;
 }
 
 .focus\:placeholder-secondary-a400:focus::placeholder {
-  color: #31ffda;
+  color: #4733ff;
 }
 
 .focus\:placeholder-secondary-a700:focus::placeholder {
-  color: #18ffd5;
+  color: #301aff;
 }
 
 .focus\:placeholder-error-50:focus::placeholder {
@@ -9598,131 +9603,131 @@ video {
 }
 
 .text-primary-50 {
-  color: #e7bee7;
+  color: #b7b5c5;
 }
 
 .text-primary-200 {
-  color: #d893d8;
+  color: #88849f;
 }
 
 .text-primary-300 {
-  color: #c868c8;
+  color: #585279;
 }
 
 .text-primary-400 {
-  color: #bc47bc;
+  color: #342d5c;
 }
 
 .text-primary-500 {
-  color: #b027b0;
+  color: #10083f;
 }
 
 .text-primary-600 {
-  color: #a923a9;
+  color: #0e0739;
 }
 
 .text-primary-700 {
-  color: #a01da0;
+  color: #0c0631;
 }
 
 .text-primary-800 {
-  color: #971797;
+  color: #090429;
 }
 
 .text-primary-900 {
-  color: #870e87;
+  color: #05021b;
 }
 
 .text-primary-transLight {
-  color: rgb(231, 190, 231, 0.15);
+  color: rgb(183, 181, 197, 0.15);
 }
 
 .text-primary-trans {
-  color: rgb(231, 190, 231, 0.7);
+  color: rgb(183, 181, 197, 0.7);
 }
 
 .text-primary-transDark {
-  color: rgb(176, 39, 176, 0.15);
+  color: rgb(16, 8, 63, 0.15);
 }
 
 .text-primary-a100 {
-  color: #ffb8ff;
+  color: #6659ff;
 }
 
 .text-primary-a200 {
-  color: #ff85ff;
+  color: #3726ff;
 }
 
 .text-primary-a400 {
-  color: #ff52ff;
+  color: #1300f2;
 }
 
 .text-primary-a700 {
-  color: #ff38ff;
+  color: #1100d9;
 }
 
 .text-secondary-50 {
-  color: #b3e0db;
+  color: #c8c5dd;
 }
 
 .text-secondary-200 {
-  color: #80cbc4;
+  color: #a49ec6;
 }
 
 .text-secondary-300 {
-  color: #4db6ac;
+  color: #7f77af;
 }
 
 .text-secondary-400 {
-  color: #26a69a;
+  color: #63599d;
 }
 
 .text-secondary-500 {
-  color: #009688;
+  color: #483c8c;
 }
 
 .text-secondary-600 {
-  color: #008e80;
+  color: #413684;
 }
 
 .text-secondary-700 {
-  color: #008375;
+  color: #382e79;
 }
 
 .text-secondary-800 {
-  color: #00796b;
+  color: #30276f;
 }
 
 .text-secondary-900 {
-  color: #006858;
+  color: #211a5c;
 }
 
 .text-secondary-transLight {
-  color: rgb(179, 224, 219, 0.15);
+  color: rgb(200, 197, 221, 0.15);
 }
 
 .text-secondary-trans {
-  color: rgb(179, 224, 219, 0.7);
+  color: rgb(200, 197, 221, 0.7);
 }
 
 .text-secondary-transDark {
-  color: rgb(0, 150, 136, 0.15);
+  color: rgb(72, 60, 140, 0.15);
 }
 
 .text-secondary-a100 {
-  color: #97ffec;
+  color: #a399ff;
 }
 
 .text-secondary-a200 {
-  color: #64ffe3;
+  color: #7566ff;
 }
 
 .text-secondary-a400 {
-  color: #31ffda;
+  color: #4733ff;
 }
 
 .text-secondary-a700 {
-  color: #18ffd5;
+  color: #301aff;
 }
 
 .text-error-50 {
@@ -10138,131 +10143,131 @@ video {
 }
 
 .mode-dark .dark\:text-primary-50 {
-  color: #e7bee7;
+  color: #b7b5c5;
 }
 
 .mode-dark .dark\:text-primary-200 {
-  color: #d893d8;
+  color: #88849f;
 }
 
 .mode-dark .dark\:text-primary-300 {
-  color: #c868c8;
+  color: #585279;
 }
 
 .mode-dark .dark\:text-primary-400 {
-  color: #bc47bc;
+  color: #342d5c;
 }
 
 .mode-dark .dark\:text-primary-500 {
-  color: #b027b0;
+  color: #10083f;
 }
 
 .mode-dark .dark\:text-primary-600 {
-  color: #a923a9;
+  color: #0e0739;
 }
 
 .mode-dark .dark\:text-primary-700 {
-  color: #a01da0;
+  color: #0c0631;
 }
 
 .mode-dark .dark\:text-primary-800 {
-  color: #971797;
+  color: #090429;
 }
 
 .mode-dark .dark\:text-primary-900 {
-  color: #870e87;
+  color: #05021b;
 }
 
 .mode-dark .dark\:text-primary-transLight {
-  color: rgb(231, 190, 231, 0.15);
+  color: rgb(183, 181, 197, 0.15);
 }
 
 .mode-dark .dark\:text-primary-trans {
-  color: rgb(231, 190, 231, 0.7);
+  color: rgb(183, 181, 197, 0.7);
 }
 
 .mode-dark .dark\:text-primary-transDark {
-  color: rgb(176, 39, 176, 0.15);
+  color: rgb(16, 8, 63, 0.15);
 }
 
 .mode-dark .dark\:text-primary-a100 {
-  color: #ffb8ff;
+  color: #6659ff;
 }
 
 .mode-dark .dark\:text-primary-a200 {
-  color: #ff85ff;
+  color: #3726ff;
 }
 
 .mode-dark .dark\:text-primary-a400 {
-  color: #ff52ff;
+  color: #1300f2;
 }
 
 .mode-dark .dark\:text-primary-a700 {
-  color: #ff38ff;
+  color: #1100d9;
 }
 
 .mode-dark .dark\:text-secondary-50 {
-  color: #b3e0db;
+  color: #c8c5dd;
 }
 
 .mode-dark .dark\:text-secondary-200 {
-  color: #80cbc4;
+  color: #a49ec6;
 }
 
 .mode-dark .dark\:text-secondary-300 {
-  color: #4db6ac;
+  color: #7f77af;
 }
 
 .mode-dark .dark\:text-secondary-400 {
-  color: #26a69a;
+  color: #63599d;
 }
 
 .mode-dark .dark\:text-secondary-500 {
-  color: #009688;
+  color: #483c8c;
 }
 
 .mode-dark .dark\:text-secondary-600 {
-  color: #008e80;
+  color: #413684;
 }
 
 .mode-dark .dark\:text-secondary-700 {
-  color: #008375;
+  color: #382e79;
 }
 
 .mode-dark .dark\:text-secondary-800 {
-  color: #00796b;
+  color: #30276f;
 }
 
 .mode-dark .dark\:text-secondary-900 {
-  color: #006858;
+  color: #211a5c;
 }
 
 .mode-dark .dark\:text-secondary-transLight {
-  color: rgb(179, 224, 219, 0.15);
+  color: rgb(200, 197, 221, 0.15);
 }
 
 .mode-dark .dark\:text-secondary-trans {
-  color: rgb(179, 224, 219, 0.7);
+  color: rgb(200, 197, 221, 0.7);
 }
 
 .mode-dark .dark\:text-secondary-transDark {
-  color: rgb(0, 150, 136, 0.15);
+  color: rgb(72, 60, 140, 0.15);
 }
 
 .mode-dark .dark\:text-secondary-a100 {
-  color: #97ffec;
+  color: #a399ff;
 }
 
 .mode-dark .dark\:text-secondary-a200 {
-  color: #64ffe3;
+  color: #7566ff;
 }
 
 .mode-dark .dark\:text-secondary-a400 {
-  color: #31ffda;
+  color: #4733ff;
 }
 
 .mode-dark .dark\:text-secondary-a700 {
-  color: #18ffd5;
+  color: #301aff;
 }
 
 .mode-dark .dark\:text-error-50 {
@@ -10678,131 +10683,131 @@ video {
 }
 
 .mode-dark .dark-hover\:text-primary-50:hover {
-  color: #e7bee7;
+  color: #b7b5c5;
 }
 
 .mode-dark .dark-hover\:text-primary-200:hover {
-  color: #d893d8;
+  color: #88849f;
 }
 
 .mode-dark .dark-hover\:text-primary-300:hover {
-  color: #c868c8;
+  color: #585279;
 }
 
 .mode-dark .dark-hover\:text-primary-400:hover {
-  color: #bc47bc;
+  color: #342d5c;
 }
 
 .mode-dark .dark-hover\:text-primary-500:hover {
-  color: #b027b0;
+  color: #10083f;
 }
 
 .mode-dark .dark-hover\:text-primary-600:hover {
-  color: #a923a9;
+  color: #0e0739;
 }
 
 .mode-dark .dark-hover\:text-primary-700:hover {
-  color: #a01da0;
+  color: #0c0631;
 }
 
 .mode-dark .dark-hover\:text-primary-800:hover {
-  color: #971797;
+  color: #090429;
 }
 
 .mode-dark .dark-hover\:text-primary-900:hover {
-  color: #870e87;
+  color: #05021b;
 }
 
 .mode-dark .dark-hover\:text-primary-transLight:hover {
-  color: rgb(231, 190, 231, 0.15);
+  color: rgb(183, 181, 197, 0.15);
 }
 
 .mode-dark .dark-hover\:text-primary-trans:hover {
-  color: rgb(231, 190, 231, 0.7);
+  color: rgb(183, 181, 197, 0.7);
 }
 
 .mode-dark .dark-hover\:text-primary-transDark:hover {
-  color: rgb(176, 39, 176, 0.15);
+  color: rgb(16, 8, 63, 0.15);
 }
 
 .mode-dark .dark-hover\:text-primary-a100:hover {
-  color: #ffb8ff;
+  color: #6659ff;
 }
 
 .mode-dark .dark-hover\:text-primary-a200:hover {
-  color: #ff85ff;
+  color: #3726ff;
 }
 
 .mode-dark .dark-hover\:text-primary-a400:hover {
-  color: #ff52ff;
+  color: #1300f2;
 }
 
 .mode-dark .dark-hover\:text-primary-a700:hover {
-  color: #ff38ff;
+  color: #1100d9;
 }
 
 .mode-dark .dark-hover\:text-secondary-50:hover {
-  color: #b3e0db;
+  color: #c8c5dd;
 }
 
 .mode-dark .dark-hover\:text-secondary-200:hover {
-  color: #80cbc4;
+  color: #a49ec6;
 }
 
 .mode-dark .dark-hover\:text-secondary-300:hover {
-  color: #4db6ac;
+  color: #7f77af;
 }
 
 .mode-dark .dark-hover\:text-secondary-400:hover {
-  color: #26a69a;
+  color: #63599d;
 }
 
 .mode-dark .dark-hover\:text-secondary-500:hover {
-  color: #009688;
+  color: #483c8c;
 }
 
 .mode-dark .dark-hover\:text-secondary-600:hover {
-  color: #008e80;
+  color: #413684;
 }
 
 .mode-dark .dark-hover\:text-secondary-700:hover {
-  color: #008375;
+  color: #382e79;
 }
 
 .mode-dark .dark-hover\:text-secondary-800:hover {
-  color: #00796b;
+  color: #30276f;
 }
 
 .mode-dark .dark-hover\:text-secondary-900:hover {
-  color: #006858;
+  color: #211a5c;
 }
 
 .mode-dark .dark-hover\:text-secondary-transLight:hover {
-  color: rgb(179, 224, 219, 0.15);
+  color: rgb(200, 197, 221, 0.15);
 }
 
 .mode-dark .dark-hover\:text-secondary-trans:hover {
-  color: rgb(179, 224, 219, 0.7);
+  color: rgb(200, 197, 221, 0.7);
 }
 
 .mode-dark .dark-hover\:text-secondary-transDark:hover {
-  color: rgb(0, 150, 136, 0.15);
+  color: rgb(72, 60, 140, 0.15);
 }
 
 .mode-dark .dark-hover\:text-secondary-a100:hover {
-  color: #97ffec;
+  color: #a399ff;
 }
 
 .mode-dark .dark-hover\:text-secondary-a200:hover {
-  color: #64ffe3;
+  color: #7566ff;
 }
 
 .mode-dark .dark-hover\:text-secondary-a400:hover {
-  color: #31ffda;
+  color: #4733ff;
 }
 
 .mode-dark .dark-hover\:text-secondary-a700:hover {
-  color: #18ffd5;
+  color: #301aff;
 }
 
 .mode-dark .dark-hover\:text-error-50:hover {
@@ -11218,131 +11223,131 @@ video {
 }
 
 .mode-dark .dark-active\:text-primary-50:active {
-  color: #e7bee7;
+  color: #b7b5c5;
 }
 
 .mode-dark .dark-active\:text-primary-200:active {
-  color: #d893d8;
+  color: #88849f;
 }
 
 .mode-dark .dark-active\:text-primary-300:active {
-  color: #c868c8;
+  color: #585279;
 }
 
 .mode-dark .dark-active\:text-primary-400:active {
-  color: #bc47bc;
+  color: #342d5c;
 }
 
 .mode-dark .dark-active\:text-primary-500:active {
-  color: #b027b0;
+  color: #10083f;
 }
 
 .mode-dark .dark-active\:text-primary-600:active {
-  color: #a923a9;
+  color: #0e0739;
 }
 
 .mode-dark .dark-active\:text-primary-700:active {
-  color: #a01da0;
+  color: #0c0631;
 }
 
 .mode-dark .dark-active\:text-primary-800:active {
-  color: #971797;
+  color: #090429;
 }
 
 .mode-dark .dark-active\:text-primary-900:active {
-  color: #870e87;
+  color: #05021b;
 }
 
 .mode-dark .dark-active\:text-primary-transLight:active {
-  color: rgb(231, 190, 231, 0.15);
+  color: rgb(183, 181, 197, 0.15);
 }
 
 .mode-dark .dark-active\:text-primary-trans:active {
-  color: rgb(231, 190, 231, 0.7);
+  color: rgb(183, 181, 197, 0.7);
 }
 
 .mode-dark .dark-active\:text-primary-transDark:active {
-  color: rgb(176, 39, 176, 0.15);
+  color: rgb(16, 8, 63, 0.15);
 }
 
 .mode-dark .dark-active\:text-primary-a100:active {
-  color: #ffb8ff;
+  color: #6659ff;
 }
 
 .mode-dark .dark-active\:text-primary-a200:active {
-  color: #ff85ff;
+  color: #3726ff;
 }
 
 .mode-dark .dark-active\:text-primary-a400:active {
-  color: #ff52ff;
+  color: #1300f2;
 }
 
 .mode-dark .dark-active\:text-primary-a700:active {
-  color: #ff38ff;
+  color: #1100d9;
 }
 
 .mode-dark .dark-active\:text-secondary-50:active {
-  color: #b3e0db;
+  color: #c8c5dd;
 }
 
 .mode-dark .dark-active\:text-secondary-200:active {
-  color: #80cbc4;
+  color: #a49ec6;
 }
 
 .mode-dark .dark-active\:text-secondary-300:active {
-  color: #4db6ac;
+  color: #7f77af;
 }
 
 .mode-dark .dark-active\:text-secondary-400:active {
-  color: #26a69a;
+  color: #63599d;
 }
 
 .mode-dark .dark-active\:text-secondary-500:active {
-  color: #009688;
+  color: #483c8c;
 }
 
 .mode-dark .dark-active\:text-secondary-600:active {
-  color: #008e80;
+  color: #413684;
 }
 
 .mode-dark .dark-active\:text-secondary-700:active {
-  color: #008375;
+  color: #382e79;
 }
 
 .mode-dark .dark-active\:text-secondary-800:active {
-  color: #00796b;
+  color: #30276f;
 }
 
 .mode-dark .dark-active\:text-secondary-900:active {
-  color: #006858;
+  color: #211a5c;
 }
 
 .mode-dark .dark-active\:text-secondary-transLight:active {
-  color: rgb(179, 224, 219, 0.15);
+  color: rgb(200, 197, 221, 0.15);
 }
 
 .mode-dark .dark-active\:text-secondary-trans:active {
-  color: rgb(179, 224, 219, 0.7);
+  color: rgb(200, 197, 221, 0.7);
 }
 
 .mode-dark .dark-active\:text-secondary-transDark:active {
-  color: rgb(0, 150, 136, 0.15);
+  color: rgb(72, 60, 140, 0.15);
 }
 
 .mode-dark .dark-active\:text-secondary-a100:active {
-  color: #97ffec;
+  color: #a399ff;
 }
 
 .mode-dark .dark-active\:text-secondary-a200:active {
-  color: #64ffe3;
+  color: #7566ff;
 }
 
 .mode-dark .dark-active\:text-secondary-a400:active {
-  color: #31ffda;
+  color: #4733ff;
 }
 
 .mode-dark .dark-active\:text-secondary-a700:active {
-  color: #18ffd5;
+  color: #301aff;
 }
 
 .mode-dark .dark-active\:text-error-50:active {
@@ -14825,139 +14830,139 @@ video {
 }
 
 .caret-primary {
-  caret-color: #b027b0;
+  caret-color: #10083f;
 }
 
 .caret-primary-50 {
-  caret-color: #e7bee7;
+  caret-color: #b7b5c5;
 }
 
 .caret-primary-200 {
-  caret-color: #d893d8;
+  caret-color: #88849f;
 }
 
 .caret-primary-300 {
-  caret-color: #c868c8;
+  caret-color: #585279;
 }
 
 .caret-primary-400 {
-  caret-color: #bc47bc;
+  caret-color: #342d5c;
 }
 
 .caret-primary-500 {
-  caret-color: #b027b0;
+  caret-color: #10083f;
 }
 
 .caret-primary-600 {
-  caret-color: #a923a9;
+  caret-color: #0e0739;
 }
 
 .caret-primary-700 {
-  caret-color: #a01da0;
+  caret-color: #0c0631;
 }
 
 .caret-primary-800 {
-  caret-color: #971797;
+  caret-color: #090429;
 }
 
 .caret-primary-900 {
-  caret-color: #870e87;
+  caret-color: #05021b;
 }
 
 .caret-primary-transLight {
-  caret-color: rgb(231, 190, 231, 0.15);
+  caret-color: rgb(183, 181, 197, 0.15);
 }
 
 .caret-primary-trans {
-  caret-color: rgb(231, 190, 231, 0.7);
+  caret-color: rgb(183, 181, 197, 0.7);
 }
 
 .caret-primary-transDark {
-  caret-color: rgb(176, 39, 176, 0.15);
+  caret-color: rgb(16, 8, 63, 0.15);
 }
 
 .caret-primary-a100 {
-  caret-color: #ffb8ff;
+  caret-color: #6659ff;
 }
 
 .caret-primary-a200 {
-  caret-color: #ff85ff;
+  caret-color: #3726ff;
 }
 
 .caret-primary-a400 {
-  caret-color: #ff52ff;
+  caret-color: #1300f2;
 }
 
 .caret-primary-a700 {
-  caret-color: #ff38ff;
+  caret-color: #1100d9;
 }
 
 .caret-secondary {
-  caret-color: #009688;
+  caret-color: #483c8c;
 }
 
 .caret-secondary-50 {
-  caret-color: #b3e0db;
+  caret-color: #c8c5dd;
 }
 
 .caret-secondary-200 {
-  caret-color: #80cbc4;
+  caret-color: #a49ec6;
 }
 
 .caret-secondary-300 {
-  caret-color: #4db6ac;
+  caret-color: #7f77af;
 }
 
 .caret-secondary-400 {
-  caret-color: #26a69a;
+  caret-color: #63599d;
 }
 
 .caret-secondary-500 {
-  caret-color: #009688;
+  caret-color: #483c8c;
 }
 
 .caret-secondary-600 {
-  caret-color: #008e80;
+  caret-color: #413684;
 }
 
 .caret-secondary-700 {
-  caret-color: #008375;
+  caret-color: #382e79;
 }
 
 .caret-secondary-800 {
-  caret-color: #00796b;
+  caret-color: #30276f;
 }
 
 .caret-secondary-900 {
-  caret-color: #006858;
+  caret-color: #211a5c;
 }
 
 .caret-secondary-transLight {
-  caret-color: rgb(179, 224, 219, 0.15);
+  caret-color: rgb(200, 197, 221, 0.15);
 }
 
 .caret-secondary-trans {
-  caret-color: rgb(179, 224, 219, 0.7);
+  caret-color: rgb(200, 197, 221, 0.7);
 }
 
 .caret-secondary-transDark {
-  caret-color: rgb(0, 150, 136, 0.15);
+  caret-color: rgb(72, 60, 140, 0.15);
 }
 
 .caret-secondary-a100 {
-  caret-color: #97ffec;
+  caret-color: #a399ff;
 }
 
 .caret-secondary-a200 {
-  caret-color: #64ffe3;
+  caret-color: #7566ff;
 }
 
 .caret-secondary-a400 {
-  caret-color: #31ffda;
+  caret-color: #4733ff;
 }
 
 .caret-secondary-a700 {
-  caret-color: #18ffd5;
+  caret-color: #301aff;
 }
 
 .caret-error {
@@ -15397,139 +15402,139 @@ video {
 }
 
 .stroke-primary {
-  stroke: #b027b0;
+  stroke: #10083f;
 }
 
 .stroke-primary-50 {
-  stroke: #e7bee7;
+  stroke: #b7b5c5;
 }
 
 .stroke-primary-200 {
-  stroke: #d893d8;
+  stroke: #88849f;
 }
 
 .stroke-primary-300 {
-  stroke: #c868c8;
+  stroke: #585279;
 }
 
 .stroke-primary-400 {
-  stroke: #bc47bc;
+  stroke: #342d5c;
 }
 
 .stroke-primary-500 {
-  stroke: #b027b0;
+  stroke: #10083f;
 }
 
 .stroke-primary-600 {
-  stroke: #a923a9;
+  stroke: #0e0739;
 }
 
 .stroke-primary-700 {
-  stroke: #a01da0;
+  stroke: #0c0631;
 }
 
 .stroke-primary-800 {
-  stroke: #971797;
+  stroke: #090429;
 }
 
 .stroke-primary-900 {
-  stroke: #870e87;
+  stroke: #05021b;
 }
 
 .stroke-primary-transLight {
-  stroke: rgb(231, 190, 231, 0.15);
+  stroke: rgb(183, 181, 197, 0.15);
 }
 
 .stroke-primary-trans {
-  stroke: rgb(231, 190, 231, 0.7);
+  stroke: rgb(183, 181, 197, 0.7);
 }
 
 .stroke-primary-transDark {
-  stroke: rgb(176, 39, 176, 0.15);
+  stroke: rgb(16, 8, 63, 0.15);
 }
 
 .stroke-primary-a100 {
-  stroke: #ffb8ff;
+  stroke: #6659ff;
 }
 
 .stroke-primary-a200 {
-  stroke: #ff85ff;
+  stroke: #3726ff;
 }
 
 .stroke-primary-a400 {
-  stroke: #ff52ff;
+  stroke: #1300f2;
 }
 
 .stroke-primary-a700 {
-  stroke: #ff38ff;
+  stroke: #1100d9;
 }
 
 .stroke-secondary {
-  stroke: #009688;
+  stroke: #483c8c;
 }
 
 .stroke-secondary-50 {
-  stroke: #b3e0db;
+  stroke: #c8c5dd;
 }
 
 .stroke-secondary-200 {
-  stroke: #80cbc4;
+  stroke: #a49ec6;
 }
 
 .stroke-secondary-300 {
-  stroke: #4db6ac;
+  stroke: #7f77af;
 }
 
 .stroke-secondary-400 {
-  stroke: #26a69a;
+  stroke: #63599d;
 }
 
 .stroke-secondary-500 {
-  stroke: #009688;
+  stroke: #483c8c;
 }
 
 .stroke-secondary-600 {
-  stroke: #008e80;
+  stroke: #413684;
 }
 
 .stroke-secondary-700 {
-  stroke: #008375;
+  stroke: #382e79;
 }
 
 .stroke-secondary-800 {
-  stroke: #00796b;
+  stroke: #30276f;
 }
 
 .stroke-secondary-900 {
-  stroke: #006858;
+  stroke: #211a5c;
 }
 
 .stroke-secondary-transLight {
-  stroke: rgb(179, 224, 219, 0.15);
+  stroke: rgb(200, 197, 221, 0.15);
 }
 
 .stroke-secondary-trans {
-  stroke: rgb(179, 224, 219, 0.7);
+  stroke: rgb(200, 197, 221, 0.7);
 }
 
 .stroke-secondary-transDark {
-  stroke: rgb(0, 150, 136, 0.15);
+  stroke: rgb(72, 60, 140, 0.15);
 }
 
 .stroke-secondary-a100 {
-  stroke: #97ffec;
+  stroke: #a399ff;
 }
 
 .stroke-secondary-a200 {
-  stroke: #64ffe3;
+  stroke: #7566ff;
 }
 
 .stroke-secondary-a400 {
-  stroke: #31ffda;
+  stroke: #4733ff;
 }
 
 .stroke-secondary-a700 {
-  stroke: #18ffd5;
+  stroke: #301aff;
 }
 
 .stroke-error {
@@ -16225,7 +16230,7 @@ th:hover .sort {
 }
 
 tr.selected {
-  background-color: #e7bee7;
+  background-color: #b7b5c5;
 }
 
 .select {
@@ -16241,8 +16246,8 @@ tr.selected {
 
 .code-inline {
   font-size: 0.875rem;
-  background-color: #b3e0db;
-  color: #006858;
+  background-color: #c8c5dd;
+  color: #211a5c;
   border-radius: 0.125rem;
   padding: 0.25rem;
   letter-spacing: 0.25px;
@@ -19356,131 +19361,131 @@ tr.selected {
   }
 
   .sm\:placeholder-primary-50::placeholder {
-    color: #e7bee7;
+    color: #b7b5c5;
   }
 
   .sm\:placeholder-primary-200::placeholder {
-    color: #d893d8;
+    color: #88849f;
   }
 
   .sm\:placeholder-primary-300::placeholder {
-    color: #c868c8;
+    color: #585279;
   }
 
   .sm\:placeholder-primary-400::placeholder {
-    color: #bc47bc;
+    color: #342d5c;
   }
 
   .sm\:placeholder-primary-500::placeholder {
-    color: #b027b0;
+    color: #10083f;
   }
 
   .sm\:placeholder-primary-600::placeholder {
-    color: #a923a9;
+    color: #0e0739;
   }
 
   .sm\:placeholder-primary-700::placeholder {
-    color: #a01da0;
+    color: #0c0631;
   }
 
   .sm\:placeholder-primary-800::placeholder {
-    color: #971797;
+    color: #090429;
   }
 
   .sm\:placeholder-primary-900::placeholder {
-    color: #870e87;
+    color: #05021b;
   }
 
   .sm\:placeholder-primary-transLight::placeholder {
-    color: rgb(231, 190, 231, 0.15);
+    color: rgb(183, 181, 197, 0.15);
   }
 
   .sm\:placeholder-primary-trans::placeholder {
-    color: rgb(231, 190, 231, 0.7);
+    color: rgb(183, 181, 197, 0.7);
   }
 
   .sm\:placeholder-primary-transDark::placeholder {
-    color: rgb(176, 39, 176, 0.15);
+    color: rgb(16, 8, 63, 0.15);
   }
 
   .sm\:placeholder-primary-a100::placeholder {
-    color: #ffb8ff;
+    color: #6659ff;
   }
 
   .sm\:placeholder-primary-a200::placeholder {
-    color: #ff85ff;
+    color: #3726ff;
   }
 
   .sm\:placeholder-primary-a400::placeholder {
-    color: #ff52ff;
+    color: #1300f2;
   }
 
   .sm\:placeholder-primary-a700::placeholder {
-    color: #ff38ff;
+    color: #1100d9;
   }
 
   .sm\:placeholder-secondary-50::placeholder {
-    color: #b3e0db;
+    color: #c8c5dd;
   }
 
   .sm\:placeholder-secondary-200::placeholder {
-    color: #80cbc4;
+    color: #a49ec6;
   }
 
   .sm\:placeholder-secondary-300::placeholder {
-    color: #4db6ac;
+    color: #7f77af;
   }
 
   .sm\:placeholder-secondary-400::placeholder {
-    color: #26a69a;
+    color: #63599d;
   }
 
   .sm\:placeholder-secondary-500::placeholder {
-    color: #009688;
+    color: #483c8c;
   }
 
   .sm\:placeholder-secondary-600::placeholder {
-    color: #008e80;
+    color: #413684;
   }
 
   .sm\:placeholder-secondary-700::placeholder {
-    color: #008375;
+    color: #382e79;
   }
 
   .sm\:placeholder-secondary-800::placeholder {
-    color: #00796b;
+    color: #30276f;
   }
 
   .sm\:placeholder-secondary-900::placeholder {
-    color: #006858;
+    color: #211a5c;
   }
 
   .sm\:placeholder-secondary-transLight::placeholder {
-    color: rgb(179, 224, 219, 0.15);
+    color: rgb(200, 197, 221, 0.15);
   }
 
   .sm\:placeholder-secondary-trans::placeholder {
-    color: rgb(179, 224, 219, 0.7);
+    color: rgb(200, 197, 221, 0.7);
   }
 
   .sm\:placeholder-secondary-transDark::placeholder {
-    color: rgb(0, 150, 136, 0.15);
+    color: rgb(72, 60, 140, 0.15);
   }
 
   .sm\:placeholder-secondary-a100::placeholder {
-    color: #97ffec;
+    color: #a399ff;
   }
 
   .sm\:placeholder-secondary-a200::placeholder {
-    color: #64ffe3;
+    color: #7566ff;
   }
 
   .sm\:placeholder-secondary-a400::placeholder {
-    color: #31ffda;
+    color: #4733ff;
   }
 
   .sm\:placeholder-secondary-a700::placeholder {
-    color: #18ffd5;
+    color: #301aff;
   }
 
   .sm\:placeholder-error-50::placeholder {
@@ -19896,131 +19901,131 @@ tr.selected {
   }
 
   .sm\:focus\:placeholder-primary-50:focus::placeholder {
-    color: #e7bee7;
+    color: #b7b5c5;
   }
 
   .sm\:focus\:placeholder-primary-200:focus::placeholder {
-    color: #d893d8;
+    color: #88849f;
   }
 
   .sm\:focus\:placeholder-primary-300:focus::placeholder {
-    color: #c868c8;
+    color: #585279;
   }
 
   .sm\:focus\:placeholder-primary-400:focus::placeholder {
-    color: #bc47bc;
+    color: #342d5c;
   }
 
   .sm\:focus\:placeholder-primary-500:focus::placeholder {
-    color: #b027b0;
+    color: #10083f;
   }
 
   .sm\:focus\:placeholder-primary-600:focus::placeholder {
-    color: #a923a9;
+    color: #0e0739;
   }
 
   .sm\:focus\:placeholder-primary-700:focus::placeholder {
-    color: #a01da0;
+    color: #0c0631;
   }
 
   .sm\:focus\:placeholder-primary-800:focus::placeholder {
-    color: #971797;
+    color: #090429;
   }
 
   .sm\:focus\:placeholder-primary-900:focus::placeholder {
-    color: #870e87;
+    color: #05021b;
   }
 
   .sm\:focus\:placeholder-primary-transLight:focus::placeholder {
-    color: rgb(231, 190, 231, 0.15);
+    color: rgb(183, 181, 197, 0.15);
   }
 
   .sm\:focus\:placeholder-primary-trans:focus::placeholder {
-    color: rgb(231, 190, 231, 0.7);
+    color: rgb(183, 181, 197, 0.7);
   }
 
   .sm\:focus\:placeholder-primary-transDark:focus::placeholder {
-    color: rgb(176, 39, 176, 0.15);
+    color: rgb(16, 8, 63, 0.15);
   }
 
   .sm\:focus\:placeholder-primary-a100:focus::placeholder {
-    color: #ffb8ff;
+    color: #6659ff;
   }
 
   .sm\:focus\:placeholder-primary-a200:focus::placeholder {
-    color: #ff85ff;
+    color: #3726ff;
   }
 
   .sm\:focus\:placeholder-primary-a400:focus::placeholder {
-    color: #ff52ff;
+    color: #1300f2;
   }
 
   .sm\:focus\:placeholder-primary-a700:focus::placeholder {
-    color: #ff38ff;
+    color: #1100d9;
   }
 
   .sm\:focus\:placeholder-secondary-50:focus::placeholder {
-    color: #b3e0db;
+    color: #c8c5dd;
   }
 
   .sm\:focus\:placeholder-secondary-200:focus::placeholder {
-    color: #80cbc4;
+    color: #a49ec6;
   }
 
   .sm\:focus\:placeholder-secondary-300:focus::placeholder {
-    color: #4db6ac;
+    color: #7f77af;
   }
 
   .sm\:focus\:placeholder-secondary-400:focus::placeholder {
-    color: #26a69a;
+    color: #63599d;
   }
 
   .sm\:focus\:placeholder-secondary-500:focus::placeholder {
-    color: #009688;
+    color: #483c8c;
   }
 
   .sm\:focus\:placeholder-secondary-600:focus::placeholder {
-    color: #008e80;
+    color: #413684;
   }
 
   .sm\:focus\:placeholder-secondary-700:focus::placeholder {
-    color: #008375;
+    color: #382e79;
   }
 
   .sm\:focus\:placeholder-secondary-800:focus::placeholder {
-    color: #00796b;
+    color: #30276f;
   }
 
   .sm\:focus\:placeholder-secondary-900:focus::placeholder {
-    color: #006858;
+    color: #211a5c;
   }
 
   .sm\:focus\:placeholder-secondary-transLight:focus::placeholder {
-    color: rgb(179, 224, 219, 0.15);
+    color: rgb(200, 197, 221, 0.15);
   }
 
   .sm\:focus\:placeholder-secondary-trans:focus::placeholder {
-    color: rgb(179, 224, 219, 0.7);
+    color: rgb(200, 197, 221, 0.7);
   }
 
   .sm\:focus\:placeholder-secondary-transDark:focus::placeholder {
-    color: rgb(0, 150, 136, 0.15);
+    color: rgb(72, 60, 140, 0.15);
   }
 
   .sm\:focus\:placeholder-secondary-a100:focus::placeholder {
-    color: #97ffec;
+    color: #a399ff;
   }
 
   .sm\:focus\:placeholder-secondary-a200:focus::placeholder {
-    color: #64ffe3;
+    color: #7566ff;
   }
 
   .sm\:focus\:placeholder-secondary-a400:focus::placeholder {
-    color: #31ffda;
+    color: #4733ff;
   }
 
   .sm\:focus\:placeholder-secondary-a700:focus::placeholder {
-    color: #18ffd5;
+    color: #301aff;
   }
 
   .sm\:focus\:placeholder-error-50:focus::placeholder {
@@ -26629,131 +26634,131 @@ tr.selected {
   }
 
   .md\:placeholder-primary-50::placeholder {
-    color: #e7bee7;
+    color: #b7b5c5;
   }
 
   .md\:placeholder-primary-200::placeholder {
-    color: #d893d8;
+    color: #88849f;
   }
 
   .md\:placeholder-primary-300::placeholder {
-    color: #c868c8;
+    color: #585279;
   }
 
   .md\:placeholder-primary-400::placeholder {
-    color: #bc47bc;
+    color: #342d5c;
   }
 
   .md\:placeholder-primary-500::placeholder {
-    color: #b027b0;
+    color: #10083f;
   }
 
   .md\:placeholder-primary-600::placeholder {
-    color: #a923a9;
+    color: #0e0739;
   }
 
   .md\:placeholder-primary-700::placeholder {
-    color: #a01da0;
+    color: #0c0631;
   }
 
   .md\:placeholder-primary-800::placeholder {
-    color: #971797;
+    color: #090429;
   }
 
   .md\:placeholder-primary-900::placeholder {
-    color: #870e87;
+    color: #05021b;
   }
 
   .md\:placeholder-primary-transLight::placeholder {
-    color: rgb(231, 190, 231, 0.15);
+    color: rgb(183, 181, 197, 0.15);
   }
 
   .md\:placeholder-primary-trans::placeholder {
-    color: rgb(231, 190, 231, 0.7);
+    color: rgb(183, 181, 197, 0.7);
   }
 
   .md\:placeholder-primary-transDark::placeholder {
-    color: rgb(176, 39, 176, 0.15);
+    color: rgb(16, 8, 63, 0.15);
   }
 
   .md\:placeholder-primary-a100::placeholder {
-    color: #ffb8ff;
+    color: #6659ff;
   }
 
   .md\:placeholder-primary-a200::placeholder {
-    color: #ff85ff;
+    color: #3726ff;
   }
 
   .md\:placeholder-primary-a400::placeholder {
-    color: #ff52ff;
+    color: #1300f2;
   }
 
   .md\:placeholder-primary-a700::placeholder {
-    color: #ff38ff;
+    color: #1100d9;
   }
 
   .md\:placeholder-secondary-50::placeholder {
-    color: #b3e0db;
+    color: #c8c5dd;
   }
 
   .md\:placeholder-secondary-200::placeholder {
-    color: #80cbc4;
+    color: #a49ec6;
   }
 
   .md\:placeholder-secondary-300::placeholder {
-    color: #4db6ac;
+    color: #7f77af;
   }
 
   .md\:placeholder-secondary-400::placeholder {
-    color: #26a69a;
+    color: #63599d;
   }
 
   .md\:placeholder-secondary-500::placeholder {
-    color: #009688;
+    color: #483c8c;
   }
 
   .md\:placeholder-secondary-600::placeholder {
-    color: #008e80;
+    color: #413684;
   }
 
   .md\:placeholder-secondary-700::placeholder {
-    color: #008375;
+    color: #382e79;
   }
 
   .md\:placeholder-secondary-800::placeholder {
-    color: #00796b;
+    color: #30276f;
   }
 
   .md\:placeholder-secondary-900::placeholder {
-    color: #006858;
+    color: #211a5c;
   }
 
   .md\:placeholder-secondary-transLight::placeholder {
-    color: rgb(179, 224, 219, 0.15);
+    color: rgb(200, 197, 221, 0.15);
   }
 
   .md\:placeholder-secondary-trans::placeholder {
-    color: rgb(179, 224, 219, 0.7);
+    color: rgb(200, 197, 221, 0.7);
   }
 
   .md\:placeholder-secondary-transDark::placeholder {
-    color: rgb(0, 150, 136, 0.15);
+    color: rgb(72, 60, 140, 0.15);
   }
 
   .md\:placeholder-secondary-a100::placeholder {
-    color: #97ffec;
+    color: #a399ff;
   }
 
   .md\:placeholder-secondary-a200::placeholder {
-    color: #64ffe3;
+    color: #7566ff;
   }
 
   .md\:placeholder-secondary-a400::placeholder {
-    color: #31ffda;
+    color: #4733ff;
   }
 
   .md\:placeholder-secondary-a700::placeholder {
-    color: #18ffd5;
+    color: #301aff;
   }
 
   .md\:placeholder-error-50::placeholder {
@@ -27169,131 +27174,131 @@ tr.selected {
   }
 
   .md\:focus\:placeholder-primary-50:focus::placeholder {
-    color: #e7bee7;
+    color: #b7b5c5;
   }
 
   .md\:focus\:placeholder-primary-200:focus::placeholder {
-    color: #d893d8;
+    color: #88849f;
   }
 
   .md\:focus\:placeholder-primary-300:focus::placeholder {
-    color: #c868c8;
+    color: #585279;
   }
 
   .md\:focus\:placeholder-primary-400:focus::placeholder {
-    color: #bc47bc;
+    color: #342d5c;
   }
 
   .md\:focus\:placeholder-primary-500:focus::placeholder {
-    color: #b027b0;
+    color: #10083f;
   }
 
   .md\:focus\:placeholder-primary-600:focus::placeholder {
-    color: #a923a9;
+    color: #0e0739;
   }
 
   .md\:focus\:placeholder-primary-700:focus::placeholder {
-    color: #a01da0;
+    color: #0c0631;
   }
 
   .md\:focus\:placeholder-primary-800:focus::placeholder {
-    color: #971797;
+    color: #090429;
   }
 
   .md\:focus\:placeholder-primary-900:focus::placeholder {
-    color: #870e87;
+    color: #05021b;
   }
 
   .md\:focus\:placeholder-primary-transLight:focus::placeholder {
-    color: rgb(231, 190, 231, 0.15);
+    color: rgb(183, 181, 197, 0.15);
   }
 
   .md\:focus\:placeholder-primary-trans:focus::placeholder {
-    color: rgb(231, 190, 231, 0.7);
+    color: rgb(183, 181, 197, 0.7);
   }
 
   .md\:focus\:placeholder-primary-transDark:focus::placeholder {
-    color: rgb(176, 39, 176, 0.15);
+    color: rgb(16, 8, 63, 0.15);
   }
 
   .md\:focus\:placeholder-primary-a100:focus::placeholder {
-    color: #ffb8ff;
+    color: #6659ff;
   }
 
   .md\:focus\:placeholder-primary-a200:focus::placeholder {
-    color: #ff85ff;
+    color: #3726ff;
   }
 
   .md\:focus\:placeholder-primary-a400:focus::placeholder {
-    color: #ff52ff;
+    color: #1300f2;
   }
 
   .md\:focus\:placeholder-primary-a700:focus::placeholder {
-    color: #ff38ff;
+    color: #1100d9;
   }
 
   .md\:focus\:placeholder-secondary-50:focus::placeholder {
-    color: #b3e0db;
+    color: #c8c5dd;
   }
 
   .md\:focus\:placeholder-secondary-200:focus::placeholder {
-    color: #80cbc4;
+    color: #a49ec6;
   }
 
   .md\:focus\:placeholder-secondary-300:focus::placeholder {
-    color: #4db6ac;
+    color: #7f77af;
   }
 
   .md\:focus\:placeholder-secondary-400:focus::placeholder {
-    color: #26a69a;
+    color: #63599d;
   }
 
   .md\:focus\:placeholder-secondary-500:focus::placeholder {
-    color: #009688;
+    color: #483c8c;
   }
 
   .md\:focus\:placeholder-secondary-600:focus::placeholder {
-    color: #008e80;
+    color: #413684;
   }
 
   .md\:focus\:placeholder-secondary-700:focus::placeholder {
-    color: #008375;
+    color: #382e79;
   }
 
   .md\:focus\:placeholder-secondary-800:focus::placeholder {
-    color: #00796b;
+    color: #30276f;
   }
 
   .md\:focus\:placeholder-secondary-900:focus::placeholder {
-    color: #006858;
+    color: #211a5c;
   }
 
   .md\:focus\:placeholder-secondary-transLight:focus::placeholder {
-    color: rgb(179, 224, 219, 0.15);
+    color: rgb(200, 197, 221, 0.15);
   }
 
   .md\:focus\:placeholder-secondary-trans:focus::placeholder {
-    color: rgb(179, 224, 219, 0.7);
+    color: rgb(200, 197, 221, 0.7);
   }
 
   .md\:focus\:placeholder-secondary-transDark:focus::placeholder {
-    color: rgb(0, 150, 136, 0.15);
+    color: rgb(72, 60, 140, 0.15);
   }
 
   .md\:focus\:placeholder-secondary-a100:focus::placeholder {
-    color: #97ffec;
+    color: #a399ff;
   }
 
   .md\:focus\:placeholder-secondary-a200:focus::placeholder {
-    color: #64ffe3;
+    color: #7566ff;
   }
 
   .md\:focus\:placeholder-secondary-a400:focus::placeholder {
-    color: #31ffda;
+    color: #4733ff;
   }
 
   .md\:focus\:placeholder-secondary-a700:focus::placeholder {
-    color: #18ffd5;
+    color: #301aff;
   }
 
   .md\:focus\:placeholder-error-50:focus::placeholder {
@@ -33902,131 +33907,131 @@ tr.selected {
   }
 
   .lg\:placeholder-primary-50::placeholder {
-    color: #e7bee7;
+    color: #b7b5c5;
   }
 
   .lg\:placeholder-primary-200::placeholder {
-    color: #d893d8;
+    color: #88849f;
   }
 
   .lg\:placeholder-primary-300::placeholder {
-    color: #c868c8;
+    color: #585279;
   }
 
   .lg\:placeholder-primary-400::placeholder {
-    color: #bc47bc;
+    color: #342d5c;
   }
 
   .lg\:placeholder-primary-500::placeholder {
-    color: #b027b0;
+    color: #10083f;
   }
 
   .lg\:placeholder-primary-600::placeholder {
-    color: #a923a9;
+    color: #0e0739;
   }
 
   .lg\:placeholder-primary-700::placeholder {
-    color: #a01da0;
+    color: #0c0631;
   }
 
   .lg\:placeholder-primary-800::placeholder {
-    color: #971797;
+    color: #090429;
   }
 
   .lg\:placeholder-primary-900::placeholder {
-    color: #870e87;
+    color: #05021b;
   }
 
   .lg\:placeholder-primary-transLight::placeholder {
-    color: rgb(231, 190, 231, 0.15);
+    color: rgb(183, 181, 197, 0.15);
   }
 
   .lg\:placeholder-primary-trans::placeholder {
-    color: rgb(231, 190, 231, 0.7);
+    color: rgb(183, 181, 197, 0.7);
   }
 
   .lg\:placeholder-primary-transDark::placeholder {
-    color: rgb(176, 39, 176, 0.15);
+    color: rgb(16, 8, 63, 0.15);
   }
 
   .lg\:placeholder-primary-a100::placeholder {
-    color: #ffb8ff;
+    color: #6659ff;
   }
 
   .lg\:placeholder-primary-a200::placeholder {
-    color: #ff85ff;
+    color: #3726ff;
   }
 
   .lg\:placeholder-primary-a400::placeholder {
-    color: #ff52ff;
+    color: #1300f2;
   }
 
   .lg\:placeholder-primary-a700::placeholder {
-    color: #ff38ff;
+    color: #1100d9;
   }
 
   .lg\:placeholder-secondary-50::placeholder {
-    color: #b3e0db;
+    color: #c8c5dd;
   }
 
   .lg\:placeholder-secondary-200::placeholder {
-    color: #80cbc4;
+    color: #a49ec6;
   }
 
   .lg\:placeholder-secondary-300::placeholder {
-    color: #4db6ac;
+    color: #7f77af;
   }
 
   .lg\:placeholder-secondary-400::placeholder {
-    color: #26a69a;
+    color: #63599d;
   }
 
   .lg\:placeholder-secondary-500::placeholder {
-    color: #009688;
+    color: #483c8c;
   }
 
   .lg\:placeholder-secondary-600::placeholder {
-    color: #008e80;
+    color: #413684;
   }
 
   .lg\:placeholder-secondary-700::placeholder {
-    color: #008375;
+    color: #382e79;
   }
 
   .lg\:placeholder-secondary-800::placeholder {
-    color: #00796b;
+    color: #30276f;
   }
 
   .lg\:placeholder-secondary-900::placeholder {
-    color: #006858;
+    color: #211a5c;
   }
 
   .lg\:placeholder-secondary-transLight::placeholder {
-    color: rgb(179, 224, 219, 0.15);
+    color: rgb(200, 197, 221, 0.15);
   }
 
   .lg\:placeholder-secondary-trans::placeholder {
-    color: rgb(179, 224, 219, 0.7);
+    color: rgb(200, 197, 221, 0.7);
   }
 
   .lg\:placeholder-secondary-transDark::placeholder {
-    color: rgb(0, 150, 136, 0.15);
+    color: rgb(72, 60, 140, 0.15);
   }
 
   .lg\:placeholder-secondary-a100::placeholder {
-    color: #97ffec;
+    color: #a399ff;
   }
 
   .lg\:placeholder-secondary-a200::placeholder {
-    color: #64ffe3;
+    color: #7566ff;
   }
 
   .lg\:placeholder-secondary-a400::placeholder {
-    color: #31ffda;
+    color: #4733ff;
   }
 
   .lg\:placeholder-secondary-a700::placeholder {
-    color: #18ffd5;
+    color: #301aff;
   }
 
   .lg\:placeholder-error-50::placeholder {
@@ -34442,131 +34447,131 @@ tr.selected {
   }
 
   .lg\:focus\:placeholder-primary-50:focus::placeholder {
-    color: #e7bee7;
+    color: #b7b5c5;
   }
 
   .lg\:focus\:placeholder-primary-200:focus::placeholder {
-    color: #d893d8;
+    color: #88849f;
   }
 
   .lg\:focus\:placeholder-primary-300:focus::placeholder {
-    color: #c868c8;
+    color: #585279;
   }
 
   .lg\:focus\:placeholder-primary-400:focus::placeholder {
-    color: #bc47bc;
+    color: #342d5c;
   }
 
   .lg\:focus\:placeholder-primary-500:focus::placeholder {
-    color: #b027b0;
+    color: #10083f;
   }
 
   .lg\:focus\:placeholder-primary-600:focus::placeholder {
-    color: #a923a9;
+    color: #0e0739;
   }
 
   .lg\:focus\:placeholder-primary-700:focus::placeholder {
-    color: #a01da0;
+    color: #0c0631;
   }
 
   .lg\:focus\:placeholder-primary-800:focus::placeholder {
-    color: #971797;
+    color: #090429;
   }
 
   .lg\:focus\:placeholder-primary-900:focus::placeholder {
-    color: #870e87;
+    color: #05021b;
   }
 
   .lg\:focus\:placeholder-primary-transLight:focus::placeholder {
-    color: rgb(231, 190, 231, 0.15);
+    color: rgb(183, 181, 197, 0.15);
   }
 
   .lg\:focus\:placeholder-primary-trans:focus::placeholder {
-    color: rgb(231, 190, 231, 0.7);
+    color: rgb(183, 181, 197, 0.7);
   }
 
   .lg\:focus\:placeholder-primary-transDark:focus::placeholder {
-    color: rgb(176, 39, 176, 0.15);
+    color: rgb(16, 8, 63, 0.15);
   }
 
   .lg\:focus\:placeholder-primary-a100:focus::placeholder {
-    color: #ffb8ff;
+    color: #6659ff;
   }
 
   .lg\:focus\:placeholder-primary-a200:focus::placeholder {
-    color: #ff85ff;
+    color: #3726ff;
   }
 
   .lg\:focus\:placeholder-primary-a400:focus::placeholder {
-    color: #ff52ff;
+    color: #1300f2;
   }
 
   .lg\:focus\:placeholder-primary-a700:focus::placeholder {
-    color: #ff38ff;
+    color: #1100d9;
   }
 
   .lg\:focus\:placeholder-secondary-50:focus::placeholder {
-    color: #b3e0db;
+    color: #c8c5dd;
   }
 
   .lg\:focus\:placeholder-secondary-200:focus::placeholder {
-    color: #80cbc4;
+    color: #a49ec6;
   }
 
   .lg\:focus\:placeholder-secondary-300:focus::placeholder {
-    color: #4db6ac;
+    color: #7f77af;
   }
 
   .lg\:focus\:placeholder-secondary-400:focus::placeholder {
-    color: #26a69a;
+    color: #63599d;
   }
 
   .lg\:focus\:placeholder-secondary-500:focus::placeholder {
-    color: #009688;
+    color: #483c8c;
   }
 
   .lg\:focus\:placeholder-secondary-600:focus::placeholder {
-    color: #008e80;
+    color: #413684;
   }
 
   .lg\:focus\:placeholder-secondary-700:focus::placeholder {
-    color: #008375;
+    color: #382e79;
   }
 
   .lg\:focus\:placeholder-secondary-800:focus::placeholder {
-    color: #00796b;
+    color: #30276f;
   }
 
   .lg\:focus\:placeholder-secondary-900:focus::placeholder {
-    color: #006858;
+    color: #211a5c;
   }
 
   .lg\:focus\:placeholder-secondary-transLight:focus::placeholder {
-    color: rgb(179, 224, 219, 0.15);
+    color: rgb(200, 197, 221, 0.15);
   }
 
   .lg\:focus\:placeholder-secondary-trans:focus::placeholder {
-    color: rgb(179, 224, 219, 0.7);
+    color: rgb(200, 197, 221, 0.7);
   }
 
   .lg\:focus\:placeholder-secondary-transDark:focus::placeholder {
-    color: rgb(0, 150, 136, 0.15);
+    color: rgb(72, 60, 140, 0.15);
   }
 
   .lg\:focus\:placeholder-secondary-a100:focus::placeholder {
-    color: #97ffec;
+    color: #a399ff;
   }
 
   .lg\:focus\:placeholder-secondary-a200:focus::placeholder {
-    color: #64ffe3;
+    color: #7566ff;
   }
 
   .lg\:focus\:placeholder-secondary-a400:focus::placeholder {
-    color: #31ffda;
+    color: #4733ff;
   }
 
   .lg\:focus\:placeholder-secondary-a700:focus::placeholder {
-    color: #18ffd5;
+    color: #301aff;
   }
 
   .lg\:focus\:placeholder-error-50:focus::placeholder {
@@ -41175,131 +41180,131 @@ tr.selected {
   }
 
   .xl\:placeholder-primary-50::placeholder {
-    color: #e7bee7;
+    color: #b7b5c5;
   }
 
   .xl\:placeholder-primary-200::placeholder {
-    color: #d893d8;
+    color: #88849f;
   }
 
   .xl\:placeholder-primary-300::placeholder {
-    color: #c868c8;
+    color: #585279;
   }
 
   .xl\:placeholder-primary-400::placeholder {
-    color: #bc47bc;
+    color: #342d5c;
   }
 
   .xl\:placeholder-primary-500::placeholder {
-    color: #b027b0;
+    color: #10083f;
   }
 
   .xl\:placeholder-primary-600::placeholder {
-    color: #a923a9;
+    color: #0e0739;
   }
 
   .xl\:placeholder-primary-700::placeholder {
-    color: #a01da0;
+    color: #0c0631;
   }
 
   .xl\:placeholder-primary-800::placeholder {
-    color: #971797;
+    color: #090429;
   }
 
   .xl\:placeholder-primary-900::placeholder {
-    color: #870e87;
+    color: #05021b;
   }
 
   .xl\:placeholder-primary-transLight::placeholder {
-    color: rgb(231, 190, 231, 0.15);
+    color: rgb(183, 181, 197, 0.15);
   }
 
   .xl\:placeholder-primary-trans::placeholder {
-    color: rgb(231, 190, 231, 0.7);
+    color: rgb(183, 181, 197, 0.7);
   }
 
   .xl\:placeholder-primary-transDark::placeholder {
-    color: rgb(176, 39, 176, 0.15);
+    color: rgb(16, 8, 63, 0.15);
   }
 
   .xl\:placeholder-primary-a100::placeholder {
-    color: #ffb8ff;
+    color: #6659ff;
   }
 
   .xl\:placeholder-primary-a200::placeholder {
-    color: #ff85ff;
+    color: #3726ff;
   }
 
   .xl\:placeholder-primary-a400::placeholder {
-    color: #ff52ff;
+    color: #1300f2;
   }
 
   .xl\:placeholder-primary-a700::placeholder {
-    color: #ff38ff;
+    color: #1100d9;
   }
 
   .xl\:placeholder-secondary-50::placeholder {
-    color: #b3e0db;
+    color: #c8c5dd;
   }
 
   .xl\:placeholder-secondary-200::placeholder {
-    color: #80cbc4;
+    color: #a49ec6;
   }
 
   .xl\:placeholder-secondary-300::placeholder {
-    color: #4db6ac;
+    color: #7f77af;
   }
 
   .xl\:placeholder-secondary-400::placeholder {
-    color: #26a69a;
+    color: #63599d;
   }
 
   .xl\:placeholder-secondary-500::placeholder {
-    color: #009688;
+    color: #483c8c;
   }
 
   .xl\:placeholder-secondary-600::placeholder {
-    color: #008e80;
+    color: #413684;
   }
 
   .xl\:placeholder-secondary-700::placeholder {
-    color: #008375;
+    color: #382e79;
   }
 
   .xl\:placeholder-secondary-800::placeholder {
-    color: #00796b;
+    color: #30276f;
   }
 
   .xl\:placeholder-secondary-900::placeholder {
-    color: #006858;
+    color: #211a5c;
   }
 
   .xl\:placeholder-secondary-transLight::placeholder {
-    color: rgb(179, 224, 219, 0.15);
+    color: rgb(200, 197, 221, 0.15);
   }
 
   .xl\:placeholder-secondary-trans::placeholder {
-    color: rgb(179, 224, 219, 0.7);
+    color: rgb(200, 197, 221, 0.7);
   }
 
   .xl\:placeholder-secondary-transDark::placeholder {
-    color: rgb(0, 150, 136, 0.15);
+    color: rgb(72, 60, 140, 0.15);
   }
 
   .xl\:placeholder-secondary-a100::placeholder {
-    color: #97ffec;
+    color: #a399ff;
   }
 
   .xl\:placeholder-secondary-a200::placeholder {
-    color: #64ffe3;
+    color: #7566ff;
   }
 
   .xl\:placeholder-secondary-a400::placeholder {
-    color: #31ffda;
+    color: #4733ff;
   }
 
   .xl\:placeholder-secondary-a700::placeholder {
-    color: #18ffd5;
+    color: #301aff;
   }
 
   .xl\:placeholder-error-50::placeholder {
@@ -41715,131 +41720,131 @@ tr.selected {
   }
 
   .xl\:focus\:placeholder-primary-50:focus::placeholder {
-    color: #e7bee7;
+    color: #b7b5c5;
   }
 
   .xl\:focus\:placeholder-primary-200:focus::placeholder {
-    color: #d893d8;
+    color: #88849f;
   }
 
   .xl\:focus\:placeholder-primary-300:focus::placeholder {
-    color: #c868c8;
+    color: #585279;
   }
 
   .xl\:focus\:placeholder-primary-400:focus::placeholder {
-    color: #bc47bc;
+    color: #342d5c;
   }
 
   .xl\:focus\:placeholder-primary-500:focus::placeholder {
-    color: #b027b0;
+    color: #10083f;
   }
 
   .xl\:focus\:placeholder-primary-600:focus::placeholder {
-    color: #a923a9;
+    color: #0e0739;
   }
 
   .xl\:focus\:placeholder-primary-700:focus::placeholder {
-    color: #a01da0;
+    color: #0c0631;
   }
 
   .xl\:focus\:placeholder-primary-800:focus::placeholder {
-    color: #971797;
+    color: #090429;
   }
 
   .xl\:focus\:placeholder-primary-900:focus::placeholder {
-    color: #870e87;
+    color: #05021b;
   }
 
   .xl\:focus\:placeholder-primary-transLight:focus::placeholder {
-    color: rgb(231, 190, 231, 0.15);
+    color: rgb(183, 181, 197, 0.15);
   }
 
   .xl\:focus\:placeholder-primary-trans:focus::placeholder {
-    color: rgb(231, 190, 231, 0.7);
+    color: rgb(183, 181, 197, 0.7);
   }
 
   .xl\:focus\:placeholder-primary-transDark:focus::placeholder {
-    color: rgb(176, 39, 176, 0.15);
+    color: rgb(16, 8, 63, 0.15);
   }
 
   .xl\:focus\:placeholder-primary-a100:focus::placeholder {
-    color: #ffb8ff;
+    color: #6659ff;
   }
 
   .xl\:focus\:placeholder-primary-a200:focus::placeholder {
-    color: #ff85ff;
+    color: #3726ff;
   }
 
   .xl\:focus\:placeholder-primary-a400:focus::placeholder {
-    color: #ff52ff;
+    color: #1300f2;
   }
 
   .xl\:focus\:placeholder-primary-a700:focus::placeholder {
-    color: #ff38ff;
+    color: #1100d9;
   }
 
   .xl\:focus\:placeholder-secondary-50:focus::placeholder {
-    color: #b3e0db;
+    color: #c8c5dd;
   }
 
   .xl\:focus\:placeholder-secondary-200:focus::placeholder {
-    color: #80cbc4;
+    color: #a49ec6;
   }
 
   .xl\:focus\:placeholder-secondary-300:focus::placeholder {
-    color: #4db6ac;
+    color: #7f77af;
   }
 
   .xl\:focus\:placeholder-secondary-400:focus::placeholder {
-    color: #26a69a;
+    color: #63599d;
   }
 
   .xl\:focus\:placeholder-secondary-500:focus::placeholder {
-    color: #009688;
+    color: #483c8c;
   }
 
   .xl\:focus\:placeholder-secondary-600:focus::placeholder {
-    color: #008e80;
+    color: #413684;
   }
 
   .xl\:focus\:placeholder-secondary-700:focus::placeholder {
-    color: #008375;
+    color: #382e79;
   }
 
   .xl\:focus\:placeholder-secondary-800:focus::placeholder {
-    color: #00796b;
+    color: #30276f;
   }
 
   .xl\:focus\:placeholder-secondary-900:focus::placeholder {
-    color: #006858;
+    color: #211a5c;
   }
 
   .xl\:focus\:placeholder-secondary-transLight:focus::placeholder {
-    color: rgb(179, 224, 219, 0.15);
+    color: rgb(200, 197, 221, 0.15);
   }
 
   .xl\:focus\:placeholder-secondary-trans:focus::placeholder {
-    color: rgb(179, 224, 219, 0.7);
+    color: rgb(200, 197, 221, 0.7);
   }
 
   .xl\:focus\:placeholder-secondary-transDark:focus::placeholder {
-    color: rgb(0, 150, 136, 0.15);
+    color: rgb(72, 60, 140, 0.15);
   }
 
   .xl\:focus\:placeholder-secondary-a100:focus::placeholder {
-    color: #97ffec;
+    color: #a399ff;
   }
 
   .xl\:focus\:placeholder-secondary-a200:focus::placeholder {
-    color: #64ffe3;
+    color: #7566ff;
   }
 
   .xl\:focus\:placeholder-secondary-a400:focus::placeholder {
-    color: #31ffda;
+    color: #4733ff;
   }
 
   .xl\:focus\:placeholder-secondary-a700:focus::placeholder {
-    color: #18ffd5;
+    color: #301aff;
   }
 
   .xl\:focus\:placeholder-error-50:focus::placeholder {

@@ -46,7 +46,18 @@ export default {
 			nodePolyfills(),
 
 			smelte({
-				output: "static/smelte.css"
+				output: "static/smelte.css",
+				tailwind: {
+					colors: {
+						primary: "#10083f",
+						secondary: "#483C8C",
+						error: "#f44336",
+						success: "#4caf50",
+						alert: "#ff9800",
+						blue: "#2196f3",
+						dark: "#212121"
+					}
+				}
 			}),
 
 			legacy && babel({

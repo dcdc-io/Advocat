@@ -1,3 +1,40 @@
+<script>
+  import { Button, TextField } from 'smelte'
+  import { useDatabase, signUp } from '../helpers.js'
+  import * as yup from 'yup'
+  
+  let user = { 
+    email: "",
+    newPassword: "",
+    newPasswordConfirm: ""
+  }
+
+  let isValid 
+  let isSubmitting
+  
+  const users = useDatabase({name:""}).__remote
+  const handleSubmit = () => {
+    signUp(user.email, user.newPassword).then((result) =>
+    {
+      console.log(result)
+      setSubmitting(false)
+    })  
+  }
+
+  const validate = (data) => {
+    console.log(JSON.stringify(user))
+  }
+
+  const schema = yup.object().shape({
+    user: yup.object().shape({
+      email: yup.string().required().email(),
+      password: yup.string().required().min(6),
+      passwordConfirm: yup.string().required().oneOf([yup.ref('password')],null)
+    }),
+  })
+  const initialValues = {}
+</script>
+
 <style type="text/scss" global>
   .sveltejs-forms {
     background-color: lightgray;
@@ -18,56 +55,18 @@
     }
   }
 </style>
-<script>
-  import { Button, TextField } from 'smelte'
-
-  import { useDatabase, signUp } from '../helpers.js'
-  import { Form, Input, Select, Choice } from 'sveltejs-forms'
-  import * as yup from 'yup'
-  
-  let isValid 
-  let isSubmitting
-  
-  const users = useDatabase({name:""}).__remote
-  const handleSubmit = ({detail:{values, setSubmitting, resetForm}}) => { 
-    signUp(values.user.email, values.user.password).then((result) =>
-    {
-      console.log(result)
-      setSubmitting(false)      
-    })  
-  }
-
-  const handleReset = () => {
-
-  }
-
-  const schema = yup.object().shape({
-    user: yup.object().shape({
-      email: yup.string().required().email(),
-      password: yup.string().required().min(6),
-      passwordConfirm: yup.string().required().oneOf([yup.ref('password')],null)
-    }),
-  })
-  const initialValues = {}
-</script>
 
 <svelte:head>
-	<title>register</title>
+	<title>advocat. register</title>
 </svelte:head>
 
 <h1>become an advocat.</h1>
-<Form
-  {schema}  
-  {initialValues} 
-  validateOnBlur={false} 
-  validateOnChange={true} 
-  on:submit={handleSubmit}
-  let:isSubmitting
-  let:isValid
->
-  <TextField label="email"            name="user.email" placeholder="e.g. user@example.com" />
-  <TextField label="password"         name="user.password" type="password" placeholder="Password" />
-  <TextField label="re-type password" name="user.passwordConfirm" type="password" placeholder="Password" />
+<form on:submit|preventDefault={handleSubmit} on:changed={validate} on:invalid={validate} on:input={validate}>
+  <TextField label="email" bind:value={user.email} placeholder="e.g. user@example.com" />
+  <TextField label="password" bind:value={user.newPassword} type="password" />
+  <TextField label="re-type password" bind:value={user.newPasswordConfirm} type="password" />
+
+
 
   <!-- <Select name="language" options={langOptions} /> -->  
   <!-- <Choice name="os" options={osOptions} multiple /> -->
@@ -75,4 +74,4 @@
 
   <Button block type="submit" disabled={isSubmitting}>Sign in</Button>
   The form is valid: {isValid}
-</Form>
+</form>
