@@ -15,9 +15,6 @@ export const setDatabaseUrl = (url) => {
 }
 
 export const useDatabase = ({name, sync = true}) => {
-    if (!window) {
-        debugger
-    }
     console.log("useDatabase has been called")
     const url = `${dbUrl.replace(/\/$/, '')}${name ? '/' : ''}${name && name.replace(/^\//, '')}`
     const remote = new PouchDB(url, {skip_setup: true})

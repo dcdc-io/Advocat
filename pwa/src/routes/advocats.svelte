@@ -1,5 +1,5 @@
 <style>
-card{
+card {
     background: lightgray;
     width: 80%;
     display: block;

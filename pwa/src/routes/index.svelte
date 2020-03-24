@@ -41,43 +41,35 @@
     padding-top: 3em;
   }
   .calltoaction {
-    border-radius: 15px;
+    border-radius: 8px;
     padding: 1em;
     margin: 1em 0;
     cursor: pointer;
-    h2 {
-      font-family: "ChangaOne Regular";
-    }
   }
 </style>
 
-<div class="page">
-  <div class="title">
-    <h1>advocat.</h1>
-    {#if !$loggedIn}
-    <p>advocat was created as a local response to the 2020 international coronavirus crisis.</p>
-    <p>advocat helps you to coordinate your volunteer led efforts so that you can better support neighbours, friends, family and your local community.</p>
-    {/if}
+<h3>advocat.</h3>
+{#if !$loggedIn}
+<div>advocat. was created in response to the 2020 international coronavirus crisis.</div>
+<br />
+<div>advocat. helps coordinate volunteer effort so that you can <a href="about" class="underline font-bold">safely</a> support neighbours, friends, family and your local community.</div>
+{/if}
+
+
+{#if $loggedIn}
+  <div>
+    <div>
+      <h3>welcome back {$username}</h3>
+    </div>
+    <GroupBrowser {groups} />
   </div>
-  <div class="container">
-    {#if $loggedIn}
-      <div>
-        <div>
-          <h1>welcome back {$username}</h1>
-        </div>
-        <GroupBrowser {groups} />
-      </div>
-    {:else}
-      <div> 
-        <div class="calltoaction" style="border: 2px solid {$colourInvert ? "var(--colour-scheme-light)" : "var(--colour-scheme-dark)" }" on:click={click("findgroups")}>
-          <h2>Find Help</h2>
-          <p>Find volunteer groups in your local area</p>
-        </div>
-        <div class="calltoaction" style="border: 2px solid {$colourInvert ? "var(--colour-scheme-light)" : "var(--colour-scheme-dark)" }" on:click={click("create_group")}>
-          <h2>Be a Volunteer</h2>
-          <p>Create or join a volunteer group with other people in your area</p>
-        </div>
-      </div>
-    {/if}
+{:else}
+  <div class="calltoaction" style="border: 2px solid {$colourInvert ? "var(--colour-scheme-light)" : "var(--colour-scheme-dark)" }" on:click={click("findgroups")}>
+    <h3 class="underline">Find Help</h3>
+    <p>Find volunteer groups in your local area.</p>
   </div>
-</div>
+  <div class="calltoaction" style="border: 2px solid {$colourInvert ? "var(--colour-scheme-light)" : "var(--colour-scheme-dark)" }" on:click={click("register")}>
+    <h3 class="underline">Be a Volunteer</h3>
+    <p>Create or join a volunteer group with other people in your area.</p>
+  </div>
+{/if}

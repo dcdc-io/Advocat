@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@rollup/plugin-multi-entry": "^3.0.0",
+    "@smui/select": "^1.0.0-beta.20",
     "@testing-library/svelte": "^3.0.0",
     "@types/pouchdb": "^6.4.0",
     "buffer": "^5.5.0",

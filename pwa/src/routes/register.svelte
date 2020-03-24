@@ -1,77 +1,88 @@
 <script>
-  import { Button, TextField } from 'smelte'
+  import { Button, TextField, Select } from 'smelte'
   import { useDatabase, signUp } from '../helpers.js'
   import * as yup from 'yup'
   
   let user = { 
+    name: "",
     email: "",
-    newPassword: "",
-    newPasswordConfirm: ""
+    location: ""
+  }
+
+  let error = {
+    name: "",
+    email: "",
+    location: ""
   }
 
   let isValid 
   let isSubmitting
+  let thankYou
   
   const users = useDatabase({name:""}).__remote
-  const handleSubmit = () => {
-    signUp(user.email, user.newPassword).then((result) =>
+  const handleSubmit = async () => {
+    isSubmitting = true
+    const ok = await validate()
+    if (ok) {
+      await signUp(user)
+      user.name = ""
+      user.email = ""
+      isSubmitting = false
+      thankYou = true
+    } else {
+      isSubmitting = false
+    }
+   /* signUp(user.email, user.newPassword).then((result) =>
     {
       console.log(result)
       setSubmitting(false)
-    })  
+    }) */
   }
 
-  const validate = (data) => {
-    console.log(JSON.stringify(user))
+  const validate = async () => {
+    new Promise((resolve, reject) => {
+      const schema = yup.object().shape({
+        name: yup.string().required(),
+        email: yup.string().email().required(),
+        location: yup.string()
+      })
+      error.name = "";
+      error.email = "";
+      schema.validate(user, {abortEarly: false})
+        .then(() => {
+          resolve(true)
+        })
+        .catch(err => {
+          (err.inner || []).forEach(err => {
+            error[err.path] = err.message
+          })
+          resolve(false)
+        })
+    })
   }
 
-  const schema = yup.object().shape({
-    user: yup.object().shape({
-      email: yup.string().required().email(),
-      password: yup.string().required().min(6),
-      passwordConfirm: yup.string().required().oneOf([yup.ref('password')],null)
-    }),
-  })
-  const initialValues = {}
 </script>
-
-<style type="text/scss" global>
-  .sveltejs-forms {
-    background-color: lightgray;
-    display: inline-block;
-    padding: 1rem;
-    .field {
-      margin-bottom: 1rem;
-      &.error {
-        input {
-          border: 1px solid red;
-        }
-        .message {
-          margin-top: 0.2rem;
-          color: red;
-          font-size: 0.8rem;
-        }
-      }
-    }
-  }
-</style>
 
 <svelte:head>
 	<title>advocat. register</title>
 </svelte:head>
 
-<h1>become an advocat.</h1>
 <form on:submit|preventDefault={handleSubmit} on:changed={validate} on:invalid={validate} on:input={validate}>
-  <TextField label="email" bind:value={user.email} placeholder="e.g. user@example.com" />
-  <TextField label="password" bind:value={user.newPassword} type="password" />
-  <TextField label="re-type password" bind:value={user.newPasswordConfirm} type="password" />
+  <h3>Be a Volunteer</h3>
 
+  <p>
+    After you register we will send you an activation link that you can click to sign in:
+  </p>
 
+  <TextField label="name" bind:value={user.name} placeholder="e.g. Jonas Salk" error={error.name} />
 
-  <!-- <Select name="language" options={langOptions} /> -->  
-  <!-- <Choice name="os" options={osOptions} multiple /> -->
-  <!-- <button type="reset">Reset</button> -->
+  <TextField label="email" bind:value={user.email} placeholder="e.g. you@example.com" error={error.email} />
+  
+  <p>
+    By telling us your location we can tell the groups nearby that you can help:
+  </p>
 
-  <Button block type="submit" disabled={isSubmitting}>Sign in</Button>
-  The form is valid: {isValid}
+  <TextField label="location" bind:value={user.location} placeholder="e.g. Kent or ED1 4PP" />
+
+  <Button block type="submit" disabled={isSubmitting}>Register</Button>
 </form>
