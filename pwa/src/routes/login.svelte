@@ -1,15 +1,16 @@
-<style>
-div.error{
-	color: red
-}
-</style>
 <script>
 	import { login } from '../helpers.js'
 	import { goto } from "@sapper/app"
 
-	let username = ""
-	let password = ""
-	let error = ""
+	let user = {
+		email: "",
+		password: ""
+	}
+
+	let error = {
+		email: "",
+		password: ""
+	}
 
 	const logInButton = async () => {
 		try{
@@ -20,19 +21,21 @@ div.error{
 			error = e.message
 		}
 	}
+
 	const register = async () => {
 		goto("/register")
 	}
 </script>
 
 <svelte:head>
-	<title>login</title>
+	<title>advocat. login</title>
 </svelte:head>
 
-<h1>login</h1>
-<div class="error">{error}</div>
+<form on:submit|preventDefault={handleSubmit} on:changed={validate} on:invalid={validate} on:input={validate}>
+  <h3>Sign In</h3>
 
-email <input type="text" bind:value={username}><br>
-password <input type="password" bind:value={password}><br>
+  <TextField label="email" bind:value={user.email} placeholder="e.g. you@example.com" error={error.email} />
+  <TextField label="password" bind:value={user.password} type="password" error={error.password} />
 
-<button on:click={logInButton}>log in</button><button on:click={register}>register</button>
+  <Button block type="submit" disabled={isSubmitting}>Sign In</Button>
+</form>
