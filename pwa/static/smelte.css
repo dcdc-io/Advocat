@@ -40,17 +40,6 @@ card.svelte-ae7dcl{
   display:block;
   padding:5px
 }
-h1.svelte-1e0o0rs{
-  font-family:"ChangaOne Regular"
-}
-
-h2.svelte-1e0o0rs{
-  font-size:1.5em;
-  font-family:"ChangaOne Regular"
-}
-div.error.svelte-1p70sjp{
-  color:red
-}
 .jobs_list.svelte-kd1y6q{
   display:yes
 }
@@ -59,25 +48,6 @@ div.error.svelte-1p70sjp{
   padding:1em;
   margin:1em 0;
   cursor:pointer
-}
-.sveltejs-forms{
-  background-color:lightgray;
-  display:inline-block;
-  padding:1rem
-}
-
-.sveltejs-forms .field{
-  margin-bottom:1rem
-}
-
-.sveltejs-forms .field.error input{
-  border:1px solid red
-}
-
-.sveltejs-forms .field.error .message{
-  margin-top:0.2rem;
-  color:red;
-  font-size:0.8rem
 }
 ul.svelte-1she90c{
   margin:0 0 1em 0;
@@ -192,6 +162,27 @@ a.svelte-bp852d{
 .wrapper.svelte-142y8oi{
   display:inline-block
 }
+.p-1\/2.svelte-ixci48{
+  padding:0.125rem
+}
+.reverse.svelte-zzky5a{
+  -webkit-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+  transform:rotate(180deg)
+}
+
+.tip.svelte-zzky5a{
+  -webkit-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform:rotate(90deg)
+}
+.drawer.svelte-12w8ugb{
+  min-width:250px
+}
+
+aside.svelte-12w8ugb{
+  height:calc(100vh - 4rem)
+}
 .inc.svelte-mguqwa{
   -webkit-animation:svelte-mguqwa-increase 2s ease-in-out infinite;
   animation:svelte-mguqwa-increase 2s ease-in-out infinite
@@ -248,29 +239,6 @@ a.svelte-bp852d{
     left:110%;
     width:10%
   }
-}
-.reverse.svelte-zzky5a{
-  -webkit-transform:rotate(180deg);
-  -ms-transform:rotate(180deg);
-  transform:rotate(180deg)
-}
-
-.tip.svelte-zzky5a{
-  -webkit-transform:rotate(90deg);
-  -ms-transform:rotate(90deg);
-  transform:rotate(90deg)
-}
-.label-top.svelte-81hn54{
-  line-height:0.05
-}
-
-.label-transition.svelte-81hn54{
-  -webkit-transition:font-size 0.05s, line-height 0.1s;
-  -o-transition:font-size 0.05s, line-height 0.1s;
-  transition:font-size 0.05s, line-height 0.1s
-}
-.p-1\/2.svelte-ixci48{
-  padding:0.125rem
 }
 .circular.svelte-1xkiyez{
   -webkit-animation:svelte-1xkiyez-rotate 2s linear infinite;
@@ -333,18 +301,25 @@ a.svelte-bp852d{
     stroke-dashoffset:-124
   }
 }
+.snackbar.svelte-1ym8qvd{
+  min-width:344px
+}
+.label-top.svelte-81hn54{
+  line-height:0.05
+}
+
+.label-transition.svelte-81hn54{
+  -webkit-transition:font-size 0.05s, line-height 0.1s;
+  -o-transition:font-size 0.05s, line-height 0.1s;
+  transition:font-size 0.05s, line-height 0.1s
+}
 .line.svelte-xd9zs6{
   height:1px
 }
-.drawer.svelte-12w8ugb{
-  min-width:250px
-}
-
-aside.svelte-12w8ugb{
-  height:calc(100vh - 4rem)
-}
-.snackbar.svelte-1ym8qvd{
-  min-width:344px
+th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
+  -webkit-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+  transform:rotate(180deg)
 }
 .tooltip.svelte-1n6auy7{
   left:50%;
@@ -354,11 +329,6 @@ aside.svelte-12w8ugb{
 }
 .ripple.svelte-1o8z87d{
   position:absolute !important
-}
-th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
-  -webkit-transform:rotate(180deg);
-  -ms-transform:rotate(180deg);
-  transform:rotate(180deg)
 }
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 

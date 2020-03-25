@@ -2,6 +2,8 @@ import * as fuxor from 'fuxor'
 import * as pouchdbSecurity from '../../pouchdb-security'
 fuxor.add('pouchdb-security', pouchdbSecurity)
 
+import slouchdbSecurity from '../../slouchdb-security'
+
 import PouchDB from 'pouchdb'
 import express from 'express'
 import expressPouchdb from 'express-pouchdb'
@@ -29,7 +31,7 @@ express().get(
 	expressPouchdb(
 		PouchDB.defaults({
 			prefix: './db/'
-		}), {
+		}).plugin(slouchdbSecurity), {
 			mode: 'fullCouchDB',
 			overrideMode: {
 				exclude: ['routes/fauxton']
@@ -43,16 +45,3 @@ express().get(
 ).listen(PORT, err => {
 	if (err) console.log('error', err)
 })
-
-
-/*
-polka() // You can also use Express
-	.use(
-		compression({ threshold: 0 }),
-		sirv('static', { dev }),
-		sapper.middleware()
-	)
-	.listen(PORT, err => {
-		if (err) console.log('error', err);
-	});
-*/

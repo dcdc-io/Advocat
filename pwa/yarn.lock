@@ -8226,7 +8226,7 @@ pouchdb-promise@5.4.3:
   dependencies:
     lie "3.0.4"
 
-pouchdb-promise@6.4.3, pouchdb-promise@^6.4.1, pouchdb-promise@^6.4.3, pouchdb-promise@~6.4.0:
+pouchdb-promise@6.4.3, pouchdb-promise@^6.1.2, pouchdb-promise@^6.4.1, pouchdb-promise@^6.4.3, pouchdb-promise@~6.4.0:
   version "6.4.3"
   resolved "https://registry.yarnpkg.com/pouchdb-promise/-/pouchdb-promise-6.4.3.tgz#74516f4acf74957b54debd0fb2c0e5b5a68ca7b3"
   integrity sha512-ruJaSFXwzsxRHQfwNHjQfsj58LBOY1RzGzde4PM5CWINZwFjCQAhZwfMrch2o/0oZT6d+Xtt0HTWhq35p3b0qw==
@@ -8411,6 +8411,13 @@ pouchdb-update@4.2.0:
     pouchdb-promise "^6.4.1"
     pouchdb-req-http-query "4.2.0"
     promise-nodify "^1.0.2"
+
+pouchdb-upsert@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/pouchdb-upsert/-/pouchdb-upsert-2.2.0.tgz#42b15e420848f3b294c35060589fdb51cf7f7f5f"
+  integrity sha1-QrFeQghI87KUw1BgWJ/bUc9/f18=
+  dependencies:
+    pouchdb-promise "^6.1.2"
 
 pouchdb-upsert@~2.0.1:
   version "2.0.2"

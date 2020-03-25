@@ -75,8 +75,10 @@ const register_user = {
     password: "register"
 }
 
-export const signUp = async(username, password ) =>{
+export const signUp = async({name, email, location}) =>{
     try {
+        
+        /*
         const database = useDatabase({name:"_users"}).__remote
         if((await database.getSession()).userCtx.name != "register")
         {
@@ -89,6 +91,8 @@ export const signUp = async(username, password ) =>{
         console.log ((await database.getSession()).userCtx.name)
         await login({username: username ,password: password})
         return result
+
+        */
     } catch (e) {
         console.log("signup Error")
         console.log(e)
