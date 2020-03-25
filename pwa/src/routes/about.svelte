@@ -16,10 +16,10 @@
 
 <h3>Want to get involved?</h3>
 
-<h2>Time and technical skills:</h2>
+<h4>Time and technical skills:</h4>
 <p>we're on <a href="https://github.com/dcdc-io/Advocat/issues" target="_blank">github.com</a> and we would love your help.</p>
 
-<h2>Keeping the lights on:</h2>
+<h4>Keeping the lights on:</h4>
 <p>you may contribute directly to the development, support and maintainance of advocat. by sponsoring the project. contact us for more information at <a href="https://dcdc.io/contact_us">dcdc.io</a>.</p>
-<h2>Donating to volunteers:</h2>
+<h4>Donating to volunteers:</h4>
 <p>if you would like to make a donation to an advocat. group, you should contact the administrators of the group or groups you wish to support directly as we do not have to facility to process donations on behalf of others at the moment.</p>

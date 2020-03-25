@@ -1,7 +1,10 @@
 <script>
-  import { Button, TextField, Select } from 'smelte'
+  import { Button, TextField } from 'smelte'
+  import LocationWidget, { getLocation } from "../components/LocationWidget.svelte";
   import { useDatabase, signUp } from '../helpers.js'
   import * as yup from 'yup'
+	import { onMount } from 'svelte';
+
   
   let user = { 
     name: "",
@@ -18,12 +21,16 @@
   let isValid 
   let isSubmitting
   let thankYou
+
+  const update = (data) => {}
   
   const users = useDatabase({name:""}).__remote
   const handleSubmit = async () => {
     isSubmitting = true
     const ok = await validate()
     if (ok) {
+      user.location = await getLocation();
+      console.log(user)
       await signUp(user)
       user.name = ""
       user.email = ""
@@ -32,11 +39,6 @@
     } else {
       isSubmitting = false
     }
-   /* signUp(user.email, user.newPassword).then((result) =>
-    {
-      console.log(result)
-      setSubmitting(false)
-    }) */
   }
 
   const validate = async () => {
@@ -49,7 +51,7 @@
       error.name = "";
       error.email = "";
       schema.validate(user, {abortEarly: false})
-        .then(() => {
+        .then(async () => {
           resolve(true)
         })
         .catch(err => {
@@ -60,7 +62,6 @@
         })
     })
   }
-
 </script>
 
 <svelte:head>
@@ -81,8 +82,8 @@
   <p>
     By telling us your location we can tell the groups nearby that you can help:
   </p>
-
-  <TextField label="location" bind:value={user.location} placeholder="e.g. Kent or ED1 4PP" />
+  <LocationWidget update={update}></LocationWidget>
+  <br>
 
   <Button block type="submit" disabled={isSubmitting}>Register</Button>
 </form>

@@ -1,6 +1,7 @@
 <script>
 	import { login } from '../helpers.js'
 	import { goto } from "@sapper/app"
+	import { Button, TextField } from 'smelte'
 
 	let user = {
 		email: "",
@@ -11,6 +12,8 @@
 		email: "",
 		password: ""
 	}
+
+	let isSubmitting = false;
 
 	const logInButton = async () => {
 		try{
@@ -25,6 +28,10 @@
 	const register = async () => {
 		goto("/register")
 	}
+
+	const validate = (event) => {}
+
+	const handleSubmit = (event) => {}
 </script>
 
 <svelte:head>

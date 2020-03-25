@@ -17,7 +17,12 @@ const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
-const onwarn = (warning, onwarn) => (warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning);
+const onwarn = (warning, onwarn) => 
+{
+	if (warning.plugin === undefined && warning.message === "The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten")			
+		return;
+	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning)
+};
 
 export default {
 	client: {
@@ -82,7 +87,8 @@ export default {
 			})
 		],
 
-		onwarn,
+		onwarn
+		,		
 	},
 
 	server: {
@@ -107,7 +113,7 @@ export default {
 			require('module').builtinModules || Object.keys(process.binding('natives'))
 		),
 
-		onwarn,
+		onwarn
 	},
 
 	serviceworker: {
