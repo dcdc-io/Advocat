@@ -2,25 +2,21 @@
     import { Button, TextField } from '../../node_modules/smelte/src'
     import { setContext, getContext, onMount } from 'svelte'
 
-
     let error
     let location
     let isMobile = false
 
-    
-
-    const getLocationViaLatLong = async function(pos){
+    const getLocationViaLatLong = async function(pos) {
         let lon = pos.coords.longitude  
         let lat = pos.coords.latitude 
         
-        if(pos.coords.accuracy < 100)
-        {
+        if (pos.coords.accuracy < 100) {
             error = `accuracy too low for good postcode detection, accuracy was within ${pos.cords.accuracy} m`
         }
 
         const response = await fetch(postcode_url + `?lon=${lon}&lat=${lat}`)
         const result = (await response.json()).result
-        if(result){
+        if (result) {
             postcode = result[0].postcode
         } else{
             error = `no postcodes found within 100m of your location`
@@ -28,7 +24,7 @@
     }
 
     const getLocationViaDevice = async function() {
-        if(navigator.geolocation){
+        if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((loc) => {
                 getLocationViaLatLong(loc);
             });
@@ -36,11 +32,14 @@
     }
 
     onMount(() => {
+        dispatch = createEventDispatcher()
         isMobile = ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/));
     })
 </script>
 
 <script context="module">
+    import { createEventDispatcher } from 'svelte'
+
     let postcode_url = "https://api.postcodes.io/postcodes"
     let postcode
 
@@ -48,14 +47,14 @@
     let result = {postcode:  null,
                   easting: null,
                   northing:  null}
-     
-    export let update = () => {}
+    
+    let dispatch = () => {}
 
     const processPostcode = async function(data) {
         result.geoCode  = data.result.postcode;
         result.easting  = data.result.easting;
         result.northing = data.result.northing;
-        update(data)
+        dispatch('update', result)
         return result
     }
     export const getLocation = async () => {
