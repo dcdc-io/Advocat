@@ -121,7 +121,7 @@ securityWrappers.query = function (original, args) {
     var isStoredView = typeof args.fun === "string";
     return (
       isIn(userCtx, security.admins) ||
-      (isStoredView && (isMember(userCtx, security) || isReader(userCtx, security)))
+      (isStoredView && (isMember(userCtx, security) || isReader(userCtx, security) || isPublicReader(userCtx, security)))
     );
   }, original, args);
 };
@@ -134,17 +134,7 @@ function documentModificationWrapper(original, args, docId) {
     var isNotDesignDoc = String(docId).indexOf("_design/") !== 0;
     return (
       isIn(userCtx, security.admins) ||
-      (isNotDesignDoc && isMember(userCtx, security))
-    );
-  }, original, args);
-}
-
-function documentCreationWrapper(original, args, docId) {
-  return securityWrapper(function (userCtx, security) {
-    var isNotDesignDoc = String(docId).indexOf("_design/") !== 0;
-    return (
-      isIn(userCtx, security.admins) ||
-      (isNotDesignDoc && (isMember(userCtx, security) || isWriter(userCtx, security)))
+      (isNotDesignDoc && (isMember(userCtx, security) || isWriter(userCtx, security) || isPublicWriter(userCtx, security)))
     );
   }, original, args);
 }
@@ -185,12 +175,14 @@ function isPublicReader(userCtx, security) {
   return security.readers.roles.some(role => role === "_public")
 }
 
+function isPublicWriter(userCtx, security) {
+  return security.writers.roles.some(role => role === "_public")
+}
+
 securityWrappers.put = function (original, args) {
   return documentModificationWrapper(original, args, args.doc._id);
 };
-securityWrappers.post = function (original, args) {
-  return documentCreationWrapper(original, args, args.doc._id)
-}
+securityWrappers.post = securityWrappers.put
 securityWrappers.remove = securityWrappers.put;
 
 securityWrappers.putAttachment = function (original, args) {
@@ -241,7 +233,9 @@ var requiresReaderWrapper = securityWrapper.bind(null, function (userCtx, securi
 var requiresWriterWrapper = securityWrapper.bind(null, function (userCtx, security) {
   return (
     isIn(userCtx, security.admins) ||
-    isWriter(userCtx, security)
+    isWriter(userCtx, security) ||
+    isMember(userCtx, security) ||
+    isPublicWriter(userCtx, security)
   )
 });
 

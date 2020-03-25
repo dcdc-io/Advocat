@@ -1,0 +1,22 @@
+{
+  "name": "slouchdb-security",
+  "version": "1.0.0",
+  "module": "lib.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "@types/pouchdb": "^6.4.0",
+    "jest": "^25.1.0",
+    "pouchdb-wrappers": "^4.2.0"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.9.0",
+    "@types/jest": "^25.1.4",
+    "pouchdb": "^7.2.1",
+    "pouchdb-adapter-memory": "^7.2.1",
+    "ts-jest": "^25.2.1",
+    "typescript": "^3.8.3"
+  }
+}

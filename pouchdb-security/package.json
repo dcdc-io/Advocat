@@ -2,6 +2,9 @@
   "name": "slouchdb-security",
   "version": "1.0.0",
   "main": "lib/index.js",
+  "scripts": {
+    "test": "jest"
+  },
   "license": "MIT",
   "dependencies": {
     "pouchdb-bulkdocs-wrapper": "^4.2.0",
@@ -9,5 +12,11 @@
     "pouchdb-plugin-error": "^4.2.0",
     "pouchdb-promise": "^6.4.3",
     "pouchdb-wrappers": "^4.2.0"
+  },
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "pouchdb": "^7.2.1",
+    "pouchdb-adapter-memory": "^7.2.1",
+    "pouchdb-authentication": "^1.1.3"
   }
 }
