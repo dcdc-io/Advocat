@@ -3,6 +3,8 @@
   import LocationWidget, { getLocation } from "../components/LocationWidget.svelte";
   import { useDatabase, signUp } from '../helpers.js'
   import * as yup from 'yup'
+	import { onMount } from 'svelte';
+
   
   let user = { 
     name: "",
@@ -19,6 +21,8 @@
   let isValid 
   let isSubmitting
   let thankYou
+
+  const update = (data) => {}
   
   const users = useDatabase({name:""}).__remote
   const handleSubmit = async () => {
@@ -78,7 +82,7 @@
   <p>
     By telling us your location we can tell the groups nearby that you can help:
   </p>
-  <LocationWidget></LocationWidget>
+  <LocationWidget update={update}></LocationWidget>
   <br>
 
   <Button block type="submit" disabled={isSubmitting}>Register</Button>

@@ -16,7 +16,6 @@
     let postcode_url = "https://api.postcodes.io/postcodes"
     let isMobile = ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/));
 
-    //let _this = this
 
     let result = {postcode:  null,
                   easting: null,
@@ -36,7 +35,7 @@
         
         if(pos.coords.accuracy < 100)
         {
-            error = `accuracy too low for good postcode, accuracy detected = ${pos.cords.accuracy} m`
+            error = `accuracy too low for good postcode detection, accuracy was within ${pos.cords.accuracy} m`
         }
 
         const response = await fetch(postcode_url + `?lon=${lon}&lat=${lat}`)
@@ -67,7 +66,6 @@
 <div>
     <div id="error">{error}</div>
     <TextField label="postcode" bind:value={postcode} />
-    <!-- <Button on:click={getLocationByPostcode}>get location by postcode</Button>  -->
     {#if isMobile && navigator.geolocation}
         <Button block on:click={getLocationViaDevice}>use current location</Button>
     {/if}
