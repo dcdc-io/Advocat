@@ -22,13 +22,13 @@
                   longitude: null,
                   latitude:  null}
      
-    const processPostcode = async function(data) {
-        result.geoCode   = data.result.postcode;
-        result.latitude  = data.result.latitude;
-        result.longitude = data.result.longitude;
-        update(data)
-        return result
-    }
+    // const processPostcode = async function(data) {
+    //     result.geoCode   = data.result.postcode;
+    //     result.latitude  = data.result.latitude;
+    //     result.longitude = data.result.longitude;
+    //     update(data)
+    //     return result
+    // }
 
     const getLocationViaLatLong = async function(pos){
         let lon = pos.coords.longitude  
@@ -48,7 +48,7 @@
         }
     }
 
-    const getLocationViaDevice  = async function() {
+    const getLocationViaDevice = async function() {
         if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition((loc) => {
                 getLocationViaLatLong(loc);

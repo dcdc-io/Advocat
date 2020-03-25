@@ -62,7 +62,7 @@
 
     <CreateJob></CreateJob>
     
-    { #each jobs as job}
+    {#each jobs as job}
         <JobCard job={job} clientLocation={client_coords}></JobCard>
     {/each}
 </div>
