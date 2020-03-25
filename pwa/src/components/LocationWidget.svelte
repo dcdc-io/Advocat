@@ -52,8 +52,8 @@
 
     const processPostcode = async function(data) {
         result.geoCode  = data.result.postcode;
-        result.easting  = data.result.easting;
-        result.northing = data.result.northing;
+        result.easting  = data.result.eastings;
+        result.northing = data.result.northings;
         dispatch('update', result)
         return result
     }
