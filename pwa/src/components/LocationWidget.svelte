@@ -19,16 +19,16 @@
     //let _this = this
 
     let result = {postcode:  null,
-                  longitude: null,
-                  latitude:  null}
+                  easting: null,
+                  northing:  null}
      
-    // const processPostcode = async function(data) {
-    //     result.geoCode   = data.result.postcode;
-    //     result.latitude  = data.result.latitude;
-    //     result.longitude = data.result.longitude;
-    //     update(data)
-    //     return result
-    // }
+    const processPostcode = async function(data) {
+        result.geoCode  = data.result.postcode;
+        result.easting  = data.result.easting;
+        result.northing = data.result.northing;
+        update(data)
+        return result
+    }
 
     const getLocationViaLatLong = async function(pos){
         let lon = pos.coords.longitude  
