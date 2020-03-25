@@ -55,9 +55,10 @@ export const login = async ({ username, password, force = false }) => {
 }
 
 export const checkLocalUser = async ({ loggedIn, username }) => {
+    // use _local/ prefix on local only databases - it stops them syncing
     console.log("checking local user")
 
-    console.log(dbs)
+    ///console.log(dbs)
 
     let local
     try {

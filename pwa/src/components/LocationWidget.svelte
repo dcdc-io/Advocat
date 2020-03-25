@@ -2,32 +2,12 @@
     import { Button, TextField } from '../../node_modules/smelte/src'
     import { setContext, getContext, onMount } from 'svelte'
 
-    export let update
-
-    console.log("update")
-    console.log(update)
-
-    update("blah")
 
     let error
     let location
-    let postcode
-    let data
-    let postcode_url = "https://api.postcodes.io/postcodes"
     let isMobile = false
 
-
-    let result = {postcode:  null,
-                  easting: null,
-                  northing:  null}
-     
-    const processPostcode = async function(data) {
-        result.geoCode  = data.result.postcode;
-        result.easting  = data.result.easting;
-        result.northing = data.result.northing;
-        update(data)
-        return result
-    }
+    
 
     const getLocationViaLatLong = async function(pos){
         let lon = pos.coords.longitude  
@@ -60,8 +40,25 @@
     })
 </script>
 
-<script context="module">    
-    export async function getLocation() {
+<script context="module">
+    let postcode_url = "https://api.postcodes.io/postcodes"
+    let postcode
+
+    let data
+    let result = {postcode:  null,
+                  easting: null,
+                  northing:  null}
+     
+    export let update = () => {}
+
+    const processPostcode = async function(data) {
+        result.geoCode  = data.result.postcode;
+        result.easting  = data.result.easting;
+        result.northing = data.result.northing;
+        update(data)
+        return result
+    }
+    export const getLocation = async () => {
         const response = await fetch(postcode_url + "/" + postcode);
         return processPostcode(await response.json())
     };
