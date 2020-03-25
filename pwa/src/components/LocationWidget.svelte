@@ -1,6 +1,6 @@
 <script>
-    import { Button, TextField } from 'smelte'
-    import { setContext, getContext } from 'svelte'
+    import { Button, TextField } from '../../node_modules/smelte/src'
+    import { setContext, getContext, onMount } from 'svelte'
 
     export let update
 
@@ -14,7 +14,7 @@
     let postcode
     let data
     let postcode_url = "https://api.postcodes.io/postcodes"
-    let isMobile = ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/));
+    let isMobile = false
 
 
     let result = {postcode:  null,
@@ -54,6 +54,10 @@
             });
         }
     }
+
+    onMount(() => {
+        isMobile = ('ontouchstart' in document.documentElement && navigator.userAgent.match(/Mobi/));
+    })
 </script>
 
 <script context="module">    

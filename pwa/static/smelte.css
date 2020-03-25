@@ -1,9 +1,3 @@
-card.svelte-ae7dcl{
-  background:lightgray;
-  width:80%;
-  display:block;
-  padding:5px
-}
 h1.svelte-13vgy2g,p.svelte-13vgy2g{
   margin:0 auto
 }
@@ -40,6 +34,12 @@ main.svelte-1bhcf2h{
   color:var(--colour-scheme-dark);
   border-top:0.1px solid var(--colour-scheme-dark)
 }
+card.svelte-ae7dcl{
+  background:lightgray;
+  width:80%;
+  display:block;
+  padding:5px
+}
 .jobs_list.svelte-kd1y6q{
   display:yes
 }
@@ -48,6 +48,10 @@ main.svelte-1bhcf2h{
   padding:1em;
   margin:1em 0;
   cursor:pointer
+}
+ul.svelte-1she90c{
+  margin:0 0 1em 0;
+  line-height:1.5
 }
 .content.svelte-dkhkxh h2{
   font-size:1.4em;
@@ -73,10 +77,6 @@ main.svelte-1bhcf2h{
 
 .content.svelte-dkhkxh li{
   margin:0 0 0.5em 0
-}
-ul.svelte-1she90c{
-  margin:0 0 1em 0;
-  line-height:1.5
 }
 nav.svelte-bp852d{
   font-weight:300;
@@ -166,12 +166,66 @@ a.svelte-bp852d{
 .wrapper.svelte-142y8oi{
   display:inline-block
 }
-.drawer.svelte-12w8ugb{
-  min-width:250px
+.circular.svelte-1xkiyez{
+  -webkit-animation:svelte-1xkiyez-rotate 2s linear infinite;
+  animation:svelte-1xkiyez-rotate 2s linear infinite;
+  position:relative
 }
 
-aside.svelte-12w8ugb{
-  height:calc(100vh - 4rem)
+.path.svelte-1xkiyez{
+  stroke-dasharray:1, 200;
+  stroke-dashoffset:0;
+  stroke-linecap:round;
+  -webkit-animation:svelte-1xkiyez-dash 1.5s ease-in-out infinite;
+  animation:svelte-1xkiyez-dash 1.5s ease-in-out infinite
+}
+
+@-webkit-keyframes svelte-1xkiyez-rotate{
+  100%{
+    -webkit-transform:rotate(360deg);
+    transform:rotate(360deg)
+  }
+}
+
+@keyframes svelte-1xkiyez-rotate{
+  100%{
+    -webkit-transform:rotate(360deg);
+    transform:rotate(360deg)
+  }
+}
+
+@-webkit-keyframes svelte-1xkiyez-dash{
+  0%{
+    stroke-dasharray:1, 200;
+    stroke-dashoffset:0
+  }
+
+  50%{
+    stroke-dasharray:89, 200;
+    stroke-dashoffset:-35
+  }
+
+  100%{
+    stroke-dasharray:89, 200;
+    stroke-dashoffset:-124
+  }
+}
+
+@keyframes svelte-1xkiyez-dash{
+  0%{
+    stroke-dasharray:1, 200;
+    stroke-dashoffset:0
+  }
+
+  50%{
+    stroke-dasharray:89, 200;
+    stroke-dashoffset:-35
+  }
+
+  100%{
+    stroke-dasharray:89, 200;
+    stroke-dashoffset:-124
+  }
 }
 .p-1\/2.svelte-ixci48{
   padding:0.125rem
@@ -247,67 +301,6 @@ aside.svelte-12w8ugb{
 .snackbar.svelte-1ym8qvd{
   min-width:344px
 }
-.circular.svelte-1xkiyez{
-  -webkit-animation:svelte-1xkiyez-rotate 2s linear infinite;
-  animation:svelte-1xkiyez-rotate 2s linear infinite;
-  position:relative
-}
-
-.path.svelte-1xkiyez{
-  stroke-dasharray:1, 200;
-  stroke-dashoffset:0;
-  stroke-linecap:round;
-  -webkit-animation:svelte-1xkiyez-dash 1.5s ease-in-out infinite;
-  animation:svelte-1xkiyez-dash 1.5s ease-in-out infinite
-}
-
-@-webkit-keyframes svelte-1xkiyez-rotate{
-  100%{
-    -webkit-transform:rotate(360deg);
-    transform:rotate(360deg)
-  }
-}
-
-@keyframes svelte-1xkiyez-rotate{
-  100%{
-    -webkit-transform:rotate(360deg);
-    transform:rotate(360deg)
-  }
-}
-
-@-webkit-keyframes svelte-1xkiyez-dash{
-  0%{
-    stroke-dasharray:1, 200;
-    stroke-dashoffset:0
-  }
-
-  50%{
-    stroke-dasharray:89, 200;
-    stroke-dashoffset:-35
-  }
-
-  100%{
-    stroke-dasharray:89, 200;
-    stroke-dashoffset:-124
-  }
-}
-
-@keyframes svelte-1xkiyez-dash{
-  0%{
-    stroke-dasharray:1, 200;
-    stroke-dashoffset:0
-  }
-
-  50%{
-    stroke-dasharray:89, 200;
-    stroke-dashoffset:-35
-  }
-
-  100%{
-    stroke-dasharray:89, 200;
-    stroke-dashoffset:-124
-  }
-}
 .label-top.svelte-81hn54{
   line-height:0.05
 }
@@ -320,16 +313,23 @@ aside.svelte-12w8ugb{
 .line.svelte-xd9zs6{
   height:1px
 }
+th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
+  -webkit-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+  transform:rotate(180deg)
+}
 .tooltip.svelte-1n6auy7{
   left:50%;
   -webkit-transform:translateX(-50%);
   -ms-transform:translateX(-50%);
   transform:translateX(-50%)
 }
-th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
-  -webkit-transform:rotate(180deg);
-  -ms-transform:rotate(180deg);
-  transform:rotate(180deg)
+.drawer.svelte-12w8ugb{
+  min-width:250px
+}
+
+aside.svelte-12w8ugb{
+  height:calc(100vh - 4rem)
 }
 .ripple.svelte-1o8z87d{
   position:absolute !important

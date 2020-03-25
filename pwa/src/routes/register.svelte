@@ -1,5 +1,5 @@
 <script>
-  import { Button, TextField } from 'smelte'
+  import { Button, TextField } from '../../node_modules/smelte/src'
   import LocationWidget, { getLocation } from "../components/LocationWidget.svelte";
   import { signUp } from '../helpers.js'
   import * as yup from 'yup'
@@ -28,7 +28,7 @@
     isSubmitting = true
     const ok = await validate()
     if (ok) {
-      user.location = await getLocation();
+      user.location = await getLocation()
       console.log(user)
       await signUp(user)
       user.name = ""
@@ -41,7 +41,7 @@
   }
 
   const validate = async () => {
-    new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
       const schema = yup.object().shape({
         name: yup.string().required(),
         email: yup.string().email().required(),
