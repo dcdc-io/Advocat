@@ -78,20 +78,13 @@ export const checkLocalUser = async ({ loggedIn, username }) => {
 }
 
 export const signUp = async ({ name, email, location }) => {
-    try {
-        const registrations = useDatabase({ name: "registrations", onlyRemote: true })
-        const ok = await registrations.post({
-            _id: `${name} <${email}>`,
-            email,
-            name,
-            location
-        })
-
-    } catch (e) {
-        console.log("signup Error")
-        console.log(e)
-        throw (e)
-    }
+    const registrations = useDatabase({ name: "registrations", onlyRemote: true })
+    const ok = await registrations.post({
+        _id: `${name} <${email}>`,
+        email,
+        name,
+        location
+    })
 }
 /*
 export const logOut = async () => {
