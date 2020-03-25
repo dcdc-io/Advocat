@@ -33,9 +33,17 @@
 
 
     const registrations = await createDatabase("registrations")
-    registrations.put({
-        "_"
-    })
+    const _users = await createDatabase("_users")
+    
+    for (let user of [
+        { _id:"ben@dcdc.io", name:"Ben Babik", location: "Leeds, UK", version:"0.1" },
+        { _id:"rhys@dcdc.io", name:"Rhys Kyte", location: "Leeds, UK", version:"0.1" },
+        { _id:"james@dcdc.io", name:"James Turner", location: "Leeds, UK", version:"0.1" },
+        { _id:"elma@dcdc.io", name:"Elma Gakenyi", location: "Leeds, UK", version:"0.1" },
+        { _id:"kertu@dcdc.io", name:"Kertu Babik", location: "Leeds, UK", version:"0.1" },
+        { _id:"davidcharnock@dcdc.io", name:"David Charnock", location: "Leeds, UK", version:"0.1" }
+    ]) { await registrations.post(user) }
+
     
 
     await migrationdb.get("2020-03-25-0001").then(async doc => {

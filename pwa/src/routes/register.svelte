@@ -1,7 +1,7 @@
 <script>
   import { Button, TextField } from 'smelte'
   import LocationWidget, { getLocation } from "../components/LocationWidget.svelte";
-  import { useDatabase, signUp } from '../helpers.js'
+  import { signUp } from '../helpers.js'
   import * as yup from 'yup'
 	import { onMount } from 'svelte';
 
@@ -24,7 +24,6 @@
 
   const update = (data) => {}
   
-  const users = useDatabase({name:""}).__remote
   const handleSubmit = async () => {
     isSubmitting = true
     const ok = await validate()

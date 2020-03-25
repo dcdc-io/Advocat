@@ -29,14 +29,14 @@ express().get(
 ).use(
 	'/db',
 	expressPouchdb(
-		PouchDB.defaults({
+		PouchDB.plugin(slouchdbSecurity).defaults({
 			prefix: './db/'
-		}).plugin(slouchdbSecurity), {
-			mode: 'fullCouchDB',
-			overrideMode: {
-				exclude: ['routes/fauxton']
-			}
+		}), {
+		mode: 'fullCouchDB',
+		overrideMode: {
+			exclude: ['routes/fauxton']
 		}
+	}
 	),
 ).use(
 	compression({ threshold: 0 }),
