@@ -81,7 +81,7 @@
   <p>
     By telling us your location we can tell the groups nearby that you can help:
   </p>
-  <LocationWidget update={update}></LocationWidget>
+  <LocationWidget on:update={update}></LocationWidget>
   <br>
 
   <Button block type="submit" disabled={isSubmitting}>Register</Button>
