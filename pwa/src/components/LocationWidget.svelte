@@ -44,28 +44,29 @@
     let postcode
 
     let data
-    let result = {postcode:  null,
-                  easting: null,
-                  northing:  null}
+    let result = {geoCode: null,
+                  eastings: null,
+                  northings:  null}
     
     let dispatch = () => {}
 
     const processPostcode = async function(data) {
+        console.log(data)
         result.geoCode  = data.result.postcode;
-        result.easting  = data.result.eastings;
-        result.northing = data.result.northings;
+        result.eastings  = data.result.eastings;
+        result.northings = data.result.northings;
         dispatch('update', result)
         return result
     }
     export const getLocation = async () => {
-        const response = await fetch(postcode_url + "/" + postcode);
+        const response = await fetch(postcode_url + "/" + result.geoCode);
         return processPostcode(await response.json())
     };
 </script>
 
 <div>
     <div id="error">{error}</div>
-    <TextField label="postcode" bind:value={postcode} />
+    <TextField label="postcode" bind:value={result.geoCode} />
     {#if isMobile && navigator.geolocation}
         <Button block on:click={getLocationViaDevice}>use current location</Button>
     {/if}
