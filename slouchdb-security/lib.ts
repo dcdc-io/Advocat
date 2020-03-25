@@ -66,9 +66,18 @@ class SecurePouchDB {
         ].includes("_public")
         return userCan || roleCan || publicRoleCan
     }
+    static async isAdminUser({name, roles}: UserCtx, {admins}: SecObj): Promise<boolean> {
+        return [...roles || []].includes("_admin") ||
+            [...roles || []].includes("admin") ||
+            [...admins?.users || []].includes(name) ||
+            roles?.some(role => [...admins?.roles || []].includes(role)) || false
+    }
     
     @wrap
     static async bulkDocs(docs: any, args: { userCtx?: UserCtx, secObj?: SecObj }): Promise<any> {
+        if (args.userCtx && args.secObj && this.isAdminUser(args.userCtx, args.secObj)) {
+            return
+        }
         if (args.userCtx && args.secObj) {
             let docArray = docs.docs || docs
             for (let doc of docArray) {

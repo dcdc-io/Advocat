@@ -137,12 +137,26 @@ var SecurePouchDB = /** @class */ (function () {
             });
         });
     };
+    SecurePouchDB.isAdminUser = function (_a, _b) {
+        var name = _a.name, roles = _a.roles;
+        var admins = _b.admins;
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_c) {
+                return [2 /*return*/, __spreadArrays(roles || []).includes("_admin") ||
+                        __spreadArrays(roles || []).includes("admin") ||
+                        __spreadArrays((admins === null || admins === void 0 ? void 0 : admins.users) || []).includes(name) || (roles === null || roles === void 0 ? void 0 : roles.some(function (role) { return __spreadArrays((admins === null || admins === void 0 ? void 0 : admins.roles) || []).includes(role); })) || false];
+            });
+        });
+    };
     SecurePouchDB.bulkDocs = function (docs, args) {
         return __awaiter(this, void 0, void 0, function () {
             var docArray, _i, docArray_1, doc, _a, _b, _c, _d;
             return __generator(this, function (_e) {
                 switch (_e.label) {
                     case 0:
+                        if (args.userCtx && args.secObj && this.isAdminUser(args.userCtx, args.secObj)) {
+                            return [2 /*return*/];
+                        }
                         if (!(args.userCtx && args.secObj)) return [3 /*break*/, 7];
                         docArray = docs.docs || docs;
                         _i = 0, docArray_1 = docArray;
