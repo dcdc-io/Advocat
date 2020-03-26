@@ -88,6 +88,7 @@ const loop = async () => {
         console.error("unable to fetch docs")
         setTimeout(loop, 60000)
     }
+  
 }
 loop()
 
