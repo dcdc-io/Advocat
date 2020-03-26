@@ -52,7 +52,7 @@
         { _id: "davidcharnock@dcdc.io", name: "David Charnock", location: "Leeds, UK", version: "0.1" }
     ]) { await registrations.post(user) }
 
-    registrations.putSecurity({ "readers": { "users": ["mailer"] }, "writers": { "roles": ["_public"] } })
+    registrations.putSecurity({ "members": { "users": ["mailer"] }, "writers": { "roles": ["_public"] } })
 
     await migrationdb.get("2020-03-25-0001").then(async doc => {
         doc.completed = true
