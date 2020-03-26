@@ -23,6 +23,7 @@
     "express-pouchdb": "^4.2.0",
     "fuxor": "^2.2.6",
     "gps-distance": "0.0.4",
+    "ol": "^6.2.1",
     "polka": "^1.0.0-next.11",
     "pouchdb": "^7.2.1",
     "pouchdb-authentication": "^1.1.3",
