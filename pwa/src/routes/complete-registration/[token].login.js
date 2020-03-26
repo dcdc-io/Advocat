@@ -29,8 +29,15 @@ export async function get(req, res, next) {
             doc.members.names = [...doc.members.names || [], lowercase(reg.email)]
             const secObjOk = await userDb.putSecurity(doc)
             console.log(secObjOk)
-            const _users = DB("_users")
-            await _users.useAsAuthenticationDB()
+            const _users = await require("express-pouchdb/lib/utils").getUsersDB(app, globalThis.dbContext)
+            const app = globalThis.appContext
+            await _users.useAsAuthenticationDB({
+                isOnlineAuthDB: false,
+                timeout: app.couchConfig.get("couchdb_httpd_auth", 'timeout'),
+                secret: app.couchConfig.get("couchdb_httpd_auth", 'secret'),
+                iterations: app.couchConfig.get("couchdb_httpd_auth", 'iterations'),
+                admins: app.couchConfig.getSection('admins')
+            })
             await _users.put({
                 _id: "org.couchdb.user:" + lowercase(reg.email),
                 id: userIdentity,

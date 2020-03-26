@@ -69,7 +69,7 @@ const loop = async () => {
                 console.log(response)
                 // here we have deferred the email until after we know the database is updated properly
                 if (response.ok) {
-                    const info = await transport.sendMail(message)
+                   // const info = await transport.sendMail(message)
                     console.log(info)
                 }
             }
