@@ -29,7 +29,6 @@
     const ok = await validate()
     if (ok) {
       user.location = await getLocation()
-      console.log(user)
       await signUp(user)
       user.name = ""
       user.email = ""
