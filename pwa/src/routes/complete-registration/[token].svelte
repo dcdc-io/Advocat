@@ -3,7 +3,7 @@
     let readyToUse = false
     export async function preload({ params: { token: incomingToken }}) {
         token = incomingToken
-        const x = await fetch(`${token}.login`)
+        const x = await this.fetch(`${token}.login`)
         console.log(x)
         readyToUse = true
     }

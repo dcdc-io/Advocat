@@ -57,5 +57,5 @@ export async function get(req, res, next) {
             return res.send({ ok: true })
         }
     })
-    res.send({ ok: false })
+    return res.send({ ok: false })
 }

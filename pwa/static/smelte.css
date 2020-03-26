@@ -507,27 +507,6 @@ a.svelte-bp852d{
 .wrapper.svelte-142y8oi{
   display:inline-block
 }
-.reverse.svelte-zzky5a{
-  -webkit-transform:rotate(180deg);
-  -ms-transform:rotate(180deg);
-  transform:rotate(180deg)
-}
-
-.tip.svelte-zzky5a{
-  -webkit-transform:rotate(90deg);
-  -ms-transform:rotate(90deg);
-  transform:rotate(90deg)
-}
-.p-1\/2.svelte-ixci48{
-  padding:0.125rem
-}
-.drawer.svelte-12w8ugb{
-  min-width:250px
-}
-
-aside.svelte-12w8ugb{
-  height:calc(100vh - 4rem)
-}
 .inc.svelte-mguqwa{
   -webkit-animation:svelte-mguqwa-increase 2s ease-in-out infinite;
   animation:svelte-mguqwa-increase 2s ease-in-out infinite
@@ -585,8 +564,44 @@ aside.svelte-12w8ugb{
     width:10%
   }
 }
+.drawer.svelte-12w8ugb{
+  min-width:250px
+}
+
+aside.svelte-12w8ugb{
+  height:calc(100vh - 4rem)
+}
+.p-1\/2.svelte-ixci48{
+  padding:0.125rem
+}
 .snackbar.svelte-1ym8qvd{
   min-width:344px
+}
+.ripple.svelte-1o8z87d{
+  position:absolute !important
+}
+th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
+  -webkit-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+  transform:rotate(180deg)
+}
+.label-top.svelte-81hn54{
+  line-height:0.05
+}
+
+.label-transition.svelte-81hn54{
+  -webkit-transition:font-size 0.05s, line-height 0.1s;
+  -o-transition:font-size 0.05s, line-height 0.1s;
+  transition:font-size 0.05s, line-height 0.1s
+}
+.tooltip.svelte-1n6auy7{
+  left:50%;
+  -webkit-transform:translateX(-50%);
+  -ms-transform:translateX(-50%);
+  transform:translateX(-50%)
+}
+.line.svelte-xd9zs6{
+  height:1px
 }
 .circular.svelte-1xkiyez{
   -webkit-animation:svelte-1xkiyez-rotate 2s linear infinite;
@@ -649,31 +664,16 @@ aside.svelte-12w8ugb{
     stroke-dashoffset:-124
   }
 }
-.label-top.svelte-81hn54{
-  line-height:0.05
-}
-
-.label-transition.svelte-81hn54{
-  -webkit-transition:font-size 0.05s, line-height 0.1s;
-  -o-transition:font-size 0.05s, line-height 0.1s;
-  transition:font-size 0.05s, line-height 0.1s
-}
-.line.svelte-xd9zs6{
-  height:1px
-}
-.ripple.svelte-1o8z87d{
-  position:absolute !important
-}
-th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
+.reverse.svelte-zzky5a{
   -webkit-transform:rotate(180deg);
   -ms-transform:rotate(180deg);
   transform:rotate(180deg)
 }
-.tooltip.svelte-1n6auy7{
-  left:50%;
-  -webkit-transform:translateX(-50%);
-  -ms-transform:translateX(-50%);
-  transform:translateX(-50%)
+
+.tip.svelte-zzky5a{
+  -webkit-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform:rotate(90deg)
 }
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 

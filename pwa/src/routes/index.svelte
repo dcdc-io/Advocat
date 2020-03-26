@@ -68,7 +68,7 @@
     <h3 class="underline">Find Help</h3>
     <p>Find volunteer groups in your local area.</p>
   </div>
-  <div class="calltoaction" style="border: 2px solid {$colourInvert ? "var(--colour-scheme-light)" : "var(--colour-scheme-dark)" }" on:click={click("create_group")}>
+  <div class="calltoaction" style="border: 2px solid {$colourInvert ? "var(--colour-scheme-light)" : "var(--colour-scheme-dark)" }" on:click={click("register")}>
     <h3 class="underline">Be a Volunteer</h3>
     <p>Create or join a volunteer group.</p>
   </div>
