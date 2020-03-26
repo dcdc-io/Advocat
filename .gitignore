@@ -5,3 +5,5 @@ db
 
 secrets.txt
 log.txt
+
+.env

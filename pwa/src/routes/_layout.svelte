@@ -58,4 +58,5 @@
 
 <div class="footer">
   <p>advocat. is made with ❤ by <a href="https://dcdc.io" target="_blank">dcdc.io</a>, the worker led digital cooperative</p>
+  <p><a href="data" class="underline">data policy</a></p>
 </div>
