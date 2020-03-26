@@ -63,3 +63,17 @@ it('can', function () { return __awaiter(void 0, void 0, void 0, function () {
         }
     });
 }); });
+it('ignores admin part', function () { return __awaiter(void 0, void 0, void 0, function () {
+    var impl, ok;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                impl = plugin.__impl;
+                return [4 /*yield*/, impl.isAdminUser({ name: null, roles: ["_admin"] })];
+            case 1:
+                ok = _a.sent();
+                expect(ok).toEqual(true);
+                return [2 /*return*/];
+        }
+    });
+}); });

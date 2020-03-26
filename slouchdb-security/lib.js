@@ -117,7 +117,7 @@ var SecurePouchDB = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var userCan, roleCan, publicRoleCan;
             return __generator(this, function (_c) {
-                userCan = __spreadArrays((admins === null || admins === void 0 ? void 0 : admins.users) || [], (members === null || members === void 0 ? void 0 : members.users) || []).includes(name);
+                userCan = name && __spreadArrays((admins === null || admins === void 0 ? void 0 : admins.users) || [], (members === null || members === void 0 ? void 0 : members.users) || []).includes(name);
                 roleCan = (roles === null || roles === void 0 ? void 0 : roles.some(function (role) { return __spreadArrays((admins === null || admins === void 0 ? void 0 : admins.roles) || [], (members === null || members === void 0 ? void 0 : members.roles) || []).includes(role); })) || false;
                 publicRoleCan = __spreadArrays((members === null || members === void 0 ? void 0 : members.roles) || []).includes("_public");
                 return [2 /*return*/, userCan || roleCan || publicRoleCan];
@@ -130,21 +130,20 @@ var SecurePouchDB = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var userCan, roleCan, publicRoleCan;
             return __generator(this, function (_c) {
-                userCan = __spreadArrays((admins === null || admins === void 0 ? void 0 : admins.users) || [], (members === null || members === void 0 ? void 0 : members.users) || [], (writers === null || writers === void 0 ? void 0 : writers.users) || []).includes(name);
+                userCan = name && __spreadArrays((admins === null || admins === void 0 ? void 0 : admins.users) || [], (members === null || members === void 0 ? void 0 : members.users) || [], (writers === null || writers === void 0 ? void 0 : writers.users) || []).includes(name);
                 roleCan = (roles === null || roles === void 0 ? void 0 : roles.some(function (role) { return __spreadArrays((admins === null || admins === void 0 ? void 0 : admins.roles) || [], (members === null || members === void 0 ? void 0 : members.roles) || [], (writers === null || writers === void 0 ? void 0 : writers.roles) || []).includes(role); })) || false;
                 publicRoleCan = __spreadArrays((members === null || members === void 0 ? void 0 : members.roles) || [], (writers === null || writers === void 0 ? void 0 : writers.roles) || []).includes("_public");
                 return [2 /*return*/, userCan || roleCan || publicRoleCan];
             });
         });
     };
-    SecurePouchDB.isAdminUser = function (_a, _b) {
-        var name = _a.name, roles = _a.roles;
-        var admins = _b.admins;
+    SecurePouchDB.isAdminUser = function (userCtx, secObj) {
+        var _a, _b;
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_c) {
-                return [2 /*return*/, __spreadArrays(roles || []).includes("_admin") ||
-                        __spreadArrays(roles || []).includes("admin") ||
-                        __spreadArrays((admins === null || admins === void 0 ? void 0 : admins.users) || []).includes(name) || (roles === null || roles === void 0 ? void 0 : roles.some(function (role) { return __spreadArrays((admins === null || admins === void 0 ? void 0 : admins.roles) || []).includes(role); })) || false];
+                return [2 /*return*/, __spreadArrays((userCtx === null || userCtx === void 0 ? void 0 : userCtx.roles) || []).includes("_admin") ||
+                        __spreadArrays((userCtx === null || userCtx === void 0 ? void 0 : userCtx.roles) || []).includes("admin") ||
+                        ((userCtx === null || userCtx === void 0 ? void 0 : userCtx.name) && __spreadArrays(((_a = secObj === null || secObj === void 0 ? void 0 : secObj.admins) === null || _a === void 0 ? void 0 : _a.users) || []).includes(userCtx === null || userCtx === void 0 ? void 0 : userCtx.name)) || ((_b = userCtx === null || userCtx === void 0 ? void 0 : userCtx.roles) === null || _b === void 0 ? void 0 : _b.some(function (role) { var _a; return __spreadArrays(((_a = secObj === null || secObj === void 0 ? void 0 : secObj.admins) === null || _a === void 0 ? void 0 : _a.roles) || []).includes(role); })) || false];
             });
         });
     };
@@ -154,7 +153,8 @@ var SecurePouchDB = /** @class */ (function () {
             return __generator(this, function (_e) {
                 switch (_e.label) {
                     case 0:
-                        if (args.userCtx && args.secObj && SecurePouchDB.isAdminUser(args.userCtx, args.secObj)) {
+                        args.userCtx = args.userCtx || { name: null, roles: ["_admin"] };
+                        if (SecurePouchDB.isAdminUser(args.userCtx, args.secObj)) {
                             return [2 /*return*/];
                         }
                         if (!(args.userCtx && args.secObj)) return [3 /*break*/, 7];
@@ -195,4 +195,6 @@ var SecurePouchDB = /** @class */ (function () {
     ], SecurePouchDB, "bulkDocs", null);
     return SecurePouchDB;
 }());
+// @ts-ignore
+wrapped.__impl = SecurePouchDB;
 module.exports = wrapped;

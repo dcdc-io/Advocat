@@ -7,7 +7,7 @@
         .plugin(require("../pouchdb-security")) // <- plugged in to expose security API
 
     const useDatabase = async (name, skip_setup = true) => {
-        const db = new PouchDB("http://admin:password@localhost/db" + (name ? "/" + name : ""), {skip_setup, adapter:"http"})
+        const db = new PouchDB("http://admin:password@localhost:3000/db" + (name ? "/" + name : ""), {skip_setup, adapter:"http"})
         await db.logIn("admin", "password")
         return db
     }
@@ -44,7 +44,7 @@
         { _id:"davidcharnock@dcdc.io", name:"David Charnock", location: "Leeds, UK", version:"0.1" }
     ]) { await registrations.post(user) }
 
-    
+
 
     await migrationdb.get("2020-03-25-0001").then(async doc => {
         doc.completed = true

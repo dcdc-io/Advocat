@@ -19,7 +19,7 @@ function wrap(target: any, propertyKey: string, descriptor: PropertyDescriptor) 
 }
 
 type UserCtx = {
-    name: string
+    name: string | null
     roles?: string[]
 }
 
@@ -43,7 +43,7 @@ class SecurePouchDB {
         return doc._id && ((await db.get(doc._id).catch(() => null)) === null)
     }
     static async canAlterDoc({ roles, name }: UserCtx, { admins, members }: SecObj): Promise<boolean> {
-        const userCan = [
+        const userCan = name && [
             ...admins?.users || [], ...members?.users || []
         ].includes(name)
         const roleCan = roles?.some(role => [
@@ -55,7 +55,7 @@ class SecurePouchDB {
         return userCan || roleCan || publicRoleCan
     }
     static async canCreateDoc({ roles, name }: UserCtx, { admins, members, writers }: SecObj): Promise<boolean> {
-        const userCan = [
+        const userCan = name && [
             ...admins?.users || [], ...members?.users || [], ...writers?.users || []
         ].includes(name)
         const roleCan = roles?.some(role => [
@@ -66,16 +66,17 @@ class SecurePouchDB {
         ].includes("_public")
         return userCan || roleCan || publicRoleCan
     }
-    static async isAdminUser({name, roles}: UserCtx, {admins}: SecObj): Promise<boolean> {
-        return [...roles || []].includes("_admin") ||
-            [...roles || []].includes("admin") ||
-            [...admins?.users || []].includes(name) ||
-            roles?.some(role => [...admins?.roles || []].includes(role)) || false
+    static async isAdminUser(userCtx?: UserCtx, secObj?: SecObj): Promise<boolean> {
+        return [...userCtx?.roles || []].includes("_admin") ||
+            [...userCtx?.roles || []].includes("admin") ||
+            (userCtx?.name && [...secObj?.admins?.users || []].includes(userCtx?.name)) ||
+            userCtx?.roles?.some(role => [...secObj?.admins?.roles || []].includes(role)) || false
     }
     
     @wrap
     static async bulkDocs(docs: any, args: { userCtx?: UserCtx, secObj?: SecObj }): Promise<any> {
-        if (args.userCtx && args.secObj && SecurePouchDB.isAdminUser(args.userCtx, args.secObj)) {
+        args.userCtx = args.userCtx || { name: null, roles: ["_admin"] }
+        if (SecurePouchDB.isAdminUser(args.userCtx, args.secObj)) {
             return
         }
         if (args.userCtx && args.secObj) {
@@ -88,4 +89,6 @@ class SecurePouchDB {
     }
 }
 
+// @ts-ignore
+wrapped.__impl = SecurePouchDB
 module.exports = wrapped

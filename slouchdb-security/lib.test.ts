@@ -9,3 +9,11 @@ it('can', async () => {
 
     expect((await db.allDocs()).rows.length).toEqual(1)
 })
+
+it('ignores admin part', async () => {
+    // @ts-ignore
+    const impl = plugin.__impl as any
+
+    const ok = await impl.isAdminUser({ name: null, roles: ["_admin"] })
+    expect(ok).toEqual(true)
+})

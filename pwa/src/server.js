@@ -16,6 +16,11 @@ import * as sapper from '@sapper/server';
 const { PORT, NODE_ENV } = process.env;
 const dev = NODE_ENV === 'development';
 
+process.on('unhandledRejection', (reason, p) => {
+	console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+	// application specific logging, throwing an error, or other logic here
+  });
+
 express().get(
 	'/db/_utils', (req, res) => {
 		if (req.originalUrl === '/db/_utils')
