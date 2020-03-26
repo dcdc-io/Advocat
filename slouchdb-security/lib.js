@@ -154,7 +154,7 @@ var SecurePouchDB = /** @class */ (function () {
             return __generator(this, function (_e) {
                 switch (_e.label) {
                     case 0:
-                        if (args.userCtx && args.secObj && this.isAdminUser(args.userCtx, args.secObj)) {
+                        if (args.userCtx && args.secObj && SecurePouchDB.isAdminUser(args.userCtx, args.secObj)) {
                             return [2 /*return*/];
                         }
                         if (!(args.userCtx && args.secObj)) return [3 /*break*/, 7];

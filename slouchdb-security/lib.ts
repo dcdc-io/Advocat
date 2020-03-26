@@ -75,7 +75,7 @@ class SecurePouchDB {
     
     @wrap
     static async bulkDocs(docs: any, args: { userCtx?: UserCtx, secObj?: SecObj }): Promise<any> {
-        if (args.userCtx && args.secObj && this.isAdminUser(args.userCtx, args.secObj)) {
+        if (args.userCtx && args.secObj && SecurePouchDB.isAdminUser(args.userCtx, args.secObj)) {
             return
         }
         if (args.userCtx && args.secObj) {
