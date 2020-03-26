@@ -31,6 +31,7 @@ export async function get(req, res, next) {
             console.log(secObjOk)
             const _users = await require("express-pouchdb/lib/utils").getUsersDB(app, globalThis.dbContext)
             const app = globalThis.appContext
+            // useAsAuthenticationDB may be redundant
             await _users.useAsAuthenticationDB({
                 isOnlineAuthDB: false,
                 timeout: app.couchConfig.get("couchdb_httpd_auth", 'timeout'),
@@ -49,7 +50,6 @@ export async function get(req, res, next) {
                 type: "user",
             })
             // get a session on behalf of the user
-
             // set a cookie for the user
             // return {ok:true} with the session
             const login = await _users.multiUserLogIn(lowercase(reg.email), password)
