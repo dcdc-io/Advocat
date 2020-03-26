@@ -34,7 +34,7 @@ express().get(
 ).use(
 	'/db',
 	expressPouchdb(
-		globalThis.dbContext = PouchDB.plugin(slouchdbSecurity).defaults({
+		globalThis.dbContext = PouchDB.plugin(slouchdbSecurity).plugin(require('pouchdb-auth')).defaults({
 			prefix: './db/'
 		}), {
 		mode: 'fullCouchDB',

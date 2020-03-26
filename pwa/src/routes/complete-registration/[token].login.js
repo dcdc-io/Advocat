@@ -1,15 +1,17 @@
 const sjcl = require("sjcl")
+const assert = require("assert")
 
 const lowercase = str => str.toLowerCase()
-const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str))
-const randomString = () => require("crypto").randomBytes(32).toString("base64")
+const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0, 32)
+const randomString = () => require("crypto").randomBytes(16).toString("hex")
 
 export async function get(req, res, next) {
     const DB = globalThis.dbContext
     // find user email for token in registrations
     const registrations = DB("registrations")
-    const all = await registrations.allDocs()
-    const [reg] = all.rows.filter(row => row.doc.token === req.param.token)
+    const all = await registrations.allDocs({ include_docs: true })
+    console.log(all)
+    const [reg] = all.rows.filter(row => row.doc.token === req.params.token).map(row => row.doc)
     assert(reg)
     // get or create a user database using hash(lowercase(email))
     const userIdentity = hash(lowercase(reg.email))
@@ -17,32 +19,36 @@ export async function get(req, res, next) {
     // add the user as a member of the database (if they are not already)
     // add the user to the _user to the database (if they're not already in)
     // set a random password if they were not already in the _user database
-    await userDb.getSecurity(async doc => {
-        if (doc.members && doc.members.users && doc.members.users.includes(lowercase(reg.email))) {
+    const password = randomString()
+    await userDb.getSecurity().then(async doc => {
+        if (doc.members && doc.members.names && doc.members.names.includes(lowercase(reg.email))) {
             // the user has access
         } else {
             // the user does not have access
-            doc.members = doc.members || []
-            doc.members.users = [...doc.members.users || [], lowercase(reg.email)]
-            await userDb.putSecurity(doc)
+            doc.members = doc.members || {}
+            doc.members.names = [...doc.members.names || [], lowercase(reg.email)]
+            const secObjOk = await userDb.putSecurity(doc)
+            console.log(secObjOk)
             const _users = DB("_users")
+            await _users.useAsAuthenticationDB()
             await _users.put({
                 _id: "org.couchdb.user:" + lowercase(reg.email),
                 id: userIdentity,
                 name: lowercase(reg.email),
                 email: lowercase(reg.email),
+                roles: [],
                 location: reg.location,
-                password: randomString(),
+                password,
                 type: "user",
             })
-            _users.close()
+            // get a session on behalf of the user
+
+            // set a cookie for the user
+            // return {ok:true} with the session
+            const login = await _users.multiUserLogIn(lowercase(reg.email), password)
+            res.cookie("AuthSession", login.sessionID)
+            return res.send({ ok: true })
         }
     })
-    // get a session on behalf of the user
-    // set a cookie for the user
-    // close the user database
-    userDb.close()
-    // return {ok:true} with the session
-    res.send({ok:true})
-    console.log(req)
+    res.send({ ok: false })
 }
