@@ -10,7 +10,31 @@
     import VectorSource from 'ol/source/Vector';
     import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
 
+    export let data = {}
+    // Data format => data = {
+    //     location: [-0.08191999999999999, 51.5473408],
+    //     dataPoints: [
+    //         [-0.08191999999999999, 51.5473408],
+    //         [-0.08191999999999999, 51.5573408]
+    //     ]
+    // }
+    
     let map;
+    let viewOptions;
+
+    if(!!data.location) {
+        viewOptions = {
+            center: data.location,
+            zoom: 12,
+            projection: 'EPSG:4326'
+        }
+    } else {
+        viewOptions = {
+            center: [-1.137255, 52.635874],
+            zoom: 7,
+            projection: 'EPSG:4326'
+        }
+    }
 
     onMount(() => {
         // MAP OBJECT
@@ -21,24 +45,18 @@
                     source: new OSM()
                 })
             ],
-
-            view: new View({
-                center: [-0.08191999999999999, 51.5473408],
-                zoom: 12,
-                projection: 'EPSG:4326'
-            })
+            view: new View(viewOptions)
         })
 
         // DATA
         let features = [];
-        let feat = new Feature({
-            'geometry': new Point([-0.08191999999999999, 51.5473408])
-        });
-        let feat1 = new Feature({
-            'geometry': new Point([-0.08191999999999999, 51.5573408])
-        });
-        features.push(feat);
-        features.push(feat1);
+        if(!!data.dataPoints) {
+            data.dataPoints.forEach((coords) => {
+                features.push(new Feature({
+                    'geometry': new Point(coords)
+                }))
+            })
+        }
         let vectorSource = new VectorSource({
             features: features,
             wrapX: false
@@ -63,25 +81,10 @@
                 return 5;
             }
         });
-        
+
         map.addLayer(vector);
         map.addLayer(vector2);
     })
-
-    // const createMap = function(viewParams) {
-    //     map = new Map({
-    //         target: 'mapTarget',
-    //         layers: [
-    //             new TileLayer({
-    //                 source: new OSM()
-    //             })
-    //         ],
-
-    //         view: new View(viewParams)
-    //     }) b
-
-    //     console.log(map);
-    // }
 </script>
 
 <!-- <script context="module">

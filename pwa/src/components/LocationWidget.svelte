@@ -45,16 +45,16 @@
 
     let data
     let result = {geoCode: null,
-                  eastings: null,
-                  northings:  null}
+                  longitude: null,
+                  latitude:  null}
     
     let dispatch = () => {}
 
     const processPostcode = async function(data) {
         console.log(data)
         result.geoCode  = data.result.postcode;
-        result.eastings  = data.result.eastings;
-        result.northings = data.result.northings;
+        result.longitude  = data.result.longitude;
+        result.latitude = data.result.latitude;
         dispatch('update', result)
         return result
     }
