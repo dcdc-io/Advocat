@@ -7,7 +7,7 @@
         .plugin(require("../pouchdb-security")) // <- plugged in to expose security API
 
     const useDatabase = async (name, skip_setup = true) => {
-        const db = new PouchDB("http://admin:password@localhost:3000/db" + (name ? "/" + name : ""), {skip_setup, adapter:"http"})
+        const db = new PouchDB("http://admin:password@localhost:3000/db" + (name ? "/" + name : ""), { skip_setup, adapter: "http" })
         await db.logIn("admin", "password")
         return db
     }
@@ -34,17 +34,25 @@
 
     const registrations = await createDatabase("registrations")
     const _users = await createDatabase("_users")
-    
+
+    await _users.post({
+        "_id": "org.couchdb.user:mailer",
+        "name": "mailer",
+        "password": process.env.MAILERPASS,
+        "roles": [],
+        "type": "user"
+    })
+
     for (let user of [
-        { _id:"ben@dcdc.io", name:"Ben Babik", location: "Leeds, UK", version:"0.1" },
-        { _id:"rhys@dcdc.io", name:"Rhys Kyte", location: "Leeds, UK", version:"0.1" },
-        { _id:"james@dcdc.io", name:"James Turner", location: "Leeds, UK", version:"0.1" },
-        { _id:"elma@dcdc.io", name:"Elma Gakenyi", location: "Leeds, UK", version:"0.1" },
-        { _id:"kertu@dcdc.io", name:"Kertu Babik", location: "Leeds, UK", version:"0.1" },
-        { _id:"davidcharnock@dcdc.io", name:"David Charnock", location: "Leeds, UK", version:"0.1" }
+        { _id: "ben@dcdc.io", name: "Ben Babik", location: "Leeds, UK", version: "0.1" },
+        { _id: "rhys@dcdc.io", name: "Rhys Kyte", location: "Leeds, UK", version: "0.1" },
+        { _id: "james@dcdc.io", name: "James Turner", location: "Leeds, UK", version: "0.1" },
+        { _id: "elma@dcdc.io", name: "Elma Gakenyi", location: "Leeds, UK", version: "0.1" },
+        { _id: "kertu@dcdc.io", name: "Kertu Babik", location: "Leeds, UK", version: "0.1" },
+        { _id: "davidcharnock@dcdc.io", name: "David Charnock", location: "Leeds, UK", version: "0.1" }
     ]) { await registrations.post(user) }
 
-
+    registrations.putSecurity({ "readers": { "users": ["mailer"] }, "writers": { "roles": ["_public"] } })
 
     await migrationdb.get("2020-03-25-0001").then(async doc => {
         doc.completed = true
