@@ -18,7 +18,7 @@
     //         [-0.08191999999999999, 51.5573408]
     //     ]
     // }
-    
+
     let map;
     let viewOptions;
 
@@ -105,9 +105,23 @@
 
 
 <style>
-    #mapTarget{
-        width: 600px;
-        height: 600px;
+    @media only screen and (max-width: 499px) {
+        #mapTarget{
+            width: 250px;
+            height: 400px;
+        }
+    }
+    @media only screen and (min-width: 500px) and (max-width: 999px) {
+        #mapTarget{
+            width: 500px;
+            height: 650px;
+        }
+    }
+    @media only screen and (min-width: 1000px) {
+        #mapTarget{
+            width: 600px;
+            height: 800px;
+        }
     }
 </style>
 
