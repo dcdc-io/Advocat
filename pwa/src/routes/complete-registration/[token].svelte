@@ -2,7 +2,7 @@
     let token
     export async function preload({ params: { token: incomingToken }}) {
         token = incomingToken
-        const x = await fetch('complete')
+        const x = await fetch(`${token}.login`)
         console.log(x)
     }
 </script>
