@@ -4,5 +4,9 @@
   },
   "admins": {
     "admin": "-pbkdf2-ac98991b63aef9f388e8a0a5192d2027a2404ba7,1e712c1e819f1ff15a1381c11991981a010214c14d1c1157,10"
+  },
+  "couch_httpd_auth": {
+    "allow_persistent_cookies": true,
+    "timeout": 1209600
   }
 }
