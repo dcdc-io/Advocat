@@ -21,3 +21,7 @@ log.txt
 /pwa/node_modules
 
 advocat.tar
+
+.env
+*.env
+**/*.env

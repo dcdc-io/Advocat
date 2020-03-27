@@ -2,8 +2,12 @@ export async function get(req, res, next) {
     const DB = globalThis.dbContext
     const registrations = DB("registrations")
     const all = await registrations.allDocs({ include_docs: true })
-    const result = all.rows.filter(row => row.doc.location).map(({doc}) => {
-        return { geoCode: doc.location.geoCode }
+    const datapoints = all.rows.filter(row => row.doc.location).map(({doc}) => {
+        //return { geoCode: doc.location.geoCode }
+        return [doc.location.latitude, doc.location.longitude]
     })
-    res.send(result)
+    res.send({
+        location: [-0.08191999999999999, 51.5473408],
+        datapoints
+    })
 }
