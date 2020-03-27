@@ -1,7 +1,7 @@
 <h3>You and Your Data</h3>
 
 <div>
-The advocat.group and advocat.dev internet domains are operated by The Digital Cooperative Development Consortium Limited, or DCDC. DCDC are a worker led UK based technology cooperative and are committed to transparency and fairness including when it comes to your data.
+The advocat.group and advocat.dev internet domains are operated by The Digital Cooperative Development Consortium Limited, or DCDC. DCDC is a worker-led UK-based technology cooperative and is committed to transparency and fairness especially when it comes to your personal data.
 </div>
 
 <br />
@@ -11,14 +11,15 @@ The advocat.group and advocat.dev internet domains are operated by The Digital C
 <ol class="list-decimal">
     <li>We don't store data we don't need.</li>
     <li>We don't store data we don't tell you about.</li>
-    <li>We don't share data with anyone unless:
+    <li>We don't share your data with anyone unless:
         <ol class="list-decimal list-inside">
             <li>We are legally compelled to do so.</li>
-            <li>We have you informed consent to do so.</li>
+            <li>We have your informed consent to do so.</li>
         </ol>
     </li>
     <li>We don't sell your data.</li>
 </ol>
+<h5>We may need to amend this policy in the future but we will never do so without requesting your consent to those amendments.</h5>
 </div>
 
 <br />
