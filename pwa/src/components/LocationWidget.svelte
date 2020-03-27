@@ -51,7 +51,6 @@
     let dispatch = () => {}
 
     const processPostcode = async function(data) {
-        console.log(data)
         result.geoCode  = data.result.postcode;
         result.longitude  = data.result.longitude;
         result.latitude = data.result.latitude;

@@ -4,7 +4,6 @@
   import { signUp } from '../helpers.js'
   import * as yup from 'yup'
 	import { onMount } from 'svelte';
-
   
   let user = { 
     name: "",
@@ -48,7 +47,6 @@
 
   const validate = async () => {
     return new Promise((resolve, reject) => {
-      console.log(user)
       const schema = yup.object().shape({
         name: yup.string().required(),
         email: yup.string().email().required(),
