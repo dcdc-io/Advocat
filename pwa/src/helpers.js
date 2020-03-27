@@ -36,7 +36,7 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
     }
 }
 
-export const login = async ({ username, password, force = false }) => {
+export const signIn = async ({ username, password }) => {
     let local
     try {
         local = useDatabase({ name: "_users", sync: false })

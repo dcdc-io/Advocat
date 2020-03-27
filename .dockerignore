@@ -19,9 +19,12 @@ log.txt
 /pwa/__sapper__
 /pwa/db
 /pwa/node_modules
+/pwa/config.json
 
 *.tar
 
 .env
 *.env
 **/*.env
+
+log.txt
