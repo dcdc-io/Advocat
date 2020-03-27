@@ -20,7 +20,7 @@ log.txt
 /pwa/db
 /pwa/node_modules
 
-advocat.tar
+*.tar
 
 .env
 *.env
