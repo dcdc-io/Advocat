@@ -7,7 +7,7 @@ export async function get(req, res, next) {
         return [doc.location.latitude, doc.location.longitude]
     })
     res.send({
-        location: [-0.08191999999999999, 51.5473408],
+        // location: [-1.137255, 52.635874],
         datapoints
     })
 }
