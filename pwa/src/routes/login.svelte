@@ -5,7 +5,8 @@
   import * as yup from 'yup'
 
   let user = {
-    email: ""
+    email: "",
+    password: ""
   }
 
   let error = {
@@ -29,9 +30,9 @@
 
   const validate = async () => {
     return new Promise((resolve, reject) => {
-      const schema = yup.object().share({
+      const schema = yup.object().shape({
         email: yup.string().required(),
-        password: yup.string().password()
+        password: yup.string().nullable()
       })
       error.email = ""
       schema.validate(user, {abortEarly: false})
@@ -56,7 +57,12 @@
   <h3>Sign In</h3>
 
   <TextField label="email" bind:value={user.email} placeholder="e.g. you@example.com" error={error.email} />
+
   <TextField label="password" bind:value={user.password} type="password" error={error.password} />
+
+  <p>If you don't remember your password leave it empty and we will send you a magic link to sign in.</p>
+
+  <br>
 
   <Button block type="submit" disabled={isSubmitting}>Sign In</Button>
 </form>

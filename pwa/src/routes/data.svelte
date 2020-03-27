@@ -19,7 +19,8 @@ The advocat.group and advocat.dev internet domains are operated by The Digital C
     </li>
     <li>We don't sell your data.</li>
 </ol>
-<h5>We may need to amend this policy in the future but we will never do so without requesting your consent to those amendments.</h5>
+<br>
+<p>We may need to amend this policy in the future but we will never do so without requesting your consent to those amendments.</p>
 </div>
 
 <br />
