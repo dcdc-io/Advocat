@@ -17,7 +17,7 @@
     const getLatLong = async () => {
         return new Promise((resolve, reject) => {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((loc) => { resolve([loc.coords.longitude.toFixed(1), loc.coords.latitude.toFixed(1)]) }, (err) => { reject(err) });
+                navigator.geolocation.getCurrentPosition((loc) => { resolve([loc.coords.longitude, loc.coords.latitude]) }, (err) => { reject(err) });
             }
         })
     }
@@ -38,6 +38,7 @@
 
 	onMount(async () => {
         data = await getData();
+        console.log(data);
         const module = await import('../components/MapWidget.svelte'); 
 		mapView = module.default;
     })
