@@ -148,6 +148,7 @@ var SecurePouchDB = /** @class */ (function () {
         });
     };
     SecurePouchDB.bulkDocs = function (docs, args) {
+        if (args === void 0) { args = {}; }
         return __awaiter(this, void 0, void 0, function () {
             var docArray, _i, docArray_1, doc, _a, _b, _c, _d;
             return __generator(this, function (_e) {
