@@ -75,6 +75,7 @@
 		<!-- <li><a rel=prefetch aria-current='{segment === "blog" ? "page" : undefined}' href='blog'>blog</a></li> -->
 		<!-- <li><a aria-current='{segment === "jobs" ? "page" : undefined}' href='jobs'>jobs</a></li> -->
 		<!-- <li><a aria-current='{segment === "advocats" ? "page" : undefined}' href='advocats'>advocats</a></li> -->
+		<li><a aria-current='{segment === "registration_map" ? "page" : undefined}' href='registration_map'>registration map</a></li>
 		{#if $loggedIn}
        		<li><p class="info">welcome back, {$username}</p></li>
 		{:else}

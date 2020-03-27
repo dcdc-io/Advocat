@@ -3,6 +3,8 @@ import PouchDBAuthentication from 'pouchdb-authentication'
 import pouchdbfind from 'pouchdb-find'
 import { setContext, getContext } from 'svelte'
 import { writable } from 'svelte/store'
+import sjcl from "sjcl"
+
 PouchDB.plugin(PouchDBAuthentication)
 PouchDB.plugin(pouchdbfind)
 
@@ -77,14 +79,21 @@ export const checkLocalUser = async ({ loggedIn, username }) => {
     }
 }
 
+const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0, 32)
+
 export const signUp = async ({ name, email, location }) => {
-    const registrations = useDatabase({ name: "registrations", onlyRemote: true })
-    const ok = await registrations.post({
-        _id: `${name} <${email}>`,
-        email,
-        name,
-        location
-    })
+    try{
+        const registrations = useDatabase({ name: "registrations", onlyRemote: true })
+        const ok = await registrations.post({
+            _id: hash(email.toLowerCase()), 
+            email,
+            name,
+            location
+        })
+    } 
+    catch(e){
+        console.error(e)
+    }
 }
 /*
 export const logOut = async () => {
