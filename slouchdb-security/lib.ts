@@ -31,7 +31,7 @@ type SecObj = {
 }
 
 type SecObjPerm = {
-    users?: string[]
+    names?: string[]
     roles?: string[]
 }
 
@@ -44,7 +44,7 @@ class SecurePouchDB {
     }
     static async canAlterDoc({ roles, name }: UserCtx, { admins, members }: SecObj): Promise<boolean> {
         const userCan = name && [
-            ...admins?.users || [], ...members?.users || []
+            ...admins?.names || [], ...members?.names || []
         ].includes(name)
         const roleCan = roles?.some(role => [
             ...admins?.roles || [], ...members?.roles || []
@@ -56,7 +56,7 @@ class SecurePouchDB {
     }
     static async canCreateDoc({ roles, name }: UserCtx, { admins, members, writers }: SecObj): Promise<boolean> {
         const userCan = name && [
-            ...admins?.users || [], ...members?.users || [], ...writers?.users || []
+            ...admins?.names || [], ...members?.names || [], ...writers?.names || []
         ].includes(name)
         const roleCan = roles?.some(role => [
             ...admins?.roles || [], ...members?.roles || [], ...writers?.roles || []
@@ -69,7 +69,7 @@ class SecurePouchDB {
     static async isAdminUser(userCtx?: UserCtx, secObj?: SecObj): Promise<boolean> {
         return [...userCtx?.roles || []].includes("_admin") ||
             [...userCtx?.roles || []].includes("admin") ||
-            (userCtx?.name && [...secObj?.admins?.users || []].includes(userCtx?.name)) ||
+            (userCtx?.name && [...secObj?.admins?.names || []].includes(userCtx?.name)) ||
             userCtx?.roles?.some(role => [...secObj?.admins?.roles || []].includes(role)) || false
     }
     

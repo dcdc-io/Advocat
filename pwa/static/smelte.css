@@ -507,10 +507,60 @@ a.svelte-18bu6o6{
 .wrapper.svelte-142y8oi{
   display:inline-block
 }
+<<<<<<< HEAD
 .reverse.svelte-zzky5a{
   -webkit-transform:rotate(180deg);
   -ms-transform:rotate(180deg);
   transform:rotate(180deg)
+=======
+.p-1\/2.svelte-ixci48{
+  padding:0.125rem
+}
+.inc.svelte-mguqwa{
+  -webkit-animation:svelte-mguqwa-increase 2s ease-in-out infinite;
+  animation:svelte-mguqwa-increase 2s ease-in-out infinite
+}
+
+.dec.svelte-mguqwa{
+  -webkit-animation:svelte-mguqwa-decrease 2s 0.9s ease-in-out infinite;
+  animation:svelte-mguqwa-decrease 2s 0.9s ease-in-out infinite
+}
+
+@-webkit-keyframes svelte-mguqwa-increase{
+  from{
+    left:-5%;
+    width:5%
+  }
+
+  to{
+    left:130%;
+    width:150%
+  }
+}
+
+@keyframes svelte-mguqwa-increase{
+  from{
+    left:-5%;
+    width:5%
+  }
+
+  to{
+    left:130%;
+    width:150%
+  }
+}
+
+@-webkit-keyframes svelte-mguqwa-decrease{
+  from{
+    left:-90%;
+    width:90%
+  }
+
+  to{
+    left:110%;
+    width:10%
+  }
+>>>>>>> 911cd80d830b0813c229f66f22676baf29818328
 }
 
 .tip.svelte-zzky5a{
@@ -525,6 +575,7 @@ a.svelte-18bu6o6{
 aside.svelte-12w8ugb{
   height:calc(100vh - 4rem)
 }
+<<<<<<< HEAD
 .line.svelte-xd9zs6{
   height:1px
 }
@@ -534,6 +585,31 @@ aside.svelte-12w8ugb{
   -ms-transform:translateX(-50%);
   transform:translateX(-50%)
 }
+=======
+.reverse.svelte-zzky5a{
+  -webkit-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+  transform:rotate(180deg)
+}
+
+.tip.svelte-zzky5a{
+  -webkit-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform:rotate(90deg)
+}
+.snackbar.svelte-1ym8qvd{
+  min-width:344px
+}
+.label-top.svelte-81hn54{
+  line-height:0.05
+}
+
+.label-transition.svelte-81hn54{
+  -webkit-transition:font-size 0.05s, line-height 0.1s;
+  -o-transition:font-size 0.05s, line-height 0.1s;
+  transition:font-size 0.05s, line-height 0.1s
+}
+>>>>>>> 911cd80d830b0813c229f66f22676baf29818328
 .circular.svelte-1xkiyez{
   -webkit-animation:svelte-1xkiyez-rotate 2s linear infinite;
   animation:svelte-1xkiyez-rotate 2s linear infinite;
@@ -654,10 +730,19 @@ aside.svelte-12w8ugb{
 }
 .snackbar.svelte-1ym8qvd{
   min-width:344px
+.line.svelte-xd9zs6{
+  height:1px
+}
+.tooltip.svelte-1n6auy7{
+  left:50%;
+  -webkit-transform:translateX(-50%);
+  -ms-transform:translateX(-50%);
+  transform:translateX(-50%)
 }
 .ripple.svelte-1o8z87d{
   position:absolute !important
 }
+<<<<<<< HEAD
 .p-1\/2.svelte-ixci48{
   padding:0.125rem
 }
@@ -670,6 +755,8 @@ aside.svelte-12w8ugb{
   -o-transition:font-size 0.05s, line-height 0.1s;
   transition:font-size 0.05s, line-height 0.1s
 }
+=======
+>>>>>>> 911cd80d830b0813c229f66f22676baf29818328
 th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
   -webkit-transform:rotate(180deg);
   -ms-transform:rotate(180deg);

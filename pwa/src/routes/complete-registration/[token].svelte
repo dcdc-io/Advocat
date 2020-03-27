@@ -2,10 +2,12 @@
     let token
     let readyToUse = false
     export async function preload({ params: { token: incomingToken }}) {
-        token = incomingToken
-        const x = await this.fetch(`${token}.login`)
-        console.log(x)
-        readyToUse = true
+        if (window) {
+            token = incomingToken
+            const x = await this.fetch(`${window.location.href}.login`)
+            console.log(x)
+            readyToUse = true
+        }
     }
 </script>
 
