@@ -1,6 +1,6 @@
 <script>
 	import { onMount, getContext } from 'svelte';
-    import { useDatabase } from '../helpers.js'
+    import { useDatabase } from '../helpers.js';
    
     const locations = useDatabase({name:"locations"})
     const users = useDatabase({name:"_users"})
@@ -12,19 +12,32 @@
 
     //users.allDocs({include_docs: true}).then(alldocs => {
 
-    // let { loggedIn, username } = getContext("user")
-    
+    //let { loggedIn, username } = getContext("user")
 
-    let mapView;
-    let data = {
-        location: [-0.08191999999999999, 51.5473408], // startpoint
-        dataPoints: [
-            [-0.08191999999999999, 51.5473408],
-            [-0.08191999999999999, 51.5573408]
-        ]
+    const getLatLong = async () => {
+        return new Promise((resolve, reject) => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition((loc) => { resolve([loc.coords.longitude.toFixed(1), loc.coords.latitude.toFixed(1)]) }, (err) => { reject(err) });
+            }
+        })
     }
 
+    const getDatapoints = async () => {
+        return fetch('reg').then(raw => raw.json())
+    }
+
+    const getData = async () => {
+        let dataObject = await getDatapoints();
+        const locLatLong = await getLatLong();
+        dataObject.location = locLatLong;
+        return dataObject
+    }
+    
+    let mapView;
+    let data;
+
 	onMount(async () => {
+        data = await getData();
         const module = await import('../components/MapWidget.svelte'); 
 		mapView = module.default;
     })
