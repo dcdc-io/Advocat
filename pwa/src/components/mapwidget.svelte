@@ -50,8 +50,9 @@
 
         // DATA
         let features = [];
-        if(!!data.dataPoints) {
-            data.dataPoints.forEach((coords) => {
+        if(data.datapoints && data.datapoints.length > 0) {
+            data.datapoints.forEach((coords) => {
+                console.log(coords)
                 features.push(new Feature({
                     'geometry': new Point(coords)
                 }))
