@@ -20,7 +20,13 @@
     const ok = await validate()
     if (ok) {
       try {
-        await signIn(user)
+        await fetch("signin", { 
+          method: "POST", 
+          body: JSON.stringify(user), 
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
       } catch(e) {
         //
       }
