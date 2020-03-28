@@ -7,7 +7,7 @@
 
 <div>
     <h5>We have a simple data policy:</h5>
-    <ol class="list-decimal" style="padding-left: 2em;">
+    <ol class="list-decimal list-inside">
         <li>We don't store data we don't need.</li>
         <li>We don't store data we don't tell you about.</li>
         <li>We don't share your data with anyone unless:
