@@ -7,18 +7,19 @@ The advocat.group and advocat.dev internet domains are operated by The Digital C
 <br />
 
 <div>
-<h5>We have a simple data policy.</h5>
+<h5>We have a simple data policy:</h5>
 <ol class="list-decimal">
     <li>We don't store data we don't need.</li>
     <li>We don't store data we don't tell you about.</li>
     <li>We don't share your data with anyone unless:
-        <ol class="list-decimal list-inside">
+        <ul class="list-disc list-inside">
             <li>We are legally compelled to do so.</li>
             <li>We have your informed consent to do so.</li>
-        </ol>
+        </ul>
     </li>
     <li>We don't sell your data.</li>
 </ol>
+<br />
 <h5>We may need to amend this policy in the future but we will never do so without requesting your consent to those amendments.</h5>
 </div>
 
