@@ -1,7 +1,7 @@
 {
   "name": "advocat.",
   "description": "advocat. is an offline-first app for volunteer coordination. It was created in response to the 2020 international coronavirus crisis by worker led cooperative dcdc.io.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",

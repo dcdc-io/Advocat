@@ -1,48 +1,68 @@
 <script>
-	import { login } from '../helpers.js'
-	import { goto } from "@sapper/app"
-	import { Button, TextField } from 'smelte'
+  import { Button, TextField } from '../../node_modules/smelte/src'
+  import { signIn } from '../helpers.js'
+  import { goto } from "@sapper/app"
+  import * as yup from 'yup'
 
-	let user = {
-		email: "",
-		password: ""
-	}
+  let user = {
+    email: "",
+    password: ""
+  }
 
-	let error = {
-		email: "",
-		password: ""
-	}
+  let error = {
+    email: ""
+  }
 
-	let isSubmitting = false;
+  let isSubmitting = false;
 
-	const logInButton = async () => {
-		try{
-			await login({username: username, password: password})
-			goto("/")
-		} catch(e) {
-			console.log(e.message)
-			error = e.message
-		}
-	}
+  const handleSubmit = async () => {
+    isSubmitting = true
+    const ok = await validate()
+    if (ok) {
+      try {
+        await signIn(user)
+      } catch(e) {
+        //
+      }
+    } 
+    isSubmitting = false
+  }
 
-	const register = async () => {
-		goto("/register")
-	}
-
-	const validate = (event) => {}
-
-	const handleSubmit = (event) => {}
+  const validate = async () => {
+    return new Promise((resolve, reject) => {
+      const schema = yup.object().shape({
+        email: yup.string().required(),
+        password: yup.string().nullable()
+      })
+      error.email = ""
+      schema.validate(user, {abortEarly: false})
+        .then(async () => {
+          resolve(true)
+        })
+        .catch(err => {
+          (err.inner || []).forEach(err => {
+            error[err.path] = err.message
+          })
+          resolve(false)
+        })
+    })
+  }
 </script>
 
 <svelte:head>
-	<title>advocat. login</title>
+  <title>advocat. login</title>
 </svelte:head>
 
 <form on:submit|preventDefault={handleSubmit} on:changed={validate} on:invalid={validate} on:input={validate}>
   <h3>Sign In</h3>
 
   <TextField label="email" bind:value={user.email} placeholder="e.g. you@example.com" error={error.email} />
+
   <TextField label="password" bind:value={user.password} type="password" error={error.password} />
+
+  <p>If you don't remember your password leave it empty and we will send you a magic link to sign in.</p>
+
+  <br>
 
   <Button block type="submit" disabled={isSubmitting}>Sign In</Button>
 </form>

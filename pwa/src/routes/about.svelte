@@ -4,9 +4,7 @@
 
 <h3>About advocat.</h3>
 
-<p>advocat. was created in March 2020 in response to the ongoing international coronavirus crisis.</p>
-<p>advocat. is designed to help volunteer groups coordinate local effort.</p>
-<p>advocat. is free to use and does not use advertising and analytics.</p>
+<p>advocat. was created in March 2020 in response to the ongoing international coronavirus crisis. It is designed to help volunteer groups coordinate local effort. The service is free to use and does not use advertising and analytics.</p>
 <br />
 
 <p>Check out our <a href="https://blog.advocat.group" target="_blank">blog</a>!</p>
@@ -14,7 +12,6 @@
 <br />
 
 <h3>Who's behind it?</h3>
-
 <p><a href="https://dcdc.io" target="_blank">DCDC</a>: we are a worker-led digital cooperative and our aim is to make the future of tech more ethical and transparent.</p>
 <br />
 

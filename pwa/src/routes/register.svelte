@@ -19,7 +19,6 @@
     accepted: ""
   }
 
-  let isValid 
   let isSubmitting = false
   let thankYou = false
   

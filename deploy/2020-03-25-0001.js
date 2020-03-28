@@ -7,8 +7,8 @@
         .plugin(require("../pouchdb-security")) // <- plugged in to expose security API
 
     const useDatabase = async (name, skip_setup = true) => {
-        const db = new PouchDB("http://admin:password@localhost:3000/db" + (name ? "/" + name : ""), { skip_setup, adapter: "http" })
-        await db.logIn("admin", "password")
+        const db = new PouchDB("http://admin:password@advocat.group/db" + (name ? "/" + name : ""), { skip_setup, adapter: "http" })
+        //await db.logIn("admin", "password")
         return db
     }
     const createDatabase = async (name) => {
@@ -44,7 +44,7 @@
     })
 
     for (let user of [
-        { _id: "ben@dcdc.io", email: "ben@dcdc.io", name: "Ben Babik", location: "Leeds, UK", version: "0.1" },
+        //{ _id: "ben@dcdc.io", email: "ben@dcdc.io", name: "Ben Babik", location: "Leeds, UK", version: "0.1" },
         //{ _id: "rhys@dcdc.io", email: "rhys@dcdc.io", name: "Rhys Kyte", location: "Leeds, UK", version: "0.1" },
         //{ _id: "james@dcdc.io", email: "james@dcdc.io", name: "James Turner", location: "Leeds, UK", version: "0.1" },
         //{ _id: "elma@dcdc.io", email: "elma@dcdc.io", name: "Elma Gakenyi", location: "Leeds, UK", version: "0.1" },
