@@ -14,6 +14,10 @@ export const setDatabaseUrl = (url) => {
     dbUrl = url
 }
 
+export const sendMail = ({to, template, params}) => {
+    console.log(to, template, params)
+}
+
 export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
     if (window === undefined) {
         onlyRemote = true
@@ -34,10 +38,6 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
     } else {
         return remote
     }
-}
-
-export const signIn = async ({ email, password }) => {
-    console.log(email, password)
 }
 
 export const checkLocalUser = async ({ loggedIn, username }) => {

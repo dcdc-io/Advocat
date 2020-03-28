@@ -7,6 +7,7 @@ import slouchdbSecurity from '../../slouchdb-security'
 import PouchDB from 'pouchdb'
 import express from 'express'
 import expressPouchdb from 'express-pouchdb'
+import bodyParser from 'body-parser'
 import path from 'path'
 
 import sirv from 'sirv';
@@ -21,7 +22,9 @@ process.on('unhandledRejection', (reason, p) => {
 	// application specific logging, throwing an error, or other logic here
   });
 
-express().get(
+express().use(
+	bodyParser.json()
+).get(
 	'/db/_utils', (req, res) => {
 		if (req.originalUrl === '/db/_utils')
 			res.redirect(301, '/db/_utils/')
