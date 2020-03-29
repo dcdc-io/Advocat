@@ -1,12 +1,30 @@
 <script>
+	import { stores } from '@sapper/app';
+	import { getContext } from 'svelte';
+	import { colourInvert } from '../helpers.js';
+	import { Tabs } from '../../node_modules/smelte/src';
+
 	export let segment;
-	import { getContext } from 'svelte'
+
+    const { page } = stores();
 	let { loggedIn, username } = getContext("user")
 
-	import { colourInvert } from '../helpers.js'
 	function colourInvertButton() {
 		colourInvert.update(n => !n)
 	}
+
+	const loginMenu = [
+      { to: '/login', text: 'login' },
+      { to: '/register', text: 'register' },
+	];
+	
+	const navMenu = [
+		{ to: '/', text: 'home'},
+		{ to: '/registration_map', text: 'registration map'}
+	]
+
+
+	$: path = $page.path;
 </script>
 
 <style>
@@ -57,6 +75,21 @@
 	.info{
 		color: var(--colour-scheme-dark);
 	}
+	.box {
+		background: var(--colour-scheme-dark);
+	}
+	.rightmenu { 
+		width: 150px;
+		float: right;
+		overflow: auto; 
+	}
+	.leftmenu { 
+		width: 250px;
+		float: left;
+		overflow: auto; 
+		white-space: nowrap;
+	}
+
 	/* .button-box {
 		position: fixed;
 		top: 0;
@@ -67,7 +100,18 @@
 		width: 3em;
 	} */
 </style>
-
+<div class="box">
+	<div class="rightmenu">
+		<Tabs 
+		    items={loginMenu}
+	  	    bind:selected={path} />
+	</div>
+	<div class="leftmenu">
+		<Tabs
+		    items={navMenu}
+	  	    bind:selected={path} />
+	</div>
+</div>
 <nav>
 	<ul>
 		<li><a aria-current='{segment === undefined ? "page" : undefined}' href='.'>home</a></li>
