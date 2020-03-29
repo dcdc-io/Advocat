@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Login</title>
+</svelte:head>
+
 <script>
   import { getContext } from "svelte"
   import { Button, TextField } from '../../node_modules/smelte/src'
@@ -75,10 +79,6 @@
     })
   }
 </script>
-
-<svelte:head>
-  <title>advocat. login</title>
-</svelte:head>
 
 <h3>Sign In</h3>
 

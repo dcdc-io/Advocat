@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>advocat.</title>
+</svelte:head>
+
 <script>
   import { useDatabase, colourInvert } from '../helpers.js'
   import { getContext } from "svelte";

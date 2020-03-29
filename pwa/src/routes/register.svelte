@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Register</title>
+</svelte:head>
+
 <script>
   import { Button, TextField, Checkbox } from '../../node_modules/smelte/src';
   import LocationWidget, { getLocation } from "../components/LocationWidget.svelte";
@@ -68,10 +72,6 @@
     })
   }
 </script>
-
-<svelte:head>
-	<title>advocat. register</title>
-</svelte:head>
 
 {#if !thankYou}
 <form on:submit|preventDefault={handleSubmit} on:changed={validate} on:invalid={validate} on:input={validate}>

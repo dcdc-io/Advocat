@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Data</title>
+</svelte:head>
+
 <h3>You and Your Data</h3>
 
 <div>
