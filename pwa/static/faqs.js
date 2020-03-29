@@ -72,7 +72,7 @@ const faqs = [
     {
         question: "How is my data used?",
         answer: [
-            `Your email address and personal details will not be visible to public. All data is safely stored in dcdc database and compliant with our <a href="/data" target="_blank">data policy</a>.
+            `Your email address and personal details will not be visible to public. All data is safely stored in dcdc database and compliant with our <a href="data" target="_blank">data policy</a>.
             We might use locations for statistical analysis and predictions of a virus spread and breakouts, this might help volunteers organise better and put more workforse where needed.`
         ]
     }

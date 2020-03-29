@@ -14,6 +14,14 @@ export const setDatabaseUrl = (url) => {
     dbUrl = url
 }
 
+export const sendMail = async ({to, template, params}) => {
+    const mail_outbox = globalThis.dbContext("mail_outbox")
+    await mail_outbox.post({
+        type: "email", to, template, params, timestamp: Date.now()
+    })
+    console.log(to, template, params)
+}
+
 export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
     if (window === undefined) {
         onlyRemote = true
@@ -34,10 +42,6 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
     } else {
         return remote
     }
-}
-
-export const signIn = async ({ email, password }) => {
-    console.log(email, password)
 }
 
 export const checkLocalUser = async ({ loggedIn, username }) => {
@@ -66,7 +70,7 @@ export const checkLocalUser = async ({ loggedIn, username }) => {
 const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0, 32)
 
 export const signUp = async ({ name, email, location }) => {
-    try{
+    try {
         const registrations = useDatabase({ name: "registrations", onlyRemote: true })
         const ok = await registrations.post({
             _id: hash(email.toLowerCase()), 
@@ -75,17 +79,9 @@ export const signUp = async ({ name, email, location }) => {
             location
         })
     } 
-    catch(e){
+    catch(e) {
         console.error(e)
     }
 }
-/*
-export const logOut = async () => {
-    const remote = new PouchDB(remoteURL, {skip_setup:true})
-    const { loggedIn } = getContext("user")
-    loggedIn.set(false)
-    await remote.logOut();
-}
-*/
 
 export let colourInvert = writable(false)

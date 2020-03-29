@@ -1,8 +1,14 @@
 <script>
+  import { getContext } from "svelte"
   import { Button, TextField } from '../../node_modules/smelte/src'
-  import { signIn } from '../helpers.js'
   import { goto } from "@sapper/app"
   import * as yup from 'yup'
+
+  const SIGNIN = 0
+  const SIGNINGIN = 1
+  const MAGICLINKSENT = 2
+
+  let stage = SIGNIN
 
   let user = {
     email: "",
@@ -20,11 +26,32 @@
     const ok = await validate()
     if (ok) {
       try {
-        await signIn(user)
+        stage = SIGNINGIN
+        const signin = await fetch("signin", { 
+          method: "POST", 
+          body: JSON.stringify(user), 
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        if (!user.password) {
+          stage = MAGICLINKSENT
+        }
+        else if (!(await signin.json()).ok && user.password) {
+          stage = SIGNIN
+          error.email = "Something didn't work. Are these details correct?"
+        }
+        else {
+          let { $loggedIn, $username } = getContext("user")
+          $loggedIn = true
+          $username = user.email.toLowerCase()
+          goto(".")
+        }
       } catch(e) {
         //
+        stage = SIGNIN
       }
-    } 
+    }
     isSubmitting = false
   }
 
@@ -53,16 +80,30 @@
   <title>advocat. login</title>
 </svelte:head>
 
+<h3>Sign In</h3>
+
+{#if stage === SIGNIN}
 <form on:submit|preventDefault={handleSubmit} on:changed={validate} on:invalid={validate} on:input={validate}>
-  <h3>Sign In</h3>
 
   <TextField label="email" bind:value={user.email} placeholder="e.g. you@example.com" error={error.email} />
 
   <TextField label="password" bind:value={user.password} type="password" error={error.password} />
 
-  <p>If you don't remember your password leave it empty and we will send you a magic link to sign in.</p>
+
+  <h6>Don't remember your password?</h6>
+
+  <p>Leave the password field empty and we will send you a magic link to sign in.</p>
 
   <br>
 
   <Button block type="submit" disabled={isSubmitting}>Sign In</Button>
 </form>
+{/if}
+
+{#if stage === SIGNINGIN}
+<p>Please wait a moment while we check your details.</p>
+{/if}
+
+{#if stage === MAGICLINKSENT}
+<p>Please check your email for a link to sign in.</p>
+{/if}

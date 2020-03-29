@@ -57,6 +57,6 @@
 {/if}
 
 <div class="footer">
-  <p><a href="data" class="underline">Data Policy</a> - <a href="about" class="underline">About</a> - <a href="faqs" class="underline">FAQs</a></p>
+  <p><a href="data" class="underline">Data Policy</a> - <a href="about" class="underline">About</a> - <a href="faqs" class="underline">FAQs</a> - <a href="https://blog.advocat.group" target="_blank">Developer Blog</a></p>
   <p>advocat. is made with ❤ by <a href="https://dcdc.io" target="_blank">dcdc.io</a>, the worker led digital cooperative</p>
 </div>
