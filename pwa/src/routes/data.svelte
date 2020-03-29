@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Data</title>
+	<title>Data Policy</title>
 </svelte:head>
 
 <h3>You and Your Data</h3>
