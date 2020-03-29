@@ -33,11 +33,9 @@ const faqs = [
         ]
     },
     {
-        // EDIT
         question: "How can I help people who don't have internet access?",
         answer: [
-            `If you have neighbours that have no internet you can write and leave a little note for them, asking them to write down if they need anything.
-            If you trust them you can leave them your phone number so they can call you and explain their needs, you can post their request on the advocat. website so other voulnteers can help them too.`
+            `If you know people that have no internet/are uncomfortable using technology you can use advocat. on their behalf.`
         ]    
     },
     {
@@ -55,15 +53,14 @@ const faqs = [
             instead we suggest using online banking apps or digital money transfer apps such as PayPal.`
         ]
     },
-    {   
-        // EDIT
-        question: "What if a person does not pay for a purchase?",
-        answer: [
-            `advocat. cannot accept any liability for requests made or monies transferred. 
-            However, the main aim of advocat. it to verify people who join this platform to provide the basis of trust.
-            To prevent abuse, we appeal to your common sense and honesty. If you have any concerns please contact our <a href="mailto:advocat@dcdc.io" target="_blank">support team</a>`
-        ]
-    },
+    // {
+    //     question: "What if a person does not pay for a purchase?",
+    //     answer: [
+    //         `<a href="https://dcdc.io">DCDC</a>, the organisation which operates advocat., cannot accept any liability for requests made or monies transferred. 
+    //         However, the main aim of advocat. is to verify people who join the platform to provide a basis of trust.
+    //         To prevent abuse, we appeal to your common sense and honesty. If you have any concerns please contact our <a href="mailto:advocat@dcdc.io" target="_blank">support team</a>`
+    //     ]
+    // },
     {
         question:"Who can see my requests?",
         answer: [
