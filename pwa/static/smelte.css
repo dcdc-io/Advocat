@@ -78,65 +78,17 @@ ul.svelte-1she90c{
 .content.svelte-dkhkxh li{
   margin:0 0 0.5em 0
 }
-nav.svelte-1p2v7hn{
-  font-weight:300;
-  padding:0 1em;
-  background-color:var(--colour-scheme-dark);
-  color:var(--colour-scheme-light)
-}
-
-ul.svelte-1p2v7hn{
-  margin:0;
-  padding:0
-}
-
-ul.svelte-1p2v7hn::after{
-  content:'';
-  display:block;
-  clear:both
-}
-
-li.svelte-1p2v7hn{
-  display:block;
-  float:left
-}
-
-[aria-current].svelte-1p2v7hn{
-  position:relative;
-  display:inline-block
-}
-
-[aria-current].svelte-1p2v7hn::after{
-  position:absolute;
-  content:'';
-  width:calc(100% - 1em);
-  background-color:var(--colour-scheme-light);
-  height:4px;
-  display:block;
-  bottom:-1px
-}
-
-a.svelte-1p2v7hn{
-  text-decoration:none;
-  padding:1em 0.5em;
-  display:block
-}
-
-.info.svelte-1p2v7hn{
-  color:var(--colour-scheme-dark)
-}
-
-.box.svelte-1p2v7hn{
+.nav-box.svelte-10o8q48{
   background:var(--colour-scheme-dark)
 }
 
-.rightmenu.svelte-1p2v7hn{
+.rightmenu.svelte-10o8q48{
   width:150px;
   float:right;
   overflow:auto
 }
 
-.leftmenu.svelte-1p2v7hn{
+.leftmenu.svelte-10o8q48{
   width:250px;
   float:left;
   overflow:auto;
