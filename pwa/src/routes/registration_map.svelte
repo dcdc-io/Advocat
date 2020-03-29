@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Volunteers</title>
+</svelte:head>
+
 <script>
 	import { onMount, getContext } from 'svelte';
     import { useDatabase } from '../helpers.js';

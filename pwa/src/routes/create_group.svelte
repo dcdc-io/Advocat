@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Create a group</title>
+</svelte:head>
+
 <style>
 
 </style>
@@ -14,15 +18,12 @@
 
   const groups = useDatabase({name:"groups"})
 
-
   schema = yup.object().shape({
     group: yup.object().shape({
       location: yup.string().required()
     }),
   })
   initialValues = {}
-
-
 
   const handleSubmit = ({detail:{values,setSubmitting,resetForm}}) => { 
     groups.post({location: values.group.location}).then((result) =>

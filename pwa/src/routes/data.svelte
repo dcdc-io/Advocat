@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Data Policy</title>
+</svelte:head>
+
 <h3>You and Your Data</h3>
 
 <div>
@@ -7,7 +11,7 @@
 
 <div>
     <h5>We have a simple data policy:</h5>
-    <ol class="list-decimal" style="padding-left: 2em;">
+    <ol class="list-decimal list-inside">
         <li>We don't store data we don't need.</li>
         <li>We don't store data we don't tell you about.</li>
         <li>We don't share your data with anyone unless:
@@ -17,6 +21,7 @@
             </ul>
         </li>
         <li>We don't sell your data.</li>
+        <li>Placeholder for adding data usage statistics details and how we wil use their data for reports ..... blah blah.</li>
     </ol>
     <br />
     We may need to amend this policy in the future but we will never do so without requesting your consent to those amendments.
