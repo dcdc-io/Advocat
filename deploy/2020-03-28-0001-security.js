@@ -1,4 +1,4 @@
-require("_/migrate")("2020-03-28-0001-security", async ({ createDatabase, useDatabase }) => {
+require("./_migrate")("2020-03-28-0001-security", async ({ createDatabase, useDatabase }) => {
     
     /**************************************************/
     /*             START OF DEPLOYMENT                */
@@ -42,4 +42,4 @@ require("_/migrate")("2020-03-28-0001-security", async ({ createDatabase, useDat
             ]
         }
     })
-})()
+})

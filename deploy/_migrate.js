@@ -9,7 +9,7 @@ PouchDB.plugin(require('pouchdb-authentication'))
     .plugin(require("../pouchdb-security")) // <- plugged in to expose security API
 
 const useDatabase = async (name, skip_setup = true) => {
-    const db = new PouchDB(`${DB_DEPLOY_PROTOCOL || "http"}://${DB_DEPLOY_USER || "admin"}:${DB_DEPLOY_PASS || "password"}@${DB_DEPLOY_ENDPOINT || "localhost/db"}` + (name ? "/" + name : ""), { skip_setup, adapter: "http" })
+    const db = new PouchDB(`${DB_DEPLOY_PROTOCOL || "http"}://${DB_DEPLOY_USER || "admin"}:${DB_DEPLOY_PASS || "password"}@${DB_DEPLOY_ENDPOINT || "localhost:3000/db"}` + (name ? "/" + name : ""), { skip_setup, adapter: "http" })
     //await db.logIn("admin", "password")
     return db
 }
@@ -18,11 +18,11 @@ const createDatabase = async (name) => {
     return db
 }
 
-export default async function handler(name, processor) {
+const handler = async (name, processor) => {
     const migrationdb = await useDatabase("__migrations__", false)
     const migrations = await migrationdb.allDocs()
-    if (migrations.rows.length > 0) {
-        console.error("cannot initialize a database that already contains migrations")
+    if (migrations.rows.filter(row => row.id === name).length) {
+        console.error("cannot migrate to a database that already contains migration")
         process.exit(-1)
     }
     await migrationdb.post({
@@ -38,3 +38,5 @@ export default async function handler(name, processor) {
     })
     console.log("migration complete")
 }
+
+module.exports = handler
