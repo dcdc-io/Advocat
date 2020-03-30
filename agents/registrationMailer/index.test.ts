@@ -15,9 +15,9 @@ describe('findTemplate', () => {
 describe('compileTemplate', () => {
     it('can replace variables', async () => {
         const actual = await lib.compileTemplate({
-            name: "test", 
-            source: 
-`# title
+            name: "test",
+            source:
+                `# title
 hello {title} {name}
 `, version: "0"
         }, {
@@ -25,12 +25,34 @@ hello {title} {name}
             title: async () => "mister"
         })
         const expected = {
+            metadata: {},
             subject: "",
-            text: "",
+            text: "TITLE\nhello mister test",
             body:
-`<h1>title</h1>
+                `<h1>title</h1>
 <p>hello mister test</p>
 `}
+        expect(actual).toEqual(expected)
+    })
+    it('can extract frontmatter', async () => {
+        const actual = await lib.compileTemplate({
+            name: "test",
+            source:
+                `---
+title: foobar
+---
+
+# hello`, version: "0"
+        })
+        const expected = {
+            subject: "",
+            text: "HELLO",
+            body: `<h1>hello</h1>
+`,
+            metadata: {
+                title: "foobar"
+            }
+        }
         expect(actual).toEqual(expected)
     })
 })

@@ -2,23 +2,25 @@ require('dotenv').config()
 
 import { findTemplate, compileTemplate } from "./lib"
 
-const nodemailer = require('nodemailer')
-const fetch = require('node-fetch')
+import nodemailer from 'nodemailer'
+import fetch from 'node-fetch'
+
+const emailSafe = (str:string) => { if (require('./rx.js').email.test(str)) { return str } else { throw "invalid email address" } }
 
 const randomString = () => require('crypto').randomBytes(16).toString("hex")
-const txtSafe = str => str.replace(require('./rx.js').cleanText, '')
-const htmlSafe = str => txtSafe(require('striptags')(str))
-const emailSafe = str => { if (require('./rx.js').email.test(str)) { return str } else { throw "invalid email address" } }
-
 
 const { DOMAIN = "advocat.group",
+    MESSAGE_DELAY = "10000",
+    RECOVERY_TIME = "60000",
+    EMAIL_FROM,
     SMTP_HOST = "localhost",
     SMTP_PASS,
-    SMTP_PORT = 25, SMTP_USER,
+    SMTP_PORT = "25",
+    SMTP_USER,
     MAILER_USER,
     MAILER_PASS,
     PROTOCOL,
-    PORT = 443 } = process.env
+    PORT = "443" } = process.env
 
 const wellKnownReplacements = {}
 
@@ -26,7 +28,7 @@ const loop = async () => {
     try {
         const transport = nodemailer.createTransport({
             host: SMTP_HOST,
-            port: SMTP_PORT,
+            port: parseInt(SMTP_PORT),
             auth: {
                 user: SMTP_USER,
                 pass: SMTP_PASS
@@ -48,10 +50,10 @@ const loop = async () => {
                 // TODO: send mail
                 const info = await transport.sendMail({
                     from: EMAIL_FROM,
-                    to: doc.to.email || doc.to,
-                    subject: frontmatter(compiled, "subject"),
-                    text: text(compiled),
-                    html: compiled
+                    to: emailSafe(doc.to.email || doc.to),
+                    subject: compiled.metadata.subject,
+                    text: compiled.text,
+                    html: compiled.body
                 })
                 console.log(info)
             } catch (error) {
@@ -64,9 +66,9 @@ const loop = async () => {
                 })
             }
         }
-        setTimeout(loop, MESSAGE_DELAY)
+        setTimeout(loop, parseInt(MESSAGE_DELAY))
     } catch (error) {
         console.error("an error occured...")
-        setTimeout(loop, RECOVERY_TIME)
+        setTimeout(loop, parseInt(RECOVERY_TIME))
     }
 }

@@ -1,6 +1,8 @@
 import { readFileSync } from "fs"
 import { join } from "path"
 import markdown from "markdown-it"
+import frontmatter from "front-matter"
+import htmltotext from "html-to-text"
 
 export type Template = {
     name: string
@@ -11,7 +13,8 @@ export type Template = {
 export type Message = {
     subject: string,
     text: string,
-    body: string
+    body: string,
+    metadata: any
 }
 type ReplacerFunction = (...args:string[]) => string
 type Replacer = string | ReplacerFunction
@@ -60,10 +63,13 @@ export async function compileTemplate(template:Template, replacements:any = {}):
         }
         return substring
     })
-    const body = md.render(await source)
+    const fm = frontmatter(await source)
+    const body = md.render(await fm.body)
+    const text = htmltotext.fromString(body)
     return {
         subject: "",
-        text: "",
-        body
+        body,
+        text,
+        metadata: fm.attributes
     }
 }

@@ -12,7 +12,7 @@ let dbUrl = ""
 export const setDatabaseUrl = (url) => {
     console.log("setDatabaseUrl has been called")
     dbUrl = url
-}
+}gi 
 
 export const sendMail = async ({to, template, params}) => {
     const mail_outbox = globalThis.dbContext("mail_outbox")
