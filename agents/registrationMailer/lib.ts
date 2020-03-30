@@ -16,7 +16,7 @@ export type Message = {
     body: string,
     metadata: any
 }
-type ReplacerFunction = (...args:string[]) => string
+type ReplacerFunction = (...args:string[]) => Promise<string>
 type Replacer = string | ReplacerFunction
 
 // credit: https://dev.to/ycmjason/stringprototypereplace-asynchronously-28k9
@@ -54,20 +54,27 @@ export async function compileTemplate(template:Template, replacements:any = {}):
         typographer: true
     })
     const replacementKeys = Object.keys(replacements)
-    let source = asyncStringReplace(template.source, /\{\s*([^\{\s]*)\s*\}/gm, (_, substring) => {
-        if (replacementKeys && replacementKeys.indexOf(substring) >= 0) {
-            if (typeof replacements[substring] === "function") {
-                return replacements[substring]()
+    const replace = async (source:string) => Promise<string> {
+        return await asyncStringReplace(source, /\{\s*([^\{\s]*)\s*\}/gm, async (_:string, substring:string) => {
+            if (replacementKeys && replacementKeys.indexOf(substring) >= 0) {
+                if (typeof replacements[substring] === "function") {
+                    return await replacements[substring]()
+                }
+                if (/\.md$/.test(replacements[substring])) {
+                    return await replace((await findTemplate(replacements[substring])).source)
+                }
+                return replacements[substring]
             }
-            return replacements[substring]
-        }
-        return substring
-    })
+            return substring
+        })
+    }
+    let source = await replace(template.source)
+    
     const fm = frontmatter(await source)
     const body = md.render(await fm.body)
     const text = htmltotext.fromString(body)
     return {
-        subject: "",
+        subject: (fm.attributes as any).subject || "",
         body,
         text,
         metadata: fm.attributes
