@@ -6,22 +6,31 @@
 
     const { page } = stores();
 	let { loggedIn, username } = getContext("user")
+	let accountMenu = [];
 
 	function colourInvertButton() {
 		colourInvert.update(n => !n)
 	}
 
-	const loginMenu = [
-      { to: '/login', text: 'login' },
-      { to: '/register', text: 'register' },
-	];
-	
 	const navMenu = [
-		{ to: '/', text: 'home'},
-		{ to: '/registration_map', text: 'registration map'}
+		{ to: '/', text: 'Home'},
+		{ to: '/registration_map', text: 'Registration Map'}
 	]
 
 	$: path = $page.path;
+	$: {
+		if ($loggedIn) {
+			accountMenu = [
+				{ to: '/account', text: $username },
+				{ to: '/signout', text: 'Logout' }
+			]
+		} else {
+			accountMenu = [
+				{ to: '/login', text: 'Login' },
+				{ to: '/register', text: 'Register' }
+			]
+		}
+	}
 </script>
 
 <style>
@@ -29,7 +38,7 @@
 		background: var(--colour-scheme-dark);
 	}
 	.rightmenu { 
-		width: 150px;
+		width: 200px;
 		float: right;
 		overflow: auto; 
 	}
@@ -42,17 +51,9 @@
 </style>
 <div class="nav-box">
 	<div class="rightmenu">
-		{#if $loggedIn}
-			<Tabs
-				items={[
-					{ to: '/account', text: $username },
-				]}
-				bind:selected={path} />
-		{:else}
-			<Tabs
-				items={loginMenu}
-				bind:selected={path} />
-		{/if}
+		<Tabs
+			items={accountMenu}
+			bind:selected={path} />
 	</div>
 	<div class="leftmenu">
 		<Tabs

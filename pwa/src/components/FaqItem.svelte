@@ -8,7 +8,7 @@
     {#if Array.isArray(line)}
         <ul class="list-disc list-inside">
             {#each line as item}
-                <li>{item}</li>
+                <li>{@html item}</li>
             {/each}
         </ul>
     {:else}

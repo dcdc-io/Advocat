@@ -8,6 +8,8 @@
   import { goto } from "@sapper/app"
   import * as yup from 'yup'
 
+  let { loggedIn, username } = getContext("user");
+
   const SIGNIN = 0
   const SIGNINGIN = 1
   const MAGICLINKSENT = 2
@@ -45,8 +47,7 @@
           stage = SIGNIN
           error.email = "Something didn't work. Are these details correct?"
         }
-        else {
-          let { $loggedIn, $username } = getContext("user")
+        else {  
           $loggedIn = true
           $username = user.email.toLowerCase()
           goto(".")
