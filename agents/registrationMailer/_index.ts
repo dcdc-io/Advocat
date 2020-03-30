@@ -14,7 +14,8 @@ const emailSafe = str => { if (require('./rx.js').email.test(str)) { return str 
 const { DOMAIN = "advocat.group",
     SMTP_HOST = "localhost",
     SMTP_PASS,
-    SMTP_PORT = 25, SMTP_USER,
+    SMTP_PORT = 25,
+    SMTP_USER,
     MAILER_USER,
     MAILER_PASS,
     PROTOCOL,
@@ -32,7 +33,7 @@ const loop = async () => {
                 pass: SMTP_PASS
             }
         })
-        const messages = await fetch(`${PROTOCOL}://${MAILER_USER}:${MAILER_PASS}@${DOMAIN}:${PORT}/db/mail_outbox/_all_docs?include_docs=true`).then(res => res.json()).then(data => data.rows)
+        const messages = await fetch(`${PROTOCOL}://${MAILER_USER}:${MAILER_PASS}@${DOMAIN}${PORT ? `:${PORT}` : ""}/db/mail_outbox/_all_docs?include_docs=true`).then(res => res.json()).then(data => data.rows)
         for (let { doc } of messages) {
             try {
                 if (doc.status === "sent" || doc.type !== "email") {
@@ -57,7 +58,7 @@ const loop = async () => {
             } catch (error) {
                 doc.status = "error"
                 console.error(error)
-                await fetch(`${PROTOCOL}://${REGISTRATION_USER}:${REGISTRATION_PASS}@${DOMAIN}:${PORT}/db/registrations/${encodeURIComponent(doc._id)}?conflict=true`, {
+                await fetch(`${PROTOCOL}://${MAILER_USER}:${MAILER_PASS}@${DOMAIN}${PORT ? `:${PORT}` : ""}/db/mail_outbox/${encodeURIComponent(doc._id)}?conflict=true`, {
                     method: "PUT",
                     body: JSON.stringify(doc),
                     headers: { 'Content-Type': 'application/json' }
