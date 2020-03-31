@@ -12,7 +12,7 @@ let dbUrl = ""
 export const setDatabaseUrl = (url) => {
     console.log("setDatabaseUrl has been called")
     dbUrl = url
-}gi 
+}
 
 export const sendMail = async ({to, template, params}) => {
     const mail_outbox = globalThis.dbContext("mail_outbox")
@@ -20,6 +20,45 @@ export const sendMail = async ({to, template, params}) => {
         type: "email", to, template, params, timestamp: Date.now()
     })
     console.log(to, template, params)
+}
+
+export const randomString = () => require('crypto').randomBytes(16).toString("hex")
+export const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0, 32)
+
+export const signUp = async ({ name, email, location }) => {
+    try {
+        const token = randomString()
+        const registrations = globalThis.dbContext("registrations")
+        await registrations.post({
+            _id: hash(email.toLowerCase()), 
+            email,
+            name,
+            location,
+            token
+        })
+        await sendMail({
+            to: email,
+            template: "registration",
+            params:{
+                token
+            }
+        })
+        return {ok: true}
+    } catch(e) {
+        if(e.message == "Save failed: Document update conflict"){
+            await sendMail({
+                to: email,
+                template: "registration_duplicate",
+                params:{
+                    token
+                }
+            })
+            console.error(e)
+            return {ok: true}
+        }
+        console.error(e)
+        return {ok: false}
+    }
 }
 
 export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
@@ -66,22 +105,3 @@ export const checkLocalUser = async ({ loggedIn, username }) => {
         local.close()
     }
 }
-
-const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0, 32)
-
-export const signUp = async ({ name, email, location }) => {
-    try {
-        const registrations = useDatabase({ name: "registrations", onlyRemote: true })
-        const ok = await registrations.post({
-            _id: hash(email.toLowerCase()), 
-            email,
-            name,
-            location
-        })
-    } 
-    catch(e) {
-        console.error(e)
-    }
-}
-
-export let colourInvert = writable(false)

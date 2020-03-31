@@ -1,9 +1,9 @@
+import { randomString, hash } from "../../helpers.js"
+
 const sjcl = require("sjcl")
 const assert = require("assert")
 
 const lowercase = str => str.toLowerCase()
-const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0, 32)
-const randomString = () => require("crypto").randomBytes(16).toString("hex")
 
 export async function get(req, res, next) {
     const DB = globalThis.dbContext

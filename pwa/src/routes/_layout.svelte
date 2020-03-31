@@ -3,7 +3,7 @@
 
 	import Nav from '../components/Nav.svelte';
 	import { setContext, onMount } from 'svelte'
-	import { checkLocalUser, colourInvert } from "../helpers.js"
+	import { checkLocalUser } from "../helpers.js"
 
 	import { writable } from 'svelte/store'
 	const loggedIn = writable(false)
@@ -46,15 +46,9 @@
 
 <Nav {segment}></Nav>
 
-{#if $colourInvert}
 <main >
 	<slot></slot>
 </main>
-{:else}
-<main >
-	<slot></slot>
-</main>
-{/if}
 
 <div class="footer">
   <p><a href="data" class="underline">Data Policy</a> - <a href="about" class="underline">About</a> - <a href="faqs" class="underline">FAQs</a> - <a href="https://blog.advocat.group" target="_blank">Developer Blog</a></p>

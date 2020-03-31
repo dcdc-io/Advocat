@@ -3,7 +3,7 @@
 </svelte:head>
 
 <script>
-  import { useDatabase, colourInvert } from '../helpers.js'
+  import { useDatabase } from '../helpers.js'
   import { getContext } from "svelte";
   import { goto } from '@sapper/app'
   import GroupBrowser from '../components/GroupBrowser.svelte'
@@ -68,11 +68,11 @@
     <GroupBrowser {groups} />
   </div>
 {:else}
-  <div class="calltoaction" style="border: 2px solid {$colourInvert ? "var(--colour-scheme-light)" : "var(--colour-scheme-dark)" }" on:click={click("find_groups")}>
+  <div class="calltoaction" style="border: 2px solid var(--colour-scheme-dark)" on:click={click("find_groups")}>
     <h3 class="underline">Find Help</h3>
     <p>Find volunteer groups in your local area.</p>
   </div>
-  <div class="calltoaction" style="border: 2px solid {$colourInvert ? "var(--colour-scheme-light)" : "var(--colour-scheme-dark)" }" on:click={click("register")}>
+  <div class="calltoaction" style="border: 2px solid var(--colour-scheme-dark)" on:click={click("register")}>
     <h3 class="underline">Be a Volunteer</h3>
     <p>Create or join a volunteer group.</p>
   </div>

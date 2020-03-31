@@ -34,7 +34,14 @@
     if (ok) {
       user.location = await getLocation()
       try {
-        await signUp(user)
+        //await signUp(user)
+        await fetch("account/signup", {
+          method: "POST", 
+          body: JSON.stringify(user), 
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
       } catch(e) {
         // TODO: already registered this email?
         // TODO: should we send a reminder?
