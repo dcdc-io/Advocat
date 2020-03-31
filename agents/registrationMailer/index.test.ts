@@ -55,4 +55,26 @@ title: foobar
         }
         expect(actual).toEqual(expected)
     })
+    it('can load a sub template', async () => {
+        jest.mock('fs', () => ({
+            readFileSync: (name:string) => {
+                return "# file {name}"
+            }
+        }))
+        const actual = await lib.compileTemplate({
+            version: "0",
+            name: "",
+            source: `# title
+# file {file.md}`
+        }, {name: "test"})
+        const expected = {
+            body: `<h1>title</h1>
+<h1>file file.md</h1>
+`,
+            text: "TITLE\nFILE FILE.MD",
+            metadata: {},
+            subject: ""
+        }
+        expect(actual).toEqual(expected)
+    })
 })
