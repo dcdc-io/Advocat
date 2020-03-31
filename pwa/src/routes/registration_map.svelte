@@ -4,19 +4,6 @@
 
 <script>
 	import { onMount, getContext } from 'svelte';
-    import { useDatabase } from '../helpers.js';
-   
-    const locations = useDatabase({name:"locations"})
-    const users = useDatabase({name:"_users"})
-
-    let docs = []
-    locations.allDocs({include_docs: true}).then(alldocs => {
-        docs = [...alldocs.rows]
-    })
-
-    //users.allDocs({include_docs: true}).then(alldocs => {
-
-    //let { loggedIn, username } = getContext("user")
 
     const getLatLong = async () => {
         return new Promise((resolve, reject) => {
