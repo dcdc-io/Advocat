@@ -4,9 +4,10 @@
 
 <script>
 	import { getContext, onMount } from "svelte"
-	import { Button, TextField } from '../../node_modules/smelte/src'
+	import { useDatabase, getUserAccountDB } from "../helpers.js"
+	import { Button, TextField } from "../../node_modules/smelte/src"
 	import { goto } from "@sapper/app"
-	import * as yup from 'yup'
+	import * as yup from "yup"
 
 	let { loggedIn, username } = getContext("user");
 	let user = {
@@ -19,7 +20,9 @@
 		country: "",
 		postcode: "",
 	}
-	let error = {};
+	let error = {
+		email: ""
+	};
 	let validChangeDetected = false;
 
 	const handleSubmit = async () => {
@@ -27,6 +30,12 @@
 		if (validChangeDetected) {
 			// Update DB with user info
 			validChangeDetected = false;
+		}
+	}
+
+	const clearAllErrorText = () => {
+		for(const value of Object.values(error)) {
+			value = ""
 		}
 	}
 
@@ -41,6 +50,7 @@
 			country: yup.string().nullable(),
 			postcode: yup.string().nullable()
 		})
+		clearAllErrorText()
 		return schema.validate(user, {abortEarly: false}).then(() => {
 			validChangeDetected = true;
 		}).catch(err => {
@@ -52,7 +62,11 @@
 	}
 
 	onMount(async () => {
-		// Get user info
+		const _users = getUserAccountDB()
+		_users.allDocs({ include_docs: true }).then((docs) => {
+			user = docs.rows[0]
+			console.log(user)
+		})
 	});
 </script>
 
@@ -67,10 +81,11 @@
 	<form on:submit|preventDefault={handleSubmit} on:changed={validate} on:invalid={validate} on:input={validate}>
 		<div>
 			<p>Personal Information</p>
-			<TextField label="Email" bind:value={user.email} />
+			<TextField label="Email" bind:value={user.email} error={error.email} />
 			<TextField label="First Name" bind:value={user.firstName} />
 			<TextField label="Surname" bind:value={user.surname} />
 		</div>
+
 		<br>
 		<div>
 			<p>Address</p>

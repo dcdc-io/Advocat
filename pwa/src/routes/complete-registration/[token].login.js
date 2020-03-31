@@ -1,9 +1,7 @@
-import { randomString, hash } from "../../helpers.js"
+import { randomString, lowercase, hash } from "../../helpers.js"
 
 const sjcl = require("sjcl")
 const assert = require("assert")
-
-const lowercase = str => str.toLowerCase()
 
 export async function get(req, res, next) {
     const DB = globalThis.dbContext

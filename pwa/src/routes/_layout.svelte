@@ -13,7 +13,7 @@
 	export let segment;
 
 	onMount(() => {
-		checkLocalUser({ loggedIn, username })
+		checkLocalUser()
 	})
 </script>
 
