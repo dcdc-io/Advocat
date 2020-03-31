@@ -4,9 +4,10 @@
 
 <script>
 	import { getContext, onMount } from "svelte"
-	import { Button, TextField } from '../../node_modules/smelte/src'
+	import { useDatabase, getUserAccountDB } from "../helpers.js"
+	import { Button, TextField } from "../../node_modules/smelte/src"
 	import { goto } from "@sapper/app"
-	import * as yup from 'yup'
+	import * as yup from "yup"
 
 	let { loggedIn, username } = getContext("user");
 	let user = {
@@ -32,6 +33,12 @@
 		}
 	}
 
+	const clearAllErrorText = () => {
+		for(const value of Object.values(error)) {
+			value = ""
+		}
+	}
+
 	const validate = () => {
 		const schema = yup.object().shape({
 			email: yup.string().email().required(),
@@ -43,7 +50,7 @@
 			country: yup.string().nullable(),
 			postcode: yup.string().nullable()
 		})
-		error.email = "";
+		clearAllErrorText()
 		return schema.validate(user, {abortEarly: false}).then(() => {
 			validChangeDetected = true;
 		}).catch(err => {
@@ -55,7 +62,11 @@
 	}
 
 	onMount(async () => {
-		// Get user info
+		const _users = getUserAccountDB()
+		_users.allDocs({ include_docs: true }).then((docs) => {
+			user = docs.rows[0]
+			console.log(user)
+		})
 	});
 </script>
 
@@ -74,6 +85,7 @@
 			<TextField label="First Name" bind:value={user.firstName} />
 			<TextField label="Surname" bind:value={user.surname} />
 		</div>
+
 		<br>
 		<div>
 			<p>Address</p>

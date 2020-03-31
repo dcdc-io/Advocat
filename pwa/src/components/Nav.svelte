@@ -1,16 +1,11 @@
 <script>
 	import { stores } from '@sapper/app';
 	import { getContext } from 'svelte';
-	import { colourInvert } from '../helpers.js';
 	import { Tabs } from '../../node_modules/smelte/src';
 
     const { page } = stores();
 	let { loggedIn, username } = getContext("user")
 	let accountMenu = [];
-
-	function colourInvertButton() {
-		colourInvert.update(n => !n)
-	}
 
 	const navMenu = [
 		{ to: '/', text: 'Home'},
