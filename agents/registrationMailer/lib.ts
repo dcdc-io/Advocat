@@ -54,7 +54,7 @@ export async function compileTemplate(template:Template, replacements:any = {}):
         typographer: true
     })
     const replacementKeys = Object.keys(replacements)
-    const replace = async (source:string) => Promise<string> {
+    const replace = async (source:string): Promise<string> => {
         return await asyncStringReplace(source, /\{\s*([^\{\s]*)\s*\}/gm, async (_:string, substring:string) => {
             if (replacementKeys && replacementKeys.indexOf(substring) >= 0) {
                 if (typeof replacements[substring] === "function") {
