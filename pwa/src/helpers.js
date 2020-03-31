@@ -98,7 +98,11 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
 export const checkLocalUser = async () => {
     // use _local/ prefix on local only databases - it stops them syncing
     console.log("checking local user")
-    const { loggedIn, username } = getContext("user")
+    const userContext = getContext("user")
+    if (!userContext) {
+        return
+    }
+    const { loggedIn, username } = userContext
     let session
     let local
     try {
