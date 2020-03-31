@@ -10,8 +10,6 @@ PouchDB.plugin(pouchdbfind)
 
 let dbUrl = ""
 
-const { loggedIn, username } = getContext("user")
-
 export const lowercase = str => str.toLowerCase()
 export const randomString = () => require('crypto').randomBytes(16).toString("hex")
 export const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0, 32)
@@ -27,11 +25,15 @@ export const setDatabaseUrl = (url) => {
 }
 
 export const sendMail = async ({to, template, params}) => {
+    let mailParams = {}
+    for (let key of Object.keys(params)) {
+        mailParams[key] = typeof params[key] === "function" ? `func:${params[key].toString()}` : params[key]
+    }
     const mail_outbox = globalThis.dbContext("mail_outbox")
     await mail_outbox.post({
-        type: "email", to, template, params, timestamp: Date.now()
+        type: "email", to, template, params: mailParams, timestamp: Date.now()
     })
-    console.log(to, template, params)
+    console.log(to, template, mailParams)
 }
 
 export const signUp = async ({ name, email, location }) => {
@@ -46,10 +48,12 @@ export const signUp = async ({ name, email, location }) => {
             token
         })
         await sendMail({
-            to: email,
+            to: `"${name}" <${email}>`,
             template: "registration",
-            params:{
-                token
+            params: {
+                token,
+                name,
+                url: ({domain, token}) => `https://${domain}/complete-registration/${token}`
             }
         })
         return {ok: true}
@@ -94,6 +98,7 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
 export const checkLocalUser = async () => {
     // use _local/ prefix on local only databases - it stops them syncing
     console.log("checking local user")
+    const { loggedIn, username } = getContext("user")
     let session
     let local
     try {

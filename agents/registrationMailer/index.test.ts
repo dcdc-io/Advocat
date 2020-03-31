@@ -1,4 +1,6 @@
 import * as lib from "./lib"
+import { readFileSync } from "fs"
+const fs = require('fs')
 
 describe('findTemplate', () => {
     it('can load a template', async () => {
@@ -8,7 +10,7 @@ describe('findTemplate', () => {
         expect(actual.version).toEqual("0")
     })
     it('throws an exception when a template is not found', async () => {
-        expect(lib.findTemplate("BOGUS")).rejects.toEqual(Error("resource not found"))
+        expect(lib.findTemplate("BOGUS")).rejects.toEqual(Error("resource not found: BOGUS"))
     })
 })
 
@@ -19,18 +21,22 @@ describe('compileTemplate', () => {
             source:
                 `# title
 hello {title} {name}
+
+{complex}
 `, version: "0"
         }, {
             name: "test",
-            title: async () => "mister"
+            title: async () => "mister",
+            complex: "func:({name}) => `${name}`"
         })
         const expected = {
             metadata: {},
             subject: "",
-            text: "TITLE\nhello mister test",
+            text: "TITLE\nhello mister test\n\ntest",
             body:
                 `<h1>title</h1>
 <p>hello mister test</p>
+<p>test</p>
 `}
         expect(actual).toEqual(expected)
     })
@@ -56,25 +62,24 @@ title: foobar
         expect(actual).toEqual(expected)
     })
     it('can load a sub template', async () => {
-        jest.mock('fs', () => ({
-            readFileSync: (name:string) => {
-                return "# file {name}"
-            }
-        }))
+        const spy = jest.spyOn(fs, "readFileSync").mockImplementation(() => "# name = {name}")
         const actual = await lib.compileTemplate({
             version: "0",
             name: "",
             source: `# title
-# file {file.md}`
+# heading
+{file.md}`
         }, {name: "test"})
         const expected = {
             body: `<h1>title</h1>
-<h1>file file.md</h1>
+<h1>heading</h1>
+<h1>name = test</h1>
 `,
-            text: "TITLE\nFILE FILE.MD",
+            text: "TITLE\nHEADING\nNAME = TEST",
             metadata: {},
             subject: ""
         }
+        spy.mockRestore()
         expect(actual).toEqual(expected)
     })
 })

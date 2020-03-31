@@ -59,4 +59,4 @@
         await migrationdb.put(doc)
     })
     console.log("migration complete")
-})
+})()
