@@ -1,17 +1,16 @@
 <script>
-    import { useDatabase } from '../helpers.js'
+    import { useDatabase, validateClaimForm } from '../helpers.js'
     import * as yup from 'yup';
     import { onMount  } from 'svelte';
     import { Button, TextField, DatePicker } from '../../node_modules/smelte/src'
-
     
     export let template
     let formShape
     let files
     let filename = ""
 
-    let formdata
-    let formerror 
+    let formdata = {}
+    let formerror = {}
 
     $: {
         if (files && files.length) {
@@ -39,36 +38,13 @@
             console.error("e:", e)
         }        
     }
-
-    const generateValidation = (input) => {
-        return input.reduce( (total, fun) => {
-            return total[fun[0]](...fun.slice(1))
-        }, yup)
-    }
-
+   
     const validate = async () => {
-        return new Promise((resolve, reject) => {
-          let schema = {}
-          formShape.fields.forEach(field => 
-              schema[field.name] = generateValidation(field.validation)
-          )
-          schema = yup.object().shape(schema)
-          // reset errors
-          for (const key of Object.keys(formerror)) {
-              formerror[key] = ""
-          }
-          schema.validate(formdata, {abortEarly: false})
-            .then(async () => {
-              resolve(true)
-            })
-            .catch(err => {
-              (err.inner || []).forEach(err => {
-                console.log(err)
-                formerror[err.path] = err.message
-              })
-              resolve(false)
-            })
-        })
+        return await validateClaimForm(
+            formdata,
+            error => formerror = error,
+            formShape
+        )
     }
 
     const handleSubmit = async () => {

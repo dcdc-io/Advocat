@@ -5,6 +5,7 @@ import { getContext } from 'svelte'
 import pouchdbfind from 'pouchdb-find'
 import { writable } from 'svelte/store'
 import sjcl from "sjcl"
+import * as yup from "yup"
 
 PouchDB.plugin(PouchDBAuthentication)
 PouchDB.plugin(pouchdbfind)
@@ -128,4 +129,37 @@ export const checkLocalUser = async ({loggedIn, username}) => {
         local.close()
         return session.userCtx.name
     }
+}
+
+export const validateClaimForm = async(formdata, errorHandler, formShape) => {
+    const generateValidation = (input) => {
+        return input.reduce( (total, fun) => {
+            return total[fun[0]](...fun.slice(1))
+        }, yup)
+    }
+
+    return new Promise((resolve, reject) => {
+        let schema = {}
+        let formerror = {}
+        formShape.fields.forEach(field => {
+            formerror[field.name] = ""
+            schema[field.name] = generateValidation(field.validation)
+        })
+        schema = yup.object().shape(schema)
+                
+        schema.validate(formdata, {abortEarly: false})
+          .then(async () => {
+            errorHandler(formerror)
+            resolve(true)
+          })
+          .catch(err => {
+            let formerror = {};
+            (err.inner || []).forEach(err => {
+              console.log(err)
+              formerror[err.path] = err.message
+            })
+            errorHandler(formerror)
+            resolve(false)
+          })
+      })
 }
