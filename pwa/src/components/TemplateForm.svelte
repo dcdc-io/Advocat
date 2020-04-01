@@ -58,10 +58,9 @@
 
     const handleSubmit = async () => {
         isSubmitting = true
-  
         const ok = await validate()
         if(ok){
-            await (await getUserAccountDB(username)).post(formData)
+            await (await getUserAccountDB($username)).post(formData)
             isSubmitting = false
             console.log("yes")
         }else{
