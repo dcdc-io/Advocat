@@ -1,5 +1,5 @@
 import calculateSessionId from 'couchdb-calculate-session-id'
-import { sendMail } from "../helpers.js"
+import { sendMail, randomString } from "../helpers.js"
 import assert from "assert"
 
 export async function post(req, res, next) {
@@ -8,13 +8,24 @@ export async function post(req, res, next) {
         // magic link email
         // calculateSessionId(userDoc.name, userDoc.salt, info.secret, timestamp());
         const user = await _users.get(`org.couchdb.user:${req.body.email.toLowerCase()}`)
-        const info = await await require("pouchdb-auth/lib/utils").dbDataFor(_users)
+        const info = await require("pouchdb-auth/lib/utils").dbDataFor(_users)
         const sessionID = calculateSessionId(user.name, user.salt, info.secret, Math.round(Date.now() / 1000))
+        // gen token and put into magiclinks db
+        const token = randomString()
+        const magiclinks = globalThis.dbContext("magiclinks")
+        await magiclinks.post({
+            _id: token,
+            sessionID,
+            expires: Date.now() + 86400000
+        })
         // send session ID to user as email
-        sendMail({
-            to: user.name,
+        await sendMail({
+            to: user.email,
             template: "magiclink",
-            params: { sessionID }
+            params: {
+                name: user.name,
+                url: ({domain, token}) => `https://${domain}/account/signin.${token}`
+            }
         })
         res.send({ok:true})
         return

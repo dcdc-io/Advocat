@@ -6,7 +6,7 @@ subject: Sign In to advocat.
 
 We had a request to sign in to advocat. using your email **{email}**.
 
-Click {signInLink} to sign in.
+Click {url} to sign in.
 
 Once you have signed in you can change your password if you need to.
 

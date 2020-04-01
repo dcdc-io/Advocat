@@ -2,7 +2,7 @@
 subject: Your {domain} Registration
 ---
 
-### Hello again!.
+### Hello again!
 
 Hello {name}.
 

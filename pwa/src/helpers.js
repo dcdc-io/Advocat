@@ -1,3 +1,4 @@
+import calculateSessionId from 'couchdb-calculate-session-id'
 import PouchDB from 'pouchdb'
 import PouchDBAuthentication from 'pouchdb-authentication'
 import { getContext } from 'svelte'
@@ -58,12 +59,25 @@ export const signUp = async ({ name, email, location }) => {
         })
         return {ok: true}
     } catch(e) {
-        if(e.message == "Save failed: Document update conflict"){
+        if(/Document update conflict/.test(e.message)) {
+            const token = randomString()
+            const _users = await require("express-pouchdb/lib/utils").getUsersDB(globalThis.appContext, globalThis.dbContext)
+            const user = await _users.get(`org.couchdb.user:${email.toLowerCase()}`)
+            const info = await require("pouchdb-auth/lib/utils").dbDataFor(_users)
+            const sessionID = calculateSessionId(user.name, user.salt, info.secret, Math.round(Date.now() / 1000))
+            const magiclinks = globalThis.dbContext("magiclinks")
+            await magiclinks.post({
+                _id: token,
+                sessionID,
+                expires: Date.now() + 86400000
+            })
             await sendMail({
-                to: email,
-                template: "registration_duplicate",
+                to: user.email,
+                template: "registration-duplicate",
                 params:{
-                    token
+                    token,
+                    name,
+                    url: ({domain, token}) => `https://${domain}/account/signin.${token}`
                 }
             })
             console.error(e)
