@@ -1,5 +1,6 @@
 <script>
     import TemplateForm from "../components/TemplateForm.svelte";
+    import { Button, Snackbar, notifier, Notifications } from '../../node_modules/smelte/src'
     import Claim from "../components/claim.svelte";
     import { onMount, getContext } from 'svelte';
     import { getUserAccountDB } from '../helpers.js'
@@ -9,7 +10,6 @@
     let docs;
 
     const init = async () => {
-        window.db = await getUserAccountDB($username)
         docs = await (await getUserAccountDB($username)).allDocs({include_docs: true});
         docs = docs.rows.filter(row => {
             return row.doc.type === "claim"
@@ -20,6 +20,12 @@
         makingNewClaim = true;
     }
 
+    const completedClaim = _ => {
+        makingNewClaim = false;
+        notifier.notify("you got claim!")
+        init()
+    }
+
     onMount(() => {
         init();
     })
@@ -27,9 +33,9 @@
 
 {#if makingNewClaim}
     <!-- will have dropdown in future to select form  -->
-    <TemplateForm template="void-uk-covid-19-antibody-test"></TemplateForm>
+    <TemplateForm on:completed={completedClaim} template="void-uk-covid-19-antibody-test"></TemplateForm>
 {:else}
-    <button on:click={clickHandler}></button>
+    <Button on:click={clickHandler}>make new claim</Button>
 {/if}
 
 <div class="claim-list">
@@ -40,3 +46,4 @@
     {/if}
 </div>
 
+<Notifications />
