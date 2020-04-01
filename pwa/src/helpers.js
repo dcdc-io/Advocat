@@ -89,6 +89,9 @@ export const signUp = async ({ name, email, location }) => {
 }
 
 export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
+    if (!name){
+        throw "name not included in options"
+    }
     if (window === undefined) {
         onlyRemote = true
     }

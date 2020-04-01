@@ -1,7 +1,7 @@
 <script>
     import { useDatabase, validateClaimForm, getUserAccountDB} from '../helpers.js'
     import * as yup from 'yup';
-    import { onMount,getContext } from 'svelte';
+    import { onMount, getContext } from 'svelte';
     import { Button, TextField, DatePicker, Select } from '../../node_modules/smelte/src'
     
     export let template
@@ -10,7 +10,7 @@
     let filename = ""
     let isSubmitting = false
 
-    let { loggedIn, username } = getContext("user");
+    let { username } = getContext("user");
 
     let formData = {}
     let formError = {}
@@ -35,9 +35,8 @@
                 formData[field.name] = field.default
                 formError[field.name] = ""
             });
-            formData.formName = formShape.name
-            formData.formVersion = formShape.version
-            formData.type = "claim"
+            
+      
         } catch (e) {
             console.error("db:", db)
             console.error("template:", template)
@@ -60,7 +59,20 @@
         isSubmitting = true
         const ok = await validate()
         if(ok){
-            await (await getUserAccountDB($username)).post(formData)
+            let data = []
+            for(let key in formData)
+            {
+                data.push({
+                            name: key,
+                            value: formData[key]
+                         })
+            }
+            await (await getUserAccountDB($username)).post({
+                      "formName": formShape.name,
+                      "formVersion": formShape.version,
+                      "type": "claim",
+                      "fields": data
+            })
             isSubmitting = false
             console.log("yes")
         }else{

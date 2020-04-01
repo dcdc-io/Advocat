@@ -16,6 +16,7 @@
 	$: {
 		if ($loggedIn) {
 			accountMenu = [
+				{ to: '/claims', text: 'claims'},
 				{ to: '/account', text: $username },
 				{ to: '/signout', text: 'Logout' }
 			]
