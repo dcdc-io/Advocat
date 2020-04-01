@@ -29,30 +29,30 @@
 </script>
 
 <style>
-	.nav-box {
-		background: var(--colour-scheme-dark);
-	}
-	.rightmenu { 
-		width: 200px;
-		float: right;
-		overflow: auto; 
-	}
-	.leftmenu { 
-		width: 250px;
-		float: left;
-		overflow: auto; 
-		white-space: nowrap;
-	}
+    .nav-box {
+        background: var(--colour-scheme-dark);
+        display: flex;
+    }
+    .leftmenu { 
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+    }
+    .rightmenu { 
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
 </style>
 <div class="nav-box">
-	<div class="rightmenu">
-		<Tabs
-			items={accountMenu}
-			bind:selected={path} />
-	</div>
-	<div class="leftmenu">
-		<Tabs
-			items={navMenu}
-			bind:selected={path} />
-	</div>
+    <div class="leftmenu">
+        <Tabs
+            items={navMenu}
+            bind:selected={path} />
+    </div>
+    <div class="rightmenu">
+        <Tabs
+            items={accountMenu}
+            bind:selected={path} />
+    </div>
 </div>

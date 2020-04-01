@@ -60,7 +60,7 @@
 	$: {
 		getUserAccountDB($username).then(
 			_users => {
-				    _users.allDocs({ include_docs: true }).then((docs) => {					
+				    _users.allDocs({ include_docs: true }).then((docs) => {
 					console.log(docs)
 				})
 			}
@@ -102,6 +102,9 @@
 			<TextField label="Post/Zip Code" bind:value={user.postcode} />
 		</div>
 		<br>
+
+		
+
 		<Button block type="submit" disabled={!validChangeDetected}>Update Information</Button>
 	</form>
 	<br>
