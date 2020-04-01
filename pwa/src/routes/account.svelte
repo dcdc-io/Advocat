@@ -100,11 +100,15 @@
 			<TextField label="Town/City" bind:value={user.city} />
 			<TextField label="Country" bind:value={user.country} />
 			<TextField label="Post/Zip Code" bind:value={user.postcode} />
+			<TextField label="Phone Number" bind:value={user.phoneNumber} />
 		</div>
 		<br>
-
-		
-
+			<p>GP's info</p>
+			<TextField label="Address Line 1" bind:value={user.GP_addressLine1} />
+			<TextField label="Address Line 2" bind:value={user.GP_addressLine2} />
+			<TextField label="Town/City" bind:value={user.GP_city} />
+			<TextField label="email" bind:value={user.GP_Email} /> 
+		<br>
 		<Button block type="submit" disabled={!validChangeDetected}>Update Information</Button>
 	</form>
 	<br>

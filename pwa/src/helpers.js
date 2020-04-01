@@ -5,6 +5,7 @@ import { getContext } from 'svelte'
 import pouchdbfind from 'pouchdb-find'
 import { writable } from 'svelte/store'
 import sjcl from "sjcl"
+import * as yup from "yup"
 
 PouchDB.plugin(PouchDBAuthentication)
 PouchDB.plugin(pouchdbfind)
@@ -16,7 +17,7 @@ export const randomString = () => require('crypto').randomBytes(16).toString("he
 export const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0, 32)
 
 export const getUserAccountDB = async (username) => {
-    return useDatabase("user_" + (username ? hash(lowercase(username)) : "local"))
+    return useDatabase({name: "user_" + (username ? hash(lowercase(username)) : "local")})
 }
 
 export const setDatabaseUrl = (url) => {
@@ -88,6 +89,9 @@ export const signUp = async ({ name, email, location }) => {
 }
 
 export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
+    if (!name){
+        throw "name not included in options"
+    }
     if (window === undefined) {
         onlyRemote = true
     }
@@ -128,4 +132,36 @@ export const checkLocalUser = async ({loggedIn, username}) => {
         local.close()
         return session.userCtx.name
     }
+}
+
+export const validateClaimForm = async(formdata, errorHandler, formShape) => {
+    const generateValidation = (input) => {
+        return input.reduce( (total, fun) => {
+            return total[fun[0]](...fun.slice(1))
+        }, yup)
+    }
+
+    return new Promise((resolve, reject) => {
+        let schema = {}
+        let formerror = {}
+        formShape.fields.forEach(field => {
+            formerror[field.name] = ""
+            schema[field.name] = generateValidation(field.validation)
+        })
+        schema = yup.object().shape(schema)
+                
+        schema.validate(formdata, {abortEarly: false})
+          .then(async () => {
+            errorHandler(formerror)
+            resolve(true)
+          })
+          .catch(err => {
+            let formerror = {};
+            (err.inner || []).forEach(err => {
+              formerror[err.path] = err.message
+            })
+            errorHandler(formerror)
+            resolve(false)
+          })
+      })
 }

@@ -39,7 +39,6 @@
     let distance_in_km
     let distance = 0
 
-
     let postcode_url = "https://api.postcodes.io/postcodes/"
     let postcode_data = {result: {postcode: "loading",
                                   longitude: 0.0,
