@@ -1,16 +1,19 @@
 <script>
-    import { useDatabase, validateClaimForm } from '../helpers.js'
+    import { useDatabase, validateClaimForm, getUserAccountDB} from '../helpers.js'
     import * as yup from 'yup';
-    import { onMount  } from 'svelte';
-    import { Button, TextField, DatePicker } from '../../node_modules/smelte/src'
+    import { onMount,getContext } from 'svelte';
+    import { Button, TextField, DatePicker, Select } from '../../node_modules/smelte/src'
     
     export let template
     let formShape
     let files
     let filename = ""
+    let isSubmitting = false
 
-    let formdata = {}
-    let formerror = {}
+    let { loggedIn, username } = getContext("user");
+
+    let formData = {}
+    let formError = {}
 
     $: {
         if (files && files.length) {
@@ -27,11 +30,14 @@
         const db = await useDatabase({name:"claim_templates"})
         try {
             formShape = await db.get(template)
-            formdata = {
-                serialNumber: "",
-                date: "",
-                photo: {}
-            }
+            formData = {}
+            formShape.fields.forEach(field => {
+                formData[field.name] = field.default
+                formError[field.name] = ""
+            });
+            formData.formName = formShape.name
+            formData.formVersion = formShape.version
+            formData.type = "claim"
         } catch (e) {
             console.error("db:", db)
             console.error("template:", template)
@@ -40,18 +46,26 @@
     }
    
     const validate = async () => {
+        for(let error in formError){
+            error = "";
+        }
         return await validateClaimForm(
-            formdata,
-            error => formerror = error,
+            formData,
+            error => formError = error,
             formShape
         )
     }
 
     const handleSubmit = async () => {
+        isSubmitting = true
+  
         const ok = await validate()
         if(ok){
+            await (await getUserAccountDB(username)).post(formData)
+            isSubmitting = false
             console.log("yes")
         }else{
+            isSubmitting = false
             console.log("no")
         }
     }
@@ -70,21 +84,25 @@
             <h3>{formShape.name}</h3>
             {#each formShape.fields as field}
                 {#if field.inputType === "TextField"}
-                    <TextField label={field.label} bind:value={formdata[field.name]} error={formerror[field.name]}></TextField>
+                    <TextField label={field.label} bind:value={formData[field.name]} error={formError[field.name]}></TextField>
                 {:else if field.inputType === "DateField"}
-                    <DatePicker label={field.label} bind:value={formdata[field.name]}></DatePicker>
+                    <DatePicker label={field.label} bind:value={formData[field.name]}></DatePicker>
                 {:else if field.inputType === "FileField"}
                     <br/>
                     <label for="fileupload">
-                        UPLOAD (TODO: needs button style!)
+                        UPLOAD (TODO: needs button style!)<Button>test</Button>
                     </label>
                     <span>{filename}</span>
                     <input id="fileupload" style="display: none;" type="file" bind:files />
+                {:else if field.inputType === "SelectField"}
+                    <Select bind:value={formData[field.name]} items={field.values} />
                 {:else}
                     <p> unknown form data type detected </p>
                 {/if}
             {/each}
-            <Button block> submit </Button>
+            <Button block type="submit" disabled={isSubmitting}> submit </Button>
         </form>
+    {:else}
+        <p> form loading...</p>
     {/if}
 </div>

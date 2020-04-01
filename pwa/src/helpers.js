@@ -17,7 +17,7 @@ export const randomString = () => require('crypto').randomBytes(16).toString("he
 export const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0, 32)
 
 export const getUserAccountDB = async (username) => {
-    return useDatabase("user_" + (username ? hash(lowercase(username)) : "local"))
+    return useDatabase({name: "user_" + (username ? hash(lowercase(username)) : "local")})
 }
 
 export const setDatabaseUrl = (url) => {
@@ -155,7 +155,6 @@ export const validateClaimForm = async(formdata, errorHandler, formShape) => {
           .catch(err => {
             let formerror = {};
             (err.inner || []).forEach(err => {
-              console.log(err)
               formerror[err.path] = err.message
             })
             errorHandler(formerror)
