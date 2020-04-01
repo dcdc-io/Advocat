@@ -1,7 +1,3 @@
-<svelte:head>
-	<title>Account</title>
-</svelte:head>
-
 <script>
 	import { getContext, onMount } from "svelte"
 	import { useDatabase, getUserAccountDB } from "../helpers.js"
@@ -18,8 +14,8 @@
 		addressLine2: "",
 		city: "",
 		country: "",
-		postcode: "",
-	}
+		postcode: ""
+	};
 	let error = {
 		email: ""
 	};
@@ -34,8 +30,8 @@
 	}
 
 	const clearAllErrorText = () => {
-		for(const value of Object.values(error)) {
-			value = ""
+		for (const key of Object.keys(error)) {
+			error[key] = ""
 		}
 	}
 
@@ -61,14 +57,24 @@
 		})
 	}
 
+	$: {
+		getUserAccountDB($username).then(
+			_users => {
+				    _users.allDocs({ include_docs: true }).then((docs) => {					
+					console.log(docs)
+				})
+			}
+		)
+	}
+
 	onMount(async () => {
-		const _users = getUserAccountDB()
-		_users.allDocs({ include_docs: true }).then((docs) => {
-			user = docs.rows[0]
-			console.log(user)
-		})
+		
 	});
 </script>
+
+<svelte:head>
+	<title>advocat. account</title>
+</svelte:head>
 
 <style>
 	.login-redirect {

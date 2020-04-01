@@ -1,19 +1,17 @@
 <script>
 	import "smelte/src/tailwind.css";
-
 	import Nav from '../components/Nav.svelte';
 	import { setContext, onMount } from 'svelte'
 	import { checkLocalUser } from "../helpers.js"
-
 	import { writable } from 'svelte/store'
-	const loggedIn = writable(false)
-	const username = writable("empty")
-	setContext("user", { loggedIn, username })	
-
 	export let segment;
 
-	onMount(() => {
-		checkLocalUser()
+	const loggedIn = writable(false)
+	const username = writable("empty")
+	setContext("user", { loggedIn, username })
+
+	onMount(async () => {
+		await checkLocalUser({loggedIn, username})
 	})
 </script>
 

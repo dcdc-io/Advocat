@@ -15,9 +15,8 @@ export const lowercase = str => str.toLowerCase()
 export const randomString = () => require('crypto').randomBytes(16).toString("hex")
 export const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0, 32)
 
-export const getUserAccountDB = async _ => {
-    const email = await checkLocalUser()
-    return useDatabase("users_" + hash(lowercase(email)))
+export const getUserAccountDB = async (username) => {
+    return useDatabase("user_" + (username ? hash(lowercase(username)) : "local"))
 }
 
 export const setDatabaseUrl = (url) => {
@@ -96,6 +95,7 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
         throw "cannot useDatabase without a URL"
     }
     const url = `${dbUrl.replace(/\/$/, '')}${name ? '/' : ''}${name && name.replace(/^\//, '')}`
+    console.log(url)
     const remote = new PouchDB(url, { skip_setup: true })
     if (!onlyRemote) {
         const local = new PouchDB(`${name}`)
@@ -109,14 +109,8 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
     }
 }
 
-export const checkLocalUser = async () => {
+export const checkLocalUser = async ({loggedIn, username}) => {
     // use _local/ prefix on local only databases - it stops them syncing
-    console.log("checking local user")
-    const userContext = getContext("user")
-    if (!userContext) {
-        return
-    }
-    const { loggedIn, username } = userContext
     let session
     let local
     try {
