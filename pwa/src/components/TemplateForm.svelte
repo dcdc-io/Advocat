@@ -113,7 +113,7 @@
     {#if formShape}
         <form on:submit|preventDefault={handleSubmit} on:changed={validate} on:invalid={validate} on:input={validate}>
             <h3>{formShape.name}</h3>
-            {#each formShape.fields as field}
+            {#each formShape.fields.sort( (a,b) => a.order - b.order) as field}
                 {#if field.inputType === "TextField"}
                     <TextField label={field.label} bind:value={formData[field.name]} error={formError[field.name]}></TextField>
                 {:else if field.inputType === "DateField"}
