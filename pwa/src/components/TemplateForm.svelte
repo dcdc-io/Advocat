@@ -5,6 +5,8 @@
     import { Button, TextField, DatePicker, Select } from '../../node_modules/smelte/src'
     
     export let template
+    export let edit
+
     let formShape
     let files
     let filename = ""
