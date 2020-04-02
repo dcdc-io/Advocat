@@ -246,14 +246,14 @@ var requiresWriterWrapper = securityWrapper.bind(null, function (userCtx, securi
 });
 
 [
-  'changes', 'sync', 'replicate.to', 'replicate.from'
+  'sync', 'replicate.to', 'replicate.from'
 ].forEach(function (name) {
   securityWrappers[name] = requireMemberChangesWrapper;
 });
 
 [
   'get', 'allDocs', 'getAttachment', 'info', 'revsDiff', 'getSecurity', 'list',
-  'show', 'bulkGet', 'getIndexes', 'find', 'explain'
+  'show', 'bulkGet', 'getIndexes', 'find', 'explain', 'changes'
 ].forEach(function (name) {
   securityWrappers[name] = requiresReaderWrapper;
 });

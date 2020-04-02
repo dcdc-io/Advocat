@@ -1,0 +1,136 @@
+<script>
+    import { useDatabase, validateClaimForm, getUserAccountDB} from '../helpers.js'
+    import * as yup from 'yup';
+    import { onMount, getContext, createEventDispatcher } from 'svelte';
+    import { Button, TextField, DatePicker, Select } from '../../node_modules/smelte/src'
+    
+    export let template
+    let formShape
+    let files
+    let filename = ""
+    let isSubmitting = false
+
+    let { username } = getContext("user");
+
+    let formData = {}
+    let formError = {}
+
+    $: {
+        if (files && files.length) {
+            filename = files[0].name
+        }
+    }
+
+    const dispatch = createEventDispatcher()
+
+    const components = {
+        "TextField": TextField,
+        "Button": Button
+    }
+
+    const getCustomData = async (arg) =>{
+        if(!arg.custom){return arg}
+        //this is lazy for now
+        // in future assume user account db, account is id, name is part of the doc, this *might* be enough
+        if(arg.custom === "account.name"){            
+            return await (await (await getUserAccountDB($username)).get("account")).name
+        }
+    }
+
+    const init = async () => {
+        const db = await useDatabase({name:"claim_templates"})
+        try {
+            formShape = await db.get(template)
+            if (template.unique) {
+                // TODO: check for dupes, start in "edit mode if one already exists
+            }
+            formData = {}
+            formShape.fields.forEach( async field => {
+                formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
+                formError[field.name] = ""
+            });
+        } catch (e) {
+            console.error("db:", db)
+            console.error("template:", template)
+            console.error("e:", e)
+        }        
+    }
+   
+    const validate = async () => {
+        return await validateClaimForm(
+            formData,
+            error => formError = error,
+            formShape
+        )
+    }
+
+    const button_cancel = async () =>{
+        dispatch("cancel")
+    }
+
+    const handleSubmit = async () => {
+        isSubmitting = true
+        const ok = await validate()
+        if(ok){
+            let data = []
+            for(let key in formData)
+            {
+                data.push({
+                            name: key,
+                            value: formData[key]
+                         })
+            }
+            const doc = {
+                      "formName": formShape.name,
+                      "formVersion": formShape.version,
+                      "type": "claim",
+                      "fields": data
+            }
+            await (await getUserAccountDB($username)).post(doc)
+            dispatch("completed", doc)
+            isSubmitting = false
+            console.log("yes")
+        }else{
+            isSubmitting = false
+            console.log("no")
+        }
+    }
+       
+    onMount(() => {
+        if (template) {
+            init()
+        }
+    })
+</script>
+    
+<style></style>
+<div class="form_container">
+    {#if formShape}
+        <form on:submit|preventDefault={handleSubmit} on:changed={validate} on:invalid={validate} on:input={validate}>
+            <h3>{formShape.name}</h3>
+            {#each formShape.fields.sort( (a,b) => a.order - b.order) as field}
+                {#if field.inputType === "TextField"}
+                    <TextField label={field.label} bind:value={formData[field.name]} error={formError[field.name]}></TextField>
+                {:else if field.inputType === "DateField"}
+                    <DatePicker label={field.label} bind:value={formData[field.name]}></DatePicker>
+                {:else if field.inputType === "FileField"}
+                    <br/>
+                    <label for="fileupload">
+                        UPLOAD (TODO: needs button style!)<Button>test</Button>
+                    </label>
+                    <span>{filename}</span>
+                    <input id="fileupload" style="display: none;" type="file" bind:files />
+                {:else if field.inputType === "SelectField"}
+                    <Select bind:value={formData[field.name]} items={field.values} />
+                {:else}
+                    <p> unknown form data type detected </p>
+                {/if}
+            {/each}
+            <Button block type="submit" disabled={isSubmitting}> submit </Button> <br><br>
+            <Button block on:click={button_cancel} disabled={isSubmitting}>Cancel</Button>
+
+        </form>
+    {:else}
+        <p> form loading...</p>
+    {/if}
+</div>

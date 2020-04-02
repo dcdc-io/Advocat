@@ -1,3 +1,5 @@
+require("dotenv").config()
+
 import * as fuxor from 'fuxor'
 import * as pouchdbSecurity from '../../pouchdb-security'
 fuxor.add('pouchdb-security', pouchdbSecurity)

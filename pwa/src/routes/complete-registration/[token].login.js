@@ -19,16 +19,17 @@ export async function get(req, res, next) {
     // set a random password if they were not already in the _user database
     const password = randomString()
     await userDb.getSecurity().then(async doc => {
+        const app = globalThis.appContext
+        const _users = await require("express-pouchdb/lib/utils").getUsersDB(app, globalThis.dbContext)
         if (doc.members && doc.members.names && doc.members.names.includes(lowercase(reg.email))) {
             // the user has access
+            return res.send({ok: false, reason: "expired"})
         } else {
             // the user does not have access
             doc.members = doc.members || {}
             doc.members.names = [...doc.members.names || [], lowercase(reg.email)]
             const secObjOk = await userDb.putSecurity(doc)
             console.log(secObjOk)
-            const app = globalThis.appContext
-            const _users = await require("express-pouchdb/lib/utils").getUsersDB(app, globalThis.dbContext)
             await _users.put({
                 _id: "org.couchdb.user:" + lowercase(reg.email),
                 id: userIdentity,
@@ -47,5 +48,4 @@ export async function get(req, res, next) {
             return res.send({ ok: true })
         }
     })
-    return res.send({ ok: false })
 }

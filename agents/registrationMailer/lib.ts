@@ -14,13 +14,14 @@ export type Message = {
     subject: string,
     text: string,
     body: string,
-    metadata: any
+    metadata: any,
+    missingReplacements?: string[]
 }
-type ReplacerFunction = (...args:string[]) => Promise<string>
+type ReplacerFunction = (...args: string[]) => Promise<string>
 type Replacer = string | ReplacerFunction
 
 // credit: https://dev.to/ycmjason/stringprototypereplace-asynchronously-28k9
-async function asyncStringReplace(str:string, regex:RegExp, aReplacer:Replacer):Promise<string> {
+async function asyncStringReplace(str: string, regex: RegExp, aReplacer: Replacer): Promise<string> {
     const substrs = []
     let match
     let i = 0
@@ -43,33 +44,40 @@ export async function findTemplate(name: string): Promise<Template> {
             version: "0"
         }
     } catch (e) {
-        throw Error("resource not found")
+        throw Error(`resource not found: ${name}`)
     }
 }
 
-export async function compileTemplate(template:Template, replacements:any = {}): Promise<Message> {
+export async function compileTemplate(template: Template, replacements: any = {}): Promise<Message> {
     const md = markdown({
         html: true,
         xhtmlOut: true,
         typographer: true
     })
+    const missingReplacements:string[] = []
     const replacementKeys = Object.keys(replacements)
-    const replace = async (source:string): Promise<string> => {
-        return await asyncStringReplace(source, /\{\s*([^\{\s]*)\s*\}/gm, async (_:string, substring:string) => {
-            if (replacementKeys && replacementKeys.indexOf(substring) >= 0) {
+    const replace = async (source: string): Promise<string> => {
+        return await asyncStringReplace(source, /\{\s*([^\{\s]*)\s*\}/gm, async (_: string, substring: string) => {
+            if (/^func\:/.test(replacements[substring])) {
+                replacements[substring] = eval(replacements[substring])
+            }
+            if (replacementKeys && replacementKeys.indexOf(substring) >= 0) {                
                 if (typeof replacements[substring] === "function") {
-                    return await replacements[substring]()
-                }
-                if (/\.md$/.test(replacements[substring])) {
-                    return await replace((await findTemplate(replacements[substring])).source)
+                    return await replacements[substring](replacements)
                 }
                 return replacements[substring]
+            }
+            if (/\.md$/.test(substring)) {
+                return await replace((await findTemplate(substring.replace(/\.md$/, ""))).source)
+            }
+            if (!missingReplacements.includes(substring)) {
+                missingReplacements.push(substring)
             }
             return substring
         })
     }
     let source = await replace(template.source)
-    
+
     const fm = frontmatter(await source)
     const body = md.render(await fm.body)
     const text = htmltotext.fromString(body)
@@ -77,6 +85,7 @@ export async function compileTemplate(template:Template, replacements:any = {}):
         subject: (fm.attributes as any).subject || "",
         body,
         text,
-        metadata: fm.attributes
+        metadata: fm.attributes,
+        ...(missingReplacements.length ? { missingReplacements } : {})
     }
 }

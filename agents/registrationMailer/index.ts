@@ -5,14 +5,14 @@ import { findTemplate, compileTemplate } from "./lib"
 import nodemailer from 'nodemailer'
 import fetch from 'node-fetch'
 
-const emailSafe = (str:string) => { if (require('./rx.js').email.test(str)) { return str } else { throw "invalid email address" } }
+const emailSafe = (str:string) => { if (require('./rx.js').email.test(str.split("<").reverse()[0].trim().replace(">",""))) { return str } else { throw "invalid email address" } }
 
 const randomString = () => require('crypto').randomBytes(16).toString("hex")
 
 const { DOMAIN = "advocat.group",
     MESSAGE_DELAY = "10000",
     RECOVERY_TIME = "60000",
-    EMAIL_FROM,
+    EMAIL_FROM = "advocat. <advocat@dcdc.io>",
     SMTP_HOST = "localhost",
     SMTP_PASS,
     SMTP_PORT = "25",
@@ -22,7 +22,9 @@ const { DOMAIN = "advocat.group",
     PROTOCOL,
     PORT = "443" } = process.env
 
-const wellKnownReplacements = {}
+const wellKnownReplacements = {
+    domain: DOMAIN
+}
 
 const loop = async () => {
     try {
@@ -56,6 +58,11 @@ const loop = async () => {
                     html: compiled.body
                 })
                 console.log(info)
+                await fetch(`${PROTOCOL}://${MAILER_USER}:${MAILER_PASS}@${DOMAIN}${PORT ? `:${PORT}` : ""}/db/mail_outbox/${encodeURIComponent(doc._id)}?conflict=true`, {
+                    method: "PUT",
+                    body: JSON.stringify(doc),
+                    headers: { 'Content-Type': 'application/json' }
+                })
             } catch (error) {
                 doc.status = "error"
                 console.error(error)

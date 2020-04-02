@@ -1,20 +1,35 @@
-<script context="module">
-    let token
+<script>
+    import { onMount } from "svelte"
+    import MakeClaim from "../../components/MakeClaim.svelte";
+
+    
     let readyToUse = false
-    export async function preload({ params: { token: incomingToken }}) {
-        if (window) {
-            token = incomingToken
-            const x = await this.fetch(`${window.location.href}.login`)
-            console.log(x)
-            readyToUse = true
+    let expiredLink = false
+    
+    onMount(async () => {
+        const result = await fetch(`${window.location.href}.login`).then(raw => raw.json())
+        console.log(result)
+        if (!result.ok) {
+            if (result.reason && /expired/.test(result.reason)) {
+                expiredLink = true
+            }
         }
-    }
+        readyToUse = true
+    })
 </script>
 
-<div>hello</div>
+{#if !readyToUse}
+<div>Please wait...</div>
+{/if}
 
-{#if readyToUse}
+{#if readyToUse && !expiredLink}
 <div>
-    this content is only available when you have signed in
+    <MakeClaim></MakeClaim>
+</div>
+{/if}
+
+{#if expiredLink}
+<div>
+    The registration you are trying to complete has already been completed.
 </div>
 {/if}

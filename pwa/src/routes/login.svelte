@@ -47,7 +47,7 @@
           stage = SIGNIN
           error.email = "Something didn't work. Are these details correct?"
         }
-        else {  
+        else {
           $loggedIn = true
           $username = user.email.toLowerCase()
           goto(".")
