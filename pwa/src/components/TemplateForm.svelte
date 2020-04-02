@@ -41,16 +41,14 @@
         const db = await useDatabase({name:"claim_templates"})
         try {
             formShape = await db.get(template)
-            if(template.unique){
-                //TODO: check for dupes, start in "edit mode if one already exists
+            if (template.unique) {
+                // TODO: check for dupes, start in "edit mode if one already exists
             }
             formData = {}
             formShape.fields.forEach( async field => {
                 formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
                 formError[field.name] = ""
             });
-            
-      
         } catch (e) {
             console.error("db:", db)
             console.error("template:", template)
@@ -59,9 +57,6 @@
     }
    
     const validate = async () => {
-        for(let error in formError){
-            error = "";
-        }
         return await validateClaimForm(
             formData,
             error => formError = error,

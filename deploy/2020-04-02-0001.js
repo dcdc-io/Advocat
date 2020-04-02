@@ -14,7 +14,7 @@
         "void": true,
         /* this value indicates you can only make one claim of this type */
         "unique": true,
-        "name": "UK GP (DEMO)",
+        "name": "UK Registered GP (DEMO)",
         "fields": [
           {
               "label": "Full Name",

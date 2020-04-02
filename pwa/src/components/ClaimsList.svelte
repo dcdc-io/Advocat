@@ -9,11 +9,13 @@
 
     const init = async () => {
         db = await getUserAccountDB($username)
+        /* TODO: this causes client side memory leak 
         db.changes({
             since: 'now',
             live: true,
             include_docs: true
         }).on('change', function(change) {updateDocs()})
+        */
         updateDocs()
     }
 
