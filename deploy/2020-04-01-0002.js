@@ -37,7 +37,7 @@ require("./_migrate")("2020-04-01-0002", async ({ createDatabase, useDatabase })
         },
         {
           "label": "Outcome",
-          "name": "outome",
+          "name": "outcome",
           "default": "",
           "inputType": "SelectField",
           "values": [

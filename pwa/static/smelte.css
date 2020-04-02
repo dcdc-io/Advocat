@@ -17,7 +17,7 @@ p.svelte-13vgy2g{
     font-size:4em
   }
 }
-main.svelte-z517hf{
+main.svelte-7na5hc{
   max-width:600px;
   margin:0 auto;
   padding:2em;
@@ -26,7 +26,7 @@ main.svelte-z517hf{
   color:var(--colour-scheme-dark)
 }
 
-.footer.svelte-z517hf{
+.footer.svelte-7na5hc{
   padding:1em;
   text-align:center;
   color:black;
@@ -82,7 +82,7 @@ ul.svelte-1she90c{
 .content.svelte-dkhkxh li{
   margin:0 0 0.5em 0
 }
-.nav-box.svelte-1iex9l9{
+.nav-box.svelte-1sx0zty{
   background:var(--colour-scheme-dark);
   display:flex
 }
@@ -489,6 +489,11 @@ ul.svelte-1she90c{
   animation:svelte-1xkiyez-rotate 2s linear infinite;
   position:relative
 }
+.circular.svelte-1xkiyez{
+  -webkit-animation:svelte-1xkiyez-rotate 2s linear infinite;
+  animation:svelte-1xkiyez-rotate 2s linear infinite;
+  position:relative
+}
 
 .path.svelte-1xkiyez{
   stroke-dasharray:1, 200;
@@ -544,16 +549,6 @@ ul.svelte-1she90c{
     stroke-dasharray:89, 200;
     stroke-dashoffset:-124
   }
-}
-.p-1\/2.svelte-ixci48{
-  padding:0.125rem
-}
-.drawer.svelte-12w8ugb{
-  min-width:250px
-}
-
-aside.svelte-12w8ugb{
-  height:calc(100vh - 4rem)
 }
 .reverse.svelte-zzky5a{
   -webkit-transform:rotate(180deg);
@@ -638,14 +633,21 @@ aside.svelte-12w8ugb{
   -o-transition:font-size 0.05s, line-height 0.1s;
   transition:font-size 0.05s, line-height 0.1s
 }
+.ripple.svelte-1o8z87d{
+  position:absolute !important
+}
+.drawer.svelte-12w8ugb{
+  min-width:250px
+}
+
+aside.svelte-12w8ugb{
+  height:calc(100vh - 4rem)
+}
 .tooltip.svelte-1n6auy7{
   left:50%;
   -webkit-transform:translateX(-50%);
   -ms-transform:translateX(-50%);
   transform:translateX(-50%)
-}
-.ripple.svelte-1o8z87d{
-  position:absolute !important
 }
 th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
   -webkit-transform:rotate(180deg);
