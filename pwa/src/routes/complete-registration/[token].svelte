@@ -1,7 +1,9 @@
 <script>
+    import { onMount } from "svelte"
+    
     let readyToUse = false
     let expiredLink = false
-    import { onMount } from "svelte"
+    
     onMount(async () => {
         const result = await fetch(`${window.location.href}.login`).then(raw => raw.json())
         console.log(result)
@@ -21,6 +23,7 @@
 {#if readyToUse && !expiredLink}
 <div>
     This content is only available when you have signed in
+    <ClaimMaker></ClaimMaker>
 </div>
 {/if}
 

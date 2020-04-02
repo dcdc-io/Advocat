@@ -32,8 +32,6 @@
         if(!arg.custom){return arg}
         //this is lazy for now
         // in future assume user account db, account is id, name is part of the doc, this *might* be enough
-        console.log(arg)
-        console.log(await getUserAccountDB($username))
         if(arg.custom === "account.name"){            
             return await (await (await getUserAccountDB($username)).get("account")).name
         }
@@ -93,7 +91,6 @@
                       "type": "claim",
                       "fields": data
             }
-            console.log(doc)
             await (await getUserAccountDB($username)).post(doc)
             dispatch("completed", doc)
             isSubmitting = false

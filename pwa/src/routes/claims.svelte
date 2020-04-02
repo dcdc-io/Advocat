@@ -1,7 +1,7 @@
 <script>
     import TemplateForm from "../components/TemplateForm.svelte";
     import { Button, Snackbar, notifier, Notifications } from '../../node_modules/smelte/src'
-    import Claim from "../components/claim.svelte";
+    import ClaimsList from "../components/ClaimsList.svelte"
     import { onMount, getContext } from 'svelte';
     import { getUserAccountDB } from '../helpers.js'
       
@@ -24,7 +24,7 @@
 
     const cancelledClaim = _ => {
         claimBeingMade = false;
-        notifier.notify("Claim was cancelled")
+        notifier.notify("cancelled claim submission")
     }
 
     const button_COVID19 = () =>{
@@ -40,16 +40,10 @@
     })
 </script>
 
-<div class="claim-list">
-    {#if docs}
-        {#each docs as doc}
-            <Claim claim={doc.doc}></Claim>
-        {/each}
-    {/if}
-</div>
+<ClaimsList></ClaimsList>
 
 {#if claimBeingMade}
-    <TemplateForm on:canvel={cancelledClaim} on:completed={completedClaim} template={claimBeingMade}></TemplateForm>
+    <TemplateForm on:cancel={cancelledClaim} on:completed={completedClaim} template={claimBeingMade}></TemplateForm>
 {:else}
 <!-- TODO: in future this will be a dropdown -->
     <div class="button-container">
