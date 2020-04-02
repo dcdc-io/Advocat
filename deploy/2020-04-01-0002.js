@@ -1,4 +1,4 @@
-require("./_migrate")("2020-04-01-0001", async ({ createDatabase, useDatabase }) => {
+require("./_migrate")("2020-04-01-0002", async ({ createDatabase, useDatabase }) => {
 
   /**************************************************/
   /*             START OF DEPLOYMENT                */

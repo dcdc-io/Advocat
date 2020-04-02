@@ -30,12 +30,13 @@
             let account
             try {
                 account = await userDb.get("account")
+                console.log("rev comparision:", user._rev || "none", account._rev || "none")
                 user._rev = account._rev
             } catch(e) {
                 console.log("getAccount error: ", e)
             } finally {
                 user._id = "account"
-                userDb.put(user)
+                await userDb.put(user)
             }
         }
         if (validChangeDetected) {
@@ -85,6 +86,7 @@
             user = await userDb.get("account")
         } catch(e) {
             // not found?
+            console.log(e)
         } finally {
             userDataLoaded = true
         }

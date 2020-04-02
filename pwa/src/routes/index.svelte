@@ -14,10 +14,12 @@
   let groups = []
   $: {
     if ($loggedIn) {
+     /* 
       groupsDb = useDatabase({name:"groups"})
       groupsDb.allDocs({include_docs:true}).then(result => {
         groups = result.rows.map(r => r.doc)
       })
+      */
     }
   }
 

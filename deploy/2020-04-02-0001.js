@@ -31,7 +31,7 @@
             "validation": [["string"], ["required"]]
           },
           {
-            "label": "video of you holding ID and saying this is for advocat",
+            "label": "video of you holding ID and saying this is for advocat.",
             "name": "video",
             "default": {},
             "inputType": "FileField",
