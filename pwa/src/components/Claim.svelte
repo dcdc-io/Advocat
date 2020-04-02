@@ -18,13 +18,13 @@
 
 <div class="claim-container" id="claim.formName">
     {#if claim}
-        <h5> {claim.formName} - version {claim.formVersion}  <Edit size=4em ></Edit> </h5> 
+        <h5>{claim.formName} - v{claim.formVersion}</h5> 
         {#each claim.fields.sort( (a,b) => a.order - b.order) as data}
             <div class="claim-field">
                 <label class="claim-field-name">{data.name}:</label>
                 <span class="claim-field-data">{data.value}</span>
             </div>
-        {/each}      
+        {/each}
          <Edit size=3em ></Edit><Delete size=3em ></Delete>
     {:else}
         no claim being passed

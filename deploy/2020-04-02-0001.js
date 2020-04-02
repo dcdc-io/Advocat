@@ -14,11 +14,11 @@
         "void": true,
         /* this value indicates you can only make one claim of this type */
         "unique": true,
-        "name": "I am a GP(DEMO)",
+        "name": "UK GP (DEMO)",
         "fields": [
           {
-              "label": "name",
-              "name": "Full Name",
+              "label": "Full Name",
+              "name": "name",
               "default": {"custom": "account.name"},
               "inputType": "TextField",
               "validation": [["string"], ["required"]],
