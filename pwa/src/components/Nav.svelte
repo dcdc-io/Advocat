@@ -9,14 +9,14 @@
 
 	const navMenu = [
 		{ to: '/', text: 'Home'},
-		{ to: '/registration_map', text: 'Registration Map'}
+		{ to: '/registration_map', text: 'Map'}
 	]
 
 	$: path = $page.path;
 	$: {
 		if ($loggedIn) {
 			accountMenu = [
-				{ to: '/claims', text: 'claims'},
+				{ to: '/claims', text: 'Tech Preview'},
 				{ to: '/account', text: $username },
 				{ to: '/signout', text: 'Logout' }
 			]

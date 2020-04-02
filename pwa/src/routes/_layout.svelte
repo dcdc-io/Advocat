@@ -1,5 +1,5 @@
 <script>
-	import "smelte/src/tailwind.css";
+	import "../../node_modules/smelte/src/tailwind.css";
 	import Nav from '../components/Nav.svelte';
 	import { setContext, onMount } from 'svelte'
 	import { checkLocalUser } from "../helpers.js"
