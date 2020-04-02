@@ -91,8 +91,9 @@ export const signUp = async ({ name, email, location }) => {
     }
 }
 
+const databaseCache = {}
 export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
-    if (!name){
+    if (!name) {
         throw "name not included in options"
     }
     if (window === undefined) {
@@ -102,15 +103,36 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
         throw "cannot useDatabase without a URL"
     }
     const url = `${dbUrl.replace(/\/$/, '')}${name ? '/' : ''}${name && name.replace(/^\//, '')}`
-    const remote = new PouchDB(url, { skip_setup: true })
-    if (!onlyRemote) {
-        const local = new PouchDB(`${name}`)
-        if (sync) {
-            local.sync(remote, { live: true, retry: true }).on('error', console.log.bind(console))
+    const cacheKey = `${name}:${sync}:${onlyRemote}`
+    if (onlyRemote === false) {
+        if (Object.keys(databaseCache).indexOf(cacheKey) >= 0) {
+            // existing db
+            return databaseCache[cacheKey]
         }
-        local.__remote = remote
+        const local = new PouchDB(name)
+        if (sync) {
+            local.replicate.from(url).on('complete', (info) => {
+                local.sync(url, { live: true, retry: true })
+                    .on('change', function() { console.log("change") })
+                    .on('paused', function() { console.log("paused") })
+                    .on('error', function() { console.log("error") })
+            }).on('error', function() { console.log("error") })
+        }
+        databaseCache[cacheKey] = local
+        const close = local.close.bind(local)
+        local.close = () => {
+            close()
+            delete databaseCache[cacheKey]
+        }
         return local
     } else {
+        const remote = new PouchDB(url, { skip_setup: true })
+        databaseCache[cacheKey] = remote
+        const close = remote.close.bind(remote)
+        remote.close = () => {
+            close()
+            delete databaseCache[cacheKey]
+        }
         return remote
     }
 }
@@ -118,10 +140,10 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
 export const checkLocalUser = async ({loggedIn, username}) => {
     // use _local/ prefix on local only databases - it stops them syncing
     let session
-    let local
+    let db
     try {
-        local = useDatabase({ name: "_users", sync: false })
-        session = await local.__remote.getSession()
+        db = useDatabase({ name: "_users", onlyRemote: true })
+        session = await db.getSession()
         if (session.ok && session.userCtx.name) {
             username.set(session.userCtx.name)
             loggedIn.set(true)
@@ -130,8 +152,7 @@ export const checkLocalUser = async ({loggedIn, username}) => {
         // don't rethrow
         console.log(e)
     } finally {
-        local.__remote.close()
-        local.close()
+        db.close()
         return session.userCtx.name
     }
 }

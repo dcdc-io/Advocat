@@ -35,7 +35,7 @@
         {#if IsEditing}
             <TemplateForm  on:cancel={cancelledClaim} on:completed={updateClaim}  form={claim.formName} edit={claim}></TemplateForm>
         {:else}
-            <h5> {claim.formName} - version {claim.formVersion}  <Edit size=4em ></Edit> </h5> 
+            <h5> {claim.formName} - v{claim.formVersion}  <Edit size=4em ></Edit> </h5> 
             {#each claim.fields.sort( (a,b) => a.order - b.order) as data}
                 <div class="claim-field">
                     <label class="claim-field-name">{data.name}:</label>

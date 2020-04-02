@@ -14,11 +14,11 @@
         "void": true,
         /* this value indicates you can only make one claim of this type */
         "unique": true,
-        "name": "I am a GP(DEMO)",
+        "name": "UK GP (DEMO)",
         "fields": [
           {
-              "label": "name",
-              "name": "Full Name",
+              "label": "Full Name",
+              "name": "name",
               "default": {"custom": "account.name"},
               "inputType": "TextField",
               "validation": [["string"], ["required"]],
@@ -33,7 +33,7 @@
             "order": 20
           },
           {
-            "label": "video of you holding ID and saying this is for advocat",
+            "label": "video of you holding ID and saying this is for advocat.",
             "name": "video",
             "default": {},
             "inputType": "FileField",
@@ -46,7 +46,7 @@
     )
     
     await claim_templates.get("void-uk-covid-19-antibody-test").then( doc => {
-      return debug.put({{
+      return debug.put({
         "_id": "void-uk-covid-19-antibody-test",
         "_rev": doc._rev,
         /* this value indicates this schema is void and 
