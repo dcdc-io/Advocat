@@ -98,26 +98,6 @@ ul.svelte-1she90c{
   display:flex;
   justify-content:flex-end
 }
-@media only screen and (max-width: 499px){
-  #mapTarget.svelte-16d87ic{
-    width:250px;
-    height:400px
-  }
-}
-
-@media only screen and (min-width: 500px) and (max-width: 999px){
-  #mapTarget.svelte-16d87ic{
-    width:500px;
-    height:650px
-  }
-}
-
-@media only screen and (min-width: 1000px){
-  #mapTarget.svelte-16d87ic{
-    width:600px;
-    height:800px
-  }
-}
 .jobs_list.svelte-1vjnm4u{
   display:yes
 }
@@ -151,6 +131,26 @@ ul.svelte-1she90c{
 
 .failed.svelte-1vjnm4u{
   color:red
+}
+@media only screen and (max-width: 499px){
+  #mapTarget.svelte-16d87ic{
+    width:250px;
+    height:400px
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 999px){
+  #mapTarget.svelte-16d87ic{
+    width:500px;
+    height:650px
+  }
+}
+
+@media only screen and (min-width: 1000px){
+  #mapTarget.svelte-16d87ic{
+    width:600px;
+    height:800px
+  }
 }
 .claim-container.svelte-197jds4{
   margin:3px;
@@ -484,6 +484,27 @@ ul.svelte-1she90c{
 .wrapper.svelte-142y8oi{
   display:inline-block
 }
+.p-1\/2.svelte-ixci48{
+  padding:0.125rem
+}
+.reverse.svelte-zzky5a{
+  -webkit-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+  transform:rotate(180deg)
+}
+
+.tip.svelte-zzky5a{
+  -webkit-transform:rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform:rotate(90deg)
+}
+.drawer.svelte-12w8ugb{
+  min-width:250px
+}
+
+aside.svelte-12w8ugb{
+  height:calc(100vh - 4rem)
+}
 .inc.svelte-mguqwa{
   -webkit-animation:svelte-mguqwa-increase 2s ease-in-out infinite;
   animation:svelte-mguqwa-increase 2s ease-in-out infinite
@@ -540,27 +561,6 @@ ul.svelte-1she90c{
     left:110%;
     width:10%
   }
-}
-.reverse.svelte-zzky5a{
-  -webkit-transform:rotate(180deg);
-  -ms-transform:rotate(180deg);
-  transform:rotate(180deg)
-}
-
-.tip.svelte-zzky5a{
-  -webkit-transform:rotate(90deg);
-  -ms-transform:rotate(90deg);
-  transform:rotate(90deg)
-}
-.p-1\/2.svelte-ixci48{
-  padding:0.125rem
-}
-.drawer.svelte-12w8ugb{
-  min-width:250px
-}
-
-aside.svelte-12w8ugb{
-  height:calc(100vh - 4rem)
 }
 .circular.svelte-1xkiyez{
   -webkit-animation:svelte-1xkiyez-rotate 2s linear infinite;
@@ -623,10 +623,11 @@ aside.svelte-12w8ugb{
     stroke-dashoffset:-124
   }
 }
-th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
-  -webkit-transform:rotate(180deg);
-  -ms-transform:rotate(180deg);
-  transform:rotate(180deg)
+.snackbar.svelte-1ym8qvd{
+  min-width:344px
+}
+.line.svelte-xd9zs6{
+  height:1px
 }
 .tooltip.svelte-1n6auy7{
   left:50%;
@@ -634,8 +635,13 @@ th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
   -ms-transform:translateX(-50%);
   transform:translateX(-50%)
 }
-.snackbar.svelte-1ym8qvd{
-  min-width:344px
+th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
+  -webkit-transform:rotate(180deg);
+  -ms-transform:rotate(180deg);
+  transform:rotate(180deg)
+}
+.ripple.svelte-1o8z87d{
+  position:absolute !important
 }
 .label-top.svelte-81hn54{
   line-height:0.05
@@ -645,12 +651,6 @@ th.svelte-1qy4u3g .asc.svelte-1qy4u3g{
   -webkit-transition:font-size 0.05s, line-height 0.1s;
   -o-transition:font-size 0.05s, line-height 0.1s;
   transition:font-size 0.05s, line-height 0.1s
-}
-.ripple.svelte-1o8z87d{
-  position:absolute !important
-}
-.line.svelte-xd9zs6{
-  height:1px
 }
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 
