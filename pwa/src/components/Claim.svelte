@@ -16,7 +16,7 @@
 <div class="claim-container" id="claim.formName">
     {#if claim}
         <h5> {claim.formName} - version {claim.formVersion}</h5>
-        {#each claim.fields as data}
+        {#each claim.fields.sort( (a,b) => a.order - b.order) as data}
             <div class="claim-field">
                 <label class="claim-field-name">{data.name}:</label>
                 <span class="claim-field-data">{data.value}</span>
