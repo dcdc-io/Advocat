@@ -1,5 +1,7 @@
 <script>
     import { onMount } from "svelte"
+    import MakeClaim from "../../components/MakeClaim.svelte";
+
     
     let readyToUse = false
     let expiredLink = false
@@ -22,8 +24,7 @@
 
 {#if readyToUse && !expiredLink}
 <div>
-    This content is only available when you have signed in
-    <ClaimMaker></ClaimMaker>
+    <MakeClaim></MakeClaim>
 </div>
 {/if}
 
