@@ -34,6 +34,7 @@
             } catch(e) {
                 console.log("getAccount error: ", e)
             } finally {
+                user._id = "account"
                 userDb.put(user)
             }
         }
@@ -74,7 +75,9 @@
             })
         })
     }
-    
+    $: {
+        
+    }
     onMount(async () => {
         console.log("==== getting user data for " + $username)
         const userDb = await getUserAccountDB($username)
@@ -85,7 +88,6 @@
         } finally {
             userDataLoaded = true
         }
-
     });
 </script>
 
