@@ -17,7 +17,10 @@ export const randomString = () => require('crypto').randomBytes(16).toString("he
 export const hash = str => sjcl.codec.hex.fromBits(sjcl.hash.sha256.hash(str)).substr(0, 32)
 
 export const getUserAccountDB = async (username) => {
-    return useDatabase({name: "user_" + (username ? hash(lowercase(username)) : "local")})
+    return useDatabase({
+        name: "user_" + ((username && username !== "empty") ? hash(lowercase(username)) : "local"),
+        sync: (username && username !== "empty")
+    })
 }
 
 export const setDatabaseUrl = (url) => {

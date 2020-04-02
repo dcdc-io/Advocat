@@ -22,7 +22,7 @@
 
     const completedClaim = _ => {
         makingNewClaim = false;
-        notifier.notify("you got claim!")
+        notifier.notify("Claim successfully recorded.")
         init()
     }
 
@@ -35,7 +35,7 @@
     <!-- will have dropdown in future to select form  -->
     <TemplateForm on:completed={completedClaim} template="void-uk-covid-19-antibody-test"></TemplateForm>
 {:else}
-    <Button on:click={clickHandler}>make new claim</Button>
+    <Button on:click={clickHandler} block>Record COVID-19 Antibody Test</Button>
 {/if}
 
 <div class="claim-list">

@@ -23,7 +23,7 @@ const { DOMAIN = "advocat.group",
     PORT = "443" } = process.env
 
 const wellKnownReplacements = {
-    domain: "advocat.group"
+    domain: DOMAIN
 }
 
 const loop = async () => {
