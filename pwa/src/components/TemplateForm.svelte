@@ -46,9 +46,16 @@
             if(template.unique){
                 //TODO: check for dupes, start in "edit mode if one already exists
             }
-            formData = {}
+            if(edit) {
+                formData = edit
+            }else{
+                formData = {}
+            }
+            
             formShape.fields.forEach( async field => {
-                formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
+                if(!edit){
+                    formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
+                }
                 formError[field.name] = ""
             });
             
