@@ -1,10 +1,6 @@
 <script>
-    import { onMount, getContext } from 'svelte';
+    import { getContext } from 'svelte';
     export let claim;
-
-    onMount(() => {
-        console.log(claim)   
-    })
 </script>
 
 <style>
@@ -14,6 +10,9 @@
 }
 </style>
 
+<!-- TODO: if signed this should have a QR code so we can prove the signature on a trusted device -->
+<!-- TODO: this should also include Edit/delete buttons -->
+
 <div class="claim-container" id="claim.formName">
     {#if claim}
         <h5> {claim.formName} - version {claim.formVersion}</h5>
@@ -22,8 +21,7 @@
                 <label class="claim-field-name">{data.name}:</label>
                 <span class="claim-field-data">{data.value}</span>
             </div>
-        {/each}
-
+        {/each}      
     {:else}
         no claim being passed
     {/if}

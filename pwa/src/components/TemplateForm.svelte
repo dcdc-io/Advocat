@@ -28,13 +28,27 @@
         "Button": Button
     }
 
+    const getCustomData = async (arg) =>{
+        if(!arg.custom){return arg}
+        //this is lazy for now
+        // in future assume user account db, account is id, name is part of the doc, this *might* be enough
+        console.log(arg)
+        console.log(await getUserAccountDB($username))
+        if(arg.custom === "account.name"){            
+            return await (await (await getUserAccountDB($username)).get("account")).name
+        }
+    }
+
     const init = async () => {
         const db = await useDatabase({name:"claim_templates"})
         try {
             formShape = await db.get(template)
+            if(template.unique){
+                //TODO: check for dupes, start in "edit mode if one already exists
+            }
             formData = {}
-            formShape.fields.forEach(field => {
-                formData[field.name] = field.default
+            formShape.fields.forEach( async field => {
+                formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
                 formError[field.name] = ""
             });
             
@@ -55,6 +69,10 @@
             error => formError = error,
             formShape
         )
+    }
+
+    const button_cancel = async () =>{
+        dispatch("cancel")
     }
 
     const handleSubmit = async () => {
@@ -116,7 +134,9 @@
                     <p> unknown form data type detected </p>
                 {/if}
             {/each}
-            <Button block type="submit" disabled={isSubmitting}> submit </Button>
+            <Button block type="submit" disabled={isSubmitting}> submit </Button> <br><br>
+            <Button block on:click={button_cancel} disabled={isSubmitting}>Cancel</Button>
+
         </form>
     {:else}
         <p> form loading...</p>

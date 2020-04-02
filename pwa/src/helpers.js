@@ -102,7 +102,6 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false }) => {
         throw "cannot useDatabase without a URL"
     }
     const url = `${dbUrl.replace(/\/$/, '')}${name ? '/' : ''}${name && name.replace(/^\//, '')}`
-    console.log(url)
     const remote = new PouchDB(url, { skip_setup: true })
     if (!onlyRemote) {
         const local = new PouchDB(`${name}`)

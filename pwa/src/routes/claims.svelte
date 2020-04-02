@@ -6,7 +6,7 @@
     import { getUserAccountDB } from '../helpers.js'
       
     let { loggedIn, username } = getContext("user");
-    let makingNewClaim = false
+    let claimBeingMade = false
     let docs;
 
     const init = async () => {
@@ -16,27 +16,29 @@
         })
     }
 
-    const clickHandler = () =>{
-        makingNewClaim = true;
-    }
-
     const completedClaim = _ => {
-        makingNewClaim = false;
+        claimBeingMade = false;
         notifier.notify("Claim successfully recorded.")
         init()
+    }
+
+    const cancelledClaim = _ => {
+        claimBeingMade = false;
+        notifier.notify("Claim was cancelled")
+    }
+
+    const button_COVID19 = () =>{
+        claimBeingMade = "void-uk-covid-19-antibody-test";
+    }
+
+    const button_GP = () =>{
+        claimBeingMade = "void-uk-is-gp";
     }
 
     onMount(() => {
         init();
     })
 </script>
-
-{#if makingNewClaim}
-    <!-- will have dropdown in future to select form  -->
-    <TemplateForm on:completed={completedClaim} template="void-uk-covid-19-antibody-test"></TemplateForm>
-{:else}
-    <Button on:click={clickHandler} block>Record COVID-19 Antibody Test</Button>
-{/if}
 
 <div class="claim-list">
     {#if docs}
@@ -45,5 +47,16 @@
         {/each}
     {/if}
 </div>
+
+{#if claimBeingMade}
+    <TemplateForm on:canvel={cancelledClaim} on:completed={completedClaim} template={claimBeingMade}></TemplateForm>
+{:else}
+<!-- TODO: in future this will be a dropdown -->
+    <div class="button-container">
+    <!-- TODO: disable button when record exists and template is unique? -->
+        <Button on:click={button_GP} block>I'm a GP in the UK</Button> <br><br> 
+        <Button on:click={button_COVID19} block>Record COVID-19 Antibody Test</Button>
+    </div>
+{/if}
 
 <Notifications />
