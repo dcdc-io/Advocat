@@ -102,6 +102,9 @@
         margin: 0 auto;
         text-align: center;
     }
+    .account-buttons {
+        text-align: center;
+    }
 </style>
 
 {#if $loggedIn && userDataLoaded}
@@ -152,8 +155,11 @@
         <br>
         <Button block type="submit" disabled={!validChangeDetected}>Update Information</Button>
     </form>
-    <br>
-    <Button type="button" href="change_password">Change Password</Button>
+    <br><br>
+    <div class="account-buttons">
+        <Button type="button" href="change_password">Change Password</Button>
+        <Button type="button" href="signout">Switch Accounts</Button>
+    </div>
 {:else}
     <div class="login-redirect">
         <br><br>

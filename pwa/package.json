@@ -37,7 +37,6 @@
     "sjcl": "^1.0.8",
     "slouchdb-security": "link:../pouchdb-security",
     "smelte": "^1.0.11",
-    "svelte-material-icons": "^1.0.3",
     "yup": "^0.28.3"
   },
   "devDependencies": {

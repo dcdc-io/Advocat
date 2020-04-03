@@ -6,24 +6,25 @@
     const { page } = stores();
     let { loggedIn, username } = getContext("user")
     let accountMenu = [];
+    let path;
 
 	const navMenu = [
-		{ to: '/', text: 'Home'},
+		{ to: '/#', text: 'Home'},
 		{ to: '/registration_map', text: 'Map'}
 	]
 
-	$: path = $page.path;
+	$: {
+        path = $page.path === "/" ? "/#" : $page.path
+    }
 	$: {
 		if ($loggedIn) {
 			accountMenu = [
 				{ to: '/claims', text: 'Tech Preview'},
-				{ to: '/account', text: $username },
-				{ to: '/signout', text: 'Logout' }
+				{ to: '/account', text: $username }
 			]
 		} else {
 			accountMenu = [
-				{ to: '/login', text: 'Login' },
-				{ to: '/register', text: 'Register' }
+                { to: '/login', text: 'Login' }
 			]
 		}
 	}
@@ -39,18 +40,25 @@
         display: flex;
         justify-content: flex-start;
     }
+    .spacer {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
     .rightmenu { 
         flex: 1;
         display: flex;
         justify-content: flex-end;
-    }
+    }  
 </style>
+
 <div class="nav-box">
     <div class="leftmenu">
         <Tabs
             items={navMenu}
             bind:selected={path} />
     </div>
+    <div class="spacer"></div>
     <div class="rightmenu">
         <Tabs
             items={accountMenu}

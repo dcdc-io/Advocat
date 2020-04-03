@@ -1,33 +1,46 @@
-<script>
-    import Claim from "../components/claim.svelte";
-    import { onMount, getContext } from 'svelte';
-    import { getUserAccountDB } from '../helpers.js'
-      
-    let { loggedIn, username } = getContext("user");
-    let docs;
-    let db
+<script context="module">
 
-    const init = async () => {
-        db = await getUserAccountDB($username)
-        /* TODO: this causes client side memory leak 
-        db.changes({
+    let singletonDB = false
+    let singletonUsername = ""
+    let docs
+
+    const updateDocs = async () =>{
+        docs.set((await singletonDB.allDocs({include_docs: true})).rows.filter(row => {
+            return row.doc.type === "claim"
+        }))
+    }
+
+    export const init = async (username) => {
+        if(username === singletonUsername)
+            return singletonDB
+        if(singletonDB)
+            singletonDB.close()       
+
+        singletonDB = await getUserAccountDB(username)
+        singletonDB.changes({
             since: 'now',
             live: true,
             include_docs: true
         }).on('change', function(change) {updateDocs()})
-        */
-        updateDocs()
+        
+        singletonUsername = username
+        updateDocs();
     }
-
-    const updateDocs = async () =>{
-        docs = (await db.allDocs({include_docs: true})).rows.filter(row => {
-            return row.doc.type === "claim"
-        })
-    }
-    onMount(()=>{
-        init();
-    })
 </script>
+
+<script>
+    import Claim from "../components/claim.svelte";
+    import { onMount, getContext,setContext } from 'svelte';
+    import { getUserAccountDB } from '../helpers.js'   
+
+    let { loggedIn, username } = getContext("user");
+
+    onMount( async () =>{
+        await init($username, this);
+    })
+
+</script>
+
 
 <div class="claim-list">
     {#if docs}

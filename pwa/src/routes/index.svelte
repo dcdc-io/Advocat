@@ -26,25 +26,9 @@
 </script>
 
 <style lang="scss">
-  .page {
-    height: 100%;
-    max-width: 600px;
-    min-width: 320px;
-    margin: 0 auto;
-  }
-  .title {
-    margin: 0 auto;
-    left: 0;
-    font-family: "ChangaOne Regular";
-    font-size: 20px;
-    p {
-      font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-      font-size: 14px;
-    }
-  }
-  .container {
-    margin: 0 auto;
-    padding-top: 3em;
+  p {
+    font-family: Roboto, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-size: 14px;
   }
   .calltoaction {
     border-radius: 8px;

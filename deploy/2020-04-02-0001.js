@@ -46,7 +46,7 @@
     )
     
     await claim_templates.get("void-uk-covid-19-antibody-test").then( doc => {
-      return debug.put({
+      return claim_templates.put({
         "_id": "void-uk-covid-19-antibody-test",
         "_rev": doc._rev,
         /* this value indicates this schema is void and 
