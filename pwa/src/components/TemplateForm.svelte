@@ -90,6 +90,7 @@
                          })
             }
             const doc = {
+                      "formID": formShape.id,
                       "formName": formShape.name,
                       "formVersion": formShape.version,
                       "type": "claim",

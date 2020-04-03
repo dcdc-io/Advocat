@@ -1,22 +1,25 @@
 <script>
-    import { getContext } from 'svelte';
+    import { getContext, onMount } from 'svelte';
     import { Chip } from '../../node_modules/smelte/src'
     import TemplateForm from "../components/TemplateForm.svelte";
+    import { getUserAccountDB } from '../helpers.js'
 
     export let claim;
 
-    let IsEditing;
+    let { loggedIn, username } = getContext("user");
+    let isEditing;
 
     const button_edit = () =>{
         // TODO: some warning needs to go up about invalidating previous proofs when you do this.
         isEditing = true
     }
-    const button_delete = () =>{
+    const button_delete = async () =>{
         // TODO: spin up a dialogue to confirm first
+        await (await getUserAccountDB($username)).remove(claim)
     }
         
-    const updateClaim = () => {IsEditing = false}
-    const cancelledClaim = () => {IsEditing = false}
+    const updateClaim = () => {isEditing = false}
+    const cancelledClaim = () => {isEditing = false}
 
 </script>
 
@@ -31,8 +34,8 @@
 
 <div class="claim-container" id="claim.formName">
     {#if claim}
-        {#if IsEditing}
-            <TemplateForm  on:cancel={cancelledClaim} on:completed={updateClaim} form={claim.formName} edit={claim}></TemplateForm>
+        {#if isEditing}
+            <TemplateForm  on:cancel={cancelledClaim} on:completed={updateClaim} template={claim.formID} edit={claim}></TemplateForm>
         {:else}
             <h5> {claim.formName} - v{claim.formVersion} </h5> 
             {#each claim.fields.sort( (a,b) => a.order - b.order) as data}
@@ -41,8 +44,8 @@
                     <span class="claim-field-data">{data.value}</span>
                 </div>
             {/each}      
-            <Chip icon="edit" on:click={button_edit}>edit</Chip>
-            <Chip icon="trash" on:click={button_delete}>delete</Chip>
+            <Chip icon="edit"  on:click={button_edit}>edit</Chip>
+            <Chip icon="delete" on:click={button_delete}>delete</Chip>
         {/if}
     {/if}
 </div>

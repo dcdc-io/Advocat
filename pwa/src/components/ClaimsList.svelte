@@ -1,26 +1,14 @@
-<script>
-    import Claim from "../components/claim.svelte";
-    import { onMount, getContext } from 'svelte';
-    import { getUserAccountDB } from '../helpers.js'
-    
-    let { loggedIn, username } = getContext("user");
-    let docs;
-    let db
-
-    export const updateDocs = async () =>{
-        docs = (await db.allDocs({include_docs: true})).rows.filter(row => {
-            return row.doc.type === "claim"
-        })
-    }
-    onMount( async () =>{
-        db = await init($username);
-        updateDocs()
-    })
-</script>
-
 <script context="module">
+
     let singletonDB = false
     let singletonUsername = ""
+    let docs
+
+    const updateDocs = async () =>{
+        docs.set((await singletonDB.allDocs({include_docs: true})).rows.filter(row => {
+            return row.doc.type === "claim"
+        }))
+    }
 
     export const init = async (username) => {
         if(username === singletonUsername)
@@ -36,9 +24,23 @@
         }).on('change', function(change) {updateDocs()})
         
         singletonUsername = username
-        return singletonDB
+        updateDocs();
     }
 </script>
+
+<script>
+    import Claim from "../components/claim.svelte";
+    import { onMount, getContext,setContext } from 'svelte';
+    import { getUserAccountDB } from '../helpers.js'   
+
+    let { loggedIn, username } = getContext("user");
+
+    onMount( async () =>{
+        await init($username, this);
+    })
+
+</script>
+
 
 <div class="claim-list">
     {#if docs}
