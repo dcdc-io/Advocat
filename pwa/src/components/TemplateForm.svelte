@@ -2,24 +2,18 @@
     import { useDatabase, validateClaimForm, getUserAccountDB} from '../helpers.js'
     import * as yup from 'yup';
     import { onMount, getContext, createEventDispatcher } from 'svelte';
-    import { Button, TextField, DatePicker, Select } from '../../node_modules/smelte/src'
+    import { Button, TextField, DatePicker, Select, Card } from '../../node_modules/smelte/src'
+    import FileField from './FileField/index.svelte'
     
     export let template
     let formShape
     let files
-    let filename = ""
     let isSubmitting = false
 
     let { username } = getContext("user");
 
     let formData = {}
     let formError = {}
-
-    $: {
-        if (files && files.length) {
-            filename = files[0].name
-        }
-    }
 
     const dispatch = createEventDispatcher()
 
@@ -29,10 +23,10 @@
     }
 
     const getCustomData = async (arg) =>{
-        if(!arg.custom){return arg}
+        if (!arg.custom) { return arg }
         //this is lazy for now
         // in future assume user account db, account is id, name is part of the doc, this *might* be enough
-        if(arg.custom === "account.name"){            
+        if (arg.custom === "account.name") {
             return await (await (await getUserAccountDB($username)).get("account")).name
         }
     }
@@ -57,6 +51,7 @@
     }
    
     const validate = async () => {
+        console.log(files)
         return await validateClaimForm(
             formData,
             error => formError = error,
@@ -71,26 +66,26 @@
     const handleSubmit = async () => {
         isSubmitting = true
         const ok = await validate()
-        if(ok){
+        if (ok){
             let data = []
             for(let key in formData)
             {
                 data.push({
-                            name: key,
-                            value: formData[key]
-                         })
+                    name: key,
+                    value: formData[key]
+                })
             }
             const doc = {
-                      "formName": formShape.name,
-                      "formVersion": formShape.version,
-                      "type": "claim",
-                      "fields": data
+                "formName": formShape.name,
+                "formVersion": formShape.version,
+                "type": "claim",
+                "fields": data
             }
             await (await getUserAccountDB($username)).post(doc)
             dispatch("completed", doc)
             isSubmitting = false
             console.log("yes")
-        }else{
+        } else {
             isSubmitting = false
             console.log("no")
         }
@@ -115,11 +110,12 @@
                     <DatePicker label={field.label} bind:value={formData[field.name]}></DatePicker>
                 {:else if field.inputType === "FileField"}
                     <br/>
-                    <label for="fileupload">
-                        UPLOAD (TODO: needs button style!)<Button>test</Button>
-                    </label>
-                    <span>{filename}</span>
-                    <input id="fileupload" style="display: none;" type="file" bind:files />
+                    <FileField bind:files={files}>
+                        <Card.Card>
+                            <div slot="title"><span data-dz-name></span></div>
+                            <div slot="media"><img class="w-full" data-dz-thumbnail /></div>
+                        </Card.Card>
+                    </FileField>
                 {:else if field.inputType === "SelectField"}
                     <Select bind:value={formData[field.name]} items={field.values} />
                 {:else}
