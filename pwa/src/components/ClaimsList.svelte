@@ -12,30 +12,31 @@
             return row.doc.type === "claim"
         })
     }
-    onMount(()=>{
-        db = init($username);
-        updateDocs();
+    onMount( async () =>{
+        db = await init($username);
+        updateDocs()
     })
 </script>
 
 <script context="module">
-    let singletonDB
-    let singletonUsername
+    let singletonDB = false
+    let singletonUsername = ""
+
     export const init = async (username) => {
-        if(username == singletonUsername)
+        if(username === singletonUsername)
             return singletonDB
         if(singletonDB)
-            singletonDB.close()         
+            singletonDB.close()       
+
         singletonDB = await getUserAccountDB(username)
         singletonDB.changes({
             since: 'now',
             live: true,
             include_docs: true
         }).on('change', function(change) {updateDocs()})
-        updateDocs()
-        let singletonUsername = username
-        let singletonDB = db
-        return db;
+        
+        singletonUsername = username
+        return singletonDB
     }
 </script>
 

@@ -1,7 +1,6 @@
 <script>
     import { getContext } from 'svelte';
-    import Edit from "svelte-material-icons/briefcaseEditOutline.svelte";
-    import Delete from "svelte-material-icons/briefcaseRemoveOutline.svelte";
+    import { Chip } from '../../node_modules/smelte/src'
     import TemplateForm from "../components/TemplateForm.svelte";
 
     export let claim;
@@ -35,14 +34,15 @@
         {#if IsEditing}
             <TemplateForm  on:cancel={cancelledClaim} on:completed={updateClaim} form={claim.formName} edit={claim}></TemplateForm>
         {:else}
-            <h5> {claim.formName} - v{claim.formVersion}  <Edit size=4em ></Edit> </h5> 
+            <h5> {claim.formName} - v{claim.formVersion} </h5> 
             {#each claim.fields.sort( (a,b) => a.order - b.order) as data}
                 <div class="claim-field">
                     <label class="claim-field-name">{data.name}:</label>
                     <span class="claim-field-data">{data.value}</span>
                 </div>
             {/each}      
-            <Edit size=3em on:click={button_edit} ></Edit><Delete size=3em on:click={button_delete}></Delete>
+            <Chip icon="edit" on:click={button_edit}>edit</Chip>
+            <Chip icon="trash" on:click={button_delete}>delete</Chip>
         {/if}
     {/if}
 </div>
