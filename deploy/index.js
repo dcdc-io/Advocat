@@ -6,6 +6,6 @@ const files = fs.readdirSync(__dirname).filter(file => /^\d\d\d\d-\d\d-\d\d-\d\d
 for (const file of files) {
     try { execSync(`node ${file}`) }
     catch (e) {
-
+               
     }
 }
