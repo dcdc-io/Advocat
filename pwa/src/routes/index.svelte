@@ -9,7 +9,7 @@
   import GroupBrowser from '../components/GroupBrowser.svelte'
   let { loggedIn, username } = getContext("user");
   const click = (page) => () => goto(page)
-
+  
   let groupsDb
   let groups = []
   $: {
