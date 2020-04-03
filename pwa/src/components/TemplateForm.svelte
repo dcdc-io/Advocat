@@ -5,6 +5,8 @@
     import { Button, TextField, DatePicker, Select } from '../../node_modules/smelte/src'
     
     export let template
+    export let edit
+
     let formShape
     let files
     let filename = ""
@@ -44,9 +46,16 @@
             if (template.unique) {
                 // TODO: check for dupes, start in "edit mode if one already exists
             }
-            formData = {}
+            if(edit) {
+                formData = edit
+            }else{
+                formData = {}
+            }
+            
             formShape.fields.forEach( async field => {
-                formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
+                if(!edit){
+                    formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
+                }
                 formError[field.name] = ""
             });
         } catch (e) {
@@ -81,6 +90,7 @@
                          })
             }
             const doc = {
+                      "formID": formShape.id,
                       "formName": formShape.name,
                       "formVersion": formShape.version,
                       "type": "claim",
