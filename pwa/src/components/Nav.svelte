@@ -24,8 +24,7 @@
 			]
 		} else {
 			accountMenu = [
-                { to: '/login', text: 'Decently Long text to test long texts' },
-                { to: '/jobs', text: 'Decently Long text to test long texts2' }
+                { to: '/login', text: 'Login' }
 			]
 		}
 	}
