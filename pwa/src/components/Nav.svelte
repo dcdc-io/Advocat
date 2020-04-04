@@ -19,8 +19,8 @@
 	$: {
 		if ($loggedIn) {
 			accountMenu = [
-				{ to: '/claims', text: 'Tech Preview'},
-				{ to: '/account', text: $username }
+                { to: '/claims', text: 'Tech Preview'},
+                { to: '/account', text: $username }		
 			]
 		} else {
 			accountMenu = [
@@ -49,7 +49,7 @@
         flex: 1;
         display: flex;
         justify-content: flex-end;
-    }  
+    } 
 </style>
 
 <div class="nav-box">

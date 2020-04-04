@@ -81,6 +81,13 @@
   }
 </script>
 
+<style>
+  .register-box {
+    margin: 0 auto;
+    width: 100%;
+  }
+</style>
+
 <h3>Sign In</h3>
 
 {#if stage === SIGNIN}
@@ -99,6 +106,10 @@
 
   <Button block type="submit" disabled={isSubmitting}>Sign In</Button>
 </form>
+<br><br>
+<div class="register-box">
+  <Button style="width:100%;" type="button" href="register">Don't have an account? Register Here!</Button>
+</div>
 {/if}
 
 {#if stage === SIGNINGIN}
