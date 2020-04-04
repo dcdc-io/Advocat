@@ -24,6 +24,8 @@ export async function post(req, res, next) {
             template: "magiclink",
             params: {
                 name: user.name,
+                email: user.email,
+                token,
                 url: ({domain, token}) => `https://${domain}/account/signin.${token}`
             }
         })
