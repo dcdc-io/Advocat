@@ -17,9 +17,9 @@
 
 <style>
 	main {
-		width: 600px;
+		width: min(90vw, 600px);
 		margin: 0 auto;
-		padding: 2em;
+		padding: 2em 0;
 		box-sizing: border-box;
 		flex: 1;
 		color: var(--colour-scheme-dark);
