@@ -40,14 +40,14 @@
             if (template.unique) {
                 // TODO: check for dupes, start in "edit mode if one already exists
             }
-            if(edit) {
+            if (edit) {
                 formData = edit
-            }else{
+            } else {
                 formData = {}
             }
             
             formShape.fields.forEach( async field => {
-                if(!edit){
+                if (!edit) {
                     formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
                 }
                 formError[field.name] = ""
@@ -75,9 +75,9 @@
     const handleSubmit = async () => {
         isSubmitting = true
         const ok = await validate()
-        if (ok){
+        if (ok) {
             let data = []
-            for(let key in formData)
+            for (let key in formData)
             {
                 data.push({
                     name: key,
