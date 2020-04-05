@@ -9,7 +9,7 @@
     export let edit
 
     let formShape
-    let files
+    let files = {}
     let isSubmitting = false
 
     let { username } = getContext("user");
@@ -72,11 +72,12 @@
         dispatch("cancel")
     }
 
+
     const handleSubmit = async () => {
         isSubmitting = true
         const ok = await validate()
         if (ok){
-            let data = []
+            let data = []            
             for(let key in formData)
             {
                 data.push({
@@ -84,14 +85,27 @@
                     value: formData[key]
                 })
             }
+            
             const doc = {
+                "_id": formShape.unique ? formShape.id : formShape.id + randomString(20),
                 "formID": formShape.id,
                 "formName": formShape.name,
                 "formVersion": formShape.version,
                 "type": "claim",
-                "fields": data
+                "fields":data
             }
-            await (await getUserAccountDB($username)).post(doc)
+
+            // TODO use this rev to put stuff
+            let db = await getUserAccountDB($username)
+            let rev = await db.put(doc)._rev
+
+            while (files.length > 0)
+            {
+                let currentFile = files.pop()
+                debugger
+                rev = await db.putAttachment(doc._id, currentFile.name, rev, currentFile.blob, {type: 'image'})._rev            
+            }
+
             dispatch("completed", doc)
             isSubmitting = false
             console.log("yes")
@@ -120,7 +134,7 @@
                     <DatePicker label={field.label} bind:value={formData[field.name]}></DatePicker>
                 {:else if field.inputType === "FileField"}
                     <br/>
-                    <FileField bind:files={files}>
+                    <FileField bind:files={files} field={field.label}>
                         <Card.Card>
                             <div slot="title"><span data-dz-name></span></div>
                             <div slot="media"><img class="w-full" data-dz-thumbnail /></div>
