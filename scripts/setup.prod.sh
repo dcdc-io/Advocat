@@ -48,16 +48,17 @@ else
     echo "info: advocat is not running, this is the first run"
 fi
 
+# setup directory structure
+(mkdir -p /app/db && chmod 666 /app/db)
+
 # move alive tar to /app and load into docker
 echo "info: loading alive.tar to docker images"
-(cd / && mkdir -p /app && mv /alive.tar /app/alive.tar && cat /app/alive.tar | docker load)
+(cd / && mv /alive.tar /app/alive.tar && cat /app/alive.tar | docker load)
 
 # move incoming tar to /app and load into docker
 echo "info: loading $FILE to docker images"
-(cd / && mkdir -p /app && mv /$FILE /app/$FILE && cat /app/$FILE | docker load)
+ADVOCAT_TAG=$((cd / && mv /$FILE /app/$FILE && cat /app/$FILE | docker load) | cut -d ' ' -f3)
 
-# setup directory structure
-(mkdir -p /app/db && chmod 666 /app/db)
 
 # copy config if no config exists for DEPLOY_ENV
 if [ -f "/app/config.$DEPLOY_ENV.json" ]
@@ -69,7 +70,7 @@ else
 fi
 
 # run advocat
-docker run -d -v /app/db:/app/db -v /app/config.$DEPLOY_ENV.json:/app/config.json -p 3000:3000 -e VIRTUAL_HOST=$DOMAIN -t advocat
+docker run -d -v /app/db:/app/db -v /app/config.$DEPLOY_ENV.json:/app/config.json -p 3000:3000 -e VIRTUAL_HOST=$DOMAIN -t $ADVOCAT_TAG
 
 # run alive
 docker run -d -p 999:999 alive

@@ -16,6 +16,7 @@ pscp -i $DEPLOY_KEY $FILE $DEPLOY_USER@$DEPLOY_TARGET:/$FILE
 pscp -i $DEPLOY_KEY alive.tar $DEPLOY_USER@$DEPLOY_TARGET:/alive.tar
 pscp -i $DEPLOY_KEY ./scripts/setup.prod.sh $DEPLOY_USER@$DEPLOY_TARGET:/setup.prod.sh
 pscp -i $DEPLOY_KEY config.$DEPLOY_ENV.json $DEPLOY_USER@$DEPLOY_TARGET:/config.$DEPLOY_ENV.json
+pscp -i $DEPLOY_KEY ./pwa/static/manifest.dev.json $DEPLOY_USER@$DEPLOY_TARGET:/manifest.dev.json
 
 plink -i $DEPLOY_KEY $DEPLOY_USER@$DEPLOY_TARGET "chmod +x /setup.prod.sh"
 
