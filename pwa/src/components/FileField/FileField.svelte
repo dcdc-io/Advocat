@@ -9,7 +9,7 @@ let template
 export let method = "post"
 export let url = "#"
 export let files
-export let field
+export let label
 export let autoProcessQueue = false
 
 onMount(async () => {
@@ -23,10 +23,10 @@ onMount(async () => {
         url
     })
     thisDropzone.on("addedfile", file => {
-        files[field] = thisDropzone.files
+        files = thisDropzone
     })
     thisDropzone.on("removedfile", file => {
-        files[field] = thisDropzone.files
+        files = thisDropzone
     })
 })
 </script>
@@ -37,13 +37,14 @@ onMount(async () => {
             <p style="position: absolute; transform: translate(-50%, -50%); top: 50%; left: 50%;">drop or tap to upload files</p>
         </div>
     </slot>
+    <label>{label}</label>
     <span bind:this={template} style="display:none;">
         <slot>
             <div class="dz-preview dz-file-preview">
                 <div class="dz-details">
                     <div class="dz-filename"><span data-dz-name></span></div>
                     <div class="dz-size" data-dz-size></div>
-                    <img data-dz-thumbnail />
+                    <img alt="thumbnail" data-dz-thumbnail />
                 </div>
                 <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
                 <div class="dz-success-mark"><span></span></div>

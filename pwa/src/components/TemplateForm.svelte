@@ -1,12 +1,11 @@
 <script>
-    import { useDatabase, validateClaimForm, getUserAccountDB} from '../helpers.js'
+    import { useDatabase, validateClaimForm, getUserAccountDB, randomString} from '../helpers.js'
     import * as yup from 'yup';
     import { onMount, getContext, createEventDispatcher } from 'svelte';
     import { Button, TextField, DatePicker, Select, Card } from '../../node_modules/smelte/src'
     import FileField from './FileField/index.svelte'
     
     export let template
-    export let edit
 
     let formShape
     let files = {}
@@ -37,20 +36,15 @@
         const db = await useDatabase({name:"claim_templates"})
         try {
             formShape = await db.get(template)
-            if (template.unique) {
-                // TODO: check for dupes, start in "edit mode if one already exists
-            }
-            if (edit) {
-                formData = edit
-            } else {
-                formData = {}
+            if(formShape == undefined){
+                throw new error("template not found")
             }
             
             formShape.fields.forEach( async field => {
-                if (!edit) {
+                //if (!edit) {
                     formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
-                }
-                formError[field.name] = ""
+                //}
+                //formError[field.name] = ""
             });
         } catch (e) {
             console.error("db:", db)
@@ -60,10 +54,9 @@
     }
    
     const validate = async () => {
-        console.log(files)
         return await validateClaimForm(
             formData,
-            error => formError = error,
+            error => {formError = error; console.error(error)},
             formShape
         )
     }
@@ -87,8 +80,8 @@
             }
             
             const doc = {
-                "_id": formShape.unique ? formShape.id : formShape.id + randomString(20),
-                "formID": formShape.id,
+                "_id": formShape.unique ? formShape._id : formShape._id + randomString(20),
+                "formID": formShape._id,
                 "formName": formShape.name,
                 "formVersion": formShape.version,
                 "type": "claim",
@@ -96,14 +89,19 @@
             }
 
             // TODO use this rev to put stuff
+            console.log(formShape)
             let db = await getUserAccountDB($username)
-            let rev = await db.put(doc)._rev
-
+            console.log(doc)
+            let rev = (await db.put(doc))._rev
+            console.log(rev)
+            debugger
             while (files.length > 0)
             {
                 let currentFile = files.pop()
+                let fileContents = currentFile.stream().getReader().read()
+                console.log (fileContents)
                 debugger
-                rev = await db.putAttachment(doc._id, currentFile.name, rev, currentFile.blob, {type: 'image'})._rev            
+                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileContents, {type: 'image'})._rev            
             }
 
             dispatch("completed", doc)
@@ -134,10 +132,10 @@
                     <DatePicker label={field.label} bind:value={formData[field.name]}></DatePicker>
                 {:else if field.inputType === "FileField"}
                     <br/>
-                    <FileField bind:files={files} field={field.label}>
+                    <FileField bind:files={files} label={field.label}>
                         <Card.Card>
                             <div slot="title"><span data-dz-name></span></div>
-                            <div slot="media"><img class="w-full" data-dz-thumbnail /></div>
+                            <div slot="media"><img alt="upload thumbnail" class="w-full" data-dz-thumbnail /></div>
                         </Card.Card>
                     </FileField>
                 {:else if field.inputType === "SelectField"}
