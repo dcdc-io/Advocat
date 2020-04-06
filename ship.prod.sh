@@ -2,12 +2,14 @@
 
 TAG=$(git describe --tags)
 
+# build alive
+(cd alive && docker build -t alive .)
+docker save -o alive.tar alive:latest
+
+# build advocat
 docker build -t advocat .
-
 docker tag advocat:latest advocat:$TAG
-
 FILE=advocat.release.$TAG.tar
-
 docker save -o $FILE advocat:$TAG
 
 pscp -i $DEPLOY_KEY $FILE $DEPLOY_USER@$DEPLOY_TARGET:/$FILE
