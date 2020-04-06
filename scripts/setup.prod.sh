@@ -22,11 +22,10 @@ fi
 PROXY_CONTAINER=$(docker ps | grep nginx-proxy | cut -d ' ' -f1)
 if [ ! -z "$PROXY_CONTAINER" ]
 then
-    echo "info: nginx-proxy is ok"
-else
-    echo "warn: nginx-proxy is missing, will be started"
-    docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock -t jwilder/nginx-proxy
-    PROXY_CONTAINER=$(docker ps | grep nginx-proxy | cut -d ' ' -f1)
+    echo "info: nginx-proxy is ok, shutting down"
+    docker kill $PROXY_CONTAINER
+else 
+    echo "info: no nginx-proxy running"
 fi
 
 # kill "alive" health monitor and wait for 20 seconds
@@ -53,11 +52,11 @@ fi
 
 # move alive tar to /app and load into docker
 echo "info: loading alive.tar to docker images"
-(cd / && mv /alive.tar /app/alive.tar && cat /app/alive.tar | docker load)
+(cat alive.tar | docker load)
 
 # move incoming tar to /app and load into docker
 echo "info: loading $FILE to docker images"
-ADVOCAT_TAG=$((cd / && mv /$FILE /app/$FILE && cat /app/$FILE | docker load) | cut -d ' ' -f3)
+ADVOCAT_TAG=$((cat $FILE | docker load) | cut -d ' ' -f3)
 
 
 # copy config if no config exists for DEPLOY_ENV
@@ -74,3 +73,6 @@ docker run -d -v /app/db:/app/db -v /app/config.$DEPLOY_ENV.json:/app/config.jso
 
 # run alive
 docker run -d -p 999:999 alive
+
+# run nginx-proxy
+docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock -t jwilder/nginx-proxy
