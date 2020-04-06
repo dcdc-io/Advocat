@@ -32,7 +32,7 @@ export async function get(req, res, next) {
             console.log(secObjOk)
             await _users.put({
                 _id: "org.couchdb.user:" + lowercase(reg.email),
-                id: userIdentity,
+                ident: userIdentity,
                 name: lowercase(reg.email),
                 email: lowercase(reg.email),
                 roles: [],

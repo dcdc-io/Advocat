@@ -2,7 +2,7 @@
 	import "../../node_modules/smelte/src/tailwind.css";
 	import Nav from '../components/Nav.svelte';
 	import { setContext, onMount } from 'svelte'
-	import { checkLocalUser } from "../helpers.js"
+	import { userSetup } from "../helpers.js"
 	import { writable } from 'svelte/store'
 	export let segment;
 
@@ -11,7 +11,7 @@
 	setContext("user", { loggedIn, username })
 
 	onMount(async () => {
-		await checkLocalUser({loggedIn, username})
+		await userSetup({loggedIn, username})
 	})
 </script>
 

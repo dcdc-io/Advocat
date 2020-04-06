@@ -7,6 +7,7 @@ const PouchDB = require("pouchdb")
 PouchDB.plugin(require('pouchdb-authentication'))
     .plugin(require('pouchdb-adapter-http'))
     .plugin(require("../pouchdb-security")) // <- plugged in to expose security API
+    .plugin(require('pouchdb-find'))
 
 const useDatabase = async (name, skip_setup = true) => {
     const db = new PouchDB(`${DB_DEPLOY_PROTOCOL || "http"}://${DB_DEPLOY_USER || "admin"}:${DB_DEPLOY_PASS || "password"}@${DB_DEPLOY_ENDPOINT || "localhost:3000/db"}` + (name ? "/" + name : ""), { skip_setup, adapter: "http" })
