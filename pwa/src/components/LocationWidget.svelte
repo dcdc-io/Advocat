@@ -2,7 +2,7 @@
     import { Button, TextField } from '../../node_modules/smelte/src'
     import { setContext, getContext, onMount } from 'svelte'
 
-    let error
+    let error = ""
     let location
     let isMobile = false
 
