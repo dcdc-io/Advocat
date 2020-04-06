@@ -1,0 +1,20 @@
+{
+	"background_color": "#ffffff",
+	"theme_color": "#333333",
+	"name": "advocat.dev",
+	"short_name": "advocat.dev",
+	"display": "standalone",
+	"start_url": "/",
+	"icons": [
+		{
+			"src": "advocat-logo-quick-beta-192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "advocat-logo-quick-beta-512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
+}

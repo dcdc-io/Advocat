@@ -3,8 +3,13 @@
     import { Chip } from '../../node_modules/smelte/src'
     import TemplateForm from "../components/TemplateForm.svelte";
     import { getUserAccountDB } from '../helpers.js'
+    import VerticalDrawer from '../components/VerticalDrawer/VerticalDrawer.svelte'
+    import { qrcode, svg2url  } from 'pure-svg-code' 
 
     export let claim;
+
+    let share = false
+    let dataUrl = ""
 
     let { loggedIn, username } = getContext("user");
     let isEditing;
@@ -16,6 +21,10 @@
     const button_delete = async () =>{
         // TODO: spin up a dialogue to confirm first
         await (await getUserAccountDB($username)).remove(claim)
+    }
+    const button_share = async () => {
+        share = true
+        dataUrl = svg2url(qrcode(`https://advocat.group/verify/${$username}.${claim._id}`))
     }
         
     const updateClaim = () => {isEditing = false}
@@ -46,6 +55,15 @@
             {/each}      
             <Chip icon="edit"  on:click={button_edit}>edit</Chip>
             <Chip icon="delete" on:click={button_delete}>delete</Chip>
+            <Chip icon="verified_user" on:click={button_share}>verify</Chip>
+            <Chip icon="share" on:click={button_share}>share</Chip>
         {/if}
     {/if}
 </div>
+
+
+<VerticalDrawer bottom={true} persistant={true} bind:show={share}>
+    <div style="margin: 2em;">
+        <img src={dataUrl} style="width:100%;"/> 
+    </div>
+</VerticalDrawer>

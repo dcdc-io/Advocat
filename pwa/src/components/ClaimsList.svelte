@@ -4,7 +4,7 @@
 </script>
 
 <script>
-    import Claim from "../components/claim.svelte"
+    import Claim from "../components/Claim.svelte"
     import { onMount, getContext, setContext } from 'svelte'
     import { getUserAccountDB } from '../helpers.js'
 

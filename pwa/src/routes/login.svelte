@@ -4,9 +4,10 @@
 
 <script>
   import { getContext } from "svelte"
-  import { Button, TextField } from '../../node_modules/smelte/src'
+  import { Button, TextField, Checkbox } from '../../node_modules/smelte/src'
   import { goto } from "@sapper/app"
   import * as yup from 'yup'
+  import { enrollDevice } from '../helpers.js'
 
   let { loggedIn, username } = getContext("user");
 
@@ -18,7 +19,8 @@
 
   let user = {
     email: "",
-    password: ""
+    password: "",
+    enrollDevice: true
   }
 
   let error = {
@@ -50,6 +52,9 @@
         else {
           $loggedIn = true
           $username = user.email.toLowerCase()
+          if (user.enrollDevice) {
+            await enrollDevice({ username: $username, force: true })
+          }
           goto(".")
         }
       } catch(e) {
@@ -97,6 +102,7 @@
 
   <TextField label="password" bind:value={user.password} type="password" error={error.password} />
 
+  <Checkbox label="Keep me signed in." bind:checked={user.enrollDevice} />
 
   <h6>Don't remember your password?</h6>
 

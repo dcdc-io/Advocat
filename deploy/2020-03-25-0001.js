@@ -5,6 +5,7 @@
     PouchDB.plugin(require('pouchdb-authentication'))
         .plugin(require('pouchdb-adapter-http'))
         .plugin(require("../pouchdb-security")) // <- plugged in to expose security API
+        .plugin(require('pouchdb-find'))
 
     const useDatabase = async (name, skip_setup = true) => {
         const db = new PouchDB("http://admin:password@localhost:3000/db" + (name ? "/" + name : ""), { skip_setup, adapter: "http" })
@@ -37,10 +38,19 @@
 
     await _users.post({
         "_id": "org.couchdb.user:mailer",
+        "ident": "MAILER",
         "name": "mailer",
         "password": process.env.MAILERPASS,
         "roles": [],
         "type": "user"
+    })
+
+    await _users.createIndex({
+        index: {
+            fields: [
+                'ident'
+            ]
+        }
     })
 
     for (let user of [
