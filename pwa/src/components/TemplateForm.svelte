@@ -87,21 +87,14 @@
                 "type": "claim",
                 "fields":data
             }
-
             // TODO use this rev to put stuff
-            console.log(formShape)
             let db = await getUserAccountDB($username)
-            console.log(doc)
-            let rev = (await db.put(doc))._rev
-            console.log(rev)
-            debugger
+            let rev = (await db.put(doc)).rev            
             while (files.length > 0)
             {
                 let currentFile = files.pop()
-                let fileContents = currentFile.stream().getReader().read()
-                console.log (fileContents)
-                debugger
-                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileContents, {type: 'image'})._rev            
+                let fileContents = await currentFile.stream().getReader().read()
+                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileContents.value, {type: 'image'}).rev            
             }
 
             dispatch("completed", doc)
