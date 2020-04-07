@@ -56,7 +56,7 @@
     const validate = async () => {
         return await validateClaimForm(
             formData,
-            error => {formError = error; console.error(error)},
+            error => {formError = error},
             formShape
         )
     }
@@ -101,7 +101,7 @@
                 let fileContents = currentFile.stream().getReader().read()
                 console.log (fileContents)
                 debugger
-                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileContents, {type: 'image'})._rev            
+                rev = (await db.putAttachment(doc._id, currentFile.name, rev, fileContents, {type: 'image'}))._rev            
             }
 
             dispatch("completed", doc)
@@ -132,7 +132,7 @@
                     <DatePicker label={field.label} bind:value={formData[field.name]}></DatePicker>
                 {:else if field.inputType === "FileField"}
                     <br/>
-                    <FileField bind:files={files} label={field.label}>
+                    <FileField bind:files={formData["files"]} label={field.label}>
                         <Card.Card>
                             <div slot="title"><span data-dz-name></span></div>
                             <div slot="media"><img alt="upload thumbnail" class="w-full" data-dz-thumbnail /></div>

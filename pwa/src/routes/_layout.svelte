@@ -7,7 +7,7 @@
 	export let segment;
 
 	const loggedIn = writable(false)
-	const username = writable("empty")
+	const username = writable("")
 	setContext("user", { loggedIn, username })
 
 	onMount(async () => {

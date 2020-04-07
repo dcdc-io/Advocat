@@ -102,7 +102,7 @@
 
   <TextField label="password" bind:value={user.password} type="password" error={error.password} />
 
-  <Checkbox label="Keep me signed in." bind:checked={user.enrollDevice} />
+  <Checkbox label="Trust this device and keep me signed in." bind:checked={user.enrollDevice} />
 
   <h6>Don't remember your password?</h6>
 

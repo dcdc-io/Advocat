@@ -13,13 +13,16 @@ import autoPreprocess from 'svelte-preprocess'
 
 import smelte from 'smelte/rollup-plugin-smelte'
 
+// import { markdown } from 'svelte-preprocess-markdown'
+import { mdsvex } from "mdsvex"
+
+
 const mode = process.env.NODE_ENV;
 const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
-const onwarn = (warning, onwarn) => 
-{
-	if (warning.plugin === undefined && warning.message === "The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten")			
+const onwarn = (warning, onwarn) => {
+	if (warning.plugin === undefined && warning.message === "The 'this' keyword is equivalent to 'undefined' at the top level of an ES module, and has been rewritten")
 		return;
 	(warning.code === 'CIRCULAR_DEPENDENCY' && /[/\\]@sapper[/\\]/.test(warning.message)) || onwarn(warning)
 };
@@ -34,10 +37,13 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
 			svelte({
+				extensions: [ ".svelte", ".md" ],
 				dev,
 				hydratable: true,
 				emitCss: true,
-				preprocess: autoPreprocess()
+				preprocess: [ autoPreprocess(), mdsvex({
+					extension: ".md"
+				}) ]
 			}),
 			resolve({
 				browser: true,
@@ -45,7 +51,7 @@ export default {
 			}),
 			commonjs({
 				namedExports: {
-					'node_modules/immediate/lib/browser.js,':['immediate']
+					'node_modules/immediate/lib/browser.js,': ['immediate']
 				}
 			}),
 			nodePolyfills(),
@@ -66,7 +72,7 @@ export default {
 			}),
 
 			legacy && babel({
-				extensions: ['.js', '.mjs', '.html', '.svelte'],
+				extensions: ['.js', '.mjs', '.html', '.svelte', '.md'],
 				runtimeHelpers: true,
 				exclude: ['node_modules/@babel/**'],
 				presets: [
@@ -88,7 +94,7 @@ export default {
 		],
 
 		onwarn
-		,		
+		,
 	},
 
 	server: {
@@ -100,9 +106,12 @@ export default {
 				'process.env.NODE_ENV': JSON.stringify(mode)
 			}),
 			svelte({
+				extensions: [ ".svelte", ".md" ],
 				generate: 'ssr',
 				dev,
-				preprocess: autoPreprocess()
+				preprocess: [ autoPreprocess(), mdsvex({
+					extension: ".md"
+				}) ]
 			}),
 			resolve({
 				dedupe: ['svelte']

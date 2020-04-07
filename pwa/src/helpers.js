@@ -26,7 +26,7 @@ export const getUserAccountDB = async (username) => {
 }
 
 export const localDatabase = async () => {
-    return useDatabase({ name: "_local", sync: true, options: { auto_compaction: true } })
+    return useDatabase({ name: "_local", sync: false, options: { auto_compaction: true } })
 }
 
 export const setDatabaseUrl = (url) => {
@@ -201,6 +201,8 @@ export const userSetup = async ({ loggedIn, username }) => {
                 await fetch(`signin`, {
                     method: "POST",
                     headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ jwt })
+                }).catch(error => {
+                    console.log(error)
                 })
                 session = await fetch("db/_session").then(result => result.json())
             }
@@ -227,10 +229,12 @@ export const validateClaimForm = async (formdata, errorHandler, formShape) => {
     return new Promise((resolve, reject) => {
         let schema = {}
         let formerror = {}
+
         formShape.fields.forEach(field => {
             formerror[field.name] = ""
             schema[field.name] = generateValidation(field.validation)
         })
+
         schema = yup.object().shape(schema)
 
         schema.validate(formdata, { abortEarly: false })
@@ -289,7 +293,6 @@ export const enrollDevice = async ({ username, force = false }) => {
     if (!username) {
         return false
     }
-    debugger
     const key = await window.crypto.subtle.generateKey({
         name: "ECDSA",
         namedCurve: "P-256"
@@ -301,19 +304,23 @@ export const enrollDevice = async ({ username, force = false }) => {
         remoteId: randomStringSC(),
         key
     }
+    const userdb = await getUserAccountDB(username)
     // check for existing key
+    let revokeKey
     const existingKey = await local.get(`_local/enrollment/${username}`).catch(() => false)
     if (existingKey) {
         if (!force) {
             throw new Error("cannot install a key where a key already exists")
         }
+        // revoke remote key
+        revokeKey = await userdb.get(existingKey.remoteId)
+        // update rev to replace local key
         newKey._rev = existingKey._rev
     }
     setCurrentUsername({ username })
     // TODO: optionally encrypt/wrap newKey with pin/pbkdf?
     await local.put(newKey)
     const jwk = await crypto.subtle.exportKey("jwk", key.publicKey)
-    const userdb = await getUserAccountDB(username)
     await userdb.put({
         _id: newKey.remoteId,
         type: "devicekey",
@@ -321,5 +328,33 @@ export const enrollDevice = async ({ username, force = false }) => {
         userAgent: window.navigator.userAgent,
         ip: "0.0.0.0" // TODO: should record device IP so users can see what devices are authenticated
     })
+    if (revokeKey) {
+        await userdb.put({
+            ...revokeKey,
+            _deleted: true,
+            revoked: Date.now(),
+            revocationReason: "upgrade"
+        })
+    }
     return jwk
+}
+
+export const unenrollDevice = async ({username}) => {
+    if (window === undefined) {
+        return false
+    }
+    if (!username) {
+        return false
+    }
+    const local = await localDatabase()
+    const key = await local.get(`_local/enrollment/${username}`)
+    const userdb = await getUserAccountDB(username)
+    const remoteKey = await userdb.get(key.remoteId)
+    await userdb.put({
+        ...remoteKey,
+        _deleted: true,
+        revoked: Date.now(),
+        revocationReason: "unenroll"
+    })
+    await local.remove(key)
 }

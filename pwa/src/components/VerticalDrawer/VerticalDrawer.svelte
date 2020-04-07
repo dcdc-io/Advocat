@@ -5,7 +5,7 @@
   import breakpoints from "../../../node_modules/smelte/src/breakpoints";
   import { ClassBuilder } from "../../../node_modules/smelte/src/utils/classes.js";
 
-  const bp = breakpoints();
+  // const bp = breakpoints();
 
   const classesDefault = "fixed bottom-0 left-0 md:mt-16 w-full drawer overflow-hidden h-auto";
   const navClassesDefault = `h-full w-full bg-white dark:bg-gray-900 dark:text-gray-200 absolute flex w-auto z-20 drawer
@@ -30,11 +30,11 @@
   };
 
   $: transitionProps.y = bottom ? 300 : -300;
-  $: persistent = show = $bp !== "sm";
+  // $: persistent = show = $bp !== "sm";
 
   const cb = new ClassBuilder(classes, classesDefault);
 
-  if ($bp === 'sm') show = false;
+  //if ($bp === 'sm') show = false;
 
   $: c = cb
     .flush()
