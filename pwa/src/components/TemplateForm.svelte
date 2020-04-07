@@ -1,5 +1,5 @@
 <script>
-    import { useDatabase, validateClaimForm, getUserAccountDB, randomString} from '../helpers.js'
+    import { useDatabase, validateClaimForm, getUserAccountDB, randomStringSC} from '../helpers.js'
     import * as yup from 'yup';
     import { onMount, getContext, createEventDispatcher } from 'svelte';
     import { Button, TextField, DatePicker, Select, Card } from '../../node_modules/smelte/src'
@@ -80,28 +80,22 @@
             }
             
             const doc = {
-                "_id": formShape.unique ? formShape._id : formShape._id + randomString(20),
+                "_id": formShape.unique ? formShape._id : formShape._id + randomStringSC(20),
                 "formID": formShape._id,
                 "formName": formShape.name,
                 "formVersion": formShape.version,
                 "type": "claim",
                 "fields":data
             }
-
             // TODO use this rev to put stuff
-            console.log(formShape)
             let db = await getUserAccountDB($username)
-            console.log(doc)
-            let rev = (await db.put(doc))._rev
-            console.log(rev)
-            debugger
+            let rev = (await db.put(doc)).rev            
             while (files.length > 0)
             {
                 let currentFile = files.pop()
-                let fileContents = currentFile.stream().getReader().read()
-                console.log (fileContents)
-                debugger
-                rev = (await db.putAttachment(doc._id, currentFile.name, rev, fileContents, {type: 'image'}))._rev            
+                let fileContents = await currentFile.stream().getReader().read()
+                let fileBlob= new Blob([fileContents.value.buffer])
+                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileBlob, {type: 'image'}).rev
             }
 
             dispatch("completed", doc)
