@@ -1,5 +1,5 @@
 <script>
-    import { useDatabase, validateClaimForm, getUserAccountDB, randomString} from '../helpers.js'
+    import { useDatabase, validateClaimForm, getUserAccountDB, randomStringSC} from '../helpers.js'
     import * as yup from 'yup';
     import { onMount, getContext, createEventDispatcher } from 'svelte';
     import { Button, TextField, DatePicker, Select, Card } from '../../node_modules/smelte/src'
@@ -56,7 +56,7 @@
     const validate = async () => {
         return await validateClaimForm(
             formData,
-            error => {formError = error; console.error(error)},
+            error => {formError = error},
             formShape
         )
     }
@@ -80,7 +80,7 @@
             }
             
             const doc = {
-                "_id": formShape.unique ? formShape._id : formShape._id + randomString(20),
+                "_id": formShape.unique ? formShape._id : formShape._id + randomStringSC(20),
                 "formID": formShape._id,
                 "formName": formShape.name,
                 "formVersion": formShape.version,
@@ -94,7 +94,8 @@
             {
                 let currentFile = files.pop()
                 let fileContents = await currentFile.stream().getReader().read()
-                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileContents.value, {type: 'image'}).rev            
+                let fileBlob= new Blob([fileContents.value.buffer])
+                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileBlob, {type: 'image'}).rev
             }
 
             dispatch("completed", doc)
