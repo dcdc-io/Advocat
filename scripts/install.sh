@@ -19,4 +19,5 @@ FILE=advocat.release.$TAG.tar
 (cd deploy && ./pre-build.sh && docker build -t deploy .)
 
 # install
+chmod +x /build/scripts/setup.prod.sh
 /build/scripts/setup.prod.sh
