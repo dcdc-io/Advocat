@@ -62,8 +62,11 @@ fi
 # run advocat
 docker run -d -v /app/db:/app/db -v /app/config.$DEPLOY_ENV.json:/app/config.json -p 3000:3000 -e VIRTUAL_HOST=$DOMAIN -t $ADVOCAT_TAG
 
-# run deploy
-docker run -v /$DEPLOY_ENV.env:/.env deploy index.js
+if [ -z $SECONDARY_DEPLOY ]
+then
+    # run deploy
+    docker run -v /$DEPLOY_ENV.env:/.env deploy index.js
+fi
 
 # run alive
 docker run -d -p 999:999 alive

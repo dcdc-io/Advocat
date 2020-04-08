@@ -5,12 +5,7 @@ require("./_migrate")("2020-03-25-0001", async ({ createDatabase, useDatabase })
         console.error("cannot initialize a database that already contains migrations")
         process.exit(-1)
     }
-    await migrationdb.post({
-        _id: "2020-03-25-0001",
-        started: true
-    })
-
-
+    
     const registrations = await createDatabase("registrations")
     const _users = await createDatabase("_users")
 
@@ -41,9 +36,4 @@ require("./_migrate")("2020-03-25-0001", async ({ createDatabase, useDatabase })
     ]) { await registrations.post(user) }
 
     registrations.putSecurity({ "members": { "names": ["mailer"] }, "writers": { "roles": ["_public"] } })
-
-    await migrationdb.get("2020-03-25-0001").then(async doc => {
-        doc.completed = true
-        await migrationdb.put(doc)
-    })
 })

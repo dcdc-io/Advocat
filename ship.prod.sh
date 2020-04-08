@@ -46,29 +46,33 @@ docker save -o $FILE advocat:$TAG
 (cd deploy && ./pre-build.sh && docker build -t deploy .)
 docker save -o deploy.tar deploy:latest
 
-# move alive tar to /app and load into docker
-#echo "info: loading alive.tar to docker images"
-#(cat /alive.tar | docker load)
+DEPLOY_TARGETS=$(echo $DEPLOY_TARGET | tr ";" "\n")
+SECONDARY=""
+for CURRENT_DEPLOY_TARGET in $DEPLOY_TARGETS
+do
+    # copy images
+    pscp -i $DEPLOY_KEY $FILE $DEPLOY_USER@$CURRENT_DEPLOY_TARGET:/$FILE
+    pscp -i $DEPLOY_KEY alive.tar $DEPLOY_USER@$CURRENT_DEPLOY_TARGET:/alive.tar
+    pscp -i $DEPLOY_KEY deploy.tar $DEPLOY_USER@$CURRENT_DEPLOY_TARGET:/deploy.tar
 
-# load deploy
-#echo "info: loading deploy.tar to docker images"
-#(cat /deploy.tar | docker load)
+    # load images
+    plink -batch -i $DEPLOY_KEY $DEPLOY_USER@$CURRENT_DEPLOY_TARGET "cat /$FILE | docker load"
+    plink -batch -i $DEPLOY_KEY $DEPLOY_USER@$CURRENT_DEPLOY_TARGET "cat /alive.tar | docker load"
+    plink -batch -i $DEPLOY_KEY $DEPLOY_USER@$CURRENT_DEPLOY_TARGET "cat /deploy.tar | docker load"
 
-# move incoming tar to /app and load into docker
-#echo "info: loading $FILE to docker images"
-#ADVOCAT_TAG=$((cat /$FILE | docker load) | cut -d ' ' -f3)
 
-pscp -i $DEPLOY_KEY $FILE $DEPLOY_USER@$DEPLOY_TARGET:/$FILE
-pscp -i $DEPLOY_KEY alive.tar $DEPLOY_USER@$DEPLOY_TARGET:/alive.tar
-pscp -i $DEPLOY_KEY deploy.tar $DEPLOY_USER@$DEPLOY_TARGET:/deploy.tar
-pscp -i $DEPLOY_KEY ./scripts/setup.prod.sh $DEPLOY_USER@$DEPLOY_TARGET:/setup.prod.sh
-pscp -i $DEPLOY_KEY config.$DEPLOY_ENV.json $DEPLOY_USER@$DEPLOY_TARGET:/config.$DEPLOY_ENV.json
-pscp -i $DEPLOY_KEY ./pwa/static/manifest.dev.json $DEPLOY_USER@$DEPLOY_TARGET:/manifest.dev.json
+    pscp -i $DEPLOY_KEY ./scripts/setup.prod.sh $DEPLOY_USER@$CURRENT_DEPLOY_TARGET:/setup.prod.sh
+    pscp -i $DEPLOY_KEY config.$DEPLOY_ENV.json $DEPLOY_USER@$CURRENT_DEPLOY_TARGET:/config.$DEPLOY_ENV.json
+    pscp -i $DEPLOY_KEY ./pwa/static/manifest.dev.json $DEPLOY_USER@$CURRENT_DEPLOY_TARGET:/manifest.dev.json
 
-# 
+    #
+    plink -batch -i $DEPLOY_KEY $DEPLOY_USER@$CURRENT_DEPLOY_TARGET "chmod +x /setup.prod.sh"
+    plink -batch -i $DEPLOY_KEY $DEPLOY_USER@$CURRENT_DEPLOY_TARGET "SECONDARY_DEPLOY=$SECONDARY ADVOCAT_TAG=advocat:$TAG DEPLOY_ENV=$DEPLOY_ENV DOMAIN=$DOMAIN /setup.prod.sh"
+    
+    # prevents deploying to secondary instances
+    SECONDARY=TRUE
+done
 
-plink -batch -i $DEPLOY_KEY $DEPLOY_USER@$DEPLOY_TARGET "chmod +x /setup.prod.sh"
-plink -batch -i $DEPLOY_KEY $DEPLOY_USER@$DEPLOY_TARGET "FILE=/$FILE DEPLOY_ENV=$DEPLOY_ENV DOMAIN=$DOMAIN /setup.prod.sh"
 
 # DEPLOY_KEY=/path/to/ppk
 # DEPLOY_USER=root
