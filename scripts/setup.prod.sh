@@ -2,9 +2,9 @@
 
 # FILE=advocat.release.v0.1.2.tar DOMAIN=advocat.group ./setup.prod.sh
 
-if [ -z "$FILE" ]
+if [ -z "$ADVOCAT_TAG" ]
 then 
-    echo "error: FILE variable not set to location of .tar image"
+    echo "error: ADVOCAT_TAG variable not set to location of .tar image"
     exit -1
 fi
 if [ -z "$DOMAIN" ]
@@ -49,19 +49,6 @@ fi
 
 # setup directory structure
 (mkdir -p /app/db && chmod 666 /app/db)
-
-# move alive tar to /app and load into docker
-echo "info: loading alive.tar to docker images"
-(cat /alive.tar | docker load)
-
-# load deploy
-echo "info: loading deploy.tar to docker images"
-(cat /deploy.tar | docker load)
-
-# move incoming tar to /app and load into docker
-echo "info: loading $FILE to docker images"
-ADVOCAT_TAG=$((cat /$FILE | docker load) | cut -d ' ' -f3)
-
 
 # copy config if no config exists for DEPLOY_ENV
 if [ -f "/app/config.$DEPLOY_ENV.json" ]
