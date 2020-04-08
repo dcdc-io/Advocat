@@ -4,7 +4,7 @@
 
 if [ -z "$ADVOCAT_TAG" ]
 then 
-    echo "error: ADVOCAT_TAG variable not set to location of .tar image"
+    echo "error: ADVOCAT_TAG variable not set"
     exit -1
 fi
 if [ -z "$DOMAIN" ]
