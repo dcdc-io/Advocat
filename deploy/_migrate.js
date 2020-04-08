@@ -1,5 +1,6 @@
-require("dotenv").config()
-const {DB_DEPLOY_ENDPOINT, DB_DEPLOY_PASS, DB_DEPLOY_PROTOCOL, DB_DEPLOY_USER } = process.env
+const path = require("path")
+require("dotenv").config({ path: path.resolve(__dirname, process.env.NODE_ENV || "" + ".env") })
+const { DB_DEPLOY_ENDPOINT = "localhost:3000/db", DB_DEPLOY_PASS, DB_DEPLOY_PROTOCOL, DB_DEPLOY_USER } = process.env
 
 const fuxor = require('fuxor')
 fuxor.add('pouchdb-security', require('../pouchdb-security')) // <- dependency injection
@@ -10,10 +11,11 @@ PouchDB.plugin(require('pouchdb-authentication'))
     .plugin(require('pouchdb-find'))
 
 const useDatabase = async (name, skip_setup = true) => {
-    const db = new PouchDB(`${DB_DEPLOY_PROTOCOL || "http"}://${DB_DEPLOY_USER || "admin"}:${DB_DEPLOY_PASS || "password"}@${DB_DEPLOY_ENDPOINT || "localhost:3000/db"}` + (name ? "/" + name : ""), { skip_setup, adapter: "http" })
-    //await db.logIn("admin", "password")
+    const db = new PouchDB(`${DB_DEPLOY_PROTOCOL || "http"}://${DB_DEPLOY_USER}:${DB_DEPLOY_PASS}@${DB_DEPLOY_ENDPOINT}` + (name ? "/" + name : ""), { skip_setup, adapter: "http" })
     return db
+    //await db.logIn("admin", "password")
 }
+
 const createDatabase = async (name) => {
     const db = await useDatabase(name, false)
     return db

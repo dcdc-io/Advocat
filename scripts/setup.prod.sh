@@ -52,11 +52,15 @@ fi
 
 # move alive tar to /app and load into docker
 echo "info: loading alive.tar to docker images"
-(cat alive.tar | docker load)
+(cat /alive.tar | docker load)
+
+# load deploy
+echo "info: loading deploy.tar to docker images"
+(cat /deploy.tar | docker load)
 
 # move incoming tar to /app and load into docker
 echo "info: loading $FILE to docker images"
-ADVOCAT_TAG=$((cat $FILE | docker load) | cut -d ' ' -f3)
+ADVOCAT_TAG=$((cat /$FILE | docker load) | cut -d ' ' -f3)
 
 
 # copy config if no config exists for DEPLOY_ENV
@@ -70,6 +74,9 @@ fi
 
 # run advocat
 docker run -d -v /app/db:/app/db -v /app/config.$DEPLOY_ENV.json:/app/config.json -p 3000:3000 -e VIRTUAL_HOST=$DOMAIN -t $ADVOCAT_TAG
+
+# run deploy
+docker run -v /$DEPLOY_ENV.env:/.env deploy index.js
 
 # run alive
 docker run -d -p 999:999 alive

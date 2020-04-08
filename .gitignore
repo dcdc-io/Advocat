@@ -7,6 +7,11 @@ secrets.txt
 log.txt
 
 .env
+*.env
 smelte.css
 
 /*.tar
+
+ship.env.sh
+
+deploy/pouchdb-security
