@@ -37,10 +37,6 @@ onMount(async () => {
             <p style="position: absolute; transform: translate(-50%, -50%); top: 50%; left: 50%;">drop or tap to upload files</p>
         </div>
     </slot>
-    {#if label}
-        <!-- // TODO: make this work -->
-        <label>{label}</label> 
-    {/if}
     <span bind:this={template} style="display:none;">
         <slot>
             <div class="dz-preview dz-file-preview">

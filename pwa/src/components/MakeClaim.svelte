@@ -24,6 +24,7 @@
     const button_GP = () =>{
         claimBeingMade = "void-uk-is-gp";
     }
+
 </script>
 
 {#if claimBeingMade}
