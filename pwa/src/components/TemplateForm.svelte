@@ -94,8 +94,8 @@
             {
                 let currentFile = files.pop()
                 let fileContents = await currentFile.stream().getReader().read()
-                let fileBlob= new Blob([fileContents.value.buffer])
-                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileBlob, {type: 'image'}).rev
+                
+                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileContents, {type: 'image'}).rev
             }
 
             dispatch("completed", doc)
@@ -133,7 +133,7 @@
                         </Card.Card>
                     </FileField>
                 {:else if field.inputType === "SelectField"}
-                    <Select bind:value={formData[field.name]} items={field.values} />
+                    <Select label={field.label} bind:value={formData[field.name]} items={field.values} />
                 {:else}
                     <p> unknown form data type detected </p>
                 {/if}
