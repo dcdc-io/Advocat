@@ -21,6 +21,4 @@ FILE=advocat.release.$TAG.tar
 # install
 chmod +x /build/scripts/setup.prod.sh
 
-export ADVOCAT_TAG=advocat:$TAG
-
-/build/scripts/setup.prod.sh
+ADVOCAT_TAG=advocat:$TAG /build/scripts/setup.prod.sh
