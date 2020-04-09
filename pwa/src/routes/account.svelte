@@ -9,14 +9,15 @@
 
     let { loggedIn, username } = getContext("user");
     let user = {
-        email: "",
+        email: $username,
         firstName: "",
         surname: "",
         addressLine1: "",
         addressLine2: "",
         city: "",
         country: "",
-        postcode: ""
+        postcode: "",
+        GP: {}
     };
     let error = {
         email: ""
@@ -143,15 +144,15 @@
         </div>
         <br>
             <p>GP Practice/Family Doctor Information</p>
-            <TextField label="Name" bind:value={user.GP_name} />
-            <TextField label="Email" bind:value={user.GP_Email} /> 
-            <TextField label="Address Line 1" bind:value={user.GP_addressLine1} />
-            <TextField label="Address Line 2" bind:value={user.GP_addressLine2} />
-            <TextField label="Town/City" bind:value={user.GP_city} />
-            <TextField label="Post/Zip Code" bind:value={user.GP_postcode} />
-            <TextField label="Country" bind:value={user.GP_country} />
-            <TextField label="Phone Number" bind:value={user.GP_phoneNumber} />
-            <Checkbox label="Allow my doctor to access my data." bind:checked={user.GP_consent} />
+            <TextField label="Name" bind:value={user.GP.name} />
+            <TextField label="Email" bind:value={user.GP.Email} /> 
+            <TextField label="Address Line 1" bind:value={user.GP.addressLine1} />
+            <TextField label="Address Line 2" bind:value={user.GP.addressLine2} />
+            <TextField label="Town/City" bind:value={user.GP.city} />
+            <TextField label="Post/Zip Code" bind:value={user.GP.postcode} />
+            <TextField label="Country" bind:value={user.GP.country} />
+            <TextField label="Phone Number" bind:value={user.GP.phoneNumber} />
+            <Checkbox label="Allow my doctor to access my data." bind:checked={user.GP.consent} />
         <br>
         <Button block type="submit" disabled={!validChangeDetected}>Update Information</Button>
     </form>

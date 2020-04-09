@@ -1,4 +1,4 @@
-import { randomString, lowercase, hash } from "../../helpers.js"
+import { getUserAccountDB ,randomString, lowercase, hash } from "../../helpers.js"
 
 const sjcl = require("sjcl")
 const assert = require("assert")
@@ -39,6 +39,14 @@ export async function get(req, res, next) {
                 location: reg.location,
                 password,
                 type: "user",
+            })
+            usersDB = await getUserAccountDB(reg.email)
+            usersDB.put({
+                _id: "account",
+                name: reg.name,
+                email: reg.email,
+                postcode: reg.location.geocode,
+                gp: {}
             })
             // get a session on behalf of the user
             // set a cookie for the user
