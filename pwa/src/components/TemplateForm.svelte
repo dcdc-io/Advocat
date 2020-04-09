@@ -134,6 +134,9 @@
                                 <div slot="media"><img alt="upload thumbnail" class="w-full" data-dz-thumbnail /></div>
                             </Card.Card>
                         </FileField>
+                        {#if formError[field.name]}
+                            <error>{formError[field.name]}</error>
+                        {/if}
                     </Card.Card>
                 {:else if field.inputType === "SelectField"}
                     <Select label={field.label} bind:value={formData[field.name]} items={field.values} />

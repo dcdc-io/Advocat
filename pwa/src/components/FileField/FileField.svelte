@@ -9,7 +9,6 @@ let template
 export let method = "post"
 export let url = "#"
 export let files
-export let label
 export let autoProcessQueue = false
 
 onMount(async () => {
@@ -23,6 +22,7 @@ onMount(async () => {
         url
     })
     thisDropzone.on("addedfile", file => {
+        //
         files = thisDropzone.files
     })
     thisDropzone.on("removedfile", file => {
