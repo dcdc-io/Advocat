@@ -219,21 +219,26 @@ export const userSetup = async ({ loggedIn, username }) => {
     return session.userCtx.name
 }
 
-const validateFiles = (files, formField, formError) =>{
-    if(!formField){return formError}
-    for (let file of files){
-        formError[formField.name] = ""
-        if(formField.maxSize && file.length > formField.maxSize){
-            formError[formField.name] += `${file.name} is too big`
-        }
-        if(formField.fileType && !file.type.startsWith(formField.fileType)){
-            formError[formField.name] += `${file.name} is not a ${formField.fileType}`
+const validateFiles = (files, formField, formError) => {
+    if (!formField) {
+        return formError
+    }
+    let errors = []
+    for (let fileFieldName of Object.keys(files)) {
+        for (let file of files[fileFieldName]) {
+            if (formField.maxSize && file.length > formField.maxSize) {
+                errors.push(`${file.name} is too big`)
+            }
+            if (formField.fileType && !file.type.startsWith(formField.fileType)) {
+                errors.push(`${file.name} is not a ${formField.fileType}`)
+            }
         }
     }
+    formError[formField.name] = errors.join("\n")
     return formError
 }
 
-export const validateClaimForm = async (formData, errorHandler, formShape) => {
+export const validateClaimForm = async (formData, formDataFiles, errorHandler, formShape) => {
     const generateValidation = (input) => {
         return input.reduce((total, fun) => {
             return total[fun[0]](...fun.slice(1))
@@ -249,9 +254,9 @@ export const validateClaimForm = async (formData, errorHandler, formShape) => {
             schema[field.name] = generateValidation(field.validation)
         })
 
-        let fileField = formShape.fields.filter((field) => field.inputType  === "FileField")[0]
-        if(fileField){
-            formError = validateFiles(formData.files, fileField, formError)
+        let fileField = formShape.fields.filter((field) => field.inputType === "FileField")[0]
+        if (fileField) {
+            formError = validateFiles(formDataFiles, fileField, formError)
         }
 
         schema = yup.object().shape(schema)
@@ -259,7 +264,7 @@ export const validateClaimForm = async (formData, errorHandler, formShape) => {
         schema.validate(formData, { abortEarly: false })
             .then(async () => {
                 errorHandler(formError)
-                if(formError[fileField.name].length !== 0) {resolve(false)}
+                if (formError[fileField.name].length !== 0) { resolve(false) }
                 resolve(true)
             })
             .catch(err => {
@@ -359,7 +364,7 @@ export const enrollDevice = async ({ username, force = false }) => {
     return jwk
 }
 
-export const unenrollDevice = async ({username}) => {
+export const unenrollDevice = async ({ username }) => {
     if (window === undefined) {
         return false
     }

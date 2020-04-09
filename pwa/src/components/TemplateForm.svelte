@@ -56,7 +56,8 @@
    
     const validate = async () => {
         return await validateClaimForm(
-            formData,
+            formData, 
+            formDataFiles,
             error => {formError = error},
             formShape
         )
