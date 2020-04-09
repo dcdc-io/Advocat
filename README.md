@@ -8,9 +8,27 @@ Take a look at the [help us out](https://github.com/dcdc-io/Advocaat/labels/help
 
 ## Build and Run Local
 
-Run `docker-compose up` in the root directory to start a local stack.
+Run `yarn dev` in the `/pwa` directory to start a local stack.
 
-The API will run on HTTP port 3001 and the web frontend on HTTP port 3000
+To use it, go to:
+
+http://localhost:3000
+
+The PouchDB backend can be found at:
+
+http://localhost/db/_utils
+
+The default admin username and password is:
+
+Username: `admin`
+Password: `password`
+
+To create users advocat. sends an email, and you may not want this in dev so we don't enable that service by default.
+
+When you want to complete a registration of a user in dev, you can create a link using the `token` from the registrations database.
+
+To complete a dev registration go to http://localhost:3000/db/_utils and view the registrations database, copy the token for your registration and then visit http://localhost:3000/complete-registration/the-token-copied
+
 
 
 /server is the server and you run with node index.js
