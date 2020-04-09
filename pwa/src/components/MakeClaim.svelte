@@ -44,7 +44,7 @@
         {#if forms}
             {#each forms as form}
                 {#if !form.hidden}
-                    <Button on:click={() => claimBeingMade = form.id} block>{form.doc.name}</Button><br><br>
+                    <br><br><Button on:click={() => claimBeingMade = form.id} block>{form.doc.name}</Button><br><br>
                 {/if}
             {/each}
         {/if}
