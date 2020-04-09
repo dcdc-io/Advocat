@@ -94,8 +94,8 @@
             {
                 let currentFile = files.pop()
                 let fileContents = await currentFile.stream().getReader().read()
-                let fileBlob= new Blob([fileContents.value.buffer])
-                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileBlob, {type: 'image'}).rev
+                
+                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileContents, {type: 'image'}).rev
             }
 
             dispatch("completed", doc)
@@ -125,15 +125,18 @@
                 {:else if field.inputType === "DateField"}
                     <DatePicker label={field.label} bind:value={formData[field.name]}></DatePicker>
                 {:else if field.inputType === "FileField"}
-                    <br/>
-                    <FileField bind:files={formData["files"]} label={field.label}>
-                        <Card.Card>
-                            <div slot="title"><span data-dz-name></span></div>
-                            <div slot="media"><img alt="upload thumbnail" class="w-full" data-dz-thumbnail /></div>
-                        </Card.Card>
-                    </FileField>
+                    <br/>    
+                     <Card.Card class="w-full px-4 py-2">
+                        <label >{field.label}</label >
+                        <FileField bind:files={formData["files"]}>
+                            <Card.Card>
+                                <div slot="title"><span data-dz-name></span></div>
+                                <div slot="media"><img alt="upload thumbnail" class="w-full" data-dz-thumbnail /></div>
+                            </Card.Card>
+                        </FileField>
+                    </Card.Card>
                 {:else if field.inputType === "SelectField"}
-                    <Select bind:value={formData[field.name]} items={field.values} />
+                    <Select label={field.label} bind:value={formData[field.name]} items={field.values} />
                 {:else}
                     <p> unknown form data type detected </p>
                 {/if}
