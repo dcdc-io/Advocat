@@ -221,7 +221,6 @@ export const userSetup = async ({ loggedIn, username }) => {
 
 const validateFiles = (files, formField, formError) =>{
     if(!formField){return formError}
-    console.log(formField)
     for (let file of files){
         formError[formField.name] = ""
         if(formField.maxSize && file.length > formField.maxSize){
@@ -231,7 +230,6 @@ const validateFiles = (files, formField, formError) =>{
             formError[formField.name] += `${file.name} is not a ${formField.fileType}`
         }
     }
-    console.log(formError[formField.name])
     return formError
 }
 
