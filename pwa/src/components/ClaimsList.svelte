@@ -20,8 +20,6 @@
     }
 
     export const init = async () => {
-        if ($username === singletonUsername)
-            return singletonDB
         if (singletonDB)
             await singletonDB.close()
         singletonDB = await getUserAccountDB($username)
@@ -39,9 +37,7 @@
         await init()
         await updateDocs()
     })
-
 </script>
-
 
 <div class="claim-list">
     {#each docs as doc}

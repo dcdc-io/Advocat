@@ -224,10 +224,10 @@ const validateFiles = (files, formField, formError) =>{
     console.log(formField)
     for (let file of files){
         formError[formField.name] = ""
-        if(file.length > formField.maxSize){
+        if(formField.maxSize && file.length > formField.maxSize){
             formError[formField.name] += `${file.name} is too big`
         }
-        if(!file.type.startsWith(formField.fileType)){
+        if(formField.fileType && !file.type.startsWith(formField.fileType)){
             formError[formField.name] += `${file.name} is not a ${formField.fileType}`
         }
     }
