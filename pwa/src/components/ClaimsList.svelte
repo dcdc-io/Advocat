@@ -23,7 +23,7 @@
         if ($username === singletonUsername)
             return singletonDB
         if (singletonDB)
-            singletonDB.close()
+            await singletonDB.close()
         singletonDB = await getUserAccountDB($username)
         singletonDB.changes({
             since: 'now',

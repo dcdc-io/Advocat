@@ -1,6 +1,6 @@
 <script>
     import { getContext, onMount } from 'svelte';
-    import { Chip } from '../../node_modules/smelte/src'
+    import { Chip, Button, Dialog} from '../../node_modules/smelte/src'
     import TemplateForm from "../components/TemplateForm.svelte";
     import { getUserAccountDB } from '../helpers.js'
     import VerticalDrawer from '../components/VerticalDrawer/VerticalDrawer.svelte'
@@ -10,6 +10,7 @@
 
     let share = false
     let dataUrl = ""
+    let showDeleteDialog = false
 
     let { loggedIn, username } = getContext("user");
     let isEditing;
@@ -19,7 +20,6 @@
         isEditing = true
     }
     const button_delete = async () =>{
-        // TODO: spin up a dialogue to confirm first
         await (await getUserAccountDB($username)).remove(claim)
     }
     const button_share = async () => {
@@ -54,13 +54,21 @@
                 </div>
             {/each}      
             <Chip icon="edit"  on:click={button_edit}>edit</Chip>
-            <Chip icon="delete" on:click={button_delete}>delete</Chip>
+            <Chip icon="delete" on:click={() => showDeleteDialog = true}>delete</Chip>
             <Chip icon="verified_user" on:click={button_share}>verify</Chip>
             <Chip icon="share" on:click={button_share}>share</Chip>
         {/if}
     {/if}
 </div>
 
+<Dialog bind:value={showDeleteDialog}>
+  <h5 slot="title">Delete this claim?</h5>
+  <div class="text-gray-700">If you delete this and it was signed, it will be a pain to get it back</div>
+  <div slot="actions">
+    <Button text on:click={() => {showDeleteDialog = false; button_delete();}}>Yes</Button>
+    <Button text on:click={() => showDeleteDialog = false}>No</Button>
+  </div>
+</Dialog>
 
 <VerticalDrawer bottom={true} persistent={true} bind:show={share}>
     <div style="margin: 2em;">
