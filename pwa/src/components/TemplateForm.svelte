@@ -14,6 +14,7 @@
     let { username } = getContext("user");
 
     let formData = {}
+    let formDataFiles = {}
     let formError = {}
 
     const dispatch = createEventDispatcher()
@@ -36,7 +37,7 @@
         const db = await useDatabase({name:"claim_templates"})
         try {
             formShape = await db.get(template)
-            if(formShape == undefined){
+            if (formShape == undefined) {
                 throw new error("template not found")
             }
             
@@ -69,33 +70,44 @@
     const handleSubmit = async () => {
         isSubmitting = true
         const ok = await validate()
-        if (ok){
-            let data = []            
-            for(let key in formData)
+        if (ok) {
+            let data = []
+            for (let key in formData)
             {
                 data.push({
                     name: key,
                     value: formData[key]
                 })
+            }            
+            let doc = {
+                _id: formShape.unique ? formShape._id : formShape._id + randomStringSC(20),
+                formID: formShape._id,
+                formName: formShape.name,
+                formVersion: formShape.version,
+                type: "claim",
+                fields: data
             }
-            
-            const doc = {
-                "_id": formShape.unique ? formShape._id : formShape._id + randomStringSC(20),
-                "formID": formShape._id,
-                "formName": formShape.name,
-                "formVersion": formShape.version,
-                "type": "claim",
-                "fields":data
-            }
-            // TODO use this rev to put stuff
             let db = await getUserAccountDB($username)
-            let rev = (await db.put(doc)).rev            
-            while (files.length > 0)
-            {
-                let currentFile = files.pop()
-                let fileContents = await currentFile.stream().getReader().read()
-                
-                rev = await db.putAttachment(doc._id, currentFile.name, rev, fileContents, {type: 'image'}).rev
+            let thisRev = (await db.put(doc)).rev
+            for (let fieldKey of Object.keys(formDataFiles)) {
+                let targetField = doc.fields.find(field => field.name === fieldKey)
+                targetField.value = []
+                for (let fileActual of formDataFiles[fieldKey]) {
+                    // first put attachment
+                    let next = await db.putAttachment(doc._id, fileActual.name, thisRev, fileActual, fileActual.type)
+                    // then update doc to point field to attachment
+                    if (next.rev) {
+                        targetField.value.push(fileActual.name)
+                        thisRev = next.rev
+                    }
+                }
+            }
+            // update doc if files were added
+            if (doc._rev != thisRev) {
+                await db.put({
+                    ...(await db.get(doc._id)),
+                    ...doc
+                })
             }
 
             dispatch("completed", doc)
@@ -128,7 +140,7 @@
                     <br/>    
                      <Card.Card class="w-full px-4 py-2">
                         <label >{field.label}</label >
-                        <FileField bind:files={formData["files"]}>
+                        <FileField bind:files={formDataFiles[field.name]}>
                             <Card.Card>
                                 <div slot="title"><span data-dz-name></span></div>
                                 <div slot="media"><img alt="upload thumbnail" class="w-full" data-dz-thumbnail /></div>
