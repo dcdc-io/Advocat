@@ -18,28 +18,23 @@
         notifier.notify("cancelled claim submission")
     }
 
-    const button_COVID19 = () =>{
-        claimBeingMade = "void-uk-covid-19-antibody-test";
-    }
-
-    const button_GP = () =>{
-        claimBeingMade = "void-uk-is-gp";
-    }
-
     const init = async () => {
         let claim_templates = await useDatabase({name:"claim_templates"})
-        let user_db = await getUserAccountDB()
+        let user_db = await getUserAccountDB($username)
         let docs = await claim_templates.allDocs({include_docs: true})
         forms = docs.rows
-        for(let form of forms){
-            if(form.doc.unique){
-                let existingDoc = await user_db.get(form.id).catch( () => {})
-                if(existingDoc){ form.hidden = true}
+        for(let form in forms){
+            if(forms[form].doc.unique){                
+                user_db.get(forms[form].id).then(() => forms[form].hidden = true).catch( 
+                    (e) => {
+                        if(e.status != 404) {console.log(e)}
+                    }
+                )
             }
         }
     }
 
-    init();
+    onMount( () => {init()})
 </script>
 
 {#if claimBeingMade}
