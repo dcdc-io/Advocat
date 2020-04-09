@@ -219,7 +219,21 @@ export const userSetup = async ({ loggedIn, username }) => {
     return session.userCtx.name
 }
 
-export const validateClaimForm = async (formdata, errorHandler, formShape) => {
+const validateFiles = (files, formField, formError) =>{
+    if(!formField){return formError}
+    for (let file of files){
+        formError[formField.name] = ""
+        if(formField.maxSize && file.length > formField.maxSize){
+            formError[formField.name] += `${file.name} is too big`
+        }
+        if(formField.fileType && !file.type.startsWith(formField.fileType)){
+            formError[formField.name] += `${file.name} is not a ${formField.fileType}`
+        }
+    }
+    return formError
+}
+
+export const validateClaimForm = async (formData, errorHandler, formShape) => {
     const generateValidation = (input) => {
         return input.reduce((total, fun) => {
             return total[fun[0]](...fun.slice(1))
@@ -228,26 +242,32 @@ export const validateClaimForm = async (formdata, errorHandler, formShape) => {
 
     return new Promise((resolve, reject) => {
         let schema = {}
-        let formerror = {}
+        let formError = {}
 
         formShape.fields.forEach(field => {
-            formerror[field.name] = ""
+            formError[field.name] = ""
             schema[field.name] = generateValidation(field.validation)
         })
 
+        let fileField = formShape.fields.filter((field) => field.inputType  === "FileField")[0]
+        if(fileField){
+            formError = validateFiles(formData.files, fileField, formError)
+        }
+
         schema = yup.object().shape(schema)
 
-        schema.validate(formdata, { abortEarly: false })
+        schema.validate(formData, { abortEarly: false })
             .then(async () => {
-                errorHandler(formerror)
+                errorHandler(formError)
+                if(formError[fileField.name].length !== 0) {resolve(false)}
                 resolve(true)
             })
             .catch(err => {
-                let formerror = {};
+                let formError = {};
                 (err.inner || []).forEach(err => {
-                    formerror[err.path] = err.message
+                    formError[err.path] = err.message
                 })
-                errorHandler(formerror)
+                errorHandler(formError)
                 resolve(false)
             })
     })
