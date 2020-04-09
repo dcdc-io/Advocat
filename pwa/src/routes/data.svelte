@@ -21,7 +21,6 @@
             </ul>
         </li>
         <li>We don't sell your data.</li>
-        <li>Placeholder for adding data usage statistics details and how we wil use their data for reports ..... blah blah.</li>
     </ol>
     <br />
     We may need to amend this policy in the future but we will never do so without requesting your consent to those amendments.
