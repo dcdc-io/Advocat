@@ -4,18 +4,34 @@
 	import { setContext, onMount } from 'svelte'
 	import { userSetup } from "../helpers.js"
 	import { writable } from 'svelte/store'
+	import { stores } from '@sapper/app'
 	export let segment;
+	let nopad = false;
 
+	const { page } = stores()
 	const loggedIn = writable(false)
 	const username = writable("")
 	setContext("user", { loggedIn, username })
 
 	onMount(async () => {
 		await userSetup({loggedIn, username})
+		console.log($page)
 	})
+
+
+	$: nopad = $page.path === "/find_groups"
 </script>
 
 <style>
+	.nopad {
+		margin: 0 !important;
+		padding: 0 !important;	
+		width: min(90vw, 600px);
+		box-sizing: border-box;
+		flex: 1;
+		color: var(--colour-scheme-dark);
+		position: relative;
+	}
 	main {
 		width: min(90vw, 600px);
 		margin: 0 auto;
@@ -36,7 +52,7 @@
 
 <Nav {segment}></Nav>
 
-<main >
+<main class:nopad>
 	<slot></slot>
 </main>
 

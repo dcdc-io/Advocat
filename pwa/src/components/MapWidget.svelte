@@ -5,6 +5,7 @@
     import { Heatmap as HeatmapLayer } from 'ol/layer';
     import TileLayer from 'ol/layer/Tile';
     import OSM from 'ol/source/OSM';
+    import Overlay from 'ol/Overlay';
     import Point from 'ol/geom/Point';
     import VectorLayer from 'ol/layer/Vector';
     import VectorSource from 'ol/source/Vector';
@@ -19,6 +20,7 @@
     //     ]
     // }
 
+    let popupElement
     let map;
     let viewOptions;
 
@@ -74,7 +76,7 @@
                 })
             })
         });
-        var vector2 = new HeatmapLayer({
+        let vector2 = new HeatmapLayer({
             source: vectorSource,
             blur: 10,
             radius: 10,
@@ -83,8 +85,34 @@
             }
         });
 
-        map.addLayer(vector);
         map.addLayer(vector2);
+        map.addLayer(vector);
+
+
+        var popup = new Overlay({
+            element: popupElement,
+            positioning: 'bottom-center',
+            stopEvent: false,
+            offset: [0, -50]
+        });
+        map.addOverlay(popup);
+        map.on('click', event => {
+            console.log(event)
+            const feature = map.forEachFeatureAtPixel(event.pixel, feature => feature)
+            console.log(feature)
+            if (feature) {
+                let coordinates = feature.getGeometry().getCoordinates()
+                popup.setPosition(coordinates)
+                /*$(element).popover({
+                    placement: 'top',
+                    html: true,
+                    content: feature.get('name')
+                });*/
+                /*$(element).popover('show')*/
+            } else {
+                /*$(element).popover('destroy')*/
+            }
+        })
     })
 </script>
 
@@ -103,27 +131,10 @@
         console.log(map);
     }
 </script> -->
-
-
 <style>
-    @media only screen and (max-width: 499px) {
-        #mapTarget{
-            width: 250px;
-            height: 400px;
-        }
-    }
-    @media only screen and (min-width: 500px) and (max-width: 999px) {
-        #mapTarget{
-            width: 500px;
-            height: 650px;
-        }
-    }
-    @media only screen and (min-width: 1000px) {
-        #mapTarget{
-            width: 600px;
-            height: 800px;
-        }
+    #mapTarget {
+        width: 100%;
+        height: 100%;
     }
 </style>
-
-<div id="mapTarget"></div>
+<div id="mapTarget"><div bind:this={popupElement}></div></div>
