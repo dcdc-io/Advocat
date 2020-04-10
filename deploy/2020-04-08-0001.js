@@ -36,8 +36,8 @@ require("./_migrate")("2020-04-08-0001", async ({ createDatabase, useDatabase })
           "name": "photo",
           "default": [],
           "inputType": "FileField",
-          "validation": [["array"], ["required"],["min","1"],["max","1"]],
-          "maxSize": 1048576,
+          "validation": [["array"], ["required"],["min","1"],["max","4"]],
+          "maxSize": 5242880,
           "fileType": "image",
           "order": 30
 
@@ -49,7 +49,9 @@ require("./_migrate")("2020-04-08-0001", async ({ createDatabase, useDatabase })
           "inputType": "SelectField",
           "values": [
             { "text": "Negative", "value": "negative" },
-            { "text": "Positive", "value": "positive" },
+            { "text": "IgM Positive", "value": "IgM" },
+            { "text": "IgG Positive", "value": "IgG" },
+            { "text": "IgM/IgG Positive", "value": "IgMIgG" },
             { "text": "Inconclusive", "value": "inconclusive" }
           ],
           "validation": [["string"], ["required"]],
