@@ -31,10 +31,10 @@
         data = await getData();
         console.log(data);
         const module = await import('../components/MapWidget.svelte'); 
-		mapView = module.default;
+        mapView = module.default;
+        mapView.classList.add("map")
     })
 
 </script>
- 
 Reg map
 <svelte:component this={mapView} data={data}/>
