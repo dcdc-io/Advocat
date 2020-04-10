@@ -59,7 +59,7 @@
 <div class="claim-container" id="claim.formName">
     {#if claim}
         {#if isEditing}
-            <TemplateForm  on:cancel={cancelledClaim} on:completed={updateClaim} template={claim.formID} edit={claim}></TemplateForm>
+            <TemplateForm  on:cancel={cancelledClaim} on:completed={updateClaim} type="claim" template={claim.formID} edit={claim}></TemplateForm>
         {:else}
             <h5> {claim.formName} - v{claim.formVersion} </h5> 
             {#each claim.fields.sort( (a,b) => a.order - b.order) as data}

@@ -8,7 +8,30 @@
     let claimBeingMade = false
     let forms;
 
-    const completedClaim = _ => {
+    const completedClaim = async event => {
+        let doc = event.detail
+        const db = await getUserAccountDB($username)
+        let thisRev = (await db.put(doc)).rev
+        for (let fieldKey of Object.keys(formDataFiles)) {
+            let targetField = doc.fields.find(field => field.name === fieldKey)
+            targetField.value = []
+            for (let fileActual of formDataFiles[fieldKey]) {
+                // first put attachment
+                let next = await db.putAttachment(doc._id, fileActual.name, thisRev, fileActual, fileActual.type)
+                // then update doc to point field to attachment
+                if (next.rev) {
+                    targetField.value.push(fileActual.name)
+                    thisRev = next.rev
+                }
+            }
+        }
+        // update doc if files were added
+        if (doc._rev != thisRev) {
+            await db.put({
+                ...(await db.get(doc._id)),
+                ...doc
+            })
+        }
         claimBeingMade = false;
         notifier.notify("Claim successfully recorded.")
     }
@@ -38,7 +61,7 @@
 </script>
 
 {#if claimBeingMade}
-    <TemplateForm on:cancel={cancelledClaim} on:completed={completedClaim} template={claimBeingMade}></TemplateForm>
+    <TemplateForm on:cancel={cancelledClaim} on:completed={completedClaim}  type="claim" template={claimBeingMade}></TemplateForm>
 {:else}
     <div class="button-container">
         {#if forms}
