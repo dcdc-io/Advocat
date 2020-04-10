@@ -59,7 +59,7 @@
 
 <style>
   .drawer {
-    min-height: 50vh;
+    min-height: 60vh;
   }
 
   aside {
