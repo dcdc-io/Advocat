@@ -1,5 +1,5 @@
 <svelte:head>
-	<title>Jobs for your group</title>
+	<title>Activities</title>
 </svelte:head>
 
 <script>
