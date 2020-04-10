@@ -1,10 +1,6 @@
 # Advocat.
----------------------------
+
 An app to connect self-isolating people with healthy people to drop them supplies
-
-## Contributing
-
-Take a look at the [help us out](https://github.com/dcdc-io/Advocaat/labels/help%20wanted) issues for the top priority work to do.
 
 ## Build and Run Local
 
@@ -49,7 +45,7 @@ PouchDB database access is controlled through whitelists, unless nobody is in an
 
 Once any roles or names are added to the security document for a database then access to that database will be governed by the whitelists in each section of the security document.
 
-### Roles, Names, and Permissions
+## Roles, Names, and Permissions
 
 Databases support simultaneous role-based access control and user-based access control.
 
@@ -68,14 +64,74 @@ fig.1. a security document with only one `role` named `workers_uk_leeds_rw` with
 </pre>
 </code>
 
-### New PouchDB Permission Sets and Special Roles
+## New PouchDB Permission Sets and Special Roles
 
-#### admins. members, readers, writers
+### admins. members, readers, writers
 
 Advocat. adds "readers" and "writers" in addition to the built in "admins" and "members". This allows the creation of write-only and read-only DB APIs and can be useful when deploying into federated app ecosystems where you want to take advantage of PouchDB replication without the risk that external databases write to data sources or read from data sinks.
 
-#### role: _public
+### role: _public
 
 Advocat. adds a special _public role that can be added to a security document to make a particular permission interface public and available to none authenticated users. This allows scenarios such as anonymous reading and authorised writing. It is important to remember that this is *not the same* as having a database without a security document, as this would treat every visitor as if they had "member" permissions.
 
 The shipped database `claim_templates` is an example of a database with public read and admin only write.
+
+---
+
+# Contributing
+
+## Developer Style Notes
+
+Here is a list of rules to try and stick to when working on advocat.
+
+1. Don't use underscores in routes:
+
+    _don't_
+
+    ```
+    /complete_registration
+    ```
+
+    _do_ 
+
+    ```
+    /complete-registration
+    ```
+
+2. Group APIs with their views:
+
+    _don't_
+
+    ```
+    /change-password.svelte
+    /api/change-password.js
+    ```
+
+    _do_
+
+    ```
+    /account.svelte
+    /account/change-password.js
+
+    // or //
+
+    /account/index.svelte
+    /account/change-password.js
+    ```
+
+3. Don't use server side `globalThis` on the user side:
+
+    _don't_
+
+    ```
+    // client side code
+    const myDb = globalThis.dbContext("records")
+    ```
+
+    _do_
+
+    ```
+    // client side code
+    import { useDatabase } from "helpers.js"
+    const myDb = await useDatabase("records")
+    ```
