@@ -38,6 +38,7 @@ export async function get(req, res, next) {
                 roles: [],
                 location: reg.location,
                 password,
+                passwordGenerated: true,
                 type: "user",
             })
             const thisUserDb = await globalThis.dbContext(`user_${userIdentity}`)
@@ -46,7 +47,7 @@ export async function get(req, res, next) {
                 name: reg.name,
                 email: reg.email,
                 postcode: reg.location.geocode,
-                gp: {}
+                GP: {}
             })
             // get a session on behalf of the user
             // set a cookie for the user
