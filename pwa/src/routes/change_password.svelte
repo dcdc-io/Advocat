@@ -1,75 +1,34 @@
 <script>
-    import { getContext, onMount } from "svelte"
-    import { useDatabase, getUserAccountDB } from "../helpers.js"
-    import { changePassword } from "../accountHelpers.js"
+    import { getContext } from "svelte"
     import { Button, TextField, Checkbox } from "../../node_modules/smelte/src"
     import { goto } from "@sapper/app"
-    import * as yup from "yup"
 
-    let { loggedIn, username } = getContext("user");
+    let { loggedIn, username } = getContext("user")
 
-    let db;
-    let oldPassword;
-    let newPassword;
-    let newPasswordValidate;
-    let isSubmitting;
-    let submitted = false;
-    let error = {};
-
-
-    //TODO: server side this
-    const validate = async () => {
-          return new Promise((resolve, reject) => {
-          const schema = yup.object().shape({
-            newPassword: yup.string().required(),
-            newPasswordValidate: yup.string().required().oneOf([newPassword],"passwords do not match"),
-          })
-          error.email = ""
-          schema.validate(user, {abortEarly: false})
-            .then(async () => {
-                resolve(true)
-            })
-            .catch(err => {
-                (err.inner || []).forEach(err => {
-                    error[err.path] = err.message
-                })
-              resolve(false)
-            })
-        })
-      }
+    let isSubmitting
+    let submitted = false
+    let formData = {}
+    let error = {}
     
     const handleSubmit = async () => {
-        try{
-            isSubmitting = true;
-            const ok = await validate()
-            if(ok){
-                if(user.passwordGenerated === false){
-                    const login = await _users.multiUserLogIn($username, oldPassword)
-                    if(login.sessionID){
-                        let result = await db.changePassword($username, newPassword)
-                    }else{
-                        error[oldPassword] = "old password not correct"
-                    }
-                }
-                else{
-                    let result = await db.changePassword($username, newPassword)
-                }
-            }
+        isSubmitting = true
+        // disable input
+        const result = await fetch("account/change-password", {
+            method:"POST", 
+            body: JSON.stringify({ ...formData, username: $username }),
+            headers: { "Content-Type": "application/json" }
+        })
+        // enable input
+        isSubmitting = false
+        if (result.ok) {
+            submitted = true
+        } else {
+            console.log(result)
+            error = await result.json()
         }
-        finally{
-            isSubmitting = false;
-            submitted = true;
-        }
+
+
     }
-
-    const init = async () => {
-        db = await require("express-pouchdb/lib/utils").getUsersDB(globalThis.appContext, globalThis.dbContext)		
-    }
-
-    onMount(async () => {
-        await init()
-    })
-
 </script>
 
 <svelte:head>
@@ -80,13 +39,13 @@
 [TODO : link to blog] -->
 
 {#if submitted}
-    new Password was submitted
+    Your password has been changed.
 {:else}
     <form on:submit|preventDefault={handleSubmit}>
-        <TextField type="password" label="old password" bind:value={oldPassword} error={error.oldPassword}/>
-        <TextField type="password" label="new password" bind:value={newPassword} error={error.newPassword}/>
-        <TextField type="password" label="new password confirmation" bind:value={newPasswordValidate} error={error.newPasswordValidate}/>
-        <Button block type="submit" disabled={isSubmitting}>update Password</Button>
+        <TextField type="password" label="old password" bind:value={formData.oldPassword} error={error.oldPassword}/>
+        <TextField type="password" label="new password" bind:value={formData.newPassword} error={error.newPassword}/>
+        <TextField type="password" label="new password confirmation" bind:value={formData.newPasswordValidate} error={error.newPasswordValidate}/>
+        <Button block type="submit" disabled={isSubmitting}>Update Password</Button>
     </form>
 {/if}
 
