@@ -6,6 +6,7 @@
     import FileField from './FileField/index.svelte'
     
     export let template
+    export let type
 
     let formShape
     let files = {}
@@ -34,7 +35,7 @@
     }
 
     const init = async () => {
-        const db = await useDatabase({name:"claim_templates"})
+        const db = await useDatabase({name:`${type}_templates`})
         try {
             formShape = await db.get(template)
             if (formShape == undefined) {
@@ -42,10 +43,7 @@
             }
             
             formShape.fields.forEach( async field => {
-                //if (!edit) {
-                    formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
-                //}
-                //formError[field.name] = ""
+                formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
             });
         } catch (e) {
             console.error("db:", db)
@@ -85,32 +83,10 @@
                 formID: formShape._id,
                 formName: formShape.name,
                 formVersion: formShape.version,
-                type: "claim",
+                type: type,
                 fields: data
             }
-            let db = await getUserAccountDB($username)
-            let thisRev = (await db.put(doc)).rev
-            for (let fieldKey of Object.keys(formDataFiles)) {
-                let targetField = doc.fields.find(field => field.name === fieldKey)
-                targetField.value = []
-                for (let fileActual of formDataFiles[fieldKey]) {
-                    // first put attachment
-                    let next = await db.putAttachment(doc._id, fileActual.name, thisRev, fileActual, fileActual.type)
-                    // then update doc to point field to attachment
-                    if (next.rev) {
-                        targetField.value.push(fileActual.name)
-                        thisRev = next.rev
-                    }
-                }
-            }
-            // update doc if files were added
-            if (doc._rev != thisRev) {
-                await db.put({
-                    ...(await db.get(doc._id)),
-                    ...doc
-                })
-            }
-
+            
             dispatch("completed", doc)
             isSubmitting = false
             console.log("yes")
