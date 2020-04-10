@@ -144,15 +144,15 @@
         </div>
         <br>
             <p>GP Practice/Family Doctor Information</p>
-            <TextField label="Name" bind:value={user.GP.name} />
-            <TextField label="Email" bind:value={user.GP.Email} /> 
-            <TextField label="Address Line 1" bind:value={user.GP.addressLine1} />
-            <TextField label="Address Line 2" bind:value={user.GP.addressLine2} />
-            <TextField label="Town/City" bind:value={user.GP.city} />
-            <TextField label="Post/Zip Code" bind:value={user.GP.postcode} />
-            <TextField label="Country" bind:value={user.GP.country} />
-            <TextField label="Phone Number" bind:value={user.GP.phoneNumber} />
-            <Checkbox label="Allow my doctor to access my data." bind:checked={user.GP.consent} />
+            <TextField label="Name" bind:value={user.gp.name} />
+            <TextField label="Email" bind:value={user.gp.Email} /> 
+            <TextField label="Address Line 1" bind:value={user.gp.addressLine1} />
+            <TextField label="Address Line 2" bind:value={user.gp.addressLine2} />
+            <TextField label="Town/City" bind:value={user.gp.city} />
+            <TextField label="Post/Zip Code" bind:value={user.gp.postcode} />
+            <TextField label="Country" bind:value={user.gp.country} />
+            <TextField label="Phone Number" bind:value={user.gp.phoneNumber} />
+            <Checkbox label="Allow my doctor to access my data." bind:checked={user.gp.consent} />
         <br>
         <Button block type="submit" disabled={!validChangeDetected}>Update Information</Button>
     </form>

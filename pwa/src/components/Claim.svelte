@@ -70,7 +70,7 @@
   </div>
 </Dialog>
 
-<VerticalDrawer bottom={true} persistent={true} bind:show={share}>
+<VerticalDrawer bottom={true} persistent={false} bind:show={share}>
     <div style="margin: 2em;">
         <img src={dataUrl} style="width:100%;"/> 
     </div>

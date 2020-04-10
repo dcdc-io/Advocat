@@ -141,7 +141,7 @@
                     <br/>    
                      <Card.Card class="w-full px-4 py-2">
                         <label >{field.label}</label >
-                        <FileField bind:files={formDataFiles[field.name]}>
+                        <FileField bind:files={formDataFiles[field.name]} bind:filenames={formData[field.name]}>
                             <Card.Card>
                                 <div slot="title"><span data-dz-name></span></div>
                                 <div slot="media"><img alt="upload thumbnail" class="w-full" data-dz-thumbnail /></div>

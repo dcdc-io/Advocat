@@ -1,4 +1,4 @@
-import { getUserAccountDB ,randomString, lowercase, hash } from "../../helpers.js"
+import { randomString, lowercase, hash } from "../../helpers.js"
 
 const sjcl = require("sjcl")
 const assert = require("assert")
@@ -40,8 +40,8 @@ export async function get(req, res, next) {
                 password,
                 type: "user",
             })
-            usersDB = await getUserAccountDB(reg.email)
-            usersDB.put({
+            const thisUserDb = await globalThis.dbContext(`user_${userIdentity}`)
+            thisUserDb.put({
                 _id: "account",
                 name: reg.name,
                 email: reg.email,
