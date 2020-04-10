@@ -155,17 +155,38 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false, options = {
     }
 }
 
+export const urlBase64ToBase64 = str => str.replace(/\-/g, "+").replace(/_/g, "/").padEnd(str.length + (4 - str.length % 4) % 4, "=")
 export const utf8ToBinaryString = str => encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, (_, r) => String.fromCharCode(parseInt(r, 16)))
 export const strToUrlBase64 = str => binToUrlBase64(utf8ToBinaryString(str))
 export const binToUrlBase64 = bin => btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/\=+/g, "")
-function uint8ToUrlBase64(uint8) {
-    var bin = '';
-    uint8.forEach(function (code) {
-        bin += String.fromCharCode(code);
+export const uint8ToUrlBase64 = uint8 => {
+    let bin = '';
+    uint8.forEach(code => {
+        bin += String.fromCharCode(code)
     });
-    return binToUrlBase64(bin);
+    return binToUrlBase64(bin)
 }
 
+/**
+ * Signs a whole document producing a signature suitable for signed sharing.
+ * @param {Object} doc A whole document.
+ * @param {Number} iat The issued at timestamp. 
+ * @param {Number} exp The expiration timestamp.
+ */
+export const docSignature = async (doc, iat, exp) => {
+    const username = await getCurrentUsername()
+    const deviceKey = await getDeviceKey({ username })
+    const toSign = {
+        sub: hash(username),
+        doc,
+        iat,
+        exp
+    }
+    const signature = await window.crypto.subtle.sign({
+        name: "ECDSA", hash: { name: "SHA-256" }
+    }, deviceKey.key.privateKey, new TextEncoder().encode(JSON.stringify(toSign)))
+    return new Uint8Array(signature)
+}
 
 export const createDeviceAuthenticationToken = async () => {
     const username = await getCurrentUsername()

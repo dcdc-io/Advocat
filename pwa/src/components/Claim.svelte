@@ -2,13 +2,14 @@
     import { getContext, onMount } from 'svelte';
     import { Chip, Button, Dialog} from '../../node_modules/smelte/src'
     import TemplateForm from "../components/TemplateForm.svelte";
-    import { getUserAccountDB } from '../helpers.js'
+    import { getUserAccountDB, hash, docSignature, strToUrlBase64, uint8ToUrlBase64 } from '../helpers.js'
     import VerticalDrawer from '../components/VerticalDrawer/VerticalDrawer.svelte'
     import { qrcode, svg2url  } from 'pure-svg-code' 
 
     export let claim;
 
     let share = false
+    export let shareUrl = ""
     let dataUrl = ""
     let showDeleteDialog = false
 
@@ -19,12 +20,26 @@
         // TODO: some warning needs to go up about invalidating previous proofs when you do this.
         isEditing = true
     }
-    const button_delete = async () =>{
+    const button_delete = async () => {
         await (await getUserAccountDB($username)).remove(claim)
     }
+
     const button_share = async () => {
         share = true
-        dataUrl = svg2url(qrcode(`https://advocat.group/verify/${$username}.${claim._id}`))
+        const iat = Date.now()
+        const exp = iat + 60 + 1000
+        let sig = await docSignature(claim, iat, exp)
+        let newClaim = {
+            sub: hash($username),
+            ref: claim._id,
+            iat,
+            exp,
+            sig: uint8ToUrlBase64(sig)
+        }
+        let path = strToUrlBase64(JSON.stringify(newClaim))
+
+        shareUrl = `https://advocat.group/verify/${path}.claim`
+        dataUrl = svg2url(qrcode(shareUrl))
     }
         
     const updateClaim = () => {isEditing = false}
@@ -72,6 +87,7 @@
 
 <VerticalDrawer bottom={true} persistent={false} bind:show={share}>
     <div style="margin: 2em;">
+        <span>{shareUrl}</span>
         <img src={dataUrl} style="width:100%;"/> 
     </div>
 </VerticalDrawer>
