@@ -5,10 +5,8 @@
     import { Button, TextField, DatePicker, Select, Card } from '../../node_modules/smelte/src'
     import FileField from './FileField/index.svelte'
     
-    export let template
-    export let type
+    export let formShape
 
-    let formShape
     let files = {}
     let isSubmitting = false
 
@@ -35,21 +33,11 @@
     }
 
     const init = async () => {
-        const db = await useDatabase({name:`${type}_templates`})
-        try {
-            formShape = await db.get(template)
-            if (formShape == undefined) {
-                throw new error("template not found")
-            }
-            
-            formShape.fields.forEach( async field => {
-                formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
-            });
-        } catch (e) {
-            console.error("db:", db)
-            console.error("template:", template)
-            console.error("e:", e)
-        }        
+        console.log(formShape)
+        formShape.fields.forEach( async field => {
+            formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
+        });
+      
     }
    
     const validate = async () => {
@@ -97,9 +85,7 @@
     }
        
     onMount(() => {
-        if (template) {
-            init()
-        }
+        init()
     })
 </script>
     

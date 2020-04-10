@@ -46,6 +46,25 @@ export const sendMail = async ({ to, template, params }) => {
     console.log(to, template, mailParams)
 }
 
+export const buildFormShape = async (database, mainForm, subforms = []) => {
+    const db = globalThis.dbContext(database)
+    let form = await db.get(mainForm)
+    let fields = form.fields
+
+    for(let form in subforms)
+    {
+        fields.forEach(element => {
+            element.order -= 10
+        });
+        let newForm = await db.get(form)
+        formShape.fields = formShape.fields.concat(newForm.fields)
+    }          
+
+    form.fields = fields
+    console.log(form)
+    return form
+}
+
 export const signUp = async ({ name, email, location }) => {
     try {
         const token = randomString()

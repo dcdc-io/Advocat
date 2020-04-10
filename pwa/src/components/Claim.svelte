@@ -2,7 +2,7 @@
     import { getContext, onMount } from 'svelte';
     import { Chip, Button, Dialog} from '../../node_modules/smelte/src'
     import TemplateForm from "../components/TemplateForm.svelte";
-    import { getUserAccountDB, hash, docSignature, strToUrlBase64, uint8ToUrlBase64 } from '../helpers.js'
+    import { buildFormShape, getUserAccountDB, hash, docSignature, strToUrlBase64, uint8ToUrlBase64 } from '../helpers.js'
     import VerticalDrawer from '../components/VerticalDrawer/VerticalDrawer.svelte'
     import { qrcode, svg2url  } from 'pure-svg-code' 
 
@@ -59,7 +59,7 @@
 <div class="claim-container" id="claim.formName">
     {#if claim}
         {#if isEditing}
-            <TemplateForm  on:cancel={cancelledClaim} on:completed={updateClaim} type="claim" template={claim.formID} edit={claim}></TemplateForm>
+            <!-- <TemplateForm  on:cancel={cancelledClaim} on:completed={updateClaim} type="claim" template={[claim.formID]} edit={claim}></TemplateForm> -->
         {:else}
             <h5> {claim.formName} - v{claim.formVersion} </h5> 
             {#each claim.fields.sort( (a,b) => a.order - b.order) as data}

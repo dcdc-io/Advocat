@@ -10,7 +10,7 @@
 
 	const navMenu = [
 		{ to: '/#', text: 'Home'},
-		{ to: '/registration_map', text: 'Map'}
+        { to: '/registration_map', text: 'Map'}
 	]
 
 	$: {
@@ -19,6 +19,7 @@
 	$: {
 		if ($loggedIn) {
 			accountMenu = [
+                { to: '/makeActivities', text: 'Make Activities'},
                 { to: '/claims', text: 'Tech Preview'},
                 { to: '/account', text: $username }		
 			]
