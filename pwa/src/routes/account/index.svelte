@@ -1,7 +1,7 @@
 <script>
     import { getContext, onMount } from "svelte"
-    import { useDatabase, getUserAccountDB } from "../helpers.js"
-    import { Button, TextField, Checkbox } from "../../node_modules/smelte/src"
+    import { useDatabase, getUserAccountDB } from "../../helpers.js"
+    import { Button, TextField, Checkbox } from "../../../node_modules/smelte/src"
     import { goto } from "@sapper/app"
     import * as yup from "yup"
 
