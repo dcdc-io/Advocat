@@ -8,13 +8,14 @@
     export let activity
     let mappedActivity = JSON.parse(JSON.stringify(activity))
     activity.fields.forEach((x) => mappedActivity[x.name] = x.value)
+    console.log(mappedActivity)
 
     export let clientLocation
     let { loggedIn, username } = getContext("user");
-    // let isAuthor = username === activity.author
-    // let isAssigned = username === activity.assigned
-    let isAuthor = true
-    let isAssigned = false
+    let isAuthor
+    let isAssigned
+    // let isAuthor = true
+    // let isAssigned = false
     let acceptDecline = false
     let expanded = false
 
@@ -53,7 +54,7 @@
     }
 
     const button_decline = async () => {
-        await wait(200)
+        await wait(300)
         expanded = false
     }
 
@@ -65,20 +66,20 @@
 
     const button_more = async () => {
         // WEIRD RACE CONDITION REMOVE LATER
-        await wait(200)
+        await wait(300)
         expanded = true
     }
 
     const button_less = async () => {
-        await wait(200)
+        await wait(300)
         expanded = false
     }
 
     let processPostcode = (async function(data) {
         postcode_data = data;
-        console.log(data)
-        console.log(postcode_url)
-        //distance = getDistanceToActivity()
+        // console.log(data)
+        // console.log(postcode_url)
+        // distance = getDistanceToActivity()
     })
     
     let getLocationByPostcode = (async function() {
@@ -87,6 +88,8 @@
     });
   
     onMount(async function() {
+        isAuthor = $username === activity.author
+        isAssigned = $username === activity.assigned
         if ((postcode_data.result.latitude === 0.0) &&
             (postcode_data.result.latitude === 0.0)) {
             await getLocationByPostcode()
@@ -94,7 +97,6 @@
     })
     
     let getDistanceToActivity = function() {
-        console.log("get distance called")
         distance_in_km = gpsDistance(clientLocation.latitude,
                                clientLocation.longitude,
                                postcode_data.result.latitude,
@@ -167,20 +169,20 @@
             <br/><br/>
             {#if expanded}
                 {#if isAuthor || isAssigned}
-                    {#each activity.fields.sort( (a,b) => a.order - b.order) as data}
+                    {#each activity.fields.reverse() as data}
                         <div class="activity-field">
                             <label class="activity-field-name">{data.name}:</label>
                             <span class="activity-field-data">{data.value}</span>
                         </div>
                     {/each}
-                    <br/>   
+                    <br/><br/>   
                     <Chip icon="edit" on:click={button_edit}>edit</Chip>
                     <Chip icon="delete" on:click={() => showDeleteDialog = true}>delete</Chip>
-                    <br/>
+                    <br/><br/>
                 {:else}   
                     <Chip icon="thumb_up_alt" on:click={button_accept}>I can help!</Chip>
                     <Chip icon="thumb_down_alt" on:click={button_decline}>Sorry, I can't help.</Chip>
-                    <br/>
+                    <br/><br/>
                 {/if}
                 <Chip icon="expand_less" on:click={button_less}>Less</Chip>
             {:else}

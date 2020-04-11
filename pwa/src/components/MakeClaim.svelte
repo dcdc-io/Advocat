@@ -9,9 +9,9 @@
     let forms;
     let formShapes = {};
 
-
     const completedClaim = async event => {
-        let doc = event.detail
+        let {doc, formDataFiles} = event.detail
+        console.log(event.detail)
         const db = await getUserAccountDB($username)
         let thisRev = (await db.put(doc)).rev
         for (let fieldKey of Object.keys(formDataFiles)) {

@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from "svelte"
+    import { onMount, getContext } from "svelte"
     import { Button, notifier, Notifications} from '../../node_modules/smelte/src'
     import VerticalDrawer from '../components/VerticalDrawer/VerticalDrawer.svelte'
     import TemplateForm from '../components/TemplateForm.svelte'

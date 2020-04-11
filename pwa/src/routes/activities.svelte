@@ -24,38 +24,8 @@
     setContext("clientLocation", location)
     location = getContext("clientLocation")
 
-    // let activities = [
-    //     {
-    //         name: "Deliver toilet paper",
-    //         urgency: "job",
-    //         location: {
-    //             longitude: 0.0,
-    //             latitude: 0.0
-    //         },
-    //         postcode: "LS61EY"
-    //     },
-    //     {
-    //         name: "Get milk and bread",
-    //         urgency: "job urgent",
-    //         location: {
-    //             longitude: 0.0,
-    //             latitude: 0.0
-    //         },
-    //         postcode: "WF75LY"
-    //     },
-    //     {
-    //         name: "Get prescription",
-    //         urgency: "job urgent",
-    //         restrictions: "drugs",
-    //         location: {
-    //             longitude: 0.0,
-    //             latitude: 0.0
-    //         },
-    //         postcode: "WF110DN"
-    //     }
-    // ]
-
     let activities = []
+    
     
     let processClientLocation = (async function(data) {
         postcode_data = data;
@@ -67,6 +37,7 @@
 
     const updateDocs = async () => {
         const allDocs = await singletonDB.allDocs({include_docs: true})
+        console.log(allDocs.rows[0].doc.assigned)
         activities = allDocs.rows
     }
 
