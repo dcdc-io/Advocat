@@ -6,7 +6,8 @@
     import Activity from "../components/Activity.svelte";
     import CreateJob from "../components/CreateJob.svelte";
     import LocationWidget from "../components/LocationWidget.svelte";
-    import { setContext, getContext } from 'svelte'
+    import { useDatabase } from "../helpers.js"
+    import { setContext, getContext, onMount } from "svelte"
 
     let location = "waiting"
 
@@ -17,36 +18,38 @@
     setContext("clientLocation", location)
     location = getContext("clientLocation")
 
-    let activities = [
-        {
-            name: "Deliver toilet paper",
-            urgency: "job",
-            location: {
-                longitude: 0.0,
-                latitude: 0.0
-            },
-            postcode: "LS61EY"
-        },
-        {
-            name: "Get milk and bread",
-            urgency: "job urgent",
-            location: {
-                longitude: 0.0,
-                latitude: 0.0
-            },
-            postcode: "WF75LY"
-        },
-        {
-            name: "Get prescription",
-            urgency: "job urgent",
-            restrictions: "drugs",
-            location: {
-                longitude: 0.0,
-                latitude: 0.0
-            },
-            postcode: "WF110DN"
-        }
-    ]
+    // let activities = [
+    //     {
+    //         name: "Deliver toilet paper",
+    //         urgency: "job",
+    //         location: {
+    //             longitude: 0.0,
+    //             latitude: 0.0
+    //         },
+    //         postcode: "LS61EY"
+    //     },
+    //     {
+    //         name: "Get milk and bread",
+    //         urgency: "job urgent",
+    //         location: {
+    //             longitude: 0.0,
+    //             latitude: 0.0
+    //         },
+    //         postcode: "WF75LY"
+    //     },
+    //     {
+    //         name: "Get prescription",
+    //         urgency: "job urgent",
+    //         restrictions: "drugs",
+    //         location: {
+    //             longitude: 0.0,
+    //             latitude: 0.0
+    //         },
+    //         postcode: "WF110DN"
+    //     }
+    // ]
+
+    let activities = []
     
     let processClientLocation = (async function(data) {
         postcode_data = data;
@@ -54,6 +57,30 @@
         client_coords.latitude = postcode_data.result.latitude
         console.log("updated thing")
         console.log(data)
+    })
+
+    const updateDocs = async () => {
+        const allDocs = await singletonDB.allDocs({include_docs: true})
+        activities = allDocs.rows
+    }
+
+    export const init = async () => {
+        if (singletonDB)
+            await singletonDB.close()
+        singletonDB = await useDatabase({name: 'job_index'})
+        singletonDB.changes({
+            since: 'now',
+            live: true,
+            include_docs: true
+        }).on('change', change => {
+            updateDocs()
+        })
+        singletonUsername = $username
+    }
+
+    onMount(async () => {
+        await init()
+        await updateDocs()
     })
 </script>
 

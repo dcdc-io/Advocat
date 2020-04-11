@@ -144,7 +144,8 @@
 <div class="activity-container" id="activity.formName">
     {#if activity}
         {#if isEditing}
-            <TemplateForm  on:cancel={cancelledactivity} on:completed={updateactivity} type="activity" template={[activity.formID]} edit={activity}></TemplateForm>
+            <!-- <TemplateForm  on:cancel={cancelledactivity} on:completed={updateactivity} type="activity" template={[activity.formID]} edit={activity}></TemplateForm> -->
+            <TemplateForm type="activity" template={[activity.formID]} edit={activity}></TemplateForm>
         {:else}
             <h5>{activity.name}</h5> 
             <span>{activity.postcode}</span>&nbsp;&nbsp;&nbsp;<span>Posted {getAge} minutes ago</span>
