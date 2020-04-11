@@ -18,7 +18,7 @@
         notifier.notify("cancelled form submission")
     }
     const completed = async (event) => {   
-        let doc = event.detail
+        let {doc} = event.detail
         doc.author = $username
         doc.assigned = undefined
         doc.type = "activity"
