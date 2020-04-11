@@ -42,11 +42,9 @@
             });
             formShape.fields = formShape.fields.concat(subTemplate.fields)
         })
-        console.log(formShape)
         formShape.fields.forEach( async field => {
             formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
         });
-      
     }
    
     const validate = async () => {
@@ -80,7 +78,6 @@
                 formID: formShape._id,
                 formName: formShape.name,
                 formVersion: formShape.version,
-                type: type,
                 fields: data,
                 created: Date.now()
             }
@@ -90,6 +87,7 @@
             console.log("yes")
         } else {
             isSubmitting = false
+            console.log(ok)
             console.log("no")
         }
     }
@@ -102,7 +100,7 @@
 <style></style>
 <div class="form_container">
     {#if formShape}
-        <form on:submit|preventDefault={handleSubmit} on:changed={validate} on:invalid={validate} on:input={validate}>
+        <form on:submit|preventDefault={handleSubmit} on:invalid={validate}>
             <h3>{formShape.name}</h3>
             {#each formShape.fields.sort( (a,b) => a.order - b.order) as field}
                 {#if field.inputType === "TextField"}
