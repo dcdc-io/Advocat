@@ -1,5 +1,5 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount, createEventDispatcher } from 'svelte';
     import 'ol/ol.css';
     import { Map, View, Feature } from 'ol';
     import { Heatmap as HeatmapLayer } from 'ol/layer';
@@ -10,6 +10,8 @@
     import VectorLayer from 'ol/layer/Vector';
     import VectorSource from 'ol/source/Vector';
     import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style';
+
+    const dispatch = createEventDispatcher()
 
     export let data = {}
     // Data format => data = {
@@ -32,7 +34,7 @@
         }
     } else {
         viewOptions = {
-            center: [-1.137255, 52.635874],
+            center: [-1.600675, 53.819387],
             zoom: 7,
             projection: 'EPSG:4326'
         }
@@ -56,7 +58,11 @@
             data.datapoints.forEach((coords) => {
                 console.log(coords)
                 features.push(new Feature({
-                    'geometry': new Point(coords)
+                    geometry: new Point(coords),
+                    data: {
+                        foo: 1,
+                        bar: 2
+                    }
                 }))
             })
         }
@@ -97,9 +103,8 @@
         });
         map.addOverlay(popup);
         map.on('click', event => {
-            console.log(event)
             const feature = map.forEachFeatureAtPixel(event.pixel, feature => feature)
-            console.log(feature)
+            dispatch("interact", {event, feature})
             if (feature) {
                 let coordinates = feature.getGeometry().getCoordinates()
                 popup.setPosition(coordinates)

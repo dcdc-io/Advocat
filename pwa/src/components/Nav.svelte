@@ -9,8 +9,9 @@
     let path;
 
 	const navMenu = [
-		{ to: '/#', text: 'Home'},
-		{ to: '/map/registrations', text: 'Map'}
+		{ to: '/#', text: "Home" },
+        //{ to: '/map/registrations', text: 'Map' }
+        { to: '/map/activity', text: "Map" }
 	]
 
 	$: {
