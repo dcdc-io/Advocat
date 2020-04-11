@@ -20,8 +20,12 @@
     const completed = async (event) => {   
         let doc = event.detail
         doc.author = $username
+        doc.assigned = undefined
         doc.type = "activity"
-        doc.postZipCode 
+        doc.status = "new"
+        let {longitude, latitude} = fetch("map/postcode-to-latlon?geocode=" + doc.postZipCode)
+        doc.longitude = longitude
+        doc.latitude = latitude
         //todo : location lookup and population
         console.log (await db.put(doc))
         activeForm = false;

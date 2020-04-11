@@ -11,7 +11,7 @@
 
     const completedClaim = async event => {
         let {doc, formDataFiles} = event.detail
-        console.log(event.detail)
+        doc.type = "claim"
         const db = await getUserAccountDB($username)
         let thisRev = (await db.put(doc)).rev
         for (let fieldKey of Object.keys(formDataFiles)) {
