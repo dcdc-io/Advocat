@@ -23,7 +23,7 @@
         doc.assigned = undefined
         doc.type = "activity"
         doc.status = "new"
-        let {longitude, latitude} = fetch("map/postcode-to-latlon?geocode=" + doc.postZipCode)
+        let {longitude, latitude} = await (await fetch("map/postcode-to-latlon?geocode=" + doc.postZipCode)).json()
         doc.longitude = longitude
         doc.latitude = latitude
         //todo : location lookup and population
@@ -36,10 +36,13 @@
         db = await useDatabase({name: "job_index"})
         const formDB = await useDatabase({name: "job_templates"})
         baseForm = await formDB.get("base-job")
-        formShapes["shopping"] = await formDB.get("void-uk-shopping")
+        formShapes["shopping"]   = await formDB.get("void-uk-shopping")
         formShapes["dogWalking"] = await formDB.get("void-uk-dog-walking")
         formShapes["verifyUser"] = await formDB.get("void-uk-verification")
-        formShapes["childCare"] = await formDB.get("void-uk-childcare")
+        formShapes["childCare"]  = await formDB.get("void-uk-childcare")
+        formShapes["taxi"]  = await formDB.get("void-uk-taxi")
+        formShapes["diy"]  = await formDB.get("void-uk-diy")
+        console.log(formShapes)
     }
 
     onMount( () => {init()})
@@ -53,8 +56,8 @@
     <Button icon="verified_user" class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["verifyUser"]}}>verify a user</Button>
 </div><div class="flex mb-4 -mx-4">
     <Button icon="child_friendly"class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["childCare"]}}>Child Care</Button>
-    <Button icon="local_taxi"    class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" >Taxi</Button>
-    <Button icon="build"         class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" >DIY</Button>
+    <Button icon="local_taxi"    class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["taxi"]}}>Taxi</Button>
+    <Button icon="build"         class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["diy"]}}>DIY</Button>
 </div> 
 
 <VerticalDrawer bottom={true} persistent={true} bind:show={activeForm}>

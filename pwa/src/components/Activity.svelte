@@ -186,7 +186,7 @@
                 {/if}
                 <Chip icon="expand_less" on:click={button_less}>Less</Chip>
             {:else}
-                <Chip icon="expand_more" on:click={button_more}>More</Chip>
+                <Chip icon="expand_more" on:click={() => expanded = true}>More</Chip>
             {/if} 
         {/if}
     {/if}
