@@ -65,7 +65,7 @@
 </script>
 
 {#if claimBeingMade}
-    <TemplateForm on:cancel={cancelledClaim} on:completed={completedClaim}  formShape={formShapes[claimBeingMade]}></TemplateForm>
+    <TemplateForm on:cancel={cancelledClaim} on:completed={completedClaim}  template={formShapes[claimBeingMade]}></TemplateForm>
 {:else}
     <div class="button-container">
         {#if forms}
