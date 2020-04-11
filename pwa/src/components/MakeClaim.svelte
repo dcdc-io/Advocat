@@ -2,11 +2,13 @@
     import TemplateForm from "../components/TemplateForm.svelte";
     import { Button, Snackbar, notifier, Notifications } from '../../node_modules/smelte/src'
     import { onMount, getContext } from 'svelte';
-    import { getUserAccountDB, useDatabase} from '../helpers.js'
+    import { buildFormShape, getUserAccountDB, useDatabase} from '../helpers.js'
       
     let { loggedIn, username } = getContext("user");
     let claimBeingMade = false
     let forms;
+    let formShapes = {};
+
 
     const completedClaim = async event => {
         let doc = event.detail
@@ -47,7 +49,8 @@
         let docs = await claim_templates.allDocs({include_docs: true})
         forms = docs.rows
         for(let form in forms){
-            if(forms[form].doc.unique){                
+            formShapes[forms[form].id] = forms[form].doc
+            if(forms[form].doc.unique){              
                 user_db.get(forms[form].id).then(() => forms[form].hidden = true).catch( 
                     (e) => {
                         if(e.status != 404) {console.log(e)}
@@ -55,13 +58,14 @@
                 )
             }
         }
+        console.log(formShapes)
     }
 
     onMount( () => {init()})
 </script>
 
 {#if claimBeingMade}
-    <TemplateForm on:cancel={cancelledClaim} on:completed={completedClaim}  type="claim" template={claimBeingMade}></TemplateForm>
+    <TemplateForm on:cancel={cancelledClaim} on:completed={completedClaim}  formShape={formShapes[claimBeingMade]}></TemplateForm>
 {:else}
     <div class="button-container">
         {#if forms}
