@@ -78,6 +78,7 @@
                 formID: formShape._id,
                 formName: formShape.name,
                 formVersion: formShape.version,
+                icon: formShape.icon,
                 fields: data,
                 created: Date.now()
             }

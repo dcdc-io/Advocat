@@ -32,7 +32,6 @@
         formShapes["dogWalking"] = await formDB.get("void-uk-dog-walking")
         formShapes["verifyUser"] = await formDB.get("void-uk-verification")
         formShapes["childCare"] = await formDB.get("void-uk-childcare")
-
     }
 
     onMount( () => {init()})
@@ -44,6 +43,7 @@
     <Button icon="shopping_cart" class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["shopping"]}}>shopping</Button> 
     <Button icon="pets"          class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["dogWalking"]}}>dog walking</Button>
     <Button icon="verified_user" class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["verifyUser"]}}>verify a user</Button>
+</div><div class="flex mb-4 -mx-4"></div>
     <Button icon="child_friendly"class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["childCare"]}}>Child Care</Button>
     <Button icon="local_taxi"    class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" >Taxi</Button>
     <Button icon="build"         class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" >DIY</Button>
