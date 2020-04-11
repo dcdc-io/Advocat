@@ -27,7 +27,7 @@
     const init = async () => {
         db = await useDatabase({name: "job_index"})
         const formDB = await useDatabase({name: "job_templates"})
-        baseForm = await formDB.get("job-header")
+        baseForm = await formDB.get("base-job")
         formShapes["shopping"] = await formDB.get("void-uk-shopping")
         formShapes["dogWalking"] = await formDB.get("void-uk-dog-walking")
         formShapes["verifyUser"] = await formDB.get("void-uk-verification")
