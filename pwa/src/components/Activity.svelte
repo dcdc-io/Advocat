@@ -5,6 +5,9 @@
     import TemplateForm from "../components/TemplateForm.svelte";
 
     export let activity
+    let mappedActivity = {}
+    activity.map((x) => mappedActivity[x.name] = x.value)
+
     export let clientLocation
     let { loggedIn, username } = getContext("user");
     let isAuthor = username === activity.author
@@ -52,7 +55,7 @@
     }
 
     const getAge = () => {
-        return (Date.now() - activity.created) / 60000
+        return (Date.now() - mappedActivity.created) / 60000
     }
 
     const button_more = () => {
@@ -121,7 +124,7 @@
     }
 </style>
 
-<Card.Card>
+<!-- <Card.Card>
     <div slot="title" class="card-title">
         <Card.Title
             title={activity.name}
@@ -139,7 +142,7 @@
         {/if}
     </div>
     <div slot="actions"></div>
-</Card.Card>
+</Card.Card> -->
 
 <div class="activity-container" id="activity.formName">
     {#if activity}
@@ -147,9 +150,9 @@
             <!-- <TemplateForm  on:cancel={cancelledactivity} on:completed={updateactivity} type="activity" template={[activity.formID]} edit={activity}></TemplateForm> -->
             <TemplateForm type="activity" template={[activity.formID]} edit={activity}></TemplateForm>
         {:else}
-            <h5>{activity.name}</h5> 
-            <span>{activity.postcode}</span>&nbsp;&nbsp;&nbsp;<span>Posted {getAge} minutes ago</span>
-            <div>{activity.icon}</div> 
+            <h5>{mappedActivity.name}</h5> 
+            <span>{mappedActivity.postZipCode}</span>&nbsp;&nbsp;&nbsp;<span>Posted {getAge} minutes ago</span>
+            <div>{mappedActivity.icon}</div> 
             <Chip icon="done" on:click={button_done}>Done</Chip>  
             {#if $expanded}
                 {#if $isAuthor || $isAssigned}
