@@ -37,7 +37,6 @@
 
     const updateDocs = async () => {
         const allDocs = await singletonDB.allDocs({include_docs: true})
-        console.log(allDocs.rows[0].doc.assigned)
         activities = allDocs.rows
     }
 
