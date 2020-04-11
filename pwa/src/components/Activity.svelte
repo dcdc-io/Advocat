@@ -1,10 +1,16 @@
 <script>
-    import { onMount } from "svelte"
+    import { onMount, getContext } from "svelte"
     import gpsDistance from "gps-distance"
-    import { Card, Button } from 'smelte'
+    import { Card, Button, Chip, Dialog } from 'smelte'
+    import TemplateForm from "../components/TemplateForm.svelte";
 
     export let activity
     export let clientLocation
+    let { loggedIn, username } = getContext("user");
+    let isAuthor = username === activity.author
+    let isAssigned = username === activity.assigned
+    let acceptDecline = false
+    let expanded = false
 
     let distance_in_km
     let distance = 0
@@ -16,6 +22,46 @@
     $: postcode_data, getDistanceToJob()
     $: clientLocation, getDistanceToJob()
     $: activity, getDistanceToJob()
+
+    let showDeleteDialog = false
+    let isEditing;
+
+    const button_edit = () =>{
+        // TODO: some warning needs to go up about invalidating previous proofs when you do this.
+        isEditing = true
+    }
+
+    const button_delete = async () => {
+        await (await getUserAccountDB($username)).remove(activity)
+    }
+
+    const button_done = () => {
+        console.log("done")
+    }
+
+    const button_accept = () => {
+        console.log("accepted!")
+    }
+
+    const button_decline = () => {
+        acceptDecline = false
+    }
+
+    const button_acceptdecline = () => {
+        acceptDecline = true
+    }
+
+    const getAge = () => {
+        return (Date.now() - activity.created) / 60000
+    }
+
+    const button_more = () => {
+        expanded = true
+    }
+
+    const button_less = () => {
+        expanded = false
+    }
 
     let processPostcode = (async function(data) {
         postcode_data = data;
@@ -52,19 +98,6 @@
 </script>
 
 <style>
-    /* .jobs_list {
-        display: yes; 
-    }
-    .job {
-        padding: 0.5em;        
-        border: 2px solid var(--colour-scheme-dark);
-        border-radius: 12px;
-        margin: 1em;
-    } */
-    /* .urgent {
-        border: 2px solid red;
-        background: rgb(250, 242, 243);
-    } */
     .location{
         /* float: left; */
         margin: 0px;
@@ -80,9 +113,6 @@
     .failed{
         color:red;
     }
-    /* .card-sizer {
-        display: block;
-    } */
     .card-title {
         font-family: "ChangaOne Regular";
     }
@@ -108,7 +138,45 @@
             <p class="requirements failed"> - {activity.restrictions}</p>
         {/if}
     </div>
-    <div slot="actions">
-
-    </div>
+    <div slot="actions"></div>
 </Card.Card>
+
+<div class="activity-container" id="activity.formName">
+    {#if activity}
+        {#if isEditing}
+            <TemplateForm  on:cancel={cancelledactivity} on:completed={updateactivity} type="activity" template={[activity.formID]} edit={activity}></TemplateForm>
+        {:else}
+            <h5>{activity.name}</h5> 
+            <span>{activity.postcode}</span>&nbsp;&nbsp;&nbsp;<span>Posted {getAge} minutes ago</span>
+            <div>{activity.icon}</div> 
+            <Chip icon="done" on:click={button_done}>Done</Chip>  
+            {#if $expanded}
+                {#if $isAuthor || $isAssigned}
+                    {#each activity.fields.sort( (a,b) => a.order - b.order) as data}
+                        <div class="activity-field">
+                            <label class="activity-field-name">{data.name}:</label>
+                            <span class="activity-field-data">{data.value}</span>
+                        </div>
+                    {/each}     
+                    <Chip icon="edit" on:click={button_edit}>edit</Chip>
+                    <Chip icon="delete" on:click={() => showDeleteDialog = true}>delete</Chip>
+                {:else}
+                    <Chip icon="thumb_up_alt" on:click={button_accept}>I can help!</Chip>
+                    <Chip icon="thumb_down_alt" on:click={button_decline}>Sorry, I can't help.</Chip>
+                {/if}
+                <Chip icon="expand_less" on:click={button_less}>Less</Chip>
+            {:else}
+                <Chip icon="expand_more" on:click={button_more}>More</Chip>
+            {/if} 
+        {/if}
+    {/if}
+</div>
+
+<Dialog bind:value={showDeleteDialog}>
+  <h5 slot="title">Delete this activity?</h5>
+  <div class="text-gray-700">If you delete this there is no way to get it back</div>
+  <div slot="actions">
+    <Button text on:click={() => {showDeleteDialog = false; button_delete();}}>Yes</Button>
+    <Button text on:click={() => showDeleteDialog = false}>No</Button>
+  </div>
+</Dialog>

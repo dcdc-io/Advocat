@@ -46,7 +46,7 @@
             },
             postcode: "WF110DN"
         }
-    ]                
+    ]
     
     let processClientLocation = (async function(data) {
         postcode_data = data;
