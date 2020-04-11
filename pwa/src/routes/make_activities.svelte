@@ -5,6 +5,8 @@
     import TemplateForm from '../components/TemplateForm.svelte'
     import { useDatabase } from '../helpers'
 
+    let { username } = getContext("user");
+
     let db
     let formShapes = {}
     let baseForm;
@@ -17,7 +19,9 @@
     }
     const completed = async (event) => {   
         let doc = event.detail
+        doc.author = $username
         doc.type = "activity"
+        doc.postZipCode 
         //todo : location lookup and population
         console.log (await db.put(doc))
         activeForm = false;
