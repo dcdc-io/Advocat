@@ -84,7 +84,7 @@
                 created: Date.now()
             }
             
-            dispatch("completed", doc)
+            dispatch("completed", {doc: doc , formDataFiles: formDataFiles})
             isSubmitting = false
             console.log("yes")
         } else {
