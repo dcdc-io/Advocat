@@ -1,6 +1,6 @@
 <script>
     import { onMount, getContext } from "svelte"
-    import { Button, notifier, Notifications} from '../../node_modules/smelte/src'
+    import { Button, notifier, Notifications } from '../../node_modules/smelte/src'
     import VerticalDrawer from '../components/VerticalDrawer/VerticalDrawer.svelte'
     import TemplateForm from '../components/TemplateForm.svelte'
     import { useDatabase } from '../helpers'
@@ -8,7 +8,7 @@
     let { username } = getContext("user");
 
     let db
-    let formShapes = {}
+    let formShapes = []
     let baseForm;
 
     const button_form = () => {activeForm = true;console.log("test")}
@@ -36,31 +36,22 @@
         db = await useDatabase({name: "job_index"})
         const formDB = await useDatabase({name: "job_templates"})
         baseForm = await formDB.get("base-job")
-        formShapes["shopping"]   = await formDB.get("void-uk-shopping")
-        formShapes["dogWalking"] = await formDB.get("void-uk-dog-walking")
-        formShapes["verifyUser"] = await formDB.get("void-uk-verification")
-        formShapes["childCare"]  = await formDB.get("void-uk-childcare")
-        formShapes["taxi"]  = await formDB.get("void-uk-taxi")
-        formShapes["diy"]  = await formDB.get("void-uk-diy")
-        console.log(formShapes)
+        formShapes = (await formDB.allDocs({include_docs:true})).rows.map(row => row.doc).filter(doc => doc.name)
     }
 
     onMount( () => {init()})
     let activeForm = false;
 </script>
 
-<div class="flex mb-4 -mx-4">
-    <!-- todo: make this build the form using db + account info -->
-    <Button icon="shopping_cart" class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["shopping"]}}>shopping</Button> 
-    <Button icon="pets"          class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["dogWalking"]}}>dog walking</Button>
-    <Button icon="verified_user" class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["verifyUser"]}}>verify a user</Button>
-</div><div class="flex mb-4 -mx-4">
-    <Button icon="child_friendly"class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["childCare"]}}>Child Care</Button>
-    <Button icon="local_taxi"    class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["taxi"]}}>Taxi</Button>
-    <Button icon="build"         class="flex-1 bg-gray-500 mx-2 h-12 w-1/3" on:click={() => {activeForm = formShapes["diy"]}}>DIY</Button>
+<div class="flex flex-wrap -mb-4 -mx-4">
+    {#each formShapes as thisForm}
+    <wrap class="px-2 pb-4">
+        <Button icon={thisForm.icon} light on:click={() => activeForm = thisForm}></Button>
+    </wrap>
+    {/each}
 </div> 
 
-<VerticalDrawer bottom={true} persistent={true} bind:show={activeForm}>
+<VerticalDrawer bottom={true} persistent={false} bind:show={activeForm}>
     <div style="margin: 2em;">
         {#if activeForm}
             <TemplateForm  on:cancel={cancelled} on:completed={completed} template={activeForm} subtemplate={[baseForm]} ></TemplateForm>

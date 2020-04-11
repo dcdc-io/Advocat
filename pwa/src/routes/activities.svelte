@@ -36,6 +36,7 @@
     })
 
     const updateDocs = async () => {
+        console.log("update docs has been hit")
         const allDocs = await singletonDB.allDocs({include_docs: true})
         activities = allDocs.rows
     }
@@ -44,13 +45,7 @@
         if (singletonDB)
             await singletonDB.close()
         singletonDB = await useDatabase({name: 'job_index'})
-        singletonDB.changes({
-            since: 'now',
-            live: true,
-            include_docs: true
-        }).on('change', change => {
-            updateDocs()
-        })
+        singletonDB.when("change", updateDocs)
         singletonUsername = $username
     }
 

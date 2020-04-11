@@ -63,6 +63,7 @@
   }
 
   aside {
+    position: absolute;
     width: 100vw;
   }
 </style>

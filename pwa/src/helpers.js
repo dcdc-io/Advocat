@@ -128,6 +128,10 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false, options = {
     if (dbUrl === "") {
         throw "cannot useDatabase without a URL"
     }
+    if (sync && name.indexOf("_local") >= 0) {
+        debugger
+        throw "cannot sync a local database"
+    }
     const url = `${dbUrl.replace(/\/$/, '')}${name ? '/' : ''}${name && name.replace(/^\//, '')}`
     const cacheKey = `${name}:${sync}:${onlyRemote}`
     if (onlyRemote === false) {
@@ -136,14 +140,24 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false, options = {
             return databaseCache[cacheKey]
         }
         let syncRemote
-        const local = new PouchDB(name, options)
+        const local = new PouchDB(name, options)        
+        local.whenHandlers = []
+        local.when = (eventName, handler) => {
+            local.whenHandlers.push({eventName, handler})
+        }
         if (sync) {
             syncRemote = new PouchDB(url, {
                 fetch: fetchInUserContext
             })
             local.replicate.from(syncRemote).on('complete', (info) => {
                 local.sync(syncRemote, { live: true, retry: true })
-                    .on('change', function () { console.log("change") })
+                    .on('change', () => { 
+                        console.log("change")
+                        for (const hf of local.whenHandlers.filter(handler => handler.eventName === "change")) {
+                            console.log("running handler function for change - " + hf.toString())
+                            hf.handler()
+                        }
+                    })
                     .on('paused', function () { console.log("paused") })
                     .on('error', function () { console.log("error") })
             }).on('error', function () { console.log("error") })
@@ -151,6 +165,7 @@ export const useDatabase = ({ name, sync = true, onlyRemote = false, options = {
         databaseCache[cacheKey] = local
         const close = local.close.bind(local)
         local.close = () => {
+            delete local.whenHandlers
             if (syncRemote) {
                 syncRemote.close() // necessary?
             }
