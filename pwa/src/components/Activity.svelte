@@ -3,15 +3,18 @@
     import gpsDistance from "gps-distance"
     import { Card, Button, Chip, Dialog } from 'smelte'
     import TemplateForm from "../components/TemplateForm.svelte";
+    import { useDatabase } from '../helpers.js'
 
     export let activity
-    let mappedActivity = {}
-    activity.map((x) => mappedActivity[x.name] = x.value)
+    let mappedActivity = JSON.parse(JSON.stringify(activity))
+    activity.fields.forEach((x) => mappedActivity[x.name] = x.value)
 
     export let clientLocation
     let { loggedIn, username } = getContext("user");
-    let isAuthor = username === activity.author
-    let isAssigned = username === activity.assigned
+    // let isAuthor = username === activity.author
+    // let isAssigned = username === activity.assigned
+    let isAuthor = true
+    let isAssigned = false
     let acceptDecline = false
     let expanded = false
 
@@ -22,19 +25,20 @@
     let postcode_data = {result: {postcode: "loading",
                                   longitude: 0.0,
                                   latitude: 0.0}}
-    $: postcode_data, getDistanceToJob()
-    $: clientLocation, getDistanceToJob()
-    $: activity, getDistanceToJob()
+    $: postcode_data, getDistanceToActivity()
+    $: clientLocation, getDistanceToActivity()
+    $: activity, getDistanceToActivity()
 
     let showDeleteDialog = false
     let isEditing;
 
-    const button_edit = () =>{
+    const button_edit = () => {
         // TODO: some warning needs to go up about invalidating previous proofs when you do this.
         isEditing = true
     }
 
     const button_delete = async () => {
+        // Check Docs re replication
         await (await getUserAccountDB($username)).remove(activity)
     }
 
@@ -42,27 +46,31 @@
         console.log("done")
     }
 
-    const button_accept = () => {
-        console.log("accepted!")
+    const button_accept = async () => {
+        activity.assigned = $username
+        const activitiesDB = await useDatabase({name: 'job_index'})
+        activitiesDB.put(activity)
     }
 
-    const button_decline = () => {
-        acceptDecline = false
-    }
-
-    const button_acceptdecline = () => {
-        acceptDecline = true
+    const button_decline = async () => {
+        await wait(200)
+        expanded = false
     }
 
     const getAge = () => {
-        return (Date.now() - mappedActivity.created) / 60000
+        return ((Date.now() - mappedActivity.created) / 60000).toFixed(0)
     }
 
-    const button_more = () => {
+    const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
+
+    const button_more = async () => {
+        // WEIRD RACE CONDITION REMOVE LATER
+        await wait(200)
         expanded = true
     }
 
-    const button_less = () => {
+    const button_less = async () => {
+        await wait(200)
         expanded = false
     }
 
@@ -70,11 +78,11 @@
         postcode_data = data;
         console.log(data)
         console.log(postcode_url)
-        //distance = getDistanceToJob()
+        //distance = getDistanceToActivity()
     })
     
     let getLocationByPostcode = (async function() {
-        const response = await fetch(postcode_url + job.postcode);
+        const response = await fetch(postcode_url + mappedActivity.postZipCode);
         processPostcode(await response.json())
     });
   
@@ -85,7 +93,7 @@
         }
     })
     
-    let getDistanceToJob = function() {
+    let getDistanceToActivity = function() {
         console.log("get distance called")
         distance_in_km = gpsDistance(clientLocation.latitude,
                                clientLocation.longitude,
@@ -150,23 +158,29 @@
             <!-- <TemplateForm  on:cancel={cancelledactivity} on:completed={updateactivity} type="activity" template={[activity.formID]} edit={activity}></TemplateForm> -->
             <TemplateForm type="activity" template={[activity.formID]} edit={activity}></TemplateForm>
         {:else}
-            <h5>{mappedActivity.name}</h5> 
-            <span>{mappedActivity.postZipCode}</span>&nbsp;&nbsp;&nbsp;<span>Posted {getAge} minutes ago</span>
-            <div>{mappedActivity.icon}</div> 
-            <Chip icon="done" on:click={button_done}>Done</Chip>  
-            {#if $expanded}
-                {#if $isAuthor || $isAssigned}
+            <Button icon="{mappedActivity.icon}"></Button>
+            <br/> 
+            <h5>{mappedActivity.formName}</h5> 
+            <span>{mappedActivity.postZipCode}</span>&nbsp;&nbsp;&nbsp;<span>Posted {getAge()} minutes ago</span>
+            <br/><br/>
+            <Chip icon="done" on:click={button_done}>Done</Chip>
+            <br/><br/>
+            {#if expanded}
+                {#if isAuthor || isAssigned}
                     {#each activity.fields.sort( (a,b) => a.order - b.order) as data}
                         <div class="activity-field">
                             <label class="activity-field-name">{data.name}:</label>
                             <span class="activity-field-data">{data.value}</span>
                         </div>
-                    {/each}     
+                    {/each}
+                    <br/>   
                     <Chip icon="edit" on:click={button_edit}>edit</Chip>
                     <Chip icon="delete" on:click={() => showDeleteDialog = true}>delete</Chip>
-                {:else}
+                    <br/>
+                {:else}   
                     <Chip icon="thumb_up_alt" on:click={button_accept}>I can help!</Chip>
                     <Chip icon="thumb_down_alt" on:click={button_decline}>Sorry, I can't help.</Chip>
+                    <br/>
                 {/if}
                 <Chip icon="expand_less" on:click={button_less}>Less</Chip>
             {:else}

@@ -2,6 +2,11 @@
 	<title>Activities</title>
 </svelte:head>
 
+<script context="module">
+    let singletonDB
+    let singletonUsername = ""
+</script>
+
 <script>
     import Activity from "../components/Activity.svelte";
     import CreateJob from "../components/CreateJob.svelte";
@@ -10,6 +15,7 @@
     import { setContext, getContext, onMount } from "svelte"
 
     let location = "waiting"
+    let { loggedIn, username } = getContext("user");
 
     let postcode_data
     let client_coords = {longitude: 0.0,
@@ -98,7 +104,7 @@
     <!-- <CreateJob></CreateJob> -->
     
     {#each activities as activity}
-        <Activity activity={activity} clientLocation={client_coords}></Activity>
+        <Activity activity={activity.doc} clientLocation={client_coords}></Activity>
         <br><br>
     {/each}
 </div>
