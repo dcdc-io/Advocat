@@ -19,7 +19,7 @@
 	})
 
 
-	$: nopad = $page.path === "/find_groups"
+	$: nopad = $page.path.indexOf("/map") >= 0
 </script>
 
 <style>

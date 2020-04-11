@@ -10,7 +10,7 @@
 
 	const navMenu = [
 		{ to: '/#', text: 'Home'},
-		{ to: '/registration_map', text: 'Map'}
+		{ to: '/map/registrations', text: 'Map'}
 	]
 
 	$: {

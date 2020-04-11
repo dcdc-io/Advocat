@@ -137,4 +137,6 @@
         height: 100%;
     }
 </style>
-<div id="mapTarget"><div bind:this={popupElement}></div></div>
+<div id="mapTarget">
+    <div bind:this={popupElement}></div>
+</div>

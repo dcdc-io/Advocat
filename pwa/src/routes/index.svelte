@@ -72,7 +72,7 @@
     <GroupBrowser {groups} />
   </div>
 {:else}
-  <div class="calltoaction" style="border: 2px solid var(--colour-scheme-dark)" on:click={click("find_groups")}>
+  <div class="calltoaction" style="border: 2px solid var(--colour-scheme-dark)" on:click={click("map/activity")}>
     <h3 class="underline">Find Help</h3>
     <p>Find volunteer groups in your local area.</p>
   </div>
