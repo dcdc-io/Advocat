@@ -10,6 +10,8 @@
     activity.fields.forEach((x) => mappedActivity[x.name] = x.value)
     console.log(mappedActivity)
 
+    const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
+
     export let clientLocation
     let { loggedIn, username } = getContext("user");
     let isAuthor
@@ -61,8 +63,6 @@
     const getAge = () => {
         return ((Date.now() - mappedActivity.created) / 60000).toFixed(0)
     }
-
-    const wait = ms => new Promise((r, j)=>setTimeout(r, ms))
 
     const button_more = async () => {
         // WEIRD RACE CONDITION REMOVE LATER
