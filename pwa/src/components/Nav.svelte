@@ -20,7 +20,7 @@
 	$: {
 		if ($loggedIn) {
 			accountMenu = [
-                { to: '/makeActivities', text: 'Make Activities'},
+                { to: '/make_activities', text: 'Make Activities'},
                 { to: '/claims', text: 'Tech Preview'},
                 { to: '/account', text: $username }		
 			]

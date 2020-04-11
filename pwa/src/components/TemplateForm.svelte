@@ -5,9 +5,11 @@
     import { Button, TextField, DatePicker, Select, Card } from '../../node_modules/smelte/src'
     import FileField from './FileField/index.svelte'
     
-    export let formShape
+    export let template
+    export let subtemplate = []
 
     let files = {}
+    let formShape
     let isSubmitting = false
 
     let { username } = getContext("user");
@@ -33,6 +35,13 @@
     }
 
     const init = async () => {
+        formShape = template
+        subtemplate.forEach(subTemplate =>{
+            formShape.fields.forEach(field => {
+                 field.order -= 1000
+            });
+            formShape.fields = formShape.fields.concat(subTemplate.fields)
+        })
         console.log(formShape)
         formShape.fields.forEach( async field => {
             formData[field.name] = typeof field.default === "object" ? await getCustomData(field.default) : field.default
@@ -72,7 +81,8 @@
                 formName: formShape.name,
                 formVersion: formShape.version,
                 type: type,
-                fields: data
+                fields: data,
+                created: Date.now()
             }
             
             dispatch("completed", doc)
