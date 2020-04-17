@@ -23,9 +23,9 @@ process.on('unhandledRejection', (reason, p) => {
 	console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
 	// application specific logging, throwing an error, or other logic here
   });
-
+const isNotDbRoute = (req) => req.path.indexOf("/db/") < 0
 express().use(
-	bodyParser.json()
+	(req, res, next) => isNotDbRoute(req) ? bodyParser.json()(req, res, next) : next()
 ).get(
 	'/db/_utils', (req, res) => {
 		if (req.originalUrl === '/db/_utils')

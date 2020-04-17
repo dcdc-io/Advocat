@@ -20,7 +20,7 @@ const { DOMAIN = "advocat.group",
     MAILER_USER,
     MAILER_PASS,
     PROTOCOL,
-    PORT = "443" } = process.env
+    PORT } = process.env
 
 const wellKnownReplacements = {
     domain: DOMAIN

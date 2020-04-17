@@ -15,3 +15,6 @@ smelte.css
 ship.env.sh
 
 deploy/pouchdb-security
+
+processed.txt
+isolate-**.log
