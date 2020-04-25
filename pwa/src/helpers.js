@@ -200,6 +200,9 @@ export const uint8ToUrlBase64 = uint8 => {
     });
     return binToUrlBase64(bin)
 }
+export const urlBase64ToUtf8 = str =>  atob(urlBase64ToBase64(str))
+export const btoa = globalThis.btoa || ((str) => Buffer.from(str, 'binary').toString('base64'))
+export const atob = globalThis.atob || ((bstr) => Buffer.from(bstr, 'base64').toString('binary'))
 
 /**
  * Signs a whole document producing a signature suitable for signed sharing.
@@ -208,6 +211,11 @@ export const uint8ToUrlBase64 = uint8 => {
  * @param {Number} exp The expiration timestamp.
  */
 export const docSignature = async (doc, iat, exp) => {
+    // revpos patch
+    for (const key of Object.keys(doc._attachments)) {
+        delete doc._attachments[key].revpos
+    }
+    //
     const username = await getCurrentUsername()
     const deviceKey = await getDeviceKey({ username })
     const toSign = {
@@ -216,10 +224,18 @@ export const docSignature = async (doc, iat, exp) => {
         iat,
         exp
     }
+    const hps = generateHeaderPayloadString(toSign)
+    console.log(hps)
     const signature = await window.crypto.subtle.sign({
         name: "ECDSA", hash: { name: "SHA-256" }
-    }, deviceKey.key.privateKey, new TextEncoder().encode(JSON.stringify(toSign)))
+    }, deviceKey.key.privateKey, new TextEncoder().encode(hps))
     return new Uint8Array(signature)
+}
+
+export const generateHeaderPayloadString = (payload) => {
+    const header_b64u = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9"
+    const payload_b64u = strToUrlBase64(JSON.stringify(payload))
+    return `${header_b64u}.${payload_b64u}`
 }
 
 export const createDeviceAuthenticationToken = async () => {

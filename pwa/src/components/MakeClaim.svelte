@@ -1,11 +1,13 @@
 <script>
     import TemplateForm from "../components/TemplateForm.svelte";
+    import QRScanner from "../components/QRScanner.svelte";
     import { Button, Snackbar, notifier, Notifications } from '../../node_modules/smelte/src'
     import { onMount, getContext } from 'svelte';
     import { buildFormShape, getUserAccountDB, useDatabase} from '../helpers.js'
       
     let { loggedIn, username } = getContext("user");
     let claimBeingMade = false
+    let isScanning = false
     let forms;
     let formShapes = {};
 
@@ -61,20 +63,40 @@
         console.log(formShapes)
     }
 
+    const verifyClaim = async (url) => {
+        console.log(url)
+        fetch(url).then((resp) => {
+            if(resp.ok) {
+                showVerifiedClaim(resp.doc)
+            } else {
+                console.log("Error verifying claim")
+            }
+        })
+    }
+
+    const showVerifiedClaim = (doc) => {
+        console.log(doc)
+    }
+
     onMount( () => {init()})
 </script>
 
 {#if claimBeingMade}
     <TemplateForm on:cancel={cancelledClaim} on:completed={completedClaim}  template={formShapes[claimBeingMade]}></TemplateForm>
+{:else if isScanning}
+    <QRScanner height="100" width="100" opts=... on:scan={(event) => verifyClaim(event.detail)}>
+        <div class="placeholder">No cameras loaded!</div>
+    </QRScanner>
 {:else}
     <div class="button-container">
         {#if forms}
             {#each forms as form}
                 {#if !form.hidden}
-                    <br><br><Button on:click={() => claimBeingMade = form.id} block>{form.doc.name}</Button><br><br>
+                    <br><Button on:click={() => claimBeingMade = form.id} block>{form.doc.name}</Button><br>
                 {/if}
             {/each}
         {/if}
+        <br><Button on:click={() => isScanning = true}>Scan Code</Button><br>       
     </div>
 {/if}
 

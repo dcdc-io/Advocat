@@ -1,4 +1,5 @@
 <script>
+    import { stores } from '@sapper/app';
     import { getContext, onMount } from 'svelte';
     import { Chip, Button, Dialog} from '../../node_modules/smelte/src'
     import TemplateForm from "../components/TemplateForm.svelte";
@@ -7,9 +8,10 @@
     import { qrcode, svg2url  } from 'pure-svg-code' 
 
     export let claim;
-
-    let share = false
     export let shareUrl = ""
+
+    const { page } = stores();
+    let share = false 
     let dataUrl = ""
     let showDeleteDialog = false
 
@@ -38,8 +40,8 @@
         }
         let path = strToUrlBase64(JSON.stringify(newClaim))
 
-        shareUrl = `https://advocat.group/verify/${path}.claim`
-        dataUrl = svg2url(qrcode(shareUrl))
+        shareUrl = `${$page.host.includes("localhost") ? "http" : "https"}://${$page.host}/verify/${path}.claim`
+        dataUrl = svg2url(qrcode({ content:shareUrl, ecl: "L" }))
     }
         
     const updateClaim = () => {isEditing = false}

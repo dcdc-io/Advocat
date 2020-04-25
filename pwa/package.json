@@ -12,6 +12,7 @@
     "test": "run-p --race dev cy:run"
   },
   "dependencies": {
+    "@rollup/plugin-json": "^4.0.3",
     "@rollup/plugin-multi-entry": "^3.0.0",
     "@smui/select": "^1.0.0-beta.20",
     "@testing-library/svelte": "^3.0.0",
@@ -20,6 +21,7 @@
     "buffer": "^5.5.0",
     "compression": "^1.7.1",
     "cypress": "^4.2.0",
+    "dcdc-instascan": "^1.0.0",
     "dropzone": "^5.7.0",
     "express": "^4.17.1",
     "express-pouchdb": "^4.2.0",
@@ -36,11 +38,13 @@
     "pouchdb-server": "^4.2.0",
     "pouchdb-upsert": "^2.2.0",
     "pure-svg-code": "^1.0.6",
+    "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-polyfills": "^0.2.1",
     "sirv": "^0.4.0",
     "sjcl": "^1.0.8",
     "slouchdb-security": "link:../pouchdb-security",
     "smelte": "^1.0.11",
+    "svelte-qr-scanner": "^1.1.0",
     "yup": "^0.28.3"
   },
   "devDependencies": {
