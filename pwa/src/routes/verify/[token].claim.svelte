@@ -25,6 +25,9 @@
             // user _id hash
             sub: "f4e7a1dd379adf779f88262d7f5193d7"
         } */
+
+        // example
+        const verified = await fetch(`${token}.verify`)
     })
 </script>
 
