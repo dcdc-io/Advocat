@@ -1,16 +1,20 @@
+<svelte:head>
+  <script src="instascan.min.js" on:load={instascanLoaded}></script>
+</svelte:head>
+ 
 <script>
 	import { onMount, getContext, createEventDispatcher } from 'svelte';
 	
 	export let height;
 	export let width;
 	export let opts;
-	
+
 	let	cameras = []
 	let	currentCamera = undefined
 	let	result = undefined
 	let	_loadCamera = undefined
 	let video;
-	let Camera, scanner, instascan;
+	let Camera, scanner, instascanReady;
 
 
 	// const opts = {
@@ -23,14 +27,23 @@
 	// 	scanPeriod: 1
 	// }
 
+	const instascanLoaded = () => {
+		instascanReady = true
+	}
+
 	const dispatch = createEventDispatcher()
 
 	const init = () => {
+		if (!instascanReady) {
+			return setTimeout(() => {
+				init()
+			}, 100);
+		}
 		// needed for server side rendering
 		// TODO check double launching camera
-		Camera = new instascan.Camera;
+		Camera = new Instascan.Camera;
 
-		instascan.Camera.getCameras().then(cams => {
+		Instascan.Camera.getCameras().then(cams => {
 			cameras = cams
 			_startScanner();
 		})
@@ -55,7 +68,7 @@
 		// console.log('start scanner');
 		// checks if currentCamera exists
 		const camera = !!currentCamera ? currentCamera : cameras[0];
-		scanner = new instascan.Scanner({video: video});
+		scanner = new Instascan.Scanner({video: video});
 
 		scanner.addListener('scan', (content) => {	
 			// console.log(content)
@@ -89,9 +102,9 @@
 	}
 
 	onMount(async () => {
-		const insta = await import('dcdc-instascan')
+		//const insta = await import('dcdc-instascan')
 		// console.log(insta)
-		instascan = insta.default
+		//instascan = insta.default
 		init()
 	})
 
