@@ -4887,15 +4887,6 @@ inline-process-browser@^1.0.0:
     falafel "^1.0.1"
     through2 "^0.6.5"
 
-"instascan@git+https://github.com/schmich/instascan.git":
-  version "1.0.0"
-  resolved "git+https://github.com/schmich/instascan.git#b0f9519f2dd2a6661e67066d6ed678e621dd5ce2"
-  dependencies:
-    babel-polyfill "^6.9.1"
-    fsm-as-promised "^0.13.0"
-    visibilityjs "^1.2.3"
-    webrtc-adapter "^1.4.0"
-
 invariant@^2.2.2, invariant@^2.2.4:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
@@ -10501,13 +10492,6 @@ svelte-preprocess@^3.5.0:
     "@types/sass" "^1.16.0"
     detect-indent "^6.0.0"
     strip-indent "^3.0.0"
-
-svelte-qr-scanner@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/svelte-qr-scanner/-/svelte-qr-scanner-1.1.0.tgz#633b0b9b1d0d09fc280bd7f2ba06b70dafabc430"
-  integrity sha512-8ybSBhGxceNpfCZYgEcoDsX8QVd59X+GhTw7+gUNRYE9qTXPqb7zFMRElLLozd3NTTSf6r3RCG87YKlN0na0DQ==
-  dependencies:
-    instascan "git+https://github.com/schmich/instascan.git"
 
 svelte-waypoint@^0.1.4:
   version "0.1.4"

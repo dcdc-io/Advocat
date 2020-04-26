@@ -1,6 +1,10 @@
 <script>
 	import { onMount, getContext, createEventDispatcher } from 'svelte';
 	
+	export let height;
+	export let width;
+	export let opts;
+	
 	let	cameras = []
 	let	currentCamera = undefined
 	let	result = undefined
@@ -8,9 +12,6 @@
 	let video;
 	let Camera, scanner, instascan;
 
-	export let height;
-	export let width;
-	export let opts;
 
 	// const opts = {
 	// 	continuous: true,
