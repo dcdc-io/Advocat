@@ -64,16 +64,22 @@
         return ((Date.now() - mappedActivity.created) / 60000).toFixed(0)
     }
 
-    const button_more = async () => {
-        // WEIRD RACE CONDITION REMOVE LATER
-        await wait(300)
-        expanded = true
-    }
+    // const button_more = () => {
+    //     promise = expand()
+    // }
 
-    const button_less = async () => {
-        await wait(300)
-        expanded = false
-    }
+    // const expand = async () => {
+    //     console.log('attempting to expand')
+    //     return true
+    // }
+
+    // const button_less = () => {
+    //     promise = shrink()
+    // }
+
+    // const shrink = async () => {
+    //     return false
+    // }
 
     let processPostcode = (async function(data) {
         postcode_data = data;
@@ -97,10 +103,11 @@
     })
     
     let getDistanceToActivity = function() {
-        distance_in_km = gpsDistance(clientLocation.latitude,
-                               clientLocation.longitude,
-                               postcode_data.result.latitude,
-                               postcode_data.result.longitude)
+        // distance_in_km = gpsDistance(clientLocation.latitude,
+        //                        clientLocation.longitude,
+        //                        postcode_data.result.latitude,
+        //                        postcode_data.result.longitude)
+        distance_in_km = 50
         if ((clientLocation.latitude === 0.0) &&
             (clientLocation.longitude === 0.0)) {
             distance = "?" } 
@@ -184,10 +191,10 @@
                     <Chip icon="thumb_down_alt" on:click={button_decline}>Sorry, I can't help.</Chip>
                     <br/><br/>
                 {/if}
-                <Chip icon="expand_less" on:click={button_less}>Less</Chip>
+                <Chip icon="expand_less" on:click={() => expanded = false}>Less</Chip>
             {:else}
                 <Chip icon="expand_more" on:click={() => expanded = true}>More</Chip>
-            {/if} 
+            {/if}
         {/if}
     {/if}
 </div>
