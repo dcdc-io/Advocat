@@ -5,13 +5,13 @@
 
 <script>
     import Claim from "../components/Claim.svelte"
-    import { onMount, getContext, setContext } from 'svelte'
+    import { getContext, setContext } from 'svelte'
     import { getUserAccountDB } from '../helpers.js'
 
     let { loggedIn, username } = getContext("user")
 
     let docs = []
-
+    
     const updateDocs = async () => {
         const allDocs = await singletonDB.allDocs({include_docs: true})
         docs = allDocs.rows.filter(row => {
@@ -33,14 +33,22 @@
         singletonUsername = $username
     }
 
-    onMount(async () => {
+    const loadClaims = async () => {
         await init()
         await updateDocs()
-    })
+    }
+
+    let promise = loadClaims()
 </script>
 
 <div class="claim-list">
-    {#each docs as doc}
-        <Claim claim={doc.doc}></Claim>
-    {/each}
+    {#await promise}
+        Loading claims...
+    {:then value}
+        {#each docs as doc}
+            <Claim claim={doc.doc}></Claim>
+        {/each}
+    {:catch}
+        Oops! Something went wrong!
+    {/await}
 </div>

@@ -60,7 +60,7 @@
                 )
             }
         }
-        console.log(formShapes)
+        // console.log(formShapes)
     }
 
     const verifyClaim = async (url) => {
@@ -96,7 +96,7 @@
                 {/if}
             {/each}
         {/if}
-        <br><Button on:click={() => isScanning = true}>Scan Code</Button><br>       
+        <br><Button on:click={() => isScanning = true} block>Scan Code</Button><br>       
     </div>
 {/if}
 

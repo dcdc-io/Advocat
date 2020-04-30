@@ -12,7 +12,7 @@
     import CreateJob from "../components/CreateJob.svelte";
     import LocationWidget from "../components/LocationWidget.svelte";
     import { useDatabase } from "../helpers.js"
-    import { setContext, getContext, onMount } from "svelte"
+    import { setContext, getContext } from "svelte"
 
     let location = "waiting"
     let { loggedIn, username } = getContext("user");
@@ -49,10 +49,12 @@
         singletonUsername = $username
     }
 
-    onMount(async () => {
+    const loadActivities = async () => {
         await init()
         await updateDocs()
-    })
+    }
+
+    let promise = loadActivities()
 </script>
 
 <style>
@@ -67,10 +69,16 @@
     <br> -->
 
     <!-- <CreateJob></CreateJob> -->
-    
-    {#each activities as activity}
+    {#await promise}
+        Loading activities...
+    {:then value}
+        {#each activities as activity}
         <Activity activity={activity.doc} clientLocation={client_coords}></Activity>
         <br><br>
     {/each}
+    {:catch}
+        Oops! Something went wrong!
+    {/await}
+    
 </div>
 

@@ -1,7 +1,7 @@
 <script>
     import { stores } from '@sapper/app';
     import { getContext, onMount } from 'svelte';
-    import { Chip, Button, Dialog} from '../../node_modules/smelte/src'
+    import { Chip, Button, Dialog } from '../../node_modules/smelte/src'
     import TemplateForm from "../components/TemplateForm.svelte";
     import { buildFormShape, getUserAccountDB, hash, docSignature, strToUrlBase64, uint8ToUrlBase64 } from '../helpers.js'
     import VerticalDrawer from '../components/VerticalDrawer/VerticalDrawer.svelte'

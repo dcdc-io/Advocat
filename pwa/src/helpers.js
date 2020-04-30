@@ -259,35 +259,37 @@ export const createDeviceAuthenticationToken = async () => {
 }
 
 export const userSetup = async ({ loggedIn, username }) => {
-    let session = await fetch("db/_session").then(result => result.json())
-    if (!session.userCtx || !session.userCtx.name) {
-        // offline first key authentication
-        let currentUsername = await getCurrentUsername()
-        if (currentUsername) {
-            let deviceKey = await getDeviceKey({ username: currentUsername })
-            if (deviceKey) {
-                // TODO: here we need to setup outgoing xhr
-                // to use a user signed JWT.
-                const jwt = await createDeviceAuthenticationToken()
-                await fetch(`signin`, {
-                    method: "POST",
-                    headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ jwt })
-                }).catch(error => {
-                    console.log(error)
-                })
-                session = await fetch("db/_session").then(result => result.json())
+    if(process.browser) {
+        let session = await fetch("db/_session").then(result => result.json())
+        if (!session.userCtx || !session.userCtx.name) {
+            // offline first key authentication
+            let currentUsername = await getCurrentUsername()
+            if (currentUsername) {
+                let deviceKey = await getDeviceKey({ username: currentUsername })
+                if (deviceKey) {
+                    // TODO: here we need to setup outgoing xhr
+                    // to use a user signed JWT.
+                    const jwt = await createDeviceAuthenticationToken()
+                    await fetch(`signin`, {
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ jwt })
+                    }).catch(error => {
+                        console.log(error)
+                    })
+                    session = await fetch("db/_session").then(result => result.json())
+                }
             }
         }
+        if (session.userCtx.name) {
+            username.set(session.userCtx.name)
+            loggedIn.set(true)
+        } else {
+            // TODO: are we offline??
+            username.set(null)
+            loggedIn.set(false)
+        }
+        return session.userCtx.name
     }
-    if (session.userCtx.name) {
-        username.set(session.userCtx.name)
-        loggedIn.set(true)
-    } else {
-        // TODO: are we offline??
-        username.set(null)
-        loggedIn.set(false)
-    }
-    return session.userCtx.name
 }
 
 const validateFiles = (files, formField, formError) => {
