@@ -337,7 +337,7 @@ export const validateClaimForm = async (formData, formDataFiles, errorHandler, f
         schema.validate(formData, { abortEarly: false })
             .then(async () => {
                 errorHandler(formError)
-                if (fileField && formError[fileField.name].length !== 0) { resolve(false) }
+                if (fileField && formError[fileField.name] !== 0) { resolve(false) }
                 resolve(true)
             })
             .catch(err => {

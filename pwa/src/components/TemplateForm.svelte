@@ -48,18 +48,26 @@
     }
    
     const validate = async () => {
-        return await validateClaimForm(
+        const ok = await validateClaimForm(
             formData, 
             formDataFiles,
-            error => {formError = error},
+            error => {
+                for (let fld of Object.keys(formData)) {
+                    formError[fld] = null
+                }
+                for (let key of Object.keys(error)) {
+                    formError[key] = error[key]
+                }
+            },
             formShape
         )
+        console.log(formError)
+        return ok
     }
 
     const button_cancel = async () =>{
         dispatch("cancel")
     }
-
 
     const handleSubmit = async () => {
         isSubmitting = true
@@ -94,14 +102,14 @@
         }
     }
        
-    onMount(() => {
-        init()
-    })
+    let promise = init()
 </script>
     
 <style></style>
 <div class="form_container">
-    {#if formShape}
+    {#await promise}
+        Loading...
+    {:then value}
         <form on:submit|preventDefault={handleSubmit} on:invalid={validate}>
             <h3>{formShape.name}</h3>
             {#each formShape.fields.sort( (a,b) => a.order - b.order) as field}
@@ -131,9 +139,6 @@
             {/each}
             <Button block type="submit" disabled={isSubmitting}> submit </Button> <br><br>
             <Button block on:click={button_cancel} disabled={isSubmitting}>Cancel</Button>
-
         </form>
-    {:else}
-        <p> form loading...</p>
-    {/if}
+    {/await}
 </div>

@@ -51,7 +51,7 @@
 
 <Nav {segment}></Nav>
 
-<main class:nopad>
+<main {nopad}>
 	{#await promise}
 		Signing In...
 	{:then value}	
